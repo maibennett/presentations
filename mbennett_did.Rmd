@@ -563,7 +563,7 @@ MIP Matching tolerance          | .05 SD
 ---
 #Results: Time-constant effects
 
-```{r res1, fig.height=5, fig.align='center', dev='svg', echo=FALSE, warning=FALSE}
+```{r res1, fig.width=9, fig.height=5.5, fig.align='center', dev='svg', echo=FALSE, warning=FALSE}
 
 load("sim_resultsv3_match4_caliper0_nsim100.Rdata")
 
@@ -579,17 +579,20 @@ d = data.frame(cbind(c(s1,s2,s3,s4,s5,s5alt,s6),rep(c("Simple","CA","TVA","Match
                                                       "Match (trend)","Match (cov PS)",
                                                       "Match (cov MIP)",
                                                       "Match (cov MIP all)"),7),
-                     c(rep("Time-invariant cov effect",8),
-                       rep("Time-varying cov effect",8),
-                       rep("Treat-independent cov effect",8),
-                       rep("Parallel evolution",8),
-                       rep("Evolution differs by group",8),
-                       rep("Evolution differs by group (adj)",8),
-                       rep("Evolution diverges in post",8)),
+                     c(rep("S1: Time-invariant_cov effect",8),
+                       rep("S2: Time-varying_cov effect",8),
+                       rep("S3: Treat-independent_cov effect",8),
+                       rep("S4: Parallel_evolution",8),
+                       rep("S5: Evolution diff._by group",8),
+                       rep("S6: Evolution diff._by group (adj)",8),
+                       rep("S7: Evolution diff._in post",8)),
                      c(rep("Constant",24),rep("Varying",32))))
 names(d) = c("bias","adj","type","var")
 
 d$bias = as.numeric(d$bias)
+d$type = factor(d$type,levels = unique(d$type))
+
+levels(d$type) <- gsub("_", "\n", levels(d$type)) 
 
 ggplot(d[d$var=="Constant",], aes(x = factor(adj, levels=unique(d$adj)), y = bias), fill="white") +
     geom_hline(yintercept = 0,lty=2,col="dark grey",lwd=1)+
@@ -615,12 +618,9 @@ ggplot(d[d$var=="Constant",], aes(x = factor(adj, levels=unique(d$adj)), y = bia
         legend.title = element_blank(),
         legend.text = element_text(size=15),
         legend.background = element_rect(fill="white",colour ="white"),
-        title = element_text(size=14)) + ylim(-0.5,1) +
-  theme_xaringan(
-    text_font = google_font("Fira Mono"),
-    title_font = google_font("Fira Sans Condensed")
-  ) +
-  facet_grid(cols=vars(factor(type,levels = unique(d$type[d$var=="Constant"]))))
+        title = element_text(size=14),
+        strip.text = element_text(family="Fira Sans Condensed")) + ylim(-0.5,1) +
+  facet_grid(cols=vars(type))
 
 ```
 
@@ -628,8 +628,8 @@ ggplot(d[d$var=="Constant",], aes(x = factor(adj, levels=unique(d$adj)), y = bia
 ---
 # Results: Time-varying effects
 
-```{r res2, fig.height=5, fig.align='center', dev='svg', echo=FALSE, warning=FALSE}
-ggplot(d[d$var=="Varying" & d$type!="Evolution differs by group",], 
+```{r res2, fig.width=9, fig.height=5.5, fig.align='center', dev='svg', echo=FALSE, warning=FALSE}
+ggplot(d[d$var=="Varying" & d$type!="S5: Evolution diff.\nby group",], 
        aes(x = factor(adj, levels=unique(d$adj)), y = bias), fill="white") +
     geom_hline(yintercept = 0,lty=2,col="dark grey",lwd=1)+
   geom_point(size=3)+
@@ -655,11 +655,8 @@ ggplot(d[d$var=="Varying" & d$type!="Evolution differs by group",],
         legend.title = element_blank(),
         legend.text = element_text(size=15),
         legend.background = element_rect(fill="white",colour ="white"),
-        title = element_text(size=14, family="Fira Sans Condensed")) + ylim(-0.5,1) +
-  theme_xaringan(
-    text_font = google_font("Fira Mono"),
-    title_font = google_font("Fira Sans Condensed")
-  ) +
+        title = element_text(size=14, family="Fira Sans Condensed"),
+        strip.text = element_text(family="Fira Sans Condensed")) + ylim(-0.5,1) +
   facet_grid(cols=vars(factor(type,levels = unique(d$type[d$var=="Varying" & d$type!=
                                                             "Evolution differs by group"]))))
 

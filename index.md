@@ -3,10 +3,6 @@
 
 ### Link
 
-Code: `[slide link](/mbennett_did.html)`
-
-Result:
-
 [slide link](/mbennett_did.html)
 
 
@@ -33,15 +29,6 @@ Code:
 }
 </style>
 
-
-## html iframe to embed the slide.
-
-<div class="resp-container">
-    <iframe class="testiframe" src="https://tcgriffith.github.io/xaringan_theme_example/use_master.html">
-      Fallback text here for unsupporting browsers, of which there are scant few.
-    </iframe>
-</div>
-
 ```
 
 Result:
@@ -64,7 +51,7 @@ Result:
 </style>
 
 <div class="resp-container">
-    <iframe class="testiframe" src="https://tcgriffith.github.io/xaringan_gh/xaringan_example.html">
-      Fallback text here for unsupporting browsers, of which there are scant few.
+    <iframe class="testiframe" src="https://maibennett.github.io/sds_did/mbennett_did.html">
+      Oops! Your browser doesn't suppor this.
     </iframe>
 </div>

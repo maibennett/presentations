@@ -564,8 +564,8 @@ MIP Matching tolerance          | .05 SD
 #Results: Time-constant effects
 
 ```{r res1, fig.width=9, fig.height=5.5, fig.align='center', dev='svg', echo=FALSE, warning=FALSE}
-
-load("sim_resultsv3_match4_caliper0_nsim100.Rdata")
+url_data = "https://github.com/maibennett/sds_did/blob/main/sim_resultsv3_match4_caliper0_nsim100.Rdata?raw=true"
+load(url(url_data))
 
 s1 = colMeans(m.s1[,-1], na.rm = TRUE)
 s2 = colMeans(m.s2[,-1], na.rm = TRUE)

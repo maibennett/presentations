@@ -95,12 +95,13 @@ Let's get started
 # DD Setup (cont.)
 
 - Under these assumptions:
+box-2.medium.sp-after-half[
 $$
 `\begin{align}
 \hat{\tau}^{DD} = &amp;E[Y(1)|Z=1] - E[Y(1)|Z=0] - \\
 &amp;(E[Y(0)|Z=1] - E[Y(0)|Z=0])
 \end{align}`
-$$
+`$$]
   - Where `\(t=0\)` and `\(t=1\)` are the pre- and post-intervention periods, respectively.
   
   - `\(Y(t) = Y^1(t)\cdot Z + (1-Z)\cdot Y^0(t)\)` is the observed outcome.
@@ -152,6 +153,22 @@ Simulations
 .source[Following Zeldow &amp; Hatfield (2019)]
 ---
 
+# Different ways to control
+
+.center[
+Model                                | Pseudo `R` code
+-------------------------------------|----------------------------------------------
+Simple                               | `lm(y ~ a*p + t)` 
+Covariate Adjusted (CA)              | `lm(y ~ a*p + t + x)` 
+Time-Varying Adjusted (TVA)          | `lm(y ~ a*p + t`*`x)` 
+Match on pre-treat outcomes          | `lm(y ~ a*p + t)` 
+Match on pre-treat 1st diff          | `lm(y ~ a*p + t, data=out.match)` 
+Match on pre-treat cov (PS)          | `lm(y ~ a*p + t, data=out.lag.match)` 
+Match on pre-treat cov (MIP)         | `lm(y ~ a*p + t, data=out.match.mip)` 
+]
+
+.bottom[
+.source[Following Zeldow &amp; Hatfield (2019)]]
     </textarea>
 <style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
 <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>

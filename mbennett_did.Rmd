@@ -559,21 +559,15 @@ Time periods (T)          | 10
 Last pre-intervention period (T_0)          | 5 
 Matching PS          | Nearest neighbor
 MIP Matching tolerance          | .05 SD
+Number of simulations | 500
 ]
 ---
 #Results: Time-constant effects
 
 ```{r res1, fig.width=9, fig.height=5.5, fig.align='center', dev='svg', echo=FALSE, warning=FALSE}
-url_data = "https://github.com/maibennett/sds_did/blob/main/sim_resultsv3_match4_caliper0_nsim100.Rdata?raw=true"
-load(url(url_data))
+d = read.csv("https://raw.githubusercontent.com/maibennett/sds_did/main/sim_ppt.csv")
 
-s1 = colMeans(m.s1[,-1], na.rm = TRUE)
-s2 = colMeans(m.s2[,-1], na.rm = TRUE)
-s3 = colMeans(m.s3[,-1], na.rm = TRUE)
-s4 = colMeans(m.s4[,-1], na.rm = TRUE)
-s5 = colMeans(m.s5[,-1], na.rm = TRUE)
-s6 = colMeans(m.s6[,-1], na.rm = TRUE)
-s5alt = colMeans(m.s5alt[,-1], na.rm = TRUE)
+attach(d)
 
 d = data.frame(cbind(c(s1,s2,s3,s4,s5,s5alt,s6),rep(c("Simple","CA","TVA","Match (level)",
                                                       "Match (trend)","Match (cov PS)",

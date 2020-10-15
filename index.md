@@ -1,23 +1,16 @@
 
-## Hello github page
+## SDS Seminar Series Presentation
 
 ### Link
 
-Note the relative link starting with a slash before the html file.
-
-The index.md is used to customize the github page's home page, 
-The following link directs to the slide.
-
-Code: `[slide link](/xaringan_example.html)`
+Code: `[slide link](/mbennett_did.html)`
 
 Result:
 
-[slide link](/xaringan_example.html)
+[slide link](/mbennett_did.html)
 
 
 ### Embed
-
-Or you could embed the xaringan slide into a webpage using iframe:
 
 Code:
 

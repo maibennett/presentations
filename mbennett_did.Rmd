@@ -21,6 +21,12 @@ options(htmltools.dir.version = FALSE)
 
 ```{r xaringan-themer, include=FALSE, warning=FALSE}
 library(xaringanthemer)
+style_xaringan(
+  text_font_family = "Fira Sans",
+  text_font_url = "https://fonts.googleapis.com/css2?family=Fira+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap",
+  header_font_google = google_font("Fira Sans")
+  )
+  
 style_mono_accent(
   #base_color = "#bf5700",
   base_color = "#333f48",

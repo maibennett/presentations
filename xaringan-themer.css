@@ -58,6 +58,11 @@
   --base: #333f48;
   --white: #FFFFFF;
   --black: #272822;
+  --red: #f34213;
+  --purple: #900DA4;
+  --orange: #ff8811;
+  --green: #136f63;
+  --white: #FFFFFF;
 }
 
 html {
@@ -251,6 +256,36 @@ table.dataTable.hover tbody tr:hover, table.dataTable.display tbody tr:hover {
 .bg-black {
   background-color: var(--black);
 }
+.red {
+  color: var(--red);
+}
+.bg-red {
+  background-color: var(--red);
+}
+.purple {
+  color: var(--purple);
+}
+.bg-purple {
+  background-color: var(--purple);
+}
+.orange {
+  color: var(--orange);
+}
+.bg-orange {
+  background-color: var(--orange);
+}
+.green {
+  color: var(--green);
+}
+.bg-green {
+  background-color: var(--green);
+}
+.white {
+  color: var(--white);
+}
+.bg-white {
+  background-color: var(--white);
+}
 
 
 
@@ -265,10 +300,6 @@ table.dataTable.hover tbody tr:hover, table.dataTable.display tbody tr:hover {
   font-size: 350%;
   font-family: Yanone Kaffeesatz;
   font-weight: 400;
-}
-.highlight {
-  color: #900DA4;
-  font-weight: 500;
 }
 .source {
   color: #8c8c8c;

@@ -29,14 +29,18 @@ style_mono_accent(
   code_font_google   = google_font("Fira Mono"),
   text_bold_color = "#333f48",
   text_font_size = "110%",
+  colors = c(
+    red = "#f34213",
+    purple = "#900DA4",
+    orange = "#ff8811",
+    green = "#136f63",
+    white = "#FFFFFF"),
   extra_css = list(
     ".remark-slide-number" = list("display" = "none"),
     ".strong" = list("font-weight" = "400"),
     ".big" = list("font-size" = "350%",
                      "font-family" = "Yanone Kaffeesatz",
                      "font-weight"="400"),
-    ".highlight" = list("color" = "#900DA4",
-                         "font-weight" = "500"),
     ".source" = list("color" = "#8c8c8c",
                      "font-size" = "80%"),
     ".title-slide h1" = list("font-weight" = "500"),
@@ -341,7 +345,7 @@ Let's get started
 
 - Difference-in-Differences (DD) focuses on ATT for $t>T_0$:
 $$ATT = E[Y_i^1(t) - Y_i^0(t)|Z=1]$$
-- .highlight[Assumptions for DD]:
+- **.purple[Assumptions for DD]**:
   - Parallel-trend assumption (PTA)
   
   - Common shocks
@@ -374,7 +378,7 @@ $$
   
 - Bias in a DD setting depends on the structure of $h(t)$.
 
-- Confounding in DD affect .highlight[trends] and not .highlight[levels].
+- Confounding in DD affect **.purple[trends]** and not **.purple[levels]**.
 ]
 
 .pull-right[

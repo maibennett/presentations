@@ -360,11 +360,10 @@ $$ATT = E[Y_i^1(t) - Y_i^0(t)|Z=1]$$
 # DD Setup (cont.)
 
 - Under these assumptions:
-
 $$
 \begin{align}
-\hat{\tau}^{DD} = &E[Y(1)|Z=1] - E[Y(1)|Z=0] - \\
-&(E[Y(0)|Z=1] - E[Y(0)|Z=0])
+\hat{\tau}^{DD} = &\color{#900DA4}{\overbrace{\color{black}{E[Y(1)|Z=1] - E[Y(1)|Z=0]}}^{\color{#900DA4}{\Delta_{post}}}} - \\
+&\color{#F89441}{\underbrace{\color{black}{(E[Y(0)|Z=1] - E[Y(0)|Z=0])}}_{\color{#F89441}{\Delta_{pre}}}}
 \end{align}
 $$
   - Where $t=0$ and $t=1$ are the pre- and post-intervention periods, respectively.

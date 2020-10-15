@@ -95,13 +95,12 @@ Let's get started
 # DD Setup (cont.)
 
 - Under these assumptions:
-box-2.medium.sp-after-half[
 $$
 `\begin{align}
-\hat{\tau}^{DD} = &amp;E[Y(1)|Z=1] - E[Y(1)|Z=0] - \\
-&amp;(E[Y(0)|Z=1] - E[Y(0)|Z=0])
+\hat{\tau}^{DD} = &amp;\color{#900DA4}{\overbrace{\color{black}{E[Y(1)|Z=1] - E[Y(1)|Z=0]}}^{\color{#900DA4}{\Delta_{post}}}} - \\
+&amp;\color{#F89441}{\underbrace{\color{black}{(E[Y(0)|Z=1] - E[Y(0)|Z=0])}}_{\color{#F89441}{\Delta_{pre}}}}
 \end{align}`
-`$$]
+$$
   - Where `\(t=0\)` and `\(t=1\)` are the pre- and post-intervention periods, respectively.
   
   - `\(Y(t) = Y^1(t)\cdot Z + (1-Z)\cdot Y^0(t)\)` is the observed outcome.

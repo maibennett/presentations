@@ -22,6 +22,7 @@
 @import url(https://fonts.googleapis.com/css?family=Yanone+Kaffeesatz:200,300,400,500,600,700&display=swap);
 @import url(https://fonts.googleapis.com/css?family=Fira+Mono&display=swap);
 @import url(https://fonts.googleapis.com/css?family=Fira+Sans:200,300,400,500,600&display=swap);
+@import url(https://fonts.googleapis.com/css?family=Fira+Sans+Condensed&display=swap);
 
 :root {
   /* Fonts */
@@ -313,9 +314,10 @@ table.dataTable.hover tbody tr:hover, table.dataTable.display tbody tr:hover {
   color: #8c8c8c;
   font-size: 80%;
 }
-table tr#highlight {
+.remark-slide table td#highlight {
   background-color: #eee1f0;
   color: #900DA4;
+  font-weight: 500;
 }
 .title-slide h1 {
   font-weight: 500;

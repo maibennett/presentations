@@ -45,8 +45,15 @@ class: center, middle, inverse, title-slide
 
 # What about parallel trends?
 
-.center2[
+.pull-left[
 ![](https://raw.githubusercontent.com/maibennett/website_github/master/exampleSite/content/images/data_comic.jpg)]
+
+.pull-right[
+- Can matching work to solve this? 
+
+  - It's complicated (?) .small[(Zeldow &amp; Hatfield, 2019;Lindner &amp; McConnell, 2018; Daw &amp; Hatfield, 2018 (x2); Ryan, 2018; Ryan et al., 2018)]
+  
+- Most work has focused on **.purple[matching outcomes]**]
 
 ---
 
@@ -119,6 +126,9 @@ $$
 - Bias in a DD setting depends on the structure of `\(h(t)\)`.
 
 - Confounding in DD affect **.purple[trends]** and not **.purple[levels]**.
+
+- Contextual knowledge is important!
+  - Do groups come from different populations? 
 ]
 
 .pull-right[
@@ -154,18 +164,49 @@ Simulations
 
 # Different ways to control
 
-.center[
-Model                                | Pseudo `R` code
--------------------------------------|----------------------------------------------
-Simple                               | `lm(y ~ a*p + t)` 
-Covariate Adjusted (CA)              | `lm(y ~ a*p + t + x)` 
-Time-Varying Adjusted (TVA)          | `lm(y ~ a*p + t`*`x)` 
-Match on pre-treat outcomes          | `lm(y ~ a*p + t, data=out.match)` 
-Match on pre-treat 1st diff          | `lm(y ~ a*p + t, data=out.lag.match)` 
-Match on pre-treat cov (PS)          | `lm(y ~ a*p + t, data=cov.match)` 
-**Match on pre-treat cov (MIP)**         | **`lm(y ~ a*p + t, data=cov.match.mip)`**
-**Match on all cov (MIP)**               | **`lm(y ~ a*p + t, data=cov.match.mip.all)`** 
-]
+&lt;div class="center"&gt;&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Model&lt;/th&gt;
+&lt;th&gt;Pseudo &lt;code class="remark-inline-code"&gt;R&lt;/code&gt; code&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;Simple&lt;/td&gt;
+&lt;td&gt;&lt;code class="remark-inline-code"&gt;lm(y ~ a*p + t)&lt;/code&gt; &lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Covariate Adjusted (CA)&lt;/td&gt;
+&lt;td&gt;&lt;code class="remark-inline-code"&gt;lm(y ~ a*p + t + x)&lt;/code&gt; &lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Time-Varying Adjusted (TVA)&lt;/td&gt;
+&lt;td&gt;&lt;code class="remark-inline-code"&gt;lm(y ~ a\*p + t\*x)&lt;/code&gt; &lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Match on pre-treat outcomes&lt;/td&gt;
+&lt;td&gt;&lt;code class="remark-inline-code"&gt;lm(y ~ a*p + t, data=out.match)&lt;/code&gt; &lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Match on pre-treat 1st diff&lt;/td&gt;
+&lt;td&gt;&lt;code class="remark-inline-code"&gt;lm(y ~ a*p + t, data=out.lag.match)&lt;/code&gt; &lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Match on pre-treat cov (PS)&lt;/td&gt;
+&lt;td&gt;&lt;code class="remark-inline-code"&gt;lm(y ~ a*p + t, data=cov.match)&lt;/code&gt; &lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td id="highlight"&gt;Match on pre-treat cov (MIP)&lt;/td&gt;
+&lt;td id="highlight"&gt;&lt;code class="remark-inline-code"&gt;lm(y ~ a*p + t, data=cov.match.mip)&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td id="highlight"&gt;Match on all cov (MIP)&lt;/td&gt;
+&lt;td id="highlight"&gt;&lt;code class="remark-inline-code"&gt;lm(y ~ a*p + t, data=cov.match.mip.all)&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;/div&gt;
 
 .bottom[
 .source[Following Zeldow &amp; Hatfield (2019)]]
@@ -208,6 +249,30 @@ Match on pre-treat cov (PS)          | `lm(y ~ a*p + t, data=cov.match)`
 .small[
 `$$X_i = x_{(t-1)i} + m1(t)\cdot z - m_3(z_i,t)$$`
 `$$Y_i(t) \stackrel{ind}{\sim} N(1+z_i+treat_{it}+u_i+x_i+f(t)+g(x_i,t),1)$$`]
+
+---
+#Parameters:
+
+.center[
+Parameter                            | Value
+-------------------------------------|----------------------------------------------
+Number of obs (N)                               | 1,000 
+`Pr(Z=1)`              | 0.5 
+Time periods (T)          | 10 
+Last pre-intervention period (T_0)          | 5 
+Matching PS          | Nearest neighbor
+MIP Matching tolerance          | .05 SD
+]
+---
+#Results: Time-constant effects
+
+&lt;img src="mbennett_did_files/figure-html/res1-1.svg" style="display: block; margin: auto;" /&gt;
+
+
+---
+# Results: Time-varying effects
+
+&lt;img src="mbennett_did_files/figure-html/res2-1.svg" style="display: block; margin: auto;" /&gt;
     </textarea>
 <style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
 <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>

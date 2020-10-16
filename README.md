@@ -2,4 +2,4 @@
 
 10/16/2020
 
-https://maibennett.github.io/sds_did/
+https://maibennett.github.io/presentations/

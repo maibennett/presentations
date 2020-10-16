@@ -1,5 +1,3 @@
-# SDS Seminar Series (UT)
-
-10/16/2020
+# Presentation respository
 
 https://maibennett.github.io/presentations/

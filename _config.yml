@@ -3,5 +3,5 @@ theme: jekyll-theme-minimal
 title: "maibennett"
 description: "Repository of presentations"
 
-logo: "images/mai_pink1.jpg"
+logo: "https://github.com/allisonhorst/stats-illustrations/blob/master/rstats-blanks/patchwork_blank.png"
 show_downloads: "false"

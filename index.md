@@ -10,7 +10,7 @@ PS: Awesome artwork is by [Allison Horst](https://github.com/allisonhorst/stats-
 
 ### Link
 
-[slide link](/mbennett_did.html)
+[slide link](sds_20201016/mbennett_did.html)
 
 
 ### Embed
@@ -33,7 +33,7 @@ PS: Awesome artwork is by [Allison Horst](https://github.com/allisonhorst/stats-
 </style>
 
 <div class="resp-container">
-    <iframe class="testiframe" src="https://maibennett.github.io/sds_did/mbennett_did.html">
+    <iframe class="testiframe" src="https://maibennett.github.io/presentations/sds_20201016/mbennett_did.html">
       Oops! Your browser doesn't suppor this.
     </iframe>
 </div>

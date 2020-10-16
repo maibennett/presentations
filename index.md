@@ -1,6 +1,10 @@
 
 # PRESENTATIONS
 
+This is a repository from my presentations (slides and code included!).
+
+PS: Awesome artwork is by [Allison Horst](https://github.com/allisonhorst/stats-illustrations)
+
 ## SDS Seminar Series Presentation
 **Date: 10-16-2020**
 

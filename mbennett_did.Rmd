@@ -442,6 +442,30 @@ $$
 ]
 
 ---
+# How do we match?
+
+- Match covariates or outcomes? Levels or trends?
+
+- Use of **.purple[MIP Matching]** .small[(Zubizarreta, 2015; Bennett, Zubizarreta, & Vielma, 2020)]:
+  - Balance covariates directly
+  
+  - Yield largest matched sample under balancing constraints
+  
+  - Use of template matching to match multiple groups
+  
+  - Works with large samples
+  
+---
+# Panel or repeated cross-sections?
+
+- **Panel data:** Straightforward
+
+- **Repeated cross-section data:** Representative template matching
+
+.center[
+<img src="https://raw.githubusercontent.com/maibennett/sds_did/main/images/diagram3v2.svg" alt="diagram" width="600"/>]
+
+---
 background-position: 50% 50%
 class: left, bottom, inverse
 .big[
@@ -557,6 +581,18 @@ $$X_i = x_{(t-1)i} + m1(t)\cdot z - m_3(z_i,t)$$
 $$Y_i(t) \stackrel{ind}{\sim} N(1+z_i+treat_{it}+u_i+x_i+f(t)+g(x_i,t),1)$$]
 
 ---
+# Covariate evolution: Time-invariant
+
+.center[
+<img src="https://raw.githubusercontent.com/maibennett/sds_did/main/images/cov_1.svg" alt="diagram" width="900"/>]
+
+---
+# Covariate evolution: Time-varying
+
+.center[
+<img src="https://raw.githubusercontent.com/maibennett/sds_did/main/images/cov_2.svg" alt="diagram" width="900"/>]
+
+---
 #Parameters:
 
 .center[
@@ -587,8 +623,8 @@ d = data.frame(cbind(c(s1,s2,s3,s4,s5,s5alt,s6),rep(c("Simple","CA","TVA","Match
                        rep("S3: Treat-independent_cov effect",8),
                        rep("S4: Parallel_evolution",8),
                        rep("S5: Evolution diff._by group",8),
-                       rep("S6: Evolution diff._by group (adj)",8),
-                       rep("S7: Evolution diff._in post",8)),
+                       rep("S5: Evolution diff._by group (adj)",8),
+                       rep("S6: Evolution diff._in post",8)),
                      c(rep("Constant",24),rep("Varying",32))))
 names(d) = c("bias","adj","type","var")
 
@@ -691,3 +727,76 @@ Application
 .pull-right[
 .box-6b.medium.sp-after-half[Schools:<br/>- Opt-into the policy<br/>- No selection, no fees<br/>- Resources ~ performance]
 ]
+
+---
+#Impact of the SEP policy
+
+- **Positive impact on test scores** for lower-income students (Aguirre, 2019; Nielson, 2016)
+
+- Design could have **increased** socioeconomic segregation
+  - Incentives for concentration of SEP students
+  
+- Key decision variables: Performance, current SEP students, competition, add-on fees.
+
+- **Diff-in-diff (w.r.t. 2007) for SEP and non-SEP schools**:
+  - Only for **.purple[private-subsidized schools]**
+  
+  - Matching between 2005-2007 --> Effect estimated for 2008-2011
+  
+  - Outcome: Average students' household income
+  
+---
+#Before Matching
+  
+.pull-left[
+<img src="https://raw.githubusercontent.com/maibennett/sds_did/main/images/dd_all.svg" alt="diagram" width="800"/>
+]
+.pull-right[
+- No (pre) parallel trend
+
+- Covariates evolve differently in the pre-intervention period
+]
+
+---
+#After Matching
+  
+.pull-left[
+<img src="https://raw.githubusercontent.com/maibennett/sds_did/main/images/dd_match.svg" alt="diagram" width="800"/>
+]
+.pull-right[
+- **MIP Matching**: 
+  - Mean balance (0.05 SD): Rural, enrollment, number of schools in county, charges add-on fees
+
+  - Fine balance: Test scores, monthly average voucher.
+
+- **6% increase in the income gap** between SEP and non-SEP schools
+]
+---
+background-position: 50% 50%
+class: left, bottom, inverse
+.big[
+Let's wrap it up
+]
+---
+#Conclusions
+
+.pull-left[
+- **Matching can be an important tool to address violations in PTA**.
+
+- Relevant to think whether groups come from the **.purple[same]** or **.purple[different]** populations.
+
+- **Serial correlation** also plays an important role: Don't match on random noise.
+  
+.box-7.medium.sp-after-half[Match well and match smart!
+]]
+.pull-right[
+![](https://media.giphy.com/media/drwxYI2fxqQGqRZ9Pe/giphy.gif)
+]
+
+---
+background-position: 50% 50%
+class: center,middle, inverse
+
+#A Difference-in-Differences Approach<br/>using Mixed-Integer Programming Matching
+
+##Magdalena Bennett

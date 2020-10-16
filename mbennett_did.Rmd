@@ -701,6 +701,56 @@ ggplot(d[d$var=="Varying" & d$type!="S5: Evolution diff.\nby group",],
 
 ```
 ---
+# Other simulations
+
+- Test **.purple[regression to the mean]** under no effect:
+
+  - Vary autocorrelation of $X_i(t)$; $X_0(t)$ and $X_1(t)$ come from the same/different distribution.
+
+```{r res3, fig.width=9, fig.height=4.5, fig.align='center', dev='svg', echo=FALSE, warning=FALSE}
+
+#different-high/different-low - same-high/same-low
+results = c(0.039/1.067,0.192/1.063,0.028/1.013,0.10/1.015)
+
+d = data.frame(cbind(results,c("Different dist.","Different dist.",
+                               "Same dist.","Same dist."),c("High corr","Low corr",
+                                                            "High corr","Low corr")))
+names(d) = c("bias","dist","corr")
+d$bias = as.numeric(d$bias)
+
+ggplot(d, aes(x = factor(corr, levels=unique(d$corr)), y = bias), fill="white") +
+    geom_hline(yintercept = 0,lty=2,col="dark grey",lwd=1)+
+  geom_point(size=3)+
+  geom_segment(aes(x = factor(corr, levels=unique(d$corr)), y = 0, 
+                   xend = factor(corr, levels=unique(d$corr)), yend = bias), 
+               lty=1,lwd=1,col="#900DA4") +
+  scale_color_manual(values=c("#F89441","#900DA4")) +
+  
+  theme_bw()+
+  theme_ipsum_fsc(plot_title_face = "bold") + #plain 
+  xlab("") + ylab("% Bias")+
+  theme(plot.margin=unit(c(1,1,1.5,1.2),"cm"),
+        panel.grid.major.x = element_blank(),
+        panel.grid.minor.x = element_blank(),
+        panel.grid.major.y = element_blank(),
+        panel.grid.minor.y = element_blank(),
+        axis.line = element_line(colour = "dark grey"))+
+  theme(axis.title.x = element_text(size=16, family="Fira Sans Condensed"),
+        #margin = margin(t = 10, r = 0, b = 0, l = 0)),
+        axis.text.x = element_text(size=10,angle = 45,hjust=1,vjust=1,margin=margin(0.1,0,0,0)),
+        axis.title.y = element_text(size=16),#margin = margin(t = 0, r = 10, b = 0, l = 0)),
+        axis.text.y = element_text(size=10),legend.position="none",
+        legend.title = element_blank(),
+        legend.text = element_text(size=15),
+        legend.background = element_rect(fill="white",colour ="white"),
+        title = element_text(size=14, family="Fira Sans Condensed"),
+        strip.text = element_text(family="Fira Sans Condensed")) + ylim(-0.5,0.5) +
+  facet_grid(cols=vars(factor(dist,levels = unique(d$dist))))
+
+```
+
+
+---
 background-position: 50% 50%
 class: left, bottom, inverse
 .big[
@@ -786,6 +836,8 @@ Let's wrap it up
 - Relevant to think whether groups come from the **.purple[same]** or **.purple[different]** populations.
 
 - **Serial correlation** also plays an important role: Don't match on random noise.
+
+- Adopt **flexibility** when estimating effects (event study)
   
 .box-7.medium.sp-after-half[Match well and match smart!
 ]]

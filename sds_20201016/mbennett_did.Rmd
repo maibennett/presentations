@@ -613,7 +613,7 @@ Number of simulations | 1,000
 #Results: Time-constant effects
 
 ```{r res1, fig.width=9, fig.height=5.5, fig.align='center', dev='svg', echo=FALSE, warning=FALSE}
-d = read.csv("https://raw.githubusercontent.com/maibennett/sds_did/main/sim_ppt.csv")
+d = read.csv("https://raw.githubusercontent.com/maibennett/presentations/main/sds_20201016/sim_ppt.csv")
 
 attach(d)
 

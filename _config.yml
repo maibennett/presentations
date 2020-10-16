@@ -1,8 +1,7 @@
 theme: jekyll-theme-minimal
 
-title: [maibennett]
-description: [Repository of presentations]
+title: "maibennett"
+description: "Repository of presentations"
 
-logo: [images/mai_pink1.jpg]
+logo: "images/mai_pink1.jpg"
 show_downloads: "false"
-google_analytics: [Your Google Analytics tracking ID]

@@ -1,7 +1,7 @@
 
 # PRESENTATIONS
 
-This is a repository from my presentations (slides and code included!).
+This is a repository from my presentations (slides and code included!). You can go to my main website **[here](https://www.magdalenabennett.com)**
 
 PS: Awesome artwork is by [Allison Horst](https://github.com/allisonhorst/stats-illustrations)
 

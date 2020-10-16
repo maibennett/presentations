@@ -259,19 +259,19 @@ Simulations
 
 .box-4a.medium.sp-after-half[S4: Parallel evolution]
 .small[
-`$$X_i = x_{(t-1)i} + m_1(t)\cdot z$$`
+`$$X_{it} = x_{(t-1)i} + m_1(t)\cdot z$$`
 `$$Y_i(t) \stackrel{ind}{\sim} N(1+z_i+treat_{it}+u_i+x_i+f(t)+g(x_i,t),1)$$`]
 
 --
 .box-6a.medium.sp-after-half[S5: Evolution differs by group]
 .small[
-`$$X_i = x_{(t-1)i} + m_2(z_i,t)\cdot z$$`
+`$$X_{it} = x_{(t-1)i} + m_2(z_i,t)\cdot z$$`
 `$$Y_i(t) \stackrel{ind}{\sim} N(1+z_i+treat_{it}+u_i+x_i+f(t)+g(x_i,t),1)$$`]
 
 --
 .box-7a.medium.sp-after-half[S6: Evolution diverges in post]
 .small[
-`$$X_i = x_{(t-1)i} + m1(t)\cdot z - m_3(z_i,t)$$`
+`$$X_{it} = x_{(t-1)i} + m_1(t)\cdot z - m_3(z_i,t)$$`
 `$$Y_i(t) \stackrel{ind}{\sim} N(1+z_i+treat_{it}+u_i+x_i+f(t)+g(x_i,t),1)$$`]
 
 ---
@@ -376,6 +376,16 @@ Application
 - No (pre) parallel trend
 
 - Covariates evolve differently in the pre-intervention period
+]
+
+---
+# [Pre] parallel trends
+
+.pull-left[
+&lt;img src="https://raw.githubusercontent.com/maibennett/sds_did/main/images/pta_all.svg" alt="diagram" width="800"/&gt;
+]
+.pull-right[
+&lt;img src="https://raw.githubusercontent.com/maibennett/sds_did/main/images/pta_match.svg" alt="diagram" width="800"/&gt;
 ]
 
 ---

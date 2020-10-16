@@ -10,7 +10,7 @@ PS: Awesome artwork is by [Allison Horst](https://github.com/allisonhorst/stats-
 
 ### Link
 
-[slide link](sds_20201016/mbennett_did.html)
+[slide link](sds_20201016/mbennett_did.html)   [code link](https://github.com/maibennett/presentations/blob/main/sds_20201016/mbennett_did.Rmd)
 
 
 ### Embed

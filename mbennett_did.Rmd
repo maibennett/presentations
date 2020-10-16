@@ -403,7 +403,7 @@ $$ATT = E[Y_i^1(t) - Y_i^0(t)|Z=1]$$
   
   - Common shocks
   
-  $$E[Y_i^0(1) - Y_i^0(1) | Z=1] = E[Y_i^0(1) - Y_i^0(1) | Z=0]$$
+  $$E[Y_i^0(1) - Y_i^0(0) | Z=1] = E[Y_i^0(1) - Y_i^0(0) | Z=0]$$
 ---
 # DD Setup (cont.)
 
@@ -426,7 +426,7 @@ $$
 .pull-left[
 - Under PTA, $g_1(t) = g_0(t) + h(t)$, where:
 
-  - $g_z(t) = E[Y^z_i(t) | Z=z, T=t]$
+  - $g_z(t) = E[Y^0_i(t) | Z=z, T=t]$
   - $h(t) = \alpha$
   
 - Bias in a DD setting depends on the structure of $h(t)$.
@@ -604,7 +604,7 @@ Time periods (T)          | 10
 Last pre-intervention period (T_0)          | 5 
 Matching PS          | Nearest neighbor
 MIP Matching tolerance          | .05 SD
-Number of simulations | 500
+Number of simulations | 1,000
 ]
 
 - Estimate compared to sample ATT (_different for matching_)

@@ -512,7 +512,7 @@ Simulations
 </tr>
 <tr>
 <td>Time-Varying Adjusted (TVA)</td>
-<td><code class="remark-inline-code">lm(y ~ a\*p + t\*x)</code> </td>
+<td><code class="remark-inline-code">lm(y ~ a*p + t*x)</code> </td>
 </tr>
 <tr>
 <td>Match on pre-treat outcomes</td>

@@ -7,7 +7,7 @@ logo= "/images/ggplot2_masterpiece.png"
 theme = "ananke"
 
 [params]
-  favicon = "/images/favicon.ico"
+  favicon = "favicon.ico"
   site_logo = ""
   description = "Presentation repository"
   facebook = ""

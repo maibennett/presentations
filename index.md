@@ -59,10 +59,10 @@ _Universidad de Chile_
 .resp-container {
     position: relative;
     overflow: hidden;
-    padding-top: 26.25%;
+    padding-top: 56.25%;
 }
 
-.testiframe {
+.testiframe2 {
     position: absolute;
     top: 0;
     left: 0;
@@ -73,7 +73,7 @@ _Universidad de Chile_
 </style>
 
 <div class="resp-container">
-    <iframe class="testiframe" src="https://maibennett.github.io/presentations/uchile_20200914/mbennett_covid.html">
+    <iframe class="testiframe2" src="https://maibennett.github.io/presentations/uchile_20200914/mbennett_covid.html">
       Oops! Your browser doesn't suppor this.
     </iframe>
 </div>

@@ -10,6 +10,8 @@ PS: Awesome artwork is by [Allison Horst](https://github.com/allisonhorst/stats-
 </p>
 
 ## SDS Seminar Series Presentation
+
+_The University of Texas at Austin_
 **Date: 10-16-2020**
 
 ### Link

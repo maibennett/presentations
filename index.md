@@ -42,3 +42,40 @@ _The University of Texas at Austin_
       Oops! Your browser doesn't suppor this.
     </iframe>
 </div>
+
+
+
+## 3rd Workshop on COVID-19 Modelling in Chile
+
+_Universidad de Chile_
+**Date: 09-14-2020**
+
+### Link
+
+[slide link](uchile_20200914/mbennett_covid.html)
+
+[code link](https://github.com/maibennett/presentations/blob/main/uchile_20200914/mbennett_covid.Rmd)
+
+<style>
+.resp-container {
+    position: relative;
+    overflow: hidden;
+    padding-top: 56.25%;
+}
+
+.testiframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: 0;
+}
+</style>
+
+<div class="resp-container">
+    <iframe class="testiframe" src="https://maibennett.github.io/presentations/uchile_20200914/mbennett_covid.html">
+      Oops! Your browser doesn't suppor this.
+    </iframe>
+</div>
+

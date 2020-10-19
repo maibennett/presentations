@@ -1,6 +1,3 @@
-
-# PRESENTATIONS
-
 This is a repository from my presentations (slides and code included!). You can also go to my main website **[here](https://www.magdalenabennett.com)** for more fun stuff (?).
 
 PS: Awesome artwork is by [Allison Horst](https://github.com/allisonhorst/stats-illustrations)
@@ -69,8 +66,8 @@ _Universidad de Chile_
     position: absolute;
     top: 0;
     left: 0;
-    width: 100%;
-    height: 100%;
+    width: 80%;
+    height: 80%;
     border: 0;
 }
 </style>

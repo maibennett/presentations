@@ -1,7 +1,26 @@
 baseURL = "http://maibennett.github.io/presentations"
 languageCode = "en-us"
-title = "Presentations"
+title = "maibennett"
 
-logo= "images/ggplot2_masterpiece.png"
+logo= "/images/ggplot2_masterpiece.png"
 
-theme = "starter-academic"
+theme = "ananke"
+
+[params]
+  favicon = "/images/favicon.ico"
+  site_logo = ""
+  description = "This is a repository from my presentations (slides and code included!). You can also go to my [main website](https://maibennett.com) for more fun stuff (?)."
+  facebook = ""
+  twitter = "https://twitter.com/maibennett
+  instagram = ""
+  youtube = ""
+  github = ""
+  gitlab = ""
+  linkedin = ""
+  mastodon = ""
+  slack = ""
+  stackoverflow = ""
+  rss = ""
+  # choose a background color from any on this page: http://tachyons.io/docs/themes/skins/ and preface it with "bg-"
+  background_color_class = "bg-black"
+  featured_image = "/images/ggplot2_masterpiece.png"

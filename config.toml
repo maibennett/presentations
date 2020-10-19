@@ -9,7 +9,7 @@ theme = "ananke"
 [params]
   favicon = "/images/favicon.ico"
   site_logo = ""
-  description = "This is a repository from my presentations (slides and code included!). You can also go to my [main website](https://maibennett.com) for more fun stuff (?)."
+  description = "Presentation repository"
   facebook = ""
   twitter = "https://twitter.com/maibennett
   instagram = ""

@@ -1,6 +1,6 @@
-baseURL = "http://maibennett.github.io/presentations"
-languageCode = "en-us"
 title = "maibennett"
+baseURL = "https://www.magdalenabennett.com"
+languageCode = "en-us"
 
 logo= "/images/ggplot2_masterpiece.png"
 
@@ -22,5 +22,10 @@ theme = "ananke"
   stackoverflow = ""
   rss = ""
   # choose a background color from any on this page: http://tachyons.io/docs/themes/skins/ and preface it with "bg-"
+<<<<<<< HEAD
   background_color_class = "bg-near-white"
   featured_image = "/images/ggplot2_masterpiece.png"
+=======
+  background_color_class = "bg-black"
+  featured_image = "/images/ggplot2_masterpiece.png"
+>>>>>>> f207243071381c088407e0c5be06665338b0aea3

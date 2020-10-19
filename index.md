@@ -9,9 +9,9 @@ PS: Awesome artwork is by [Allison Horst](https://github.com/allisonhorst/stats-
 <img src="https://raw.githubusercontent.com/maibennett/presentations/main/images/ggplot2_masterpiece.png" width="500">
 </p>
 
-## SDS Seminar Series Presentation
+## SDS Seminar Series
 
-_The University of Texas at Austin_
+_Department of Statistics and Data Science, The University of Texas at Austin_
 
 **Date: 10-16-2020**
 

@@ -6,6 +6,8 @@ PS: Awesome artwork is by [Allison Horst](https://github.com/allisonhorst/stats-
 <img src="https://raw.githubusercontent.com/maibennett/presentations/main/images/ggplot2_masterpiece.png" width="500">
 </p>
 
+# List of recent presentations
+
 ## SDS Seminar Series
 
 _Department of Statistics and Data Science, The University of Texas at Austin_

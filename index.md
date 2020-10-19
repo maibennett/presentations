@@ -6,7 +6,7 @@ This is a repository from my presentations (slides and code included!). You can 
 PS: Awesome artwork is by [Allison Horst](https://github.com/allisonhorst/stats-illustrations)
 
 <p align="center">
-<img src="/images/ggplot2_masterpiece.png">
+<img src="https://raw.githubusercontent.com/maibennett/presentations/main/images/ggplot2_masterpiece.png">
 </p>
 
 ## SDS Seminar Series Presentation

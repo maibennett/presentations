@@ -2,6 +2,6 @@ baseURL = "http://maibennett.github.io/presentations"
 languageCode = "en-us"
 title = "Presentations"
 
-logo: "images/ggplot2_masterpiece.png"
+logo= "images/ggplot2_masterpiece.png"
 
 theme = "ananke"

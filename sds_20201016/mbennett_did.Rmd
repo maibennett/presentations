@@ -463,7 +463,7 @@ $$
 - **Repeated cross-section data:** Representative template matching
 
 .center[
-<img src="https://raw.githubusercontent.com/maibennett/sds_did/main/images/diagram3v2.svg" alt="diagram" width="600"/>]
+<img src="https://raw.githubusercontent.com/maibennett/presentations/main/sds_20201016/images/diagram3v2.svg" alt="diagram" width="600"/>]
 
 ---
 background-position: 50% 50%
@@ -584,13 +584,13 @@ $$Y_i(t) \stackrel{ind}{\sim} N(1+z_i+treat_{it}+u_i+x_i+f(t)+g(x_i,t),1)$$]
 # Covariate evolution: Time-invariant
 
 .center[
-<img src="https://raw.githubusercontent.com/maibennett/sds_did/main/images/cov_1.svg" alt="diagram" width="900"/>]
+<img src="https://raw.githubusercontent.com/maibennett/presentations/main/sds_20201016/images/cov_1.svg" alt="diagram" width="900"/>]
 
 ---
 # Covariate evolution: Time-varying
 
 .center[
-<img src="https://raw.githubusercontent.com/maibennett/sds_did/main/images/cov_2.svg" alt="diagram" width="900"/>]
+<img src="https://raw.githubusercontent.com/maibennett/presentations/main/sds_20201016/images/cov_2.svg" alt="diagram" width="900"/>]
 
 ---
 #Parameters:
@@ -803,7 +803,7 @@ Application
 #Before Matching
   
 .pull-left[
-<img src="https://raw.githubusercontent.com/maibennett/sds_did/main/images/dd_all.svg" alt="diagram" width="800"/>
+<img src="https://github.com/maibennett/presentations/blob/main/sds_20201016/images/dd_all.svg" alt="diagram" width="800"/>
 ]
 .pull-right[
 - No (pre) parallel trend
@@ -815,17 +815,17 @@ Application
 # [Pre] parallel trends
 
 .pull-left[
-<img src="https://raw.githubusercontent.com/maibennett/sds_did/main/images/pta_all.svg" alt="diagram" width="800"/>
+<img src="https://github.com/maibennett/presentations/blob/main/sds_20201016/images/pta_all.svg" alt="diagram" width="800"/>
 ]
 .pull-right[
-<img src="https://raw.githubusercontent.com/maibennett/sds_did/main/images/pta_match.svg" alt="diagram" width="800"/>
+<img src="https://github.com/maibennett/presentations/blob/main/sds_20201016/images/pta_match.svg" alt="diagram" width="800"/>
 ]
 
 ---
 #After Matching
   
 .pull-left[
-<img src="https://raw.githubusercontent.com/maibennett/sds_did/main/images/dd_match.svg" alt="diagram" width="800"/>
+<img src="https://github.com/maibennett/presentations/blob/main/sds_20201016/images/dd_match.svg" alt="diagram" width="800"/>
 ]
 .pull-right[
 - **MIP Matching**: 

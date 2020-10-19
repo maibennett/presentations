@@ -12,6 +12,7 @@ PS: Awesome artwork is by [Allison Horst](https://github.com/allisonhorst/stats-
 ## SDS Seminar Series Presentation
 
 _The University of Texas at Austin_
+
 **Date: 10-16-2020**
 
 ### Link
@@ -48,6 +49,7 @@ _The University of Texas at Austin_
 ## 3rd Workshop on COVID-19 Modelling in Chile
 
 _Universidad de Chile_
+
 **Date: 09-14-2020**
 
 ### Link

@@ -803,7 +803,7 @@ Application
 #Before Matching
   
 .pull-left[
-<img src="https://github.com/maibennett/presentations/blob/main/sds_20201016/images/dd_all.svg" alt="diagram" width="800"/>
+<img src="https://raw.githubusercontent.com/maibennett/presentations/main/sds_20201016/images/dd_all.svg" alt="diagram" width="800"/>
 ]
 .pull-right[
 - No (pre) parallel trend
@@ -815,17 +815,17 @@ Application
 # [Pre] parallel trends
 
 .pull-left[
-<img src="https://github.com/maibennett/presentations/blob/main/sds_20201016/images/pta_all.svg" alt="diagram" width="800"/>
+<img src="https://raw.githubusercontent.com/maibennett/presentations/main/sds_20201016/images/pta_all.svg" alt="diagram" width="800"/>
 ]
 .pull-right[
-<img src="https://github.com/maibennett/presentations/blob/main/sds_20201016/images/pta_match.svg" alt="diagram" width="800"/>
+<img src="https://raw.githubusercontent.com/maibennett/presentations/main/sds_20201016/images/pta_match.svg" alt="diagram" width="800"/>
 ]
 
 ---
 #After Matching
   
 .pull-left[
-<img src="https://github.com/maibennett/presentations/blob/main/sds_20201016/images/dd_match.svg" alt="diagram" width="800"/>
+<img src="https://raw.githubusercontent.com/maibennett/presentations/main/sds_20201016/images/dd_match.svg" alt="diagram" width="800"/>
 ]
 .pull-right[
 - **MIP Matching**: 

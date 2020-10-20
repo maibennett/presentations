@@ -6,6 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <link rel="stylesheet" href="{{ '/assets/css/style.css?v=' | append: site.github.build_revision | relative_url }}">
     <link rel="stylesheet" type="text/css" href="{{ '/assets/css/print.css' | relative_url }}" media="print">
+    <link rel="shortcut icon" type="image/png" href="favicon.png">
     <!--[if lt IE 9]>
     <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
@@ -18,7 +19,7 @@
       <div class="inner">
 
         <header>
-          <h1>{{ page.title | default: site.title | default: site.github.repository_name }}</h1>
+          <h1><a class="site-title" rel="author" href="{{ "/" | relative_url }}">{{ site.title | escape }}</a></h1>
           <h2>{{ page.description | default: site.description | default: site.github.project_tagline }}</h2>
         </header>
         <section id="downloads" class="clearfix">

@@ -1,4 +1,4 @@
-This is a repository from my presentations (slides and code included!). You can also go to my main website **[here](https://www.magdalenabennett.com)** for more fun stuff (?).
+This is a repository of my presentations (slides and code included!). You can also go to my main website **[here](https://www.magdalenabennett.com)** for more fun stuff (?).
 
 PS: Awesome artwork is by [Allison Horst](https://github.com/allisonhorst/stats-illustrations)
 

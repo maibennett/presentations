@@ -61,12 +61,6 @@ _Universidad de Chile_
 [code link](https://github.com/maibennett/presentations/blob/main/uchile_20200914/mbennett_covid.Rmd)
 
 <style>
-.resp-container {
-    position: relative;
-    overflow: hidden;
-    padding-top: 56.25%;
-}
-
 .testiframe2 {
     position: absolute;
     top: 0;

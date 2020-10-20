@@ -72,11 +72,11 @@ _Universidad de Chile_
     position: absolute;
     top: 0;
     left: 0;
-    width: 76.92% !important;
-    height: 76.92% !important;
+    width: 100%;
+    height: 100%;
     border: 0;
-    -webkit-transform: scale(1.3);
-    transform: scale(1.3);
+    -webkit-transform: scale(0.7);
+    transform: scale(0.7);
     -webkit-transform-origin: 0 0;
     transform-origin: 0 0;
 }

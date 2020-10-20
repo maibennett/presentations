@@ -65,8 +65,8 @@ _Universidad de Chile_
     position: absolute;
     top: 0;
     left: 0;
-    width: 150%;
-    height: 150%;
+    width: 180%;
+    height: 180%;
     border: 0;
 }
 </style>

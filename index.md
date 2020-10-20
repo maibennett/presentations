@@ -65,7 +65,7 @@ _Universidad de Chile_
 .resp-container2 {
     position: relative;
     overflow: hidden;
-    padding-top: 56.25%;
+    padding-top: 0%;
 }
 
 .testiframe2 {
@@ -73,13 +73,13 @@ _Universidad de Chile_
     top: 0;
     left: 0;
     width: 100%;
-    height: auto;
+    height: 100%;
     border: 0;
 }
 </style>
 
 <div class="resp-container2">
-    <iframe src="https://maibennett.github.io/presentations/uchile_20200914/mbennett_covid.html" allowfullscreen>
+    <iframe class="testiframe2" src="https://maibennett.github.io/presentations/uchile_20200914/mbennett_covid.html" allowfullscreen>
       Oops! Your browser doesn't suppor this.
     </iframe>
 </div>

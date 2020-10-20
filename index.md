@@ -61,17 +61,24 @@ _Universidad de Chile_
 [code link](https://github.com/maibennett/presentations/blob/main/uchile_20200914/mbennett_covid.Rmd)
 
 <style>
+
+.resp-container2 {
+    position: relative;
+    overflow: hidden;
+    padding-top: 56.25%;
+}
+
 .testiframe2 {
     position: absolute;
     top: 0;
     left: 0;
-    width: 56.4%;
+    width: 100%;
     height: auto;
     border: 0;
 }
 </style>
 
-<div class="resp-container">
+<div class="resp-container2">
     <iframe class="testiframe2" src="https://maibennett.github.io/presentations/uchile_20200914/mbennett_covid.html" allowfullscreen>
       Oops! Your browser doesn't suppor this.
     </iframe>

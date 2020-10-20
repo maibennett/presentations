@@ -44,7 +44,7 @@ table {
 body {
   font-size: 16px;
   line-height: 1.5;
-  background-color: #e5e5e5;
+  background-color: #ffffff;
   font-family: "Fira Sans";
   text-shadow: 0 1px 0 rgba(255, 255, 255, 0.8);
   color: #606060;
@@ -64,8 +64,8 @@ header {
 header h1 {
   font-weight: 700;
   letter-spacing: -1px;
-  font-size: 2em;
-  color: #303030;
+  font-size: 4em;
+  color: #7a7777;
   line-height: 1.2;
   margin: 0 0 0.5em;
 }
@@ -78,7 +78,7 @@ header h2 {
 }
 header h3 {
   font-size: 1.2em;
-  color: #6d6d6d;
+  color: #7a7777;
   font-weight: 400;
   line-height: 1.2;
   margin: 0 0 0.5em;
@@ -201,7 +201,7 @@ h2 {
 h3 {
   font-size: 1.2em;
   font-weight: bold;
-  color: #aa05b0;
+  color: #7a7777;
 }
 
 h4 {
@@ -276,7 +276,7 @@ ol, ul {
     padding-bottom: 10px;
   }
   header h1 {
-    font-size: 2.1em;
+    font-size: 4em;
   }
   header h2 {
     font-size: 1.2em;

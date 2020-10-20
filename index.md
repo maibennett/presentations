@@ -31,8 +31,8 @@ _Department of Statistics and Data Science, The University of Texas at Austin_
     position: absolute;
     top: 0;
     left: 0;
-    max-width: 100%;
-    height: auto;
+    width: 100%;
+    height: 100%;
     border: 0;
 }
 </style>
@@ -71,8 +71,8 @@ _Universidad de Chile_
     position: absolute;
     top: 0;
     left: 0;
-    width: 100%;
-    height: 100%;
+    max-width: 100%;
+    height: auto;
     border: 0;
 }
 </style>

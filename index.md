@@ -64,7 +64,7 @@ _Universidad de Chile_
 
 .resp-container2 {
     position: relative;
-    overflow: visible;
+    overflow: hidden;
     padding-top: 56.25%;
 }
 
@@ -72,9 +72,13 @@ _Universidad de Chile_
     position: absolute;
     top: 0;
     left: 0;
-    width: 100%;
-    height: 100%;
+    width: 76.92% !important;
+    height: 76.92% !important;
     border: 0;
+    -webkit-transform: scale(1.3);
+    transform: scale(1.3);
+    -webkit-transform-origin: 0 0;
+    transform-origin: 0 0;
 }
 </style>
 

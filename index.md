@@ -71,14 +71,14 @@ _Universidad de Chile_
     position: absolute;
     top: 0;
     left: 0;
-    max-width: 100%;
-    height: auto;
+    width: 100%;
+    height: 100%;
     border: 0;
 }
 </style>
 
 <div class="resp-container">
-    <iframe class="testiframe2" src="https://maibennett.github.io/presentations/uchile_20200914/mbennett_covid.html">
+    <iframe class="testiframe2" src="https://maibennett.github.io/presentations/uchile_20200914/mbennett_covid.html" allowfullscreen>
       Oops! Your browser doesn't suppor this.
     </iframe>
 </div>

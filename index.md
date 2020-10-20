@@ -79,7 +79,7 @@ _Universidad de Chile_
 </style>
 
 <div class="resp-container2">
-    <iframe class="testiframe2" src="https://maibennett.github.io/presentations/uchile_20200914/mbennett_covid.html" allowfullscreen>
+    <iframe src="https://maibennett.github.io/presentations/uchile_20200914/mbennett_covid.html" allowfullscreen>
       Oops! Your browser doesn't suppor this.
     </iframe>
 </div>

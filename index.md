@@ -64,8 +64,8 @@ _Universidad de Chile_
 
 .resp-container2 {
     position: relative;
-    overflow: hidden;
-    padding-top: 0%;
+    overflow: visible;
+    padding-top: 56.25%;
 }
 
 .testiframe2 {

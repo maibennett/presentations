@@ -444,12 +444,12 @@ $$
 # Two distinct problems when combining matching + DD
 
 .pull-left[
-- **.purple[Regression to the mean]**:
+- **Regression to the mean**:
 
   - Both groups come from different populations
   - Particularly salient when matching on previous outcomes
   
-- **.purple[Bias when matching on time-varying covariates]**:
+- **Bias when matching on time-varying covariates**:
   
   - Depends on the structure of time variation
 ]

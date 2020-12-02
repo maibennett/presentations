@@ -588,7 +588,7 @@ Number of simulations | 1,000
 - Estimate compared to sample ATT (_different for matching_)
 - When matching with post-treat covariates $\rightarrow$ compared with direct effect $\tau$
 ---
-#Results: Time-constant effects
+#Results: Time-constant covariates
 
 ```{r res1, fig.width=9, fig.height=5.5, fig.align='center', dev='svg', echo=FALSE, warning=FALSE}
 d = read.csv("https://raw.githubusercontent.com/maibennett/presentations/main/bb_20201202/sim_ppt.csv")
@@ -646,7 +646,7 @@ ggplot(d[d$var=="Constant",], aes(x = factor(adj, levels=unique(d$adj)), y = bia
 
 
 ---
-# Results: Time-varying effects
+# Results: Time-varying covariates
 
 ```{r res2, fig.width=9, fig.height=5.5, fig.align='center', dev='svg', echo=FALSE, warning=FALSE}
 ggplot(d[d$var=="Varying" & d$type!="S5: Evolution diff.\nby group",], 

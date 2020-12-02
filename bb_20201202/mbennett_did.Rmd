@@ -508,6 +508,18 @@ Simulations
   
 .source[Following Zeldow & Hatfield (2019)]
 ---
+# Covariate evolution: Time-invariant
+
+.center[
+<img src="https://raw.githubusercontent.com/maibennett/presentations/main/sds_20201016/images/cov_1.svg" alt="diagram" width="900"/>]
+
+---
+# Covariate evolution: Time-varying
+
+.center[
+<img src="https://raw.githubusercontent.com/maibennett/presentations/main/sds_20201016/images/cov_2.svg" alt="diagram" width="900"/>]
+
+---
 
 # Different ways to control
 
@@ -557,57 +569,6 @@ Simulations
 
 .bottom[
 .source[Following Zeldow & Hatfield (2019)]]
----
-# Time-invariant Covariates
-
-.box-1a.medium.sp-after-half[S1: Time-invariant covariate effect]
-.small[
-$$X_i \stackrel{ind}{\sim} N(m(z_i),v(z_i))$$
-$$Y_i(t) \stackrel{ind}{\sim} N(1+z_i+treat_{it}+u_i+x_i+f(t),1)$$]
-
---
-.box-2a.medium.sp-after-half[S2: Time-varying covariate effect]
-.small[
-$$X_i \stackrel{ind}{\sim} N(m(z_i),v(z_i))$$
-$$Y_i(t) \stackrel{ind}{\sim} N(1+z_i+treat_{it}+u_i+x_i+f(t)+g(x_i,t),1)$$]
-
---
-.box-3a.medium.sp-after-half[S3: Treatment-independent covariate]
-.small[
-$$X_i \stackrel{ind}{\sim} N(1,1)$$
-$$Y_i(t) \stackrel{ind}{\sim} N(1+z_i+treat_{it}+u_i+x_i+f(t)+g(x_i,t),1)$$]
-
----
-# Time-varying Covariates
-
-.box-4a.medium.sp-after-half[S4: Parallel evolution]
-.small[
-$$X_{it} = x_{(t-1)i} + m_1(t)\cdot z$$
-$$Y_i(t) \stackrel{ind}{\sim} N(1+z_i+treat_{it}+u_i+x_i+f(t)+g(x_i,t),1)$$]
-
---
-.box-6a.medium.sp-after-half[S5: Evolution differs by group]
-.small[
-$$X_{it} = x_{(t-1)i} + m_2(z_i,t)\cdot z$$
-$$Y_i(t) \stackrel{ind}{\sim} N(1+z_i+treat_{it}+u_i+x_i+f(t)+g(x_i,t),1)$$]
-
---
-.box-7a.medium.sp-after-half[S6: Evolution diverges in post]
-.small[
-$$X_{it} = x_{(t-1)i} + m_1(t)\cdot z - m_3(z_i,t)$$
-$$Y_i(t) \stackrel{ind}{\sim} N(1+z_i+treat_{it}+u_i+x_i+f(t)+g(x_i,t),1)$$]
-
----
-# Covariate evolution: Time-invariant
-
-.center[
-<img src="https://raw.githubusercontent.com/maibennett/presentations/main/sds_20201016/images/cov_1.svg" alt="diagram" width="900"/>]
-
----
-# Covariate evolution: Time-varying
-
-.center[
-<img src="https://raw.githubusercontent.com/maibennett/presentations/main/sds_20201016/images/cov_2.svg" alt="diagram" width="900"/>]
 
 ---
 #Parameters:
@@ -883,3 +844,43 @@ class: center,middle, inverse
 #A Difference-in-Differences Approach<br/>using Mixed-Integer Programming Matching
 
 ##Magdalena Bennett
+
+---
+# Time-invariant Covariates
+
+.box-1a.medium.sp-after-half[S1: Time-invariant covariate effect]
+.small[
+$$X_i \stackrel{ind}{\sim} N(m(z_i),v(z_i))$$
+$$Y_i(t) \stackrel{ind}{\sim} N(1+z_i+treat_{it}+u_i+x_i+f(t),1)$$]
+
+--
+.box-2a.medium.sp-after-half[S2: Time-varying covariate effect]
+.small[
+$$X_i \stackrel{ind}{\sim} N(m(z_i),v(z_i))$$
+$$Y_i(t) \stackrel{ind}{\sim} N(1+z_i+treat_{it}+u_i+x_i+f(t)+g(x_i,t),1)$$]
+
+--
+.box-3a.medium.sp-after-half[S3: Treatment-independent covariate]
+.small[
+$$X_i \stackrel{ind}{\sim} N(1,1)$$
+$$Y_i(t) \stackrel{ind}{\sim} N(1+z_i+treat_{it}+u_i+x_i+f(t)+g(x_i,t),1)$$]
+
+---
+# Time-varying Covariates
+
+.box-4a.medium.sp-after-half[S4: Parallel evolution]
+.small[
+$$X_{it} = x_{(t-1)i} + m_1(t)\cdot z$$
+$$Y_i(t) \stackrel{ind}{\sim} N(1+z_i+treat_{it}+u_i+x_i+f(t)+g(x_i,t),1)$$]
+
+--
+.box-6a.medium.sp-after-half[S5: Evolution differs by group]
+.small[
+$$X_{it} = x_{(t-1)i} + m_2(z_i,t)\cdot z$$
+$$Y_i(t) \stackrel{ind}{\sim} N(1+z_i+treat_{it}+u_i+x_i+f(t)+g(x_i,t),1)$$]
+
+--
+.box-7a.medium.sp-after-half[S6: Evolution diverges in post]
+.small[
+$$X_{it} = x_{(t-1)i} + m_1(t)\cdot z - m_3(z_i,t)$$
+$$Y_i(t) \stackrel{ind}{\sim} N(1+z_i+treat_{it}+u_i+x_i+f(t)+g(x_i,t),1)$$]

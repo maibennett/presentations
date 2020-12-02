@@ -8,6 +8,45 @@ PS: Awesome artwork is by [Allison Horst](https://github.com/allisonhorst/stats-
 
 # List of recent presentations
 
+## Brown Bag Seminar
+
+_IROM deparment, McCombs School of Business - The University of Texas at Austin_
+
+**Date: 12-02-2020**
+
+### Link
+
+[slide link](bb_20201202/mbennett_did.html)
+
+[code link](https://github.com/maibennett/presentations/blob/main/bb_20201202/mbennett_did.Rmd)
+
+<style>
+.resp-container {
+    position: relative;
+    overflow: hidden;
+    padding-top: 56.25%;
+}
+
+.testiframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: 0;
+}
+</style>
+
+<div class="resp-container">
+    <iframe class="testiframe" src="https://maibennett.github.io/presentations/bb_20201202/mbennett_did.html">
+      Oops! Your browser doesn't suppor this.
+    </iframe>
+</div>
+
+
+<br>
+<br>
+
 ## SDS Seminar Series
 
 _Department of Statistics and Data Science, The University of Texas at Austin_

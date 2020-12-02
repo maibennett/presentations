@@ -134,13 +134,30 @@ $$
 .pull-right[
 ![](https://media.giphy.com/media/L8yQ0RQBItqso/giphy.gif)
 ]
+---
+# Two distinct problems when combining matching + DD
 
+.pull-left[
+- **.purple[Regression to the mean]**:
+
+  - Both groups come from different populations
+  - Particularly salient when matching on previous outcomes
+  
+- **.purple[Bias when matching on time-varying covariates]**:
+  
+  - Depends on the structure of time variation
+]
+
+.pull-right[
+&lt;img src="https://raw.githubusercontent.com/maibennett/presentations/main/bb_20201202/images/reg_to_the_mean.svg" alt="diagram" width="600"/&gt;
+]
 ---
 # How do we match?
 
 - Match covariates or outcomes? Levels or trends?
 
 - Use of **.purple[MIP Matching]** .small[(Zubizarreta, 2015; Bennett, Zubizarreta, &amp; Vielma, 2020)]:
+  
   - Balance covariates directly
   
   - Yield largest matched sample under balancing constraints

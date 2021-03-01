@@ -11,6 +11,7 @@ output:
       highlightLines: true
       countIncrementalSlides: false
       ratio: "16:9"
+      beforeInit: "macros.js"
     includes:
       in_header: header.html
 ---
@@ -352,7 +353,7 @@ ggplot(d, aes(x = Year, y = Pub), fill="white") +
 # What about parallel trends?
 
 .pull-left[
-![](https://raw.githubusercontent.com/maibennett/website_github/master/exampleSite/content/images/data_comic.jpg)]
+![:scale 50%](https://raw.githubusercontent.com/maibennett/website_github/master/exampleSite/content/images/data_comic.jpg)]
 
 .pull-right[
 - Can matching work to solve this? 

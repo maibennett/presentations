@@ -1,0 +1,54 @@
+# Meta Data for SEO
+
+## Homepage
+title = "maibennett"
+titleSeparator = "-"
+titleAddition = "Repository of Presentations"
+description = "This is a repository of my presentations (slides and code included!). You can also go to my **[main website](https://www.magdalenabennett.com)** for more fun stuff (?)."
+
+## Open Graph + Twitter Cards
+images = ["doks.png"]
+twitterSite = "maibennett"
+twitterCreator = "maibennett"
+facebookAuthor = "mai.bennett"
+facebookPublisher = "mai.bennett"
+ogLocale = "en_US"
+
+## JSON-LD
+schemaType = "Organization"
+schemaLogo = "logo-doks.png"
+schemaTwitter = "https://twitter.com/maibennett"
+schemaLinkedIn = "https://www.linkedin.com/in/magdalena-bennett-9b18b816/"
+schemaGitHub = "https://github.com/maibennett"
+schemaSection = "blog"
+
+## Sitelinks Search Box
+siteLinksSearchBox = false
+
+## Chrome Browser
+themeColor = "#fff"
+
+# Images
+quality = 85
+bgColor = "#fff"
+landscapePhotoWidths = [900, 800, 700, 600, 500]
+portraitPhotoWidths = [800, 700, 600, 500]
+lqipWidth = "20x"
+
+# Footer
+footer = "Powered by <a href=\"https://www.netlify.com/\">Netlify</a>, <a href=\"https://gohugo.io/\">Hugo</a>, and <a href=\"https://getdoks.org/\">Doks</a>"
+
+# Alert
+alert = false
+alertText = "Like Doks? <a class=\"alert-link\" href=\"https://github.com/h-enk/doks/stargazers\">Star on GitHub</a>. Thanks!</a>"
+
+# Edit Page
+docsRepo = "https://github.com/h-enk/doks"
+editPage = false
+
+[options]
+  lazySizes = true
+  clipBoard = true
+  instantPage = true
+  flexSearch = true
+  darkMode = true

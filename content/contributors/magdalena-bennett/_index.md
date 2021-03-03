@@ -9,4 +9,4 @@ images: []
 
 Creator of this website.
 
-[@HenkVerlinde](https://twitter.com/maibennett)
+[@maibennett](https://twitter.com/maibennett)

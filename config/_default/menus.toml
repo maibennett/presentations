@@ -1,6 +1,6 @@
 [[main]]
   name = "Presentations"
-  url = "/blog/"
+  url = "/presentations/"
   weight = 20
 
  [[social]]

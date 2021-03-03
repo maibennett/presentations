@@ -28,7 +28,7 @@ contributors: ["Magdalena Bennett"]
 </style>
 
 <div class="resp-container">
-    <iframe class="testiframe" src="https://maibennettslides.netlify.app/sds_20201016/mbennett_did.html">
+    <iframe class="testiframe" src="/bb_20201202/mbennett_did.html">
       Oops! Your browser doesn't suppor this.
     </iframe>
 </div>

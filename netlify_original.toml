@@ -1,23 +1,17 @@
 [build]
-  publish = "exampleSite/public"
-  command = "hugo -s exampleSite"
+  publish = "public"
+  functions = "functions"
 
 [build.environment]
-  HUGO_THEME = "repo"
-  HUGO_THEMESDIR = "/opt/build"
-  HUGO_VERSION = "0.72.0"
+  HUGO_VERSION = "0.80.0"
+  NODE_VERSION = "15.5.1"
+  NPM_VERSION = "7.3.0"
 
-[context.production.environment]
-  HUGO_BASEURL = "https://maibennettslides.netlify.app/"
+[context.production]
+  command = "hugo -b $URL --gc --minify && npm run build:functions"
 
 [context.deploy-preview]
-  command = "hugo -s exampleSite -b $DEPLOY_PRIME_URL"
+  command = "hugo -b $DEPLOY_PRIME_URL --gc --minify"
 
-[context.deploy-preview.environment]
-  HUGO_ENABLEGITINFO = "true"
-
-[context.branch-deplpy]
-  command = "hugo -s exampleSite -b $DEPLOY_PRIME_URL"
-
-[context.branch-deploy.environment]
-  HUGO_ENABLEGITINFO = "true"
+[context.branch-deploy]
+  command = "hugo -b $DEPLOY_PRIME_URL --gc --minify"

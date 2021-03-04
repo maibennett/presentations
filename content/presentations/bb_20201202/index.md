@@ -1,5 +1,5 @@
 ---
-title: "A Differences-in-Differences Approach using Integer Programming \U0001f615"
+title: "A Differences-in-Differences Approach using Integer Programming \U0001f34e"
 description: "Brown Bag Seminar, IROM Department at McCombs School of Business, UT Austin"
 lead: "Difference-in-differences (DD) is a commonly used approach in policy evaluation for identifying the impact of an intervention or treatment. Under a parallel trend assumption, we can recover a causal effect by comparing the difference in outcomes between a treatment and a control group, both before and after an intervention was set in place. However, time-varying confounders often break the identifying assumption, biasing our estimates. In this paper, I identify the different contexts in which matching can help reduce such biases, and show how balancing covariates directly can yield better results for solving these issues and bound causal estimates. I also show how this method can be applied both for panel and repeated cross-sectional data. I illustrate these results with simulations and a case study of the impact of a new voucher scheme on socioeconomic segregation in Chile."
 date: 2020-12-02T09:19:42+01:00
@@ -33,11 +33,7 @@ Difference-in-differences (DD) is a commonly used approach in policy evaluation 
 </style>
 
 <div class="resp-container">
-    <iframe class="testiframe" src="https://sta235.netlify.app/assignments/homework1/code/sta235_homework1">
+    <iframe class="testiframe" src="https://maibennettslides.netlify.app/presentations/bb_20201202/mbennett_did">
       Oops! Your browser doesn't support this.
     </iframe>
 </div>
-
-<iframe src="https://maibennettslides.netlify.app/presentations/bb_20201202/mbennett_did" width="100%" height = "900px"></iframe>
-
-{{< hp5 "https://maibennettslides.netlify.app/presentations/bb_20201202/mbennett_did.html#1" >}}

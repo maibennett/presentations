@@ -1,5 +1,5 @@
 ---
-title: "A Differences-in-Differences Approach using Integer Programming \U0001f615"
+title: "A Differences-in-Differences Approach using Integer Programming \U0001f34a"
 description: "Statistics and Data Science Seminar, Statistics Department, UT Austin"
 lead: "Difference-in-differences (DD) is a commonly used approach in policy evaluation for identifying the impact of an intervention or treatment. Under a parallel trend assumption, we can recover a causal effect by comparing the difference in outcomes between a treatment and a control group, both before and after an intervention was set in place. However, time-varying confounders often break the identifying assumption, biasing our estimates. In this paper, I identify the different contexts in which matching can help reduce such biases, and show how balancing covariates directly can yield better results for solving these issues and bound causal estimates. I also show how this method can be applied both for panel and repeated cross-sectional data. I illustrate these results with simulations and a case study of the impact of a new voucher scheme on socioeconomic segregation in Chile."
 date: 2020-10-16T09:19:42+01:00
@@ -13,6 +13,12 @@ contributors: ["Magdalena Bennett"]
 <h3> Abstract </h3>
 
 Difference-in-differences (DD) is a commonly used approach in policy evaluation for identifying the impact of an intervention or treatment. Under a parallel trend assumption, we can recover a causal effect by comparing the difference in outcomes between a treatment and a control group, both before and after an intervention was set in place. However, time-varying confounders often break the identifying assumption, biasing our estimates. In this paper, I identify the different contexts in which matching can help reduce such biases, and show how balancing covariates directly can yield better results for solving these issues and bound causal estimates. I also show how this method can be applied both for panel and repeated cross-sectional data. I illustrate these results with simulations and a case study of the impact of a new voucher scheme on socioeconomic segregation in Chile
+
+
+
+<a class="btn btn-link btn-sm px-4 mb-2" href="{{ \"https://github.com/maibennett/presentations/blob/main/content/sds_20201016/mbennett_did.Rmd\" | absURL }}" role="button"> Download code </a><a>\u2b07\ufe0f</a>
+
+<a class="btn btn-link btn-sm px-4 mb-2" href="{{ \"https://raw.githack.com/maibennett/presentations/main/content/sds_20201016/mbennett_did.html\" | absURL }}" role="button"> Open slides </a><a>\U0001f5a8\ufe0f</a>
 
 <style>
 .resp-container {

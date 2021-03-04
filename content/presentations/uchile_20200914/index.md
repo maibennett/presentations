@@ -18,23 +18,28 @@ Several variables and practices affect the evolution and geographic spread of CO
 <meta charset="UTF-8">
 </head>
 
-<a class="btn btn-link btn-sm px-4 mb-2" href='{{ \"https://github.com/maibennett/presentations/blob/main/content/uchile_20200914/mbennett_covid.Rmd\" | absURL }}' role="button"> Download code &#128187;</a>
-<a class="btn btn-link btn-sm px-4 mb-2" href='{{ \"https://raw.githack.com/maibennett/presentations/main/content/uchile_20200914/mbennett_covid.html\" | absURL }}' role="button"> Open slides &#128194;</a>
+<a class="btn btn-link btn-sm px-4 mb-2" href='{{ \"https://github.com/maibennett/presentations/blob/main/content/uchile_20200914/mbennett_covid.Rmd\" }}' role="button"> Download code &#128187;</a>
+<a class="btn btn-link btn-sm px-4 mb-2" href='{{ \"https://raw.githack.com/maibennett/presentations/main/content/uchile_20200914/mbennett_covid.html\" }}' role="button"> Open slides &#128194;</a>
 
 <style>
-.resp-container {
+
+.resp-container2 {
     position: relative;
     overflow: hidden;
     padding-top: 56.25%;
 }
 
-.testiframe {
+.testiframe2 {
     position: absolute;
     top: 0;
     left: 0;
-    width: 100%;
-    height: 100%;
+    width: 196%;
+    height: 196%;
     border: 0;
+    -webkit-transform: scale(0.51);
+    transform: scale(0.51);
+    -webkit-transform-origin: 0 0;
+    transform-origin: 0 0;
 }
 </style>
 

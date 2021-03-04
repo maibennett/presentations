@@ -37,3 +37,6 @@ Difference-in-differences (DD) is a commonly used approach in policy evaluation 
       Oops! Your browser doesn't suppor this.
     </iframe>
 </div>
+
+
+{{< hp5 "https://maibennettslides.netlify.app/presentations/bb_20201202/mbennett_did.html" >}}

@@ -38,6 +38,6 @@ Difference-in-differences (DD) is a commonly used approach in policy evaluation 
     </iframe>
 </div>
 
-<iframe src="/presentations/bb_20201202/mbennett_did.html" width="100%" height = "900px">
+<iframe src="/presentations/bb_20201202/mbennett_did.html" width="100%" height = "900px"></iframe>
 
-{{< hp5 "https://raw.githubusercontent.com/maibennett/presentations/main/content/presentations/bb_20201202/mbennett_did.html" >}}
+{{< hp5 "https://maibennettslides.netlify.app/presentations/bb_20201202/mbennett_did.html#1" >}}

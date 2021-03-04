@@ -456,7 +456,7 @@ $$
 ]
 
 .pull-right[
-<img src="https://raw.githubusercontent.com/maibennett/presentations/main/bb_20201202/images/reg_to_the_mean.svg" alt="diagram" width="500"/>
+<img src="https://raw.githubusercontent.com/maibennett/presentations/main/content/presentations/bb_20201202/images/reg_to_the_mean.svg" alt="diagram" width="500"/>
 ]
 ---
 # How do we match?
@@ -481,7 +481,7 @@ $$
 - **Repeated cross-section data:** Representative template matching
 
 .center[
-<img src="https://raw.githubusercontent.com/maibennett/presentations/main/bb_20201202/images/diagram3v2.svg" alt="diagram" width="600"/>]
+<img src="https://raw.githubusercontent.com/maibennett/presentations/main/content/presentations/bb_20201202/images/diagram3v2.svg" alt="diagram" width="600"/>]
 
 ---
 background-position: 50% 50%
@@ -512,13 +512,13 @@ Simulations
 # Covariate evolution: Time-invariant
 
 .center[
-<img src="https://raw.githubusercontent.com/maibennett/presentations/main/bb_20201202/images/cov_1.svg" alt="diagram" width="900"/>]
+<img src="https://raw.githubusercontent.com/maibennett/presentations/main/content/presentations/bb_20201202/images/cov_1.svg" alt="diagram" width="900"/>]
 
 ---
 # Covariate evolution: Time-varying
 
 .center[
-<img src="https://raw.githubusercontent.com/maibennett/presentations/main/bb_20201202/images/cov_2.svg" alt="diagram" width="900"/>]
+<img src="https://raw.githubusercontent.com/maibennett/presentations/main/content/presentations/bb_20201202/images/cov_2.svg" alt="diagram" width="900"/>]
 
 ---
 
@@ -592,7 +592,7 @@ Number of simulations | 1,000
 #Results: Time-constant covariates
 
 ```{r res1, fig.width=9, fig.height=5.5, fig.align='center', dev='svg', echo=FALSE, warning=FALSE}
-d = read.csv("https://raw.githubusercontent.com/maibennett/presentations/main/bb_20201202/sim_ppt.csv")
+d = read.csv("https://raw.githubusercontent.com/maibennett/presentations/main/content/presentations/bb_20201202/sim_ppt.csv")
 
 attach(d)
 
@@ -782,7 +782,7 @@ Application
 #Before Matching
   
 .pull-left[
-<img src="https://raw.githubusercontent.com/maibennett/presentations/main/bb_20201202/images/dd_all.svg" alt="diagram" width="800"/>
+<img src="https://raw.githubusercontent.com/maibennett/presentations/main/content/presentations/bb_20201202/images/dd_all.svg" alt="diagram" width="800"/>
 ]
 .pull-right[
 - No (pre) parallel trend
@@ -794,17 +794,17 @@ Application
 # [Pre] parallel trends
 
 .pull-left[
-<img src="https://raw.githubusercontent.com/maibennett/presentations/main/bb_20201202/images/pta_all.svg" alt="diagram" width="800"/>
+<img src="https://raw.githubusercontent.com/maibennett/presentations/main/content/presentations/bb_20201202/images/pta_all.svg" alt="diagram" width="800"/>
 ]
 .pull-right[
-<img src="https://raw.githubusercontent.com/maibennett/presentations/main/bb_20201202/images/pta_match.svg" alt="diagram" width="800"/>
+<img src="https://raw.githubusercontent.com/maibennett/presentations/main/content/presentations/bb_20201202/images/pta_match.svg" alt="diagram" width="800"/>
 ]
 
 ---
 #After Matching
   
 .pull-left[
-<img src="https://raw.githubusercontent.com/maibennett/presentations/main/bb_20201202/images/dd_match.svg" alt="diagram" width="800"/>
+<img src="https://raw.githubusercontent.com/maibennett/presentations/main/content/presentations/bb_20201202/images/dd_match.svg" alt="diagram" width="800"/>
 ]
 .pull-right[
 - **MIP Matching**: 

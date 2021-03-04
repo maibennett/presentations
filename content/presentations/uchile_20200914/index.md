@@ -39,7 +39,7 @@ Several variables and practices affect the evolution and geographic spread of CO
 </style>
 
 <div class="resp-container">
-    <iframe class="testiframe" src="https://maibennettslides.netlify.app/presentations/uchile_20200914/mbennett_covid">
+    <iframe class="testiframe" src="https://maibennettslides.netlify.app/presentations/uchile_20200914/mbennett_covid.html#1">
       Oops! Your browser doesn't support this.
     </iframe>
 </div>

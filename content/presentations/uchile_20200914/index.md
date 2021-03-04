@@ -18,8 +18,8 @@ Several variables and practices affect the evolution and geographic spread of CO
 <meta charset="UTF-8">
 </head>
 
-<a class="btn btn-link btn-sm px-4 mb-2" href='{{ \"https://github.com/maibennett/presentations/blob/main/content/uchile_20200914/mbennett_covid.Rmd\" }}' role="button"> Download code &#128187;</a>
-<a class="btn btn-link btn-sm px-4 mb-2" href='{{ \"https://raw.githack.com/maibennett/presentations/main/content/uchile_20200914/mbennett_covid.html\" }}' role="button"> Open slides &#128194;</a>
+<a class="btn btn-link btn-sm px-4 mb-2" href="https://github.com/maibennett/presentations/blob/main/content/presentations/uchile_20200914/mbennett_did.Rmd" role="button"> Download code &#128187;</a>
+<a class="btn btn-link btn-sm px-4 mb-2" href="https://raw.githack.com/maibennett/presentations/main/content/presentations/uchile_20200914/mbennett_did.html" role="button"> Open slides &#128194;</a>
 
 <style>
 

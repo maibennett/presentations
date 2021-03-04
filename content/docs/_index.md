@@ -1,9 +1,6 @@
 ---
-title : "Presentations"
-description: "List of Presentations"
-lead: ""
-date: 2020-10-06T08:48:23+00:00
-lastmod: 2020-10-06T08:48:23+00:00
+title: "Presentations"
+description: "Here you can find a list of all my presentations, including code and slides"
 draft: false
 images: []
 ---

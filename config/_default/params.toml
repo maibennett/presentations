@@ -15,8 +15,8 @@ facebookPublisher = "mai.bennett"
 ogLocale = "en_US"
 
 ## JSON-LD
-schemaType = "Organization"
-schemaLogo = "logo-doks.png"
+schemaType = "Person"
+schemaLogo = "maibennett_logo512.png"
 schemaTwitter = "https://twitter.com/maibennett"
 schemaLinkedIn = "https://www.linkedin.com/in/magdalena-bennett-9b18b816/"
 schemaGitHub = "https://github.com/maibennett"

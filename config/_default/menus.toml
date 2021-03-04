@@ -1,11 +1,6 @@
 [[main]]
   name = "Presentations"
-  url = "/presentations/"
-  weight = 20
-
-[[main]]
-  name = "Presentations2"
-  url = "/docs/"
+  url = "docs/covid/uchile_20200914/"
   weight = 30
 
  [[social]]

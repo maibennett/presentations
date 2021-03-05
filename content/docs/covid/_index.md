@@ -4,4 +4,5 @@ description: "Heterogeneity in Policy Effectiveness against COVID-19 Spread in C
 lead: ""
 draft: false
 images: []
+weight: 300
 ---

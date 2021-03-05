@@ -1,0 +1,6 @@
+\beamer@sectionintoc {1}{Motivation}{2}{0}{1}
+\beamer@sectionintoc {2}{Generalized Regression Discontinuity Design}{10}{0}{2}
+\beamer@subsectionintoc {2}{1}{Framework}{10}{0}{2}
+\beamer@subsectionintoc {2}{2}{GRD in practice}{19}{0}{2}
+\beamer@sectionintoc {3}{Application: Free Higher Education in Chile}{36}{0}{3}
+\beamer@sectionintoc {4}{Conclusions}{54}{0}{4}

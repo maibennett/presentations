@@ -1,6 +1,6 @@
 [[main]]
   name = "Presentations"
-  url = "docs/2_covid/uchile_20200914/"
+  url = "docs/covid/uchile_20200914/"
   weight = 30
 
  [[social]]

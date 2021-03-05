@@ -4,5 +4,4 @@ description: "Identification of causal effects for regression discontinuity desi
 lead: ""
 draft: false
 images: []
-weight: 200
 ---

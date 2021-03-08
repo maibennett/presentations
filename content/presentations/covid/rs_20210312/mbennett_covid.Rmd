@@ -198,6 +198,7 @@ Augmented Synthetic Control Method
 
 - Let $Y_{it}(z)$ be the potential outcome under treatment $z$ for unit $i$ in period $t$:
    - E.g. $W_i$ is a treatment indicator, where unit $i$ is treated for all periods $T_0<T$.
+   
 - Under traditional **Synthetic Control Method** (SCM) (Abadie \& Gardeazabal, 2003), the counterfactual for $Y_{1T}$ is:
 $$\hat{Y}_{1T}(0) = \sum_{W_i=0}\gamma_iY_{iT}$$
 <img src="images/CA_ex.png" width="500" class="center">

@@ -40,7 +40,7 @@ style_mono_accent(
                      google_font("Fira Sans Condensed")),
   base_color = "#333f48",
   header_font_google = google_font("Yanone Kaffeesatz","200","300","400","500","600","700"),
-  text_font_google   = google_font("Roboto", "300", "300i","400","500"),
+  text_font_google   = google_font("Jost", "300", "300i","400","500"),
   code_font_google   = google_font("Fira Mono"),
   text_bold_color = "#333f48",
   text_font_size = "110%",
@@ -69,7 +69,7 @@ style_mono_accent(
     ".title-slide h1" = list("font-weight" = "500"),
     ".title-slide h2" = list("font-weight" = "400",
                              "font-size" =  "170%"),
-    ".title-slide h3" = list("font-family" = "Roboto",
+    ".title-slide h3" = list("font-family" = "Jost",
                              "font-size" = "100%",
                              "font-weight" = "200"),
     ".center2" = list("margin" = "0",
@@ -130,3 +130,94 @@ style_mono_accent(
 #FCCE25
 ```
 
+```{r setup2, echo=FALSE, message=FALSE, warning = FALSE}
+library(knitr)
+library(showtext)
+library(xaringanExtra)
+
+xaringanExtra::use_scribble()
+
+```
+
+```{r fonts, message=FALSE, echo=FALSE, warning = FALSE}
+font_add_google("Fira Sans Condensed", "Fira Sans Condensed")
+font_add_google("Fira Sans", "Fira Sans")
+font_add_google("Jost", "Jost")
+```
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
+library(tidyverse)
+library(gganimate)
+library(ggthemes)
+library(gifski)
+library(plotly)
+library(leaflet)
+library(ggplot2)
+library(firasans)
+library(hrbrthemes)
+library(extrafont)
+library("RColorBrewer")
+library(viridis)
+library("tm")
+library("SnowballC")
+library("wordcloud")
+library("RColorBrewer")
+library("firasans")
+library(hrbrthemes)
+library(extrafont)
+
+options(scipen = 0)
+```
+
+# Regression discontinuity design
+
+```{r rd_intro1, fig.height=5.25, fig.width=12, fig.align='center', dev='svg', echo = FALSE, warning = FALSE, message = FALSE}
+
+set.seed(100)
+
+n = 500
+
+r = rnorm(n, 10,7)
+
+treat = as.numeric(r>=10)
+
+y = 2 - 1.5*(10-r) + 18*treat + 0.5*treat*(10-r) -  0.05*treat*(10-r)^2 + rnorm(n,0,7)
+
+d = data.frame("r" = r,
+               "treat" = treat,
+               "y" = y)
+
+ggplot(data = d, aes(x=r, y=y)) +
+  geom_point(size = 3, pch = 21, color = "dark grey", fill="white") +
+  geom_vline(aes(xintercept=10), lty = 2, color = "#333f48", lwd = 1.5) +
+  ggplot2::annotate("rect", color="white", fill="white", xmin = 7, xmax = 13, ymin=38, ymax = 48) +
+  ggplot2::annotate("text", label = "Cutoff", size = 10, hjust = 0.5, x = 10, y = 43, color = "#333f48",
+                    family = "Fira Sans Condensed")+
+  theme_bw() +
+  theme_ipsum_fsc()+
+  xlab("Running variable") + ylab("Outcome") + 
+  theme(plot.margin=unit(c(1,1,1.5,1.2),"cm"),
+        panel.grid.major.x = element_blank(),
+        panel.grid.minor.x = element_blank(),
+        panel.grid.major.y = element_line(colour = "light grey"),
+        panel.grid.minor.y = element_blank(),
+        axis.line = element_blank())+
+  theme(axis.title.x = element_text(size = 24, color = "#333f48"),#margin = margin(t = 10, r = 0, b = 0, l = 0)),
+        axis.text.x = element_blank(),
+        axis.title.y = element_text(size = 24, color = "#333f48"),#margin = margin(t = 0, r = 10, b = 0, l = 0)),
+        axis.text.y = element_blank(),legend.position="none",
+        legend.title = element_text(size=12),
+        legend.text = element_text(size=10),
+        legend.background = element_rect(fill="white",colour ="white"),
+        title = element_text(size=12))
+
+
+```
+
+---
+# Increasingly popular method
+
+
+- Testing fonts
+
+  - See how this looks

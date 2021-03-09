@@ -218,6 +218,6 @@ ggplot(data = d, aes(x=r, y=y)) +
 # Increasingly popular method
 
 
-- Testing fonts
-
-  - See how this looks
+```{r rd_publications, fig.height=5.25, fig.width=12, fig.align='center', dev='svg', echo = FALSE, warning = FALSE, message = FALSE}
+d <- read.csv("https://raw.githubusercontent.com/maibennett/presentations/main/content/presentations/RD/IC_20210312/data/regression_discontinuity.csv")
+```

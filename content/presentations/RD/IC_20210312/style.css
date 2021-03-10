@@ -1,0 +1,39 @@
+@import url(https://fonts.googleapis.com/css?family=Jost&display=swap);
+
+.remark-slide-number {
+  position: inherit;
+}
+
+.remark-slide-number .progress-bar-container {
+  position: absolute;
+  top: 0;
+  height: 5px;
+  display: block;
+  left: 0;
+  right: 0;
+}
+
+.remark-slide-number .progress-bar {
+  height: 100%;
+  background-color: #FCCE25;
+}
+
+p {
+    margin: 1em 0px;
+    margin-top: 0.2em;
+    margin-right: 0px;
+    margin-bottom: 0em;
+    margin-left: 0px;
+}
+
+ul li { 
+	margin: 1em 0px;
+    margin-top: 0.2em;
+    margin-right: 0px;
+    margin-bottom: 0.2em;
+    margin-left: 0px;
+}
+
+ul li ul { 
+	font-size: 80%;
+}

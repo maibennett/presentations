@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="" xml:lang="">
   <head>
-    <title>How far is too far?  Estimation of an interval for generalization of a regression discontinuity design away from the cutoff</title>
+    <title>How far is too far?  Generalization of a regression discontinuity design away from the cutoff</title>
     <meta charset="utf-8" />
     <meta name="author" content="International Methods Colloquium Mar 12, 2021" />
     <script src="libs/header-attrs/header-attrs.js"></script>
@@ -11,12 +11,13 @@
     <script>document.addEventListener('DOMContentLoaded', function() { window.xeScribble = new Scribble({"pen_color":["#FF0000"],"pen_size":3,"eraser_size":30}) })</script>
     <script src="https://use.fontawesome.com/5235085b15.js"></script>
     <link rel="stylesheet" href="xaringan-themer.css" type="text/css" />
+    <link rel="stylesheet" href="style.css" type="text/css" />
   </head>
   <body>
     <textarea id="source">
 class: center, middle, inverse, title-slide
 
-# How far is too far? <br/>Estimation of an interval for generalization of a regression discontinuity design away from the cutoff
+# How far is too far? <br/>Generalization of a regression discontinuity design away from the cutoff
 ## Magdalena Bennett
 ### International Methods Colloquium<br/>Mar 12, 2021
 
@@ -41,17 +42,97 @@ class: center, middle, inverse, title-slide
 # Increasingly popular method
 
 
-- Testing fonts
+&lt;img src="mbennett_grd_files/figure-html/rd_publications-1.svg" style="display: block; margin: auto;" /&gt;
+---
+# Strong internal validity
 
-  - See how this looks
+&lt;img src="mbennett_grd_files/figure-html/rd_intro2-1.svg" style="display: block; margin: auto;" /&gt;
+
+---
+# ... But limited external validity
+
+&lt;img src="mbennett_grd_files/figure-html/rd_intro3-1.svg" style="display: block; margin: auto;" /&gt;
+
+---
+# Missing data and no overlap
+
+&lt;img src="mbennett_grd_files/figure-html/rd_intro4-1.svg" style="display: block; margin: auto;" /&gt;
+
+
+---
+# Can we find a generalization interval?
+
+&lt;img src="mbennett_grd_files/figure-html/rd_intro5-1.svg" style="display: block; margin: auto;" /&gt;
+
+---
+# This paper
+
+**Identification of generalization interval and estimation of ATT for population within such interval:**
+--
+
+  - Pre-intervention period informs the generalization bandwidth &lt;br&gt;
+  .tiny[(Wing &amp; Cook, 2013; Keele, Small, Hsu, &amp; Fogarty, 2020)]
+    
+  - Leverage the use of predictive covariates for breaking link between running variable and outcome &lt;br&gt;
+  .tiny[(Angrist &amp; Rokkanen, 2015; Rokkanen, 2015; Keele, Titiunik, &amp; Zubizarreta, 2015)]
+  
+  - Based on idea of local randomization near the cutoff &lt;br&gt;
+  .tiny[(Lee, 2008; Cattaneo, Frandsen, &amp; Titiunik, 2015)]
+  
+---
+# This paper
+
+**Main advantages:**
+--
+
+- Gradual approach
+  - No need for "All or Nothing"
+  - Interval informed by the data .tiny[(Cattaneo et al., 2015)]
+--
+
+- No extrapolation of population characteristics
+  - Compare like-to-like .tiny[(Rosenbaum, 1987)]
+  - Makes overlap region explicit
+--
+
+- Generalization to population of interest
+  - Use of representative template matching .tiny[(Silber et al., 2014; Bennett, Vielma, &amp; Zubizarreta, 2020)]
+--
+
+- Sensitivity analysis to hidden bias .tiny[(Rosenbaum, 2010; Keele et al., 2020)]
+
+---
+# Outline
+
+Motivation
+
+Generalized Regression Discontinuity Design (GRD)
+
+__Framework
+  
+__GRD in practice
+  
+Application: Free Higher Education in Chile
+
+Conclusions
+
+---
+# Test
+
+- First item
+
+  - First subitem
+  - Second subitem
+  
+- Second item
     </textarea>
 <style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
 <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
 <script src="macros.js"></script>
 <script>var slideshow = remark.create({
+"slideNumberFormat": "<div class=\"progress-bar-container\">\n  <div class=\"progress-bar\" style=\"width: calc(%current% / %total% * 100%);\">\n  </div>\n</div>\n",
 "highlightStyle": "github",
 "highlightLines": true,
-"countIncrementalSlides": false,
 "ratio": "16:9"
 });
 if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {

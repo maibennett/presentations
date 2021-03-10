@@ -1,15 +1,19 @@
 ---
-title: "How far is too far? <br/>Estimation of an interval for generalization of a regression discontinuity design away from the cutoff"
+title: "How far is too far? <br/>Generalization of a regression discontinuity design away from the cutoff"
 subtitle: "Magdalena Bennett"
 author: "International Methods Colloquium<br/>Mar 12, 2021"
 output:
   xaringan::moon_reader:
-    css: [xaringan-themer.css]
+    css: ["xaringan-themer.css", "style.css"]
     lib_dir: libs
     nature:
+      slideNumberFormat: |
+        <div class="progress-bar-container">
+          <div class="progress-bar" style="width: calc(%current% / %total% * 100%);">
+          </div>
+        </div>
       highlightStyle: github
       highlightLines: true
-      countIncrementalSlides: false
       ratio: "16:9"
       beforeInit: "macros.js"
     includes:
@@ -37,13 +41,14 @@ theme_xaringan(
 style_mono_accent(
   #base_color = "#bf5700",
   extra_fonts = list(google_font("Fira Sans","200","300","400","500","600"),
-                     google_font("Fira Sans Condensed")),
+                     google_font("Fira Sans Condensed"),
+                     google_font("Jost")),
   base_color = "#333f48",
   header_font_google = google_font("Yanone Kaffeesatz","200","300","400","500","600","700"),
-  text_font_google   = google_font("Jost", "300", "300i","400","500"),
+  text_font_google   = google_font("Jost"),
   code_font_google   = google_font("Fira Mono"),
   text_bold_color = "#333f48",
-  text_font_size = "110%",
+  text_font_size = "130%",
   colors = c(
     red = "#f34213",
     purple = "#900DA4",
@@ -51,15 +56,17 @@ style_mono_accent(
     green = "#136f63",
     white = "#FFFFFF"),
   extra_css = list(
+    ".body" = list("font-family" = "Jost"),
     ".remark-slide table" = list("display" = "table",
                    "width" = "80%",
                    "text-align" = "left"),
-    ".remark-slide-number" = list("display" = "none"),
+    # ".remark-slide-number" = list("display" = "none"),
     ".strong" = list("font-weight" = "400"),
     ".big" = list("font-size" = "350%",
                      "font-family" = "Yanone Kaffeesatz",
                      "font-weight"="400"),
     ".small" = list("font-size" = "80%"),
+    ".tiny" = list("font-size" = "50%"),
     ".source" = list("color" = "#8c8c8c",
                      "font-size" = "80%"),
     ".remark-slide table td#highlight" = list("background-color" = "#eee1f0",
@@ -147,22 +154,14 @@ font_add_google("Jost", "Jost")
 
 ```{r, echo=FALSE, message=FALSE, warning=FALSE}
 library(tidyverse)
-library(gganimate)
 library(ggthemes)
-library(gifski)
-library(plotly)
-library(leaflet)
 library(ggplot2)
 library(firasans)
 library(hrbrthemes)
 library(extrafont)
-library("RColorBrewer")
+library(RColorBrewer)
 library(viridis)
-library("tm")
-library("SnowballC")
-library("wordcloud")
-library("RColorBrewer")
-library("firasans")
+library(firasans)
 library(hrbrthemes)
 library(extrafont)
 
@@ -173,7 +172,7 @@ options(scipen = 0)
 
 ```{r rd_intro1, fig.height=5.25, fig.width=12, fig.align='center', dev='svg', echo = FALSE, warning = FALSE, message = FALSE}
 
-set.seed(100)
+set.seed(110)
 
 n = 500
 
@@ -181,7 +180,9 @@ r = rnorm(n, 10,7)
 
 treat = as.numeric(r>=10)
 
-y = 2 - 1.5*(10-r) + 18*treat + 0.5*treat*(10-r) -  0.05*treat*(10-r)^2 + rnorm(n,0,7)
+error = rnorm(n,0,7)
+
+y = 2 - 1.5*(10-r) + 18*treat + 0.5*treat*(10-r) -  0.01*treat*(10-r)^2 + error
 
 d = data.frame("r" = r,
                "treat" = treat,
@@ -219,5 +220,258 @@ ggplot(data = d, aes(x=r, y=y)) +
 
 
 ```{r rd_publications, fig.height=5.25, fig.width=12, fig.align='center', dev='svg', echo = FALSE, warning = FALSE, message = FALSE}
-d <- read.csv("https://raw.githubusercontent.com/maibennett/presentations/main/content/presentations/RD/IC_20210312/data/regression_discontinuity.csv")
+pub <- read.csv("https://raw.githubusercontent.com/maibennett/presentations/main/content/presentations/RD/IC_20210312/data/regression_discontinuityv2.csv")
+
+names(pub) <- c("year","results")
+
+ggplot(data = pub, aes(x=year, y=results)) +
+  geom_point(size = 4, pch = 21, color = "#E16462", fill="#E16462") +
+  geom_line(color = "#E16462", lty = 2, lwd = 1.5) +
+  theme_bw() +
+  theme_ipsum_fsc()+
+  xlab("Year") + ylab("Number of publications") + 
+  labs(caption = "Note: Publications including 'Regression Discontinuity' in their title or abstract for research fields of Social Sciences.\nSource: Dimensions.ai") + 
+  theme(plot.margin=unit(c(1,1,1.5,1.2),"cm"),
+        panel.grid.major.x = element_blank(),
+        panel.grid.minor.x = element_blank(),
+        panel.grid.major.y = element_line(colour = "light grey"),
+        panel.grid.minor.y = element_blank(),
+        axis.line = element_blank())+
+  theme(axis.title.x = element_text(size = 24, color = "#333f48"),#margin = margin(t = 10, r = 0, b = 0, l = 0)),
+        axis.text.x = element_text(size = 14),
+        axis.title.y = element_text(size = 24, color = "#333f48"),#margin = margin(t = 0, r = 10, b = 0, l = 0)),
+        axis.text.y = element_text(size = 14),legend.position="none",
+        legend.title = element_text(size=12),
+        legend.text = element_text(size=10),
+        legend.background = element_rect(fill="white",colour ="white"),
+        title = element_text(size=28, color = "#333f48"))
 ```
+---
+# Strong internal validity
+
+```{r rd_intro2, fig.height=5.25, fig.width=12, fig.align='center', dev='svg', echo = FALSE, warning = FALSE, message = FALSE}
+
+ggplot(data = d, aes(x=r, y=y)) +
+  geom_point(size = 3, pch = 21, color = alpha("dark grey",0.8), fill="white") +
+  geom_vline(aes(xintercept=10), lty = 2, color = "grey", lwd = 1.5) +
+  
+  geom_smooth(data = dplyr::filter(d, r<10), method = "gam", se = FALSE, color = "grey", lwd = 2) + 
+  geom_smooth(data = dplyr::filter(d, r>=10), method = "gam", se = FALSE, color = "grey", lwd = 2) + 
+  
+  ggplot2::annotate("rect", color="white", fill="white", xmin = 11, xmax = 14, ymin=11, ymax = 15) +
+  ggplot2::annotate("text", label = "LATE", size = 10, hjust = 0.5, x = 12.5, y =13, color = "#E16462",
+                    family = "Fira Sans Condensed")+
+  
+  ggplot2::annotate("segment",x = 10, xend = 10, y = 1.44, yend = 19.6, color = "#E16462", lwd = 2) +
+  
+  theme_bw() +
+  theme_ipsum_fsc()+
+  xlab("Running variable") + ylab("Outcome") + 
+  theme(plot.margin=unit(c(1,1,1.5,1.2),"cm"),
+        panel.grid.major.x = element_blank(),
+        panel.grid.minor.x = element_blank(),
+        panel.grid.major.y = element_line(colour = "light grey"),
+        panel.grid.minor.y = element_blank(),
+        axis.line = element_blank())+
+  theme(axis.title.x = element_text(size = 24, color = "#333f48"),#margin = margin(t = 10, r = 0, b = 0, l = 0)),
+        axis.text.x = element_blank(),
+        axis.title.y = element_text(size = 24, color = "#333f48"),#margin = margin(t = 0, r = 10, b = 0, l = 0)),
+        axis.text.y = element_blank(),legend.position="none",
+        legend.title = element_text(size=12),
+        legend.text = element_text(size=10),
+        legend.background = element_rect(fill="white",colour ="white"),
+        title = element_text(size=12))
+
+
+```
+
+---
+# ... But limited external validity
+
+```{r rd_intro3, fig.height=5.25, fig.width=12, fig.align='center', dev='svg', echo = FALSE, warning = FALSE, message = FALSE}
+
+ggplot(data = d, aes(x=r, y=y)) +
+  geom_point(size = 3, pch = 21, color = alpha("dark grey",0.8), fill="white") +
+  geom_vline(aes(xintercept=10), lty = 2, color = "grey", lwd = 1.5) +
+  
+  geom_smooth(data = dplyr::filter(d, r<10), method = "gam", se = FALSE, color = "#E16462", lwd = 2) + 
+  geom_smooth(data = dplyr::filter(d, r>=10), method = "gam", se = FALSE, color = "#E16462", lwd = 2) + 
+  
+  ggplot2::annotate("rect", color="white", fill="white", xmin = 11, xmax = 14, ymin=11, ymax = 15) +
+  ggplot2::annotate("text", label = "LATE", size = 10, hjust = 0.5, x = 12.5, y =13, color = "grey",
+                    family = "Fira Sans Condensed")+
+  
+  ggplot2::annotate("segment",x = 10, xend = 10, y = 1.44, yend = 19.6, color = "grey", lwd = 2) +
+  
+  theme_bw() +
+  theme_ipsum_fsc()+
+  xlab("Running variable") + ylab("Outcome") + 
+  theme(plot.margin=unit(c(1,1,1.5,1.2),"cm"),
+        panel.grid.major.x = element_blank(),
+        panel.grid.minor.x = element_blank(),
+        panel.grid.major.y = element_line(colour = "light grey"),
+        panel.grid.minor.y = element_blank(),
+        axis.line = element_blank())+
+  theme(axis.title.x = element_text(size = 24, color = "#333f48"),#margin = margin(t = 10, r = 0, b = 0, l = 0)),
+        axis.text.x = element_blank(),
+        axis.title.y = element_text(size = 24, color = "#333f48"),#margin = margin(t = 0, r = 10, b = 0, l = 0)),
+        axis.text.y = element_blank(),legend.position="none",
+        legend.title = element_text(size=12),
+        legend.text = element_text(size=10),
+        legend.background = element_rect(fill="white",colour ="white"),
+        title = element_text(size=12))
+
+
+```
+
+---
+# Missing data and no overlap
+
+```{r rd_intro4, fig.height=5.25, fig.width=12, fig.align='center', dev='svg', echo = FALSE, warning = FALSE, message = FALSE}
+
+y1 = 2 - 1.5*(10-r) + 18 + 0.5*(10-r) -  0.01*(10-r)^2 + error
+y0 = 2 - 1.5*(10-r) + error
+
+d$y1 <- y1
+d$y0 <- y0
+
+ggplot(data = d, aes(x=r, y=y)) +
+  geom_point(size = 3, pch = 21, color = alpha("dark grey",0.8), fill="white") +
+  geom_vline(aes(xintercept=10), lty = 2, color = "grey", lwd = 1.5) +
+  
+  geom_smooth(data = dplyr::filter(d, r<10), method = "gam", se = FALSE, color = "#E16462", lwd = 2) + 
+  geom_smooth(data = dplyr::filter(d, r>=10), method = "gam", se = FALSE, color = "#E16462", lwd = 2) +
+  
+  geom_smooth(data = dplyr::filter(d, r<10), aes(x = r, y = y1), method = "gam", se = FALSE, color = "#E16462", lwd = 2, lty = 2) + 
+  geom_smooth(data = dplyr::filter(d, r>=10), aes(x = r, y = y0), method = "gam", se = FALSE, color = "#E16462", lwd = 2, lty = 2) +
+  
+  ggplot2::annotate("rect", color="white", fill="white", xmin = 11, xmax = 14, ymin=11, ymax = 15) +
+  ggplot2::annotate("text", label = "LATE", size = 10, hjust = 0.5, x = 12.5, y =13, color = "grey",
+                    family = "Fira Sans Condensed")+
+  
+  ggplot2::annotate("segment",x = 10, xend = 10, y = 1.44, yend = 19.6, color = "grey", lwd = 2) +
+  
+  theme_bw() +
+  theme_ipsum_fsc()+
+  xlab("Running variable") + ylab("Outcome") + 
+  theme(plot.margin=unit(c(1,1,1.5,1.2),"cm"),
+        panel.grid.major.x = element_blank(),
+        panel.grid.minor.x = element_blank(),
+        panel.grid.major.y = element_line(colour = "light grey"),
+        panel.grid.minor.y = element_blank(),
+        axis.line = element_blank())+
+  theme(axis.title.x = element_text(size = 24, color = "#333f48"),#margin = margin(t = 10, r = 0, b = 0, l = 0)),
+        axis.text.x = element_blank(),
+        axis.title.y = element_text(size = 24, color = "#333f48"),#margin = margin(t = 0, r = 10, b = 0, l = 0)),
+        axis.text.y = element_blank(),legend.position="none",
+        legend.title = element_text(size=12),
+        legend.text = element_text(size=10),
+        legend.background = element_rect(fill="white",colour ="white"),
+        title = element_text(size=12))
+
+
+```
+
+
+---
+# Can we find a generalization interval?
+
+```{r rd_intro5, fig.height=5.25, fig.width=12, fig.align='center', dev='svg', echo = FALSE, warning = FALSE, message = FALSE}
+
+ggplot(data = d, aes(x=r, y=y)) +
+  geom_point(size = 3, pch = 21, color = alpha("dark grey",0.8), fill="white") +
+  geom_vline(aes(xintercept=10), lty = 2, color = "grey", lwd = 1.5) +
+  
+  geom_smooth(data = dplyr::filter(d, r<10), method = "gam", se = FALSE, color = "grey", lwd = 2) + 
+  geom_smooth(data = dplyr::filter(d, r>=10), method = "gam", se = FALSE, color = "grey", lwd = 2) + 
+  
+  geom_vline(aes(xintercept = 5), lty = 2, color = "#E16462", lwd = 2) +
+  geom_vline(aes(xintercept = 15), lty = 2, color = "#E16462", lwd = 2) +
+  
+  ggplot2::annotate("rect", color="white", fill="white", xmin = 11, xmax = 14, ymin=11, ymax = 15) +
+  ggplot2::annotate("text", label = "LATE", size = 10, hjust = 0.5, x = 12.5, y =13, color = "grey",
+                    family = "Fira Sans Condensed")+
+  
+  ggplot2::annotate("segment",x = 10, xend = 10, y = 1.44, yend = 19.6, color = "grey", lwd = 2) +
+  
+  theme_bw() +
+  theme_ipsum_fsc()+
+  xlab("Running variable") + ylab("Outcome") + 
+  theme(plot.margin=unit(c(1,1,1.5,1.2),"cm"),
+        panel.grid.major.x = element_blank(),
+        panel.grid.minor.x = element_blank(),
+        panel.grid.major.y = element_line(colour = "light grey"),
+        panel.grid.minor.y = element_blank(),
+        axis.line = element_blank())+
+  theme(axis.title.x = element_text(size = 24, color = "#333f48"),#margin = margin(t = 10, r = 0, b = 0, l = 0)),
+        axis.text.x = element_blank(),
+        axis.title.y = element_text(size = 24, color = "#333f48"),#margin = margin(t = 0, r = 10, b = 0, l = 0)),
+        axis.text.y = element_blank(),legend.position="none",
+        legend.title = element_text(size=12),
+        legend.text = element_text(size=10),
+        legend.background = element_rect(fill="white",colour ="white"),
+        title = element_text(size=12))
+
+```
+
+---
+# This paper
+
+**Identification of generalization interval and estimation of ATT for population within such interval:**
+--
+
+  - Pre-intervention period informs the generalization bandwidth <br>
+  .tiny[(Wing & Cook, 2013; Keele, Small, Hsu, & Fogarty, 2020)]
+    
+  - Leverage the use of predictive covariates for breaking link between running variable and outcome <br>
+  .tiny[(Angrist & Rokkanen, 2015; Rokkanen, 2015; Keele, Titiunik, & Zubizarreta, 2015)]
+  
+  - Based on idea of local randomization near the cutoff <br>
+  .tiny[(Lee, 2008; Cattaneo, Frandsen, & Titiunik, 2015)]
+  
+---
+# This paper
+
+**Main advantages:**
+--
+
+- Gradual approach
+  - No need for "All or Nothing"
+  - Interval informed by the data .tiny[(Cattaneo et al., 2015)]
+--
+
+- No extrapolation of population characteristics
+  - Compare like-to-like .tiny[(Rosenbaum, 1987)]
+  - Makes overlap region explicit
+--
+
+- Generalization to population of interest
+  - Use of representative template matching .tiny[(Silber et al., 2014; Bennett, Vielma, & Zubizarreta, 2020)]
+--
+
+- Sensitivity analysis to hidden bias .tiny[(Rosenbaum, 2010; Keele et al., 2020)]
+
+---
+# Outline
+
+Motivation
+
+Generalized Regression Discontinuity Design (GRD)
+
+__Framework
+  
+__GRD in practice
+  
+Application: Free Higher Education in Chile
+
+Conclusions
+
+---
+# Test
+
+- First item
+
+  - First subitem
+  - Second subitem
+  
+- Second item

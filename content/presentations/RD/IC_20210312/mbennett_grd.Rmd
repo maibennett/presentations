@@ -628,13 +628,13 @@ Two-part problem with pre- and post-intervention periods:
 --
 <br>
 <span class="box-5">1) Identification of generalization interval H<sup>\*</sup></span>
-<br>
+
 .box-5t[(using pre-intervention period)]
 
 --
 <br>
 <span class="box-5">2) Estimation of ATT for population within H<sup>\*</sup></span>
-<br>
+
 .box-5t[(using post-intervention period)]
 
 ---
@@ -891,3 +891,86 @@ ggplot(df_post2_detrend[df_post2_detrend$xaxisTime>=5 & df_post2_detrend$xaxisTi
         legend.background = element_rect(fill="white",colour ="white"))
 
 ```
+
+---
+
+background-position: 50% 50%
+class: left, bottom, inverse, nonum
+.big[
+Getting our hands dirty...
+]
+
+---
+# Context: Representative template matching
+
+.center[
+![:scale 60%](https://raw.githubusercontent.com/maibennett/presentations/main/content/presentations/RD/IC_20210312/images/diagram3v2.svg)
+]
+
+---
+# Diagram for GRD
+
+---
+# Step 1: 
+
+---
+
+background-position: 50% 50%
+class: left, bottom, inverse, nonum
+.big[
+Application: Free Higher Education
+]
+
+---
+# Free Higher Education (FHE) in Chile
+
+**Context of higher education in Chile:**
+
+- Centralized admission system (deferred admission mechanism)
+
+- Admission score: PSU score + GPA score + ranking score
+
+- Before 2016: Scholarships + government-backed loans
+
+**FHE policy:**
+
+- Introduced in December 2015 (unanticipated)
+
+- Eligibility: Lower 50% income distribution + admitted to eligible program
+
+---
+# Research question
+<br>
+.box-5[What was the effect of being eligible for FHE on application and enrollment to university?]
+--
+
+
+- **Treatment:** SE eligibility for FHE
+
+- **Two outcomes:** Application to university and enrollment
+
+  - Lower-income students $\rightarrow$ financial constraints
+  - Saliency of the policy
+  
+- Larger effects for students away from the cutoff?
+
+  - Compare RD to GRD results
+
+---
+#What data do I have?
+<br>
+<br>
+- **3 cohorts:** 2014, 2015, and 2016 (~ 200,000 students)
+
+
+- **Rich baseline data:** Demographic and socioeconomic data at student level, 10th (8th) grade standardized scores, school characteristics.
+
+
+- **Application data:** Scores by subject, application, and enrollment.
+
+---
+# How do the RDs look like?
+
+---
+# GRD for Free Higher Education
+

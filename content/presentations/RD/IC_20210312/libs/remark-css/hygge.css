@@ -1,51 +1,17 @@
-@import url(https://fonts.googleapis.com/css?family=Jost&display=swap);
+/************************************
+ *
+ * Template-independent CSS code for formatting xaringan presentations
+ *
+ * For that extra bit of "hygge"
+ *
+ ************************************/
 
-.remark-slide-number {
-  position: inherit;
-}
 
-.remark-slide-number .progress-bar-container {
-  position: absolute;
-  top: 0;
-  height: 5px;
-  display: block;
-  left: 0;
-  right: 0;
-}
-
-.remark-slide-number .progress-bar {
-  height: 100%;
-  background-color: #FCCE25;
-}
-
-p {
-    margin: 1em 0px;
-    margin-top: 0.2em;
-    margin-right: 0px;
-    margin-bottom: 0em;
-    margin-left: 0px;
-}
-
-ul li { 
-	margin: 1em 0px;
-    margin-top: 0.2em;
-    margin-right: 0px;
-    margin-bottom: 0.2em;
-    margin-left: 0px;
-}
-
-ul li ul { 
-	font-size: 80%;
-}
-
-.nonum .remark-slide-number{
-	display: none;
-} 
-
-.MathJax {
-	font-size: 1em;
-	font-family: 'Jost';
-}
+/**************
+ *
+ * Font size and colours
+ *
+ **************/
 
 
 .Large { font-size: 144% }
@@ -127,20 +93,7 @@ ul li ul {
 }
 
 .content-box-red {
-	background-color: #E16462;
-	font-family: 'Yanone Kaffeesatz';
-}
-
-.content-box-red-large {
-	background-color: #E16462;
-	font-family: 'Yanone Kaffeesatz';
-	font-size: 120%;
-}
-
-.content-box-red-inv {
-	background-color: rgba(225, 100, 98,0.3);
-	color: #E16462;
-	font-family: 'Yanone Kaffeesatz';
+	background-color: #f9dbdb;
 }
 
 .content-box-yellow {

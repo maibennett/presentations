@@ -127,6 +127,7 @@ class: left, bottom, inverse, nonum
 Get me away from here...
 ]
 
+
 ---
 # Generalized Regression Discontinuity Design (GRD)
 
@@ -165,24 +166,45 @@ Two-part problem with pre- and post-intervention periods:
 ---
 # Two periods for GRD
 
-&lt;img src="mbennett_grd_files/figure-html/grd1-1.svg" style="display: block; margin: auto;" /&gt;
+&lt;img src="mbennett_grd_files/figure-html/grd_setup-1.svg" style="display: block; margin: auto;" /&gt;
 ---
 # A gradual approach
 
 - Conditional expectations of potential outcomes, `\(Y^{(z)}_t(R)\)`:
 `$$Y^{(0)}_0(R) = \mathbb{E}[Y^{(0)}_{i0}|R] = \mu_0(R)$$`
-`$$Y^{(1)}_0(R) = \mathbb{E}[Y^{(1)}_{i0}|R] = \underbrace{\mu_0(R)}_{\color{#900DA4}{\text{Avg. Outcome by R}}} + \underbrace{\tau_0(R)}_{\color{#900DA4}{\text{Treat. Effect by R}}}$$`
+`$$Y^{(1)}_0(R) = \mathbb{E}[Y^{(1)}_{i0}|R] = \underbrace{\mu_0(R)}_{\color{#E16462}{\text{Avg. Outcome by R}}} + \underbrace{\tau_0(R)}_{\color{#E16462}{\text{Treat. Effect by R}}}$$`
 
 --
 
 - Identify generalization interval `\(H = [H_{-},H_{+}]\)` for `\(t=0\)`:
 `$$R_{i} = h(\mathbf{X}_{i}) + \eta_i \ \ \forall \ R_i \in H$$`
-
-where `\(H^* = \max\{|H|\}\)`
 --
 
-- If `\(H^*\)` exists, then for a set of covariates `\(\mathbf{X} = \mathbf{X}_T\)`:
+- If `\(H^* = \max\{|H|\}\)` exists, then for a set of covariates `\(\mathbf{X} = \mathbf{X}_T\)`:
 `$$Y^{(0)}_0(R')|\mathbf{X}_T = Y^{(0)}_0(R'')|\mathbf{X}_T \ \ \text{for any} \ R', R'' \in H^*$$`
+
+---
+# Conditional outcome within the generalization interval
+
+&lt;img src="mbennett_grd_files/figure-html/grd_setup_pre-1.svg" style="display: block; margin: auto;" /&gt;
+---
+# Main assumption for generalization to t=1
+
+&lt;br&gt;
+&lt;br&gt;
+.box-0[&lt;b&gt;Assumption: Conditional time-invariance under control&lt;/b&gt;
+`$$Y^{(0)}_0(R|\mathbf{X}) = Y_1^{(0)}(R|\mathbf{X}) + \alpha, \ \ \ \forall R \in H^*$$`]
+
+--
+
+- No changes in unobserved confounders between `\(t=0\)` and `\(t=1\)` for units within `\(H^\ast\)`
+
+- Partially testable for `\(Z=0\)` in `\(t=1\)`
+
+---
+# Estimating an effect away from the cutoff
+
+&lt;img src="mbennett_grd_files/figure-html/grd_setup_post-1.svg" style="display: block; margin: auto;" /&gt;
     </textarea>
 <style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
 <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>

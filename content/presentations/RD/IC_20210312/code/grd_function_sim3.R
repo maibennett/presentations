@@ -4,7 +4,7 @@ grd <- function(data, tvar, grid, out_var, cov1, cov2, tols, running_var, thresh
                 size = 1000, nsamples = 10, seed = 100, dir_data, t_max_alloc, match_prop = 0.99,
                 significance, drop_tail = 0.01, print=FALSE, name_plot = "plot"){
 
-  source(paste0(dir_data,"/functions/create_template_func_sim3.R"))
+  source("https://raw.githubusercontent.com/maibennett/presentations/main/content/presentations/RD/IC_20210312/code/create_template_func_sim3.R")
   
   bandwidth_aux = bandwidth
   bandwidth_opt = bandwidth

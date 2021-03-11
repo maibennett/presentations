@@ -989,6 +989,31 @@ Getting our hands dirty...
 ]
 
 .pull-right[]
+
+---
+# Step 5b: ... until template is larger than interval
+
+.pull-left[
+This can break in two ways:
+<br>
+<br>
+.box-0[1) No overlap of covariates]
+<br>
+.box-0[.center[2) Predictive covariates don't explain correlation between R and Y]]
+]
+
+.pull-right[]
+
+---
+# Step 6: ATT estimation
+
+Straightforward estimation given the matched sample:
+
+- E.g. paired t-test:
+
+$$\hat{\tau}_{ATT}= \sum_{k=1}^N\frac{Y_{k(1)1} - Y_{k(0)1} - (Y_{k(1)0} - Y_{k(0)0})}{N} = \sum_k=1^N\frac{d_k}{N}$$
+
+$Y_{k(z)t}$: Outcome within matched group $k$ with treatment $z$ for period $t$.
 ---
 
 background-position: 50% 50%
@@ -1026,8 +1051,9 @@ Application: Free Higher Education
 
   - Lower-income students $\rightarrow$ financial constraints
   - Saliency of the policy
-  
-- Larger effects for students away from the cutoff?
+--
+
+- **Larger effects for students away from the cutoff?**
 
   - Compare RD to GRD results
 

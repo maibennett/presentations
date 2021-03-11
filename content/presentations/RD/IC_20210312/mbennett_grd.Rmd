@@ -910,9 +910,85 @@ Getting our hands dirty...
 ---
 # Diagram for GRD
 
+.center[
+![](https://raw.githubusercontent.com/maibennett/presentations/main/content/presentations/RD/IC_20210312/images/diagram_grd.png)
+]
 ---
-# Step 1: 
+# Step 0: Identification of narrow interval
 
+.pull-left[
+.center[
+![](https://raw.githubusercontent.com/maibennett/presentations/main/content/presentations/RD/IC_20210312/images/diagram_grd1.png)
+]
+]
+
+.pull-right[]
+
+---
+# Step 1: Template selection
+
+.pull-left[
+.center[
+![](https://raw.githubusercontent.com/maibennett/presentations/main/content/presentations/RD/IC_20210312/images/diagram_grd2.png)
+]
+]
+
+.pull-right[]
+
+---
+# Step 2: Matching units in pre-intervention period
+
+.pull-left[
+.center[
+![](https://raw.githubusercontent.com/maibennett/presentations/main/content/presentations/RD/IC_20210312/images/diagram_grd3.png)
+]
+]
+
+.pull-right[]
+
+---
+# Step 3 and 4: Fit a local polynomial and identify new interval
+
+.pull-left[
+.center[
+![](https://raw.githubusercontent.com/maibennett/presentations/main/content/presentations/RD/IC_20210312/images/diagram_grd4.png)
+]
+]
+
+.pull-right[]
+
+---
+# Step 5: If generalization interval > template...
+
+.pull-left[
+.center[
+![](https://raw.githubusercontent.com/maibennett/presentations/main/content/presentations/RD/IC_20210312/images/diagram_grd5.png)
+]
+]
+
+.pull-right[]
+
+---
+# Step 5a: ... expand template and do it again.
+
+.pull-left[
+.center[
+![](https://raw.githubusercontent.com/maibennett/presentations/main/content/presentations/RD/IC_20210312/images/diagram_grd6.png)
+]
+]
+
+.pull-right[]
+
+---
+# Step 5b: ... until template is larger than interval
+
+.pull-left[
+.center[
+![](https://raw.githubusercontent.com/maibennett/presentations/main/content/presentations/RD/IC_20210312/images/diagram_grd7.png)
+]
+]
+
+.pull-right[]
 ---
 
 background-position: 50% 50%

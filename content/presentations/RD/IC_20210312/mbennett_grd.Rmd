@@ -1517,7 +1517,7 @@ ggplot(data3,aes(y=y,x=running_var, label=NA), fill="white")+
 .pull-right[]
 
 ---
-# Step 5b: ... until template is larger than interval
+# Step 5b: ... until template is the same as the interval
 
 .pull-left[
 .center[
@@ -1527,7 +1527,7 @@ ggplot(data3,aes(y=y,x=running_var, label=NA), fill="white")+
 
 .pull-right[
 ```{r grd5b, fig.height=6, fig.width=6.5, fig.align='center', dev='svg', echo = FALSE, warning = FALSE, message = FALSE}
-githubURL <- "https://github.com/maibennett/presentations/raw/main/content/presentations/RD/IC_20210312/data/example_grd.RData"
+githubURL <- "https://github.com/maibennett/presentations/raw/main/content/presentations/RD/IC_20210312/data/example_grd_all.RData"
 load(url(githubURL))
 
 random_t = sample(1:nrow(d_match),600,replace=FALSE)
@@ -1618,7 +1618,153 @@ This can break in two ways:
 .box-0[.center[2) Predictive covariates don't explain correlation between R and Y]]
 ]
 
-.pull-right[]
+.pull-right[
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+
+library(ggplot2)
+library(firasans)
+library(plotly)
+
+dir_data = "C:/Users/maibe/Dropbox/PhD Columbia/Dissertation/PhD Defense/"
+
+load(paste0(dir_data,"grd1.Rdata"))
+
+data1 = data3
+data1$f = 1
+
+d_m1 = d_match2
+d_m1$f = 1
+
+optimal_bandwidth1 = optimal_bandwidth
+
+rm(data3,d_match2,optimal_bandwidth)
+
+
+load(paste0(dir_data,"grd2.Rdata"))
+
+data2 = data3
+data2$f = 2
+
+d_m2 = d_match2
+d_m2$f = 2
+
+optimal_bandwidth2 = optimal_bandwidth
+
+rm(data3,d_match2,optimal_bandwidth)
+
+load(paste0(dir_data,"grd3.Rdata"))
+
+data3 = data3
+data3$f = 3
+
+d_m3 = d_match2
+d_m3$f = 3
+
+optimal_bandwidth3 = optimal_bandwidth
+
+rm(d_match2,optimal_bandwidth)
+
+dm = rbind(d_m1,d_m2,d_m3)
+d = rbind(data1,data2,data3)
+
+d$obw1 = NA
+d$obw1[d$f==1] = optimal_bandwidth1[1]
+d$obw1[d$f==2] = optimal_bandwidth2[1]
+d$obw1[d$f==3] = optimal_bandwidth3[1]
+
+d$obw2 = NA
+d$obw2[d$f==1] = optimal_bandwidth1[2]
+d$obw2[d$f==2] = optimal_bandwidth2[2]
+d$obw2[d$f==3] = optimal_bandwidth3[2]
+
+
+m <- list(
+  l = 50,
+  r = 50,
+  b = 10,
+  t = 50,
+  pad = 4
+)
+
+fig <- dm %>% plot_ly() %>%
+  layout(xaxis = list(title = "Running variable",
+                      range = c(-600,400)),
+         yaxis = list(title = "Outcome",
+                      range = c(-30,30)),
+         plot_bgcolor="rgba(0, 0, 0, 0)",
+         paper_bgcolor="rgba(0, 0, 0, 0)",
+         margin=m,
+         showlegend = FALSE)  %>%
+  add_trace(x=~running_var,y=~y, frame=~f,type='scatter',mode='markers',
+            marker = list(color=alpha("#97D1C7",0.3),size=7,
+            line = list(
+              color = "#70C1B3",
+              width = 1.5
+            ))) %>%
+  add_trace(d,x=~running_var,y=~y,type='scatter',mode='markers',
+            marker = list(color=alpha("#97D1C7",0.0),size=3,
+            line = list(
+              color = alpha("#babbbf",0.4),
+              width = 1.2
+            )))
+
+
+g = ggplot(data3,aes(y=y,x=running_var, label=NA), fill="white")+
+  geom_point(fill=alpha("white",0),color="light grey",shape=21,size=1.2) +
+  #geom_rect(aes(xmin = grid[5], xmax = grid[6], ymin = -Inf, ymax = Inf),
+  #          fill = "light grey", alpha = 0.03) +
+  geom_ribbon(data=data3[data3$running_var>=grid[3] & data3$running_var<=grid[6],],
+              aes(ymin=-30,ymax=30),fill="light grey",alpha=0.5) +
+  #geom_point(fill="white", color="slategrey", size=2, shape=21)+
+  geom_point(data=d_match2,
+             aes(x=running_var,y=y),fill="#97D1C7",lwd=2, color="#70C1B3", size=2, shape=21,alpha=0.4)+
+  geom_vline(aes(xintercept=grid[5]),linetype='dashed',col="#FF1654",lwd=1.1) + 
+  geom_vline(aes(xintercept=optimal_bandwidth[2]),linetype='dashed',col="#FF1654",lwd=1.1) + 
+  geom_vline(aes(xintercept=0),linetype='dashed',col="slategrey",lwd=1) +
+  geom_segment(aes(x = -700, y = 0, xend = -701, yend = 0,col="slategrey"), size=1)+
+  geom_segment(aes(x = -700, y = 0, xend = -701, yend = 0,col="#FF1654"), size=1)+
+  geom_line(data=data3[!is.na(data3$est),],aes(x=running_var,y=est),col="slategrey",lwd=1) +
+  geom_ribbon(data=data3[!is.na(data3$est),],aes(x=running_var,ymin=cil,ymax=ciu),fill="#73ABC2",alpha=0.3) +
+  geom_line(data=data3[!is.na(data3$est),],aes(x=running_var,y=cil), col="#247BA0", lty=4) +
+  geom_line(data=data3[!is.na(data3$est),],aes(x=running_var,y=ciu), col="#247BA0", lty=4) +
+  theme_ipsum_fsc(grid="Y", plot_title_size = 20,
+                  axis_text_size = 10,
+                  axis_title_size=12,
+                  axis_col = col_text)+
+  xlab("Running variable") + ylab("Outcome")+ggtitle("Pre-intervention")+
+  scale_color_identity(name='Potential Outcomes',
+                       breaks=c('slategrey',"#FF1654"),
+                       labels = c("Cutoff","H1"),
+                       guide = "legend")+
+  theme(plot.margin=unit(c(1,1,1.5,1.2),"cm"))+
+  theme(axis.title.x = element_text(size=20, colour=col_text),
+        axis.text.x = element_text(size=12, colour=col_text),
+        axis.title.y = element_text(size=20, colour=col_text),
+        axis.text.y = element_text(size=12, colour=col_text),legend.position=c(0.1, 0.9),
+        legend.title = element_blank(),
+        legend.text = element_text(size=15, colour=col_text),
+        legend.background = element_rect(fill=alpha("white",0),colour =alpha("white",0)),
+        title = element_text(size=25, colour=col_text),
+        panel.background = element_rect(fill =alpha("white",0), colour = NA),
+        plot.background = element_rect(fill = alpha("white",0), colour = NA))+
+  ylim(-30,30) + xlim(-600,400)+
+  annotate("pointrange",x=-588,y=15,ymin=15,ymax=15,shape=21,size=1,col="#70C1B3",fill="#97D1C7",
+           alpha=0.4)+
+  annotate("text",x=-550,y=15,label = "Matched Obs", size=5, colour=col_text,hjust = 0,family=font_fsc)+
+  annotate("rect",xmin=-600,xmax=-580,ymin=10,ymax=11.5,col="dark gray",fill="#73ABC2",alpha=0.3)+
+  annotate("text",x=-550,y=10.5,label = "Loc. Poly. 95% CI", size=5, colour=col_text,hjust = 0,family=font_fsc) +
+  annotate("rect",xmin=-600,xmax=-580,ymin=5.2,ymax=6.8,col="dark gray",fill="light grey",alpha=0.5)+
+  annotate("text",x=-550,y=6,label = "Template region", size=5, colour=col_text,hjust = 0,family=font_fsc)
+
+fig <- ggplotly(g)
+
+fig <- fig %>% layout(plot_bgcolor="rgba(0, 0, 0, 0)",
+         paper_bgcolor="rgba(0, 0, 0, 0)")
+
+g
+
+```
+]
 
 ---
 # Step 6: ATT estimation

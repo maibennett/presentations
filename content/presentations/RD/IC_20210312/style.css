@@ -37,3 +37,12 @@ ul li {
 ul li ul { 
 	font-size: 80%;
 }
+
+.nonum .remark-slide-number{
+	display: none;
+} 
+
+.MathJax {
+	font-size: 1.1em;
+	font-family: 'Jost';
+}

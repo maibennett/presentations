@@ -87,16 +87,16 @@ class: center, middle, inverse, title-slide
 
 - Gradual approach
   - No need for "All or Nothing"
-  - Interval informed by the data .tiny[(Cattaneo et al., 2015)]
+  - Interval informed by the data .tinylist[(Cattaneo et al., 2015)]
 --
 
 - No extrapolation of population characteristics
-  - Compare like-to-like .tiny[(Rosenbaum, 1987)]
+  - Compare like-to-like .tinylist[(Rosenbaum, 1987)]
   - Makes overlap region explicit
 --
 
 - Generalization to population of interest
-  - Use of representative template matching .tiny[(Silber et al., 2014; Bennett, Vielma, &amp; Zubizarreta, 2020)]
+  - Use of representative template matching .tinylist[(Silber et al., 2014; Bennett, Vielma, &amp; Zubizarreta, 2020)]
 --
 
 - Sensitivity analysis to hidden bias .tiny[(Rosenbaum, 2010; Keele et al., 2020)]
@@ -104,27 +104,85 @@ class: center, middle, inverse, title-slide
 ---
 # Outline
 
-Motivation
+1. Motivation
+&lt;br&gt;
+&lt;br&gt;
+2. Generalized Regression Discontinuity Design (GRD)
 
-Generalized Regression Discontinuity Design (GRD)
-
-__Framework
+  2.1 Framework
   
-__GRD in practice
-  
-Application: Free Higher Education in Chile
-
-Conclusions
+  2.2 GRD in practice
+&lt;br&gt;
+&lt;br&gt;
+3. Application: Free Higher Education in Chile
+&lt;br&gt;
+&lt;br&gt;
+4. Conclusions
 
 ---
-# Test
 
-- First item
+background-position: 50% 50%
+class: left, bottom, inverse, nonum
+.big[
+Get me away from here...
+]
 
-  - First subitem
-  - Second subitem
+---
+# Generalized Regression Discontinuity Design (GRD)
+
+--
+Two-part problem with pre- and post-intervention periods:
+&lt;br&gt;
+
+--
+&lt;br&gt;
+&lt;span class="box-5"&gt;1) Identification of generalization interval H&lt;sup&gt;\*&lt;/sup&gt;&lt;/span&gt;
+&lt;br&gt;
+.box-5t[(using pre-intervention period)]
+
+--
+&lt;br&gt;
+&lt;span class="box-5"&gt;2) Estimation of ATT for population within H&lt;sup&gt;\*&lt;/sup&gt;&lt;/span&gt;
+&lt;br&gt;
+.box-5t[(using post-intervention period)]
+
+---
+#The setup
+
+- **Two periods**: pre- and post-intervention, `\(t=0\)` and `\(t=1\)`.
+
+- Running variable `\(R\)` determines assingment `\(Z\)` in `\(t=1\)`. E.g.:
+`$$Z_{it} = \mathrm{I}(R_{it}&lt;c)$$`
+
+- Potential outcomes under treatmet `\(z = 0,1\)`:
+`$$Y^{(z)}_{it} = g_z(\mathbf{X}_{it},\mathbf{u}_{it},r_{it}) + z_{it}\cdot \underbrace{\tau(\mathbf{X}_{it},\mathbf{u}_{it},r_{it})}_{\color{#E16462}{\text{Treat. Effect}}} + \underbrace{\alpha_t}_{\color{#E16462}{\text{Period FE}}}$$`
+  - `\(\mathbf{X}_{it}\)`: Predictive covariates
   
-- Second item
+  - `\(\mathbf{u}_{it}\)`: Unobserved confounders
+  
+  - `\(\tau(\cdot)\)`: Causal effect
+  
+---
+# Two periods for GRD
+
+&lt;img src="mbennett_grd_files/figure-html/grd1-1.svg" style="display: block; margin: auto;" /&gt;
+---
+# A gradual approach
+
+- Conditional expectations of potential outcomes, `\(Y^{(z)}_t(R)\)`:
+`$$Y^{(0)}_0(R) = \mathbb{E}[Y^{(0)}_{i0}|R] = \mu_0(R)$$`
+`$$Y^{(1)}_0(R) = \mathbb{E}[Y^{(1)}_{i0}|R] = \underbrace{\mu_0(R)}_{\color{#900DA4}{\text{Avg. Outcome by R}}} + \underbrace{\tau_0(R)}_{\color{#900DA4}{\text{Treat. Effect by R}}}$$`
+
+--
+
+- Identify generalization interval `\(H = [H_{-},H_{+}]\)` for `\(t=0\)`:
+`$$R_{i} = h(\mathbf{X}_{i}) + \eta_i \ \ \forall \ R_i \in H$$`
+
+where `\(H^* = \max\{|H|\}\)`
+--
+
+- If `\(H^*\)` exists, then for a set of covariates `\(\mathbf{X} = \mathbf{X}_T\)`:
+`$$Y^{(0)}_0(R')|\mathbf{X}_T = Y^{(0)}_0(R'')|\mathbf{X}_T \ \ \text{for any} \ R', R'' \in H^*$$`
     </textarea>
 <style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
 <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>

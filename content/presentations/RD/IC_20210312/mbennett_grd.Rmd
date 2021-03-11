@@ -60,13 +60,16 @@ style_mono_accent(
     ".remark-slide table" = list("display" = "table",
                    "width" = "80%",
                    "text-align" = "left"),
-    # ".remark-slide-number" = list("display" = "none"),
+    
+    #".remark-slide-number" = list("display" = "none"),
+    
     ".strong" = list("font-weight" = "400"),
     ".big" = list("font-size" = "350%",
                      "font-family" = "Yanone Kaffeesatz",
                      "font-weight"="400"),
     ".small" = list("font-size" = "80%"),
     ".tiny" = list("font-size" = "50%"),
+    ".tinylist" = list("font-size" = "62.5%"),
     ".source" = list("color" = "#8c8c8c",
                      "font-size" = "80%"),
     ".remark-slide table td#highlight" = list("background-color" = "#eee1f0",
@@ -123,7 +126,119 @@ style_mono_accent(
                                                                       "font-size" = "25px",
                                                                       "display" = "table",
                                                                       "text-align" = "left",
-                                                                      "font-family" = "Fira Sans")
+                                                                      "font-family" = "Fira Sans"),
+       ".medium" = list("font-size" = "1.4em"),
+    ".sp-after-half" = list("margin-bottom" = "0.7em !important"),
+    ".box-1,.box-1a,.box-1s,.box-1b,.box-1l,.box-1LA,.section-title-1" = list("background-color" = "#0D0887"),
+    ".box-2,.box-2a,.box-2s,.box-2b,.box-2l,.box-2LA,.section-title-2" = list("background-color" = "#5601A4"),
+    ".box-3,.box-3a,.box-3s,.box-3b,.box-3l,.box-3LA,.section-title-3" = list("background-color" = "#900DA4"),
+    ".box-4,.box-4a,.box-4s,.box-4b,.box-4l,.box-4LA,.section-title-4" = list("background-color" = "#BF3984"),
+    ".box-5,.box-5a,.box-5s,.box-5b,.box-5l,.box-5LA,.section-title-5" = list("background-color" = "#E16462"),
+    ".box-6,.box-6a,.box-6s,.box-6b,.box-6l,.box-6LA,.section-title-6" = list("background-color" = "#F89441"),
+    ".box-7,.box-7a,.box-7s,.box-7b,.box-7l,.box-7LA,.section-title-7" = list("background-color" = "#FCCE25"),
+   
+   ".box-1t,.box-1tL,.section-title-1t" = list("background-color" = "rgba(13, 8, 135,0.3)",
+                                      "color"="rgba(13, 8, 135,1)",
+                                      "font-family" = "Yanone Kaffeesatz"),
+    ".box-2t,.box-2tL,.section-title-2t" = list("background-color" = "rgba(86, 1, 164,0.3)",
+                                       "color" = "rgba(86, 1, 164,1)",
+                                       "font-family" = "Yanone Kaffeesatz"),
+    ".box-3t,.box-3tL,.section-title-3t" = list("background-color" = "rgba(144, 13, 164,0.3)",
+                                       "color" = "rgba(144, 13, 164,1)",
+                                       "font-family" = "Yanone Kaffeesatz"),
+    ".box-4t,.box-4tL,.section-title-4t" = list("background-color" = "rgba(191, 57, 132,0.3)",
+                                       "color" = "rgba(191, 57, 132,1)",
+                                       "font-family" = "Yanone Kaffeesatz"),
+    ".box-5t,.box-5tL,.section-title-5t" = list("background-color" = "rgba(225, 100, 98,0.3)",
+                                       "color" = "rgba(225, 100, 98,1)",
+                                       "font-family" = "Yanone Kaffeesatz"),
+    ".box-6t,.box-6tL,.section-title-6t" = list("background-color" = "rgba(248, 148, 65,0.3)",
+                                       "color" = "rgba(248, 148, 65,1)",
+                                       "font-family" = "Yanone Kaffeesatz"),
+    ".box-7t,.box-7tL,.section-title-7t" = list("background-color" = "rgba(252, 206, 37,0.3)",
+                                       "color" = "rgba(252, 206, 37,1)",
+                                       "font-family" = "Yanone Kaffeesatz"),
+   
+   ".box-7t, .box-6t, .box-5t, .box-4t, .box-3t, .box-2t, .box-1t" = list("margin" = "0em auto",
+                                                                    "overflow" = "hidden",
+                                                                    "padding" = "0.4em 0.4em",
+                                                                    "font-weight" = "600",
+                                                                    "font-size" = "31px",
+                                                                    "display" = "table",
+                                                                    "text-align" = "center"),
+   
+   ".box-7tL, .box-6tL, .box-5tL, .box-4tL, .box-3tL, .box-2tL, .box-1tL" = list("margin" = "0em auto",
+                                                                    "overflow" = "hidden",
+                                                                    "padding" = "0.4em 0.4em",
+                                                                    "font-weight" = "600",
+                                                                    "font-size" = "50px",
+                                                                    "display" = "table",
+                                                                    "text-align" = "center"),
+   
+    ".box-7, .box-6, .box-5, .box-4, .box-3, .box-2, .box-1" = list("color" = "#FFFFFF",
+                                                                    "margin" = "0em auto",
+                                                                    "overflow" = "hidden",
+                                                                    "padding" = "0.4em 0.4em",
+                                                                    "font-weight" = "600",
+                                                                    "font-size" = "31px",
+                                                                    "display" = "table",
+                                                                    "text-align" = "center",
+                                                                    "font-family" = "Yanone Kaffeesatz"),
+    ".box-7a, .box-6a, .box-5a, .box-4a, .box-3a, .box-2a, .box-1a" = list("color" = "#FFFFFF",
+                                                                          "left" = "0px",
+                                                                          "overflow" = "hidden",
+                                                                      "padding" = "0.4em 0.4em",
+                                                                      "font-weight" = "600",
+                                                                      "font-size" = "25px",
+                                                                      "display" = "table",
+                                                                      "text-align" = "center",
+                                                                      "font-family" = "Yanone Kaffeesatz"),
+   ".box-7s, .box-6s, .box-5s, .box-4s, .box-3s, .box-2s, .box-1s" = list("color" = "#FFFFFF",
+                                                                          "left" = "0px",
+                                                                          "overflow" = "hidden",
+                                                                      "padding" = "0.2em 0.2em",
+                                                                      "font-weight" = "400",
+                                                                      "font-size" = "100%",
+                                                                      "display" = "inline",
+                                                                      "text-align" = "center",
+                                                                      "font-family" = "Yanone Kaffeesatz"),
+       ".box-7b, .box-6b, .box-5b, .box-4b, .box-3b, .box-2b, .box-1b" = list("color" = "#FFFFFF",
+                                                                          "left" = "0px",
+                                                                          "overflow" = "hidden",
+                                                                      "padding" = "0.4em 0.4em",
+                                                                      "font-weight" = "600",
+                                                                      "font-size" = "25px",
+                                                                      "display" = "table",
+                                                                      "text-align" = "left",
+                                                                      "font-family" = "Yanone Kaffeesatz"),
+   ".box-7l, .box-6l, .box-5l, .box-4l, .box-3l, .box-2l, .box-1l" = list("color" = "#FFFFFF",
+                                                                    "margin" = "0em auto",
+                                                                    "overflow" = "hidden",
+                                                                    "padding" = "0.4em 0.4em",
+                                                                    "font-weight" = "600",
+                                                                    "font-size" = "45px",
+                                                                    "display" = "table",
+                                                                    "text-align" = "center",
+                                                                      "font-family" = "Yanone Kaffeesatz"),
+   ".box-7LA, .box-6LA, .box-5LA, .box-4LA, .box-3LA, .box-2LA, .box-1LA" = list("color" = "#FFFFFF",
+                                                                    "margin" = "0em auto",
+                                                                    "overflow" = "hidden",
+                                                                    "padding" = "0.4em 0.4em",
+                                                                    "font-weight" = "600",
+                                                                    "font-size" = "55px",
+                                                                    "display" = "table",
+                                                                    "text-align" = "center",
+                                                                      "font-family" = "Yanone Kaffeesatz"),
+   ".image-80 img" = list("scale" = "80%"),
+   ".pull-left-little_l" = list("float" = "left",
+                                "width" = "67%"),
+   ".pull-right-little_l" = list("float" = "right",
+                                "width" = "27%"),
+   ".pull-left-little_r" = list("float" = "left",
+                                "width" = "27%"),
+   ".pull-right-little_r" = list("float" = "right",
+                                "width" = "67%")
+
   )
 )
 
@@ -164,6 +279,9 @@ library(viridis)
 library(firasans)
 library(hrbrthemes)
 library(extrafont)
+library(gridExtra)
+library(pBrackets)
+library(patchwork)
 
 options(scipen = 0)
 ```
@@ -437,16 +555,16 @@ ggplot(data = d, aes(x=r, y=y)) +
 
 - Gradual approach
   - No need for "All or Nothing"
-  - Interval informed by the data .tiny[(Cattaneo et al., 2015)]
+  - Interval informed by the data .tinylist[(Cattaneo et al., 2015)]
 --
 
 - No extrapolation of population characteristics
-  - Compare like-to-like .tiny[(Rosenbaum, 1987)]
+  - Compare like-to-like .tinylist[(Rosenbaum, 1987)]
   - Makes overlap region explicit
 --
 
 - Generalization to population of interest
-  - Use of representative template matching .tiny[(Silber et al., 2014; Bennett, Vielma, & Zubizarreta, 2020)]
+  - Use of representative template matching .tinylist[(Silber et al., 2014; Bennett, Vielma, & Zubizarreta, 2020)]
 --
 
 - Sensitivity analysis to hidden bias .tiny[(Rosenbaum, 2010; Keele et al., 2020)]
@@ -454,24 +572,219 @@ ggplot(data = d, aes(x=r, y=y)) +
 ---
 # Outline
 
-Motivation
+1. Motivation
+<br>
+<br>
+2. Generalized Regression Discontinuity Design (GRD)
 
-Generalized Regression Discontinuity Design (GRD)
-
-__Framework
+  2.1 Framework
   
-__GRD in practice
-  
-Application: Free Higher Education in Chile
-
-Conclusions
+  2.2 GRD in practice
+<br>
+<br>
+3. Application: Free Higher Education in Chile
+<br>
+<br>
+4. Conclusions
 
 ---
-# Test
 
-- First item
+background-position: 50% 50%
+class: left, bottom, inverse, nonum
+.big[
+Get me away from here...
+]
 
-  - First subitem
-  - Second subitem
+---
+# Generalized Regression Discontinuity Design (GRD)
+
+--
+Two-part problem with pre- and post-intervention periods:
+<br>
+
+--
+<br>
+<span class="box-5">1) Identification of generalization interval H<sup>\*</sup></span>
+<br>
+.box-5t[(using pre-intervention period)]
+
+--
+<br>
+<span class="box-5">2) Estimation of ATT for population within H<sup>\*</sup></span>
+<br>
+.box-5t[(using post-intervention period)]
+
+---
+#The setup
+
+- **Two periods**: pre- and post-intervention, $t=0$ and $t=1$.
+
+- Running variable $R$ determines assingment $Z$ in $t=1$. E.g.:
+$$Z_{it} = \mathrm{I}(R_{it}<c)$$
+
+- Potential outcomes under treatmet $z = 0,1$:
+$$Y^{(z)}_{it} = g_z(\mathbf{X}_{it},\mathbf{u}_{it},r_{it}) + z_{it}\cdot \underbrace{\tau(\mathbf{X}_{it},\mathbf{u}_{it},r_{it})}_{\color{#E16462}{\text{Treat. Effect}}} + \underbrace{\alpha_t}_{\color{#E16462}{\text{Period FE}}}$$
+  - $\mathbf{X}_{it}$: Predictive covariates
   
-- Second item
+  - $\mathbf{u}_{it}$: Unobserved confounders
+  
+  - $\tau(\cdot)$: Causal effect
+  
+---
+# Two periods for GRD
+
+```{r grd_setup, fig.height=5.7, fig.width=12, fig.align='center', dev='svg', echo = FALSE, warning = FALSE, message = FALSE}
+set.seed(100)
+
+df_pre <- data.frame(xaxisTime=runif(300)*20) %>%
+  mutate(Y = .3*xaxisTime+rnorm(300),
+         state="1",
+         groupX=floor(xaxisTime)+.5,
+         groupLine=floor(xaxisTime),
+         cutLine=rep(c(9,11),150)) %>%
+  group_by(groupX) %>%
+  mutate(mean_Y=mean(Y)) %>%
+  ungroup() %>%
+  arrange(groupX)
+
+df_pre$id = seq(1,nrow(df_pre),1)
+
+df_post <- data.frame(xaxisTime=runif(300)*20) %>%
+  mutate(Y = .3*xaxisTime+5*(xaxisTime>10)-.15*xaxisTime*(xaxisTime>10)+rnorm(300),
+         state="1",
+         groupX=floor(xaxisTime)+.5,
+         groupLine=floor(xaxisTime),
+         cutLine=rep(c(9,11),150)) %>%
+  group_by(groupX) %>%
+  mutate(mean_Y=mean(Y)) %>%
+  ungroup() %>%
+  arrange(groupX)
+
+y1 = df_pre$Y + exp(-2*(df_pre$xaxisTime-3)) + 1 - 0.04*df_pre$xaxisTime
+poly_fit_y1 <- as.data.frame(lowess(df_pre$xaxisTime, y1, f=0.4))
+
+df_post2 <- data.frame(xaxisTime=runif(300)*20) %>%
+  mutate(Y = .3*xaxisTime+(xaxisTime<10)*(poly_fit_y1$y-df_pre$Y)+rnorm(300),
+         state="1",
+         groupX=floor(xaxisTime)+.5,
+         groupLine=floor(xaxisTime),
+         cutLine=rep(c(9,11),150)) %>%
+  group_by(groupX) %>%
+  mutate(mean_Y=mean(Y)) %>%
+  ungroup() %>%
+  arrange(groupX)
+
+df_post2_detrend <- data.frame(xaxisTime=runif(300)*20) %>%
+  mutate(Y = rnorm(300)+2.8 + (xaxisTime<10)*(poly_fit_y1$y-df_pre$Y),
+         state="1",
+         groupX=floor(xaxisTime)+.5,
+         groupLine=floor(xaxisTime),
+         cutLine=rep(c(9,11),150)) %>%
+  group_by(groupX) %>%
+  mutate(mean_Y=mean(Y)) %>%
+  ungroup() %>%
+  arrange(groupX)
+
+df_post$id = seq(1,nrow(df_post),1)
+df_post2$id = seq(1,nrow(df_post2),1)
+df_post2_detrend$id = seq(1,nrow(df_post2_detrend),1)
+
+
+poly_fit_y0 <- as.data.frame(lowess(df_pre$xaxisTime, df_pre$Y, f=0.4))
+
+y1 = df_pre$Y + exp(-2*(df_pre$xaxisTime-3)) + 1 - 0.04*df_pre$xaxisTime
+poly_fit_y1 <- as.data.frame(lowess(df_pre$xaxisTime, y1, f=0.4))
+
+#Pre-period
+g1 <- ggplot(df_pre,aes(y=Y,x=xaxisTime, label=NA), fill="#333f48")+geom_point(pch=21, fill="white", color="#333f48")+
+  geom_line(data = poly_fit_y0, aes(x=x, y=y, color='#E16462'), size=1)+
+  geom_line(data = poly_fit_y1, aes(x=x, y=y, color = '#900DA4'), size=1, lty=2)+
+  geom_vline(aes(xintercept=10),linetype='dashed') + theme_bw()+
+  xlab("Running variable") + ylab("Outcome")+ggtitle("Pre-intervention")+
+  scale_colour_identity(name='',breaks=c('#E16462','#900DA4'),
+                        labels = c(bquote(Y^{(0)}~(R)),bquote(Y^{(1)}~(R))), guide="legend") +
+  theme_bw() +
+  theme_ipsum_fsc()+
+  theme(plot.margin=unit(c(1,1,1.5,1.2),"cm"))+
+  theme(axis.title.x = element_text(size=20,margin = margin(t = 10, r = 0, b = 0, l = 0), color = "#333f48"),
+        axis.text.x = element_text(size=15),
+        axis.title.y = element_text(size=20,margin = margin(t = 0, r = 10, b = 0, l = 0), color = "#333f48"),
+        axis.text.y = element_text(size=15),legend.position="bottom",
+        title = element_text(color = "#333f48", size = 22, face = "plain"),
+        legend.text = element_text(size=15, color = "#333f48"),
+        legend.title = element_text(size=18, color = "#333f48"))+
+  ylim(-2,10)
+
+
+#Post-period
+g2 <- ggplot(df_post2,aes(y=Y,x=xaxisTime, label=NA))+geom_point(pch=21, fill="white", color="#333f48")+
+  geom_line(data = poly_fit_y0[poly_fit_y0$x>10,], aes(x=x, y=y,color='#E16462'), size=1)+
+  geom_line(color='#E16462',data = poly_fit_y0[poly_fit_y0$x<10,], aes(x=x, y=y), size=1,lty=2)+
+  geom_line(data = poly_fit_y1[poly_fit_y1$x>10,], aes(x=x, y=y, color='#900DA4'), size=1, lty=2)+
+  geom_line(color='#900DA4',data = poly_fit_y1[poly_fit_y1$x<10,], aes(x=x, y=y), size=1, lty=1)+
+  geom_vline(aes(xintercept=10),linetype='dashed') + theme_bw()+
+  xlab("Running variable") + ylab("Outcome")+ggtitle("Post-intervention")+
+  scale_colour_identity(name='',breaks=c('#E16462','#900DA4'),
+                        labels = c(bquote(Y^{(0)}~(R)),bquote(Y^{(1)}~(R))), guide="legend") +
+  theme_bw() +
+  theme_ipsum_fsc()+
+  theme(plot.margin=unit(c(1,1,1.5,1.2),"cm"))+
+  theme(axis.title.x = element_text(size=20,margin = margin(t = 10, r = 0, b = 0, l = 0), color = "#333f48"),
+        axis.text.x = element_text(size=15),
+        axis.title.y = element_text(size=20,margin = margin(t = 0, r = 10, b = 0, l = 0), color = "#333f48"),
+        axis.text.y = element_text(size=15),legend.position="bottom",
+        title = element_text(color = "#333f48", size = 22, face = "plain"),
+        legend.text = element_text(size=15, color = "#333f48"),
+        legend.title = element_text(size=18, color = "#333f48")) +
+  ylim(-2,10)
+
+g1 + g2 + plot_layout(guides = "collect") &
+  theme(legend.position='bottom')
+```
+---
+# A gradual approach
+
+- Conditional expectations of potential outcomes, $Y^{(z)}_t(R)$:
+$$Y^{(0)}_0(R) = \mathbb{E}[Y^{(0)}_{i0}|R] = \mu_0(R)$$
+$$Y^{(1)}_0(R) = \mathbb{E}[Y^{(1)}_{i0}|R] = \underbrace{\mu_0(R)}_{\color{#900DA4}{\text{Avg. Outcome by R}}} + \underbrace{\tau_0(R)}_{\color{#900DA4}{\text{Treat. Effect by R}}}$$
+
+--
+
+- Identify generalization interval $H = [H_{-},H_{+}]$ for $t=0$:
+$$R_{i} = h(\mathbf{X}_{i}) + \eta_i \ \ \forall \ R_i \in H$$
+--
+
+- If $H^* = \max\{|H|\}$ exists, then for a set of covariates $\mathbf{X} = \mathbf{X}_T$:
+$$Y^{(0)}_0(R')|\mathbf{X}_T = Y^{(0)}_0(R'')|\mathbf{X}_T \ \ \text{for any} \ R', R'' \in H^*$$
+
+---
+# Conditional outcome within the generalization interval
+
+```{r grd_setup_pre, fig.height=5.7, fig.width=12, fig.align='center', dev='svg', echo = FALSE, warning = FALSE, message = FALSE}
+coef <- summary(lm(Y ~ xaxisTime, data = df_pre))$coef
+
+
+
+df_pre_detrend <- df_pre %>% mutate(Y = Y - coef[2,1]*xaxisTime - coef[1,1]) %>%
+  filter(xaxisTime>=5 & xaxisTime<=15)
+
+#Post-period after matching
+ggplot(df_pre_detrend,aes(y=Y,x=xaxisTime, label=NA), fill="slategrey")+geom_point(pch=21, fill="white", color="#333f48") + 
+  geom_smooth(method = "loess")+ylim(0,10) + xlim(4,16)
+  geom_line(color='deepskyblue3',data = poly_fit_y0[poly_fit_y0$x<10,], aes(x=x, y=2.8), size=1,lty=2)+
+  geom_line(data = poly_fit_y1[poly_fit_y1$x>10,], aes(x=x, y=y, color='darkorchid3'), size=1, lty=2)+
+  geom_line(color='darkorchid3',data = poly_fit_y1[poly_fit_y1$x<10,], aes(x=x, y=y), size=1, lty=1)+
+  geom_vline(aes(xintercept=10),linetype='dashed', color="black") +
+  geom_vline(aes(xintercept=5),linetype='dashed',color='springgreen4',lwd=1) +
+  geom_vline(aes(xintercept=15),linetype='dashed',color='springgreen4',lwd=1) + theme_bw()+
+  xlab("Running variable") + ylab("Outcome")+ggtitle("Post-intervention after Matching")+
+  scale_colour_identity(name='Potential Outcomes',breaks=c('deepskyblue3','darkorchid3',"springgreen4"),
+                        labels = c("Y0|X","Y1|X","Matched obs"),lty=c(1,1,NA),
+                        pch=c(NA,NA,1), guide="legend") +
+  theme(plot.margin=unit(c(1,1,1.5,1.2),"cm"))+
+  theme(axis.title.x = element_text(size=15,margin = margin(t = 10, r = 0, b = 0, l = 0)),
+        axis.text.x = element_text(size=12),
+        axis.title.y = element_text(size=15,margin = margin(t = 0, r = 10, b = 0, l = 0)),
+        axis.text.y = element_text(size=12),legend.position="bottom") +
+  ylim(0,10) + xlim(4,16)
+```

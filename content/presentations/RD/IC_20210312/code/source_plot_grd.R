@@ -25,6 +25,8 @@ library(Rlab)
 library(nprobust)
 library(KernSmooth)
 library(lpdensity)
+library(Smisc)
+
 ###################################################
 #### Load real data ###############################
 ###################################################
@@ -251,7 +253,7 @@ size = 1000
 if(sample_size=="small"){size = 100} 
 nsamples = 50
 seed = sim
-dir_data = dir_data
+dir_data = ""
 t_max_alloc = 30
 significance = 0.05
 match_prop = 0.99
@@ -264,7 +266,7 @@ name_plot = paste0("BW_corr_",correlation,"_size_",sample_size,"_relyr_",rel_y_r
 
 ############ grd_function_sim3.R
 
-source(paste0(dir_data,"/functions/create_template_func_sim3.R"))
+source("https://raw.githubusercontent.com/maibennett/presentations/main/content/presentations/RD/IC_20210312/code/create_template_func_sim3.R")
 
 bandwidth_aux = bandwidth
 bandwidth_opt = bandwidth

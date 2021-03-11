@@ -1625,9 +1625,8 @@ library(ggplot2)
 library(firasans)
 library(plotly)
 
-dir_data = "C:/Users/maibe/Dropbox/PhD Columbia/Dissertation/PhD Defense/"
-
-load(paste0(dir_data,"grd1.Rdata"))
+githubURL <- "https://github.com/maibennett/presentations/raw/main/content/presentations/RD/IC_20210312/data/grd1.RData"
+load(url(githubURL))
 
 data1 = data3
 data1$f = 1

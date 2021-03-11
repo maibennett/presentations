@@ -461,6 +461,8 @@ ggplot(data3,aes(y=y,x=running_var, label=NA), fill="white")+
 
 
 ## RUN ALL ITERATIONS
+githubURL <- "https://github.com/maibennett/presentations/raw/main/content/presentations/RD/IC_20210312/data/example_grd_all.RData"
+load(url(githubURL))
 
 random_t = sample(1:nrow(d_match),600,replace=FALSE)
 d_match2 = d_match[random_t,]

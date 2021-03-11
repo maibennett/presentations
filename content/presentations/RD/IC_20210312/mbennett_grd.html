@@ -156,7 +156,7 @@ Two-part problem with pre- and post-intervention periods:
 `$$Z_{it} = \mathrm{I}(R_{it}&lt;c)$$`
 
 - Potential outcomes under treatmet `\(z = 0,1\)`:
-`$$Y^{(z)}_{it} = g_z(\mathbf{X}_{it},\mathbf{u}_{it},r_{it}) + z_{it}\cdot \underbrace{\tau(\mathbf{X}_{it},\mathbf{u}_{it},r_{it})}_{\color{#E16462}{\text{Treat. Effect}}} + \underbrace{\alpha_t}_{\color{#E16462}{\text{Period FE}}}$$`
+`$$Y^{(z)}_{it} = g_z(\mathbf{X}_{it},\mathbf{u}_{it},r_{it}) + z_{it}\cdot \underbrace{\tau(\mathbf{X}_{it},\mathbf{u}_{it},r_{it})}_{\color{#E16462}{\style{font-family:inherit}{\text{Treat. Effect}}}} + \underbrace{\alpha_t}_{\color{#E16462}{\style{font-family:inherit}{\text{Period FE}}}}$$`
   - `\(\mathbf{X}_{it}\)`: Predictive covariates
   
   - `\(\mathbf{u}_{it}\)`: Unobserved confounders
@@ -172,7 +172,7 @@ Two-part problem with pre- and post-intervention periods:
 
 - Conditional expectations of potential outcomes, `\(Y^{(z)}_t(R)\)`:
 `$$Y^{(0)}_0(R) = \mathbb{E}[Y^{(0)}_{i0}|R] = \mu_0(R)$$`
-`$$Y^{(1)}_0(R) = \mathbb{E}[Y^{(1)}_{i0}|R] = \underbrace{\mu_0(R)}_{\color{#E16462}{\text{Avg. Outcome by R}}} + \underbrace{\tau_0(R)}_{\color{#E16462}{\text{Treat. Effect by R}}}$$`
+`$$Y^{(1)}_0(R) = \mathbb{E}[Y^{(1)}_{i0}|R] = \underbrace{\mu_0(R)}_{\color{#E16462}{\style{font-family:inherit}{\text{Avg. Outcome by R}}}} + \underbrace{\tau_0(R)}_{\color{#E16462}{\style{font-family:inherit}{\text{Treat. Effect by R}}}}$$`
 
 --
 
@@ -181,7 +181,7 @@ Two-part problem with pre- and post-intervention periods:
 --
 
 - If `\(H^* = \max\{|H|\}\)` exists, then for a set of covariates `\(\mathbf{X} = \mathbf{X}_T\)`:
-`$$Y^{(0)}_0(R')|\mathbf{X}_T = Y^{(0)}_0(R'')|\mathbf{X}_T \ \ \text{for any} \ R', R'' \in H^*$$`
+`$$Y^{(0)}_0(R')|\mathbf{X}_T = Y^{(0)}_0(R'')|\mathbf{X}_T \ \ \ \ \ \ \style{font-family:inherit}{\text{for any}} \ R', R'' \in H^*$$`
 
 ---
 # Conditional outcome within the generalization interval
@@ -257,8 +257,7 @@ Application: Free Higher Education
 &lt;br&gt;
 .box-5[What was the effect of being eligible for FHE on application and enrollment to university?]
 --
-
-
+&lt;br&gt;
 - **Treatment:** SE eligibility for FHE
 
 - **Two outcomes:** Application to university and enrollment

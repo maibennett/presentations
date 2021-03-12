@@ -2313,6 +2313,9 @@ ggplot(data2016,aes(y=y,x=x, label=NA), fill="white")+
 ---
 # Balance for the entire sample
 
+.center[
+![:scale 100%](https://raw.githubusercontent.com/maibennett/presentations/main/content/presentations/RD/IC_20210312/images/balance_all-1.svg)]
+
 ```{r balance_all, fig.height=5.8, fig.width=12, fig.align='center', dev='svg', echo = FALSE, warning = FALSE, message = FALSE}
 load("C:/Users/mc72574/Dropbox/Hugo/Sites/presentations/content/presentations/RD/IC_20210312/data/data1_application.RData")
 

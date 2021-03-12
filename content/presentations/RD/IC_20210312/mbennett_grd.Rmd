@@ -2149,39 +2149,106 @@ Application: Free Higher Education
 
 ---
 # How does the RD look like?
-```{r rd_application, fig.height=5.8, fig.width=12, fig.align='center', dev='svg', echo = FALSE, warning = FALSE, message = FALSE}
-library(patchwork)
 
-col2 = "#EE6352"
-col3 = "#FFCF4F"
+.center[
+![:scale 100%](https://raw.githubusercontent.com/maibennett/presentations/main/content/presentations/RD/IC_20210312/images/rd_application-1.svg)
+]
+
+<!--
+```{r rd_application, fig.height=5.8, fig.width=12, fig.align='center', dev='svg', echo = FALSE, warning = FALSE, message = FALSE}
+# library(patchwork)
+# 
+# col2 = "#EE6352"
+# col3 = "#FFCF4F"
+# 
+# load("C:/Users/mc72574/Dropbox/Hugo/Sites/presentations/content/presentations/RD/IC_20210312/data/data0_application.RData")
+# 
+# g1 <- ggplot(data2015,aes(y=y,x=x, label=NA), fill="white")+geom_point(fill="white", color="slategrey", shape=21)+
+#   geom_line(data=data2015[data2015$lx<0,],aes(x=lx, y=ly,color=col2), size=1)+
+#   geom_line(data=data2015[data2015$lx>0,],aes(x=lx, y=ly,color=col2), size=1)+
+#   geom_vline(aes(xintercept=0),linetype='dashed') + theme_bw()+
+#   xlab("Adjusted income per capita") + ylab("Enrollment")+ggtitle("Pre-FHE (2015)")+
+#   theme_ipsum_fsc(grid="Y", plot_title_size = 20,
+#                   axis_text_size = 10,
+#                   axis_title_size=12,
+#                   axis_col = col_text)+
+#   theme(plot.margin=unit(c(1,1,1.5,1.2),"cm"))+
+#   theme(axis.title.x = element_text(size=20, colour=col_text,margin = margin(t = 10, r = 0, b = 0, l = 0)),
+#         axis.text.x = element_text(size=12, colour=col_text),
+#         axis.title.y = element_text(size=20, colour=col_text,margin = margin(t = 0, r = 10, b = 0, l = 0)),
+#         axis.text.y = element_text(size=12, colour=col_text),legend.position="none",
+#         legend.title = element_blank(),
+#         legend.text = element_text(size=15, colour=col_text),
+#         legend.background = element_rect(fill="white",colour ="white"),
+#         title = element_text(size=25, colour=col_text))+
+#   ylim(0,1)+xlim(-1500,1500)
+# 
+# 
+# g2 <- ggplot(data2016,aes(y=y,x=x, label=NA), fill="white")+geom_point(fill="white", color="slategrey", shape=21)+
+#   geom_line(data=data2016[data2016$lx<0,],aes(x=lx, y=ly,color=col2), size=1)+
+#   geom_line(data=data2016[data2016$lx>0,],aes(x=lx, y=ly,color=col2), size=1)+
+#   geom_vline(aes(xintercept=0),linetype='dashed') + theme_bw()+
+#   xlab("Adjusted income per capita") + ylab("Enrollment")+ggtitle("Post-FHE (2016)")+
+#   theme_ipsum_fsc(grid="Y", plot_title_size = 20,
+#                   axis_text_size = 10,
+#                   axis_title_size=12,
+#                   axis_col = col_text)+
+#   theme(plot.margin=unit(c(1,1,1.5,1.2),"cm"))+
+#   theme(axis.title.x = element_text(size=20, colour=col_text,margin = margin(t = 10, r = 0, b = 0, l = 0)),
+#         axis.text.x = element_text(size=12, colour=col_text),
+#         axis.title.y = element_text(size=20, colour=col_text,margin = margin(t = 0, r = 10, b = 0, l = 0)),
+#         axis.text.y = element_text(size=12, colour=col_text),legend.position="none",
+#         legend.title = element_blank(),
+#         legend.text = element_text(size=15, colour=col_text),
+#         legend.background = element_rect(fill="white",colour ="white"),
+#         title = element_text(size=25, colour=col_text))+
+#   ylim(0,1)+xlim(-1500,1500)
+# 
+# g1 + g2
+
+```
+-->
+
+---
+# GRD for Free Higher Education
+
+**Steps for GRD:**
+
+- Select template size: $N = 1,000$
+
+- 20 bin for grid
+
+- MIP matching:
+  
+  - Restricted mean balance (0.05 SD) : Academic performance, school characteristics, demographic/socioeconomic variables.
+  
+  - Fine balance: Gender, mother's and father's education (8 cat.), PSU language score (deciles), PSU math score (deciles), HS GPA (quintiles).
+  
+--
+
+**Generalization interval: [-M\$500.3, M\$300.9]**
+
+---
+# For what population are we generalizing for?
+
+.center[
+![:scale 100%](https://raw.githubusercontent.com/maibennett/presentations/main/content/presentations/RD/IC_20210312/images/rd_grd_application-1.svg)
+]
+
+<!--
+```{r rd_grd_application, fig.height=5.8, fig.width=12, fig.align='center', dev='svg', echo = FALSE, warning = FALSE, message = FALSE}
 
 load("C:/Users/mc72574/Dropbox/Hugo/Sites/presentations/content/presentations/RD/IC_20210312/data/data0_application.RData")
 
-g1 <- ggplot(data2015,aes(y=y,x=x, label=NA), fill="white")+geom_point(fill="white", color="slategrey", shape=21)+
-  geom_line(data=data2015[data2015$lx<0,],aes(x=lx, y=ly,color=col2), size=1)+
-  geom_line(data=data2015[data2015$lx>0,],aes(x=lx, y=ly,color=col2), size=1)+
-  geom_vline(aes(xintercept=0),linetype='dashed') + theme_bw()+
-  xlab("Adjusted income per capita") + ylab("Enrollment")+ggtitle("Pre-FHE (2015)")+
-  theme_ipsum_fsc(grid="Y", plot_title_size = 20,
-                  axis_text_size = 10,
-                  axis_title_size=12,
-                  axis_col = col_text)+
-  theme(plot.margin=unit(c(1,1,1.5,1.2),"cm"))+
-  theme(axis.title.x = element_text(size=20, colour=col_text,margin = margin(t = 10, r = 0, b = 0, l = 0)),
-        axis.text.x = element_text(size=12, colour=col_text),
-        axis.title.y = element_text(size=20, colour=col_text,margin = margin(t = 0, r = 10, b = 0, l = 0)),
-        axis.text.y = element_text(size=12, colour=col_text),legend.position="none",
-        legend.title = element_blank(),
-        legend.text = element_text(size=15, colour=col_text),
-        legend.background = element_rect(fill="white",colour ="white"),
-        title = element_text(size=25, colour=col_text))+
-  ylim(0,1)+xlim(-1500,1500)
-
-
-g2 <- ggplot(data2016,aes(y=y,x=x, label=NA), fill="white")+geom_point(fill="white", color="slategrey", shape=21)+
+ggplot(data2016,aes(y=y,x=x, label=NA), fill="white")+
+  geom_ribbon(aes(y=y,xmin = -500.3, xmax = 0),fill = "grey", alpha = 0.3) +
+  geom_point(fill="white", color="slategrey", shape=21)+
   geom_line(data=data2016[data2016$lx<0,],aes(x=lx, y=ly,color=col2), size=1)+
   geom_line(data=data2016[data2016$lx>0,],aes(x=lx, y=ly,color=col2), size=1)+
-  geom_vline(aes(xintercept=0),linetype='dashed') + theme_bw()+
+  geom_vline(aes(xintercept=0),linetype='dashed') + 
+  geom_vline(aes(xintercept=-500.3),linetype='dashed', lwd = 1.5, col = "#FCCE25") + 
+  geom_vline(aes(xintercept=300.9),linetype='dashed', lwd = 1.5, col = "#FCCE25") + 
+  theme_bw()+
   xlab("Adjusted income per capita") + ylab("Enrollment")+ggtitle("Post-FHE (2016)")+
   theme_ipsum_fsc(grid="Y", plot_title_size = 20,
                   axis_text_size = 10,
@@ -2196,20 +2263,45 @@ g2 <- ggplot(data2016,aes(y=y,x=x, label=NA), fill="white")+geom_point(fill="whi
         legend.text = element_text(size=15, colour=col_text),
         legend.background = element_rect(fill="white",colour ="white"),
         title = element_text(size=25, colour=col_text))+
-  ylim(0,1)+xlim(-1500,1500)
-
-g1 + g2
+  ylim(0,1)+xlim(-1000,1000)
 
 ```
-
+-->
 ---
-# GRD for Free Higher Education
+# For what population are we generalizing for?
 
-**Steps for GRD:**
+.center[
+![:scale 100%](https://raw.githubusercontent.com/maibennett/presentations/main/content/presentations/RD/IC_20210312/images/rd_grd_application2-1.svg)
+]
 
-- Select template size: $N = 1,000$
+<!--
+```{r rd_grd_application2, fig.height=5.8, fig.width=12, fig.align='center', dev='svg', echo = FALSE, warning = FALSE, message = FALSE}
 
-- 20 bin for grid
+ggplot(data2016,aes(y=y,x=x, label=NA), fill="white")+
+  geom_ribbon(aes(y=y,xmin = -500.3, xmax = 0),fill = "grey", alpha = 0.3) +
+  geom_point(fill="white", color="slategrey", shape=21)+
+  geom_line(data=data2016[data2016$lx<0,],aes(x=lx, y=ly,color=col2), size=1)+
+  geom_line(data=data2016[data2016$lx>0,],aes(x=lx, y=ly,color=col2), size=1)+
+  geom_vline(aes(xintercept=0),linetype='dashed') + 
+  geom_vline(aes(xintercept=-500.3),linetype='dashed', lwd = 1.5, col = "#FCCE25") + 
+  geom_vline(aes(xintercept=300.9),linetype='dashed', lwd = 1.5, col = "#FCCE25") + 
+  theme_bw()+
+  xlab("Adjusted income per capita") + ylab("Enrollment")+ggtitle("Post-FHE (2016)")+
+  theme_ipsum_fsc(grid="Y", plot_title_size = 20,
+                  axis_text_size = 10,
+                  axis_title_size=12,
+                  axis_col = col_text)+
+  theme(plot.margin=unit(c(1,1,1.5,1.2),"cm"))+
+  theme(axis.title.x = element_text(size=20, colour=col_text,margin = margin(t = 10, r = 0, b = 0, l = 0)),
+        axis.text.x = element_text(size=12, colour=col_text),
+        axis.title.y = element_text(size=20, colour=col_text,margin = margin(t = 0, r = 10, b = 0, l = 0)),
+        axis.text.y = element_text(size=12, colour=col_text),legend.position="none",
+        legend.title = element_blank(),
+        legend.text = element_text(size=15, colour=col_text),
+        legend.background = element_rect(fill="white",colour ="white"),
+        title = element_text(size=25, colour=col_text))+
+  ylim(0,1)+xlim(-1000,1000) +
+  annotate("text", x=-250, y = 0.8, size = 10, label = "50%", colour=col_text,hjust = 0.5,family=font_fsc)
 
-- MIP matching:
-  - Restricted mean 
+```
+-->

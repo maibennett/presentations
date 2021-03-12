@@ -279,7 +279,7 @@ library(knitr)
 library(showtext)
 library(xaringanExtra)
 
-xaringanExtra::use_scribble()
+#xaringanExtra::use_scribble()
 
 ```
 
@@ -994,9 +994,9 @@ data2_post = dt1[random,]
 
 ### Plot 1
 
-ggplot(data2_post,aes(y=y,x=running_var, label=NA), fill="white")+geom_point(fill="white", color="slategrey", size=2, shape=21)+
-  geom_vline(aes(xintercept=grid[5]),linetype='dashed',col="dark grey",lwd=1) + 
-  geom_vline(aes(xintercept=grid[7]),linetype='dashed',col="dark grey",lwd=1) + 
+ggplot(data2_post,aes(y=y,x=running_var, label=NA), fill="white")+geom_point(fill="white", color="dark grey", size=2, shape=21)+
+  geom_vline(aes(xintercept=grid[5]),linetype='dashed',col="slategrey",lwd=1) + 
+  geom_vline(aes(xintercept=grid[7]),linetype='dashed',col="slategrey",lwd=1) + 
   geom_vline(aes(xintercept=0),linetype='dashed',lwd=1.5) +
   geom_segment(aes(x = -700, y = 0, xend = -701, yend = 0,col="dark grey"), size=1.5)+
   geom_segment(aes(x = -700, y = 0, xend = -701, yend = 0,col="black"), size=1.5)+
@@ -1006,8 +1006,8 @@ ggplot(data2_post,aes(y=y,x=running_var, label=NA), fill="white")+geom_point(fil
                   axis_col = col_text)+
   xlab("Running variable") + ylab("Outcome")+ggtitle("Post-intervention")+
   scale_color_identity(name='Potential Outcomes',
-                       breaks=c('dark grey','black'),
-                       labels = c("Grid","Cutoff"),
+                       breaks=c('slategrey','black'),
+                       labels = c("Narrow BW","Cutoff"),
                        guide = "legend")+
   #  annotate("pointrage",x=-600,y=41,xend=-600,yend=41,shape=21,size=2,col="dark grey") +
   #  annotate("text",x=13.05,y=8.4,label = "H*", size=5.5, colour=col_text)+
@@ -1015,7 +1015,7 @@ ggplot(data2_post,aes(y=y,x=running_var, label=NA), fill="white")+geom_point(fil
   theme(axis.title.x = element_text(size=20, colour=col_text,margin = margin(t = 10, r = 0, b = 0, l = 0)),
         axis.text.x = element_text(size=12, colour=col_text),
         axis.title.y = element_text(size=20, colour=col_text,margin = margin(t = 0, r = 10, b = 0, l = 0)),
-        axis.text.y = element_text(size=12, colour=col_text),legend.position=c(0.1, 0.9),
+        axis.text.y = element_blank(),legend.position=c(0.1, 0.9),
         legend.title = element_blank(),
         legend.text = element_text(size=15, colour=col_text),
         legend.background = element_rect(fill=alpha("white",0),colour =alpha("white",0)),
@@ -1041,9 +1041,9 @@ ggplot(data2_post,aes(y=y,x=running_var, label=NA), fill="white")+geom_point(fil
 
 ### Plot 1
 
-ggplot(data2_post,aes(y=y,x=running_var, label=NA), fill="white")+geom_point(fill="white", color="slategrey", size=2, shape=21)+
+ggplot(data2_post,aes(y=y,x=running_var, label=NA), fill="white")+geom_point(fill="white", color="dark grey", size=2, shape=21)+
   geom_point(data = dplyr::filter(data2_post, running_var>=grid[5] & running_var<=0),fill=alpha("#F89441",0.4), color="#F89441", size=3, shape=21)+
-  geom_vline(aes(xintercept=grid[5]),linetype='dashed',col="dark grey",lwd=1) + 
+  geom_vline(aes(xintercept=grid[5]),linetype='dashed',col="slategrey",lwd=1) + 
   geom_vline(aes(xintercept=0),linetype='dashed',lwd=1.5) +
   geom_segment(aes(x = -700, y = 0, xend = -701, yend = 0,col="dark grey"), size=1.5)+
   geom_segment(aes(x = -700, y = 0, xend = -701, yend = 0,col="black"), size=1.5)+
@@ -1053,8 +1053,8 @@ ggplot(data2_post,aes(y=y,x=running_var, label=NA), fill="white")+geom_point(fil
                   axis_col = col_text)+
   xlab("Running variable") + ylab("Outcome")+ggtitle("Post-intervention")+
   scale_color_identity(name='Potential Outcomes',
-                       breaks=c('dark grey','black'),
-                       labels = c("Grid","Cutoff"),
+                       breaks=c('slategrey','black'),
+                       labels = c("Narrow BW","Cutoff"),
                        guide = "legend")+
   #  annotate("pointrage",x=-600,y=41,xend=-600,yend=41,shape=21,size=2,col="dark grey") +
   #  annotate("text",x=13.05,y=8.4,label = "H*", size=5.5, colour=col_text)+
@@ -1062,7 +1062,7 @@ ggplot(data2_post,aes(y=y,x=running_var, label=NA), fill="white")+geom_point(fil
   theme(axis.title.x = element_text(size=20, colour=col_text,margin = margin(t = 10, r = 0, b = 0, l = 0)),
         axis.text.x = element_text(size=12, colour=col_text),
         axis.title.y = element_text(size=20, colour=col_text,margin = margin(t = 0, r = 10, b = 0, l = 0)),
-        axis.text.y = element_text(size=12, colour=col_text),legend.position=c(0.1, 0.9),
+        axis.text.y = element_blank(),legend.position=c(0.1, 0.9),
         legend.title = element_blank(),
         legend.text = element_text(size=15, colour=col_text),
         legend.background = element_rect(fill=alpha("white",0),colour =alpha("white",0)),
@@ -1094,19 +1094,19 @@ data2 = data[random,]
 
 ### Plot 1
 
-ggplot(data2[data2[,tvar]==0,],aes(y=y,x=running_var, label=NA), fill="white")+geom_point(fill="white", color="slategrey", size=2, shape=21)+
-  geom_vline(aes(xintercept=grid[1]),linetype='dashed',col="dark grey",lwd=1) + 
-  geom_vline(aes(xintercept=grid[2]),linetype='dashed',col="dark grey",lwd=1) + 
-  geom_vline(aes(xintercept=grid[3]),linetype='dashed',col="dark grey",lwd=1) + 
-  geom_vline(aes(xintercept=grid[4]),linetype='dashed',col="dark grey",lwd=1) + 
-  geom_vline(aes(xintercept=grid[5]),linetype='dashed',col="dark grey",lwd=1) + 
-  geom_vline(aes(xintercept=grid[6]),linetype='dashed',col="dark grey",lwd=1) +
-  geom_vline(aes(xintercept=grid[8]),linetype='dashed',col="dark grey",lwd=1) + 
-  geom_vline(aes(xintercept=grid[9]),linetype='dashed',col="dark grey",lwd=1) + 
-  geom_vline(aes(xintercept=grid[10]),linetype='dashed',col="dark grey",lwd=1) + 
-  geom_vline(aes(xintercept=grid[11]),linetype='dashed',col="dark grey",lwd=1) + 
+ggplot(data2[data2[,tvar]==0,],aes(y=y,x=running_var, label=NA), fill="white")+geom_point(fill="white", color="dark grey", size=2, shape=21)+
+  geom_vline(aes(xintercept=grid[1]),linetype='dashed',col="slategrey",lwd=1) + 
+  geom_vline(aes(xintercept=grid[2]),linetype='dashed',col="slategrey",lwd=1) + 
+  geom_vline(aes(xintercept=grid[3]),linetype='dashed',col="slategrey",lwd=1) + 
+  geom_vline(aes(xintercept=grid[4]),linetype='dashed',col="slategrey",lwd=1) + 
+  geom_vline(aes(xintercept=grid[5]),linetype='dashed',col="slategrey",lwd=1) + 
+  geom_vline(aes(xintercept=grid[7]),linetype='dashed',col="slategrey",lwd=1) +
+  geom_vline(aes(xintercept=grid[8]),linetype='dashed',col="slategrey",lwd=1) + 
+  geom_vline(aes(xintercept=grid[9]),linetype='dashed',col="slategrey",lwd=1) + 
+  geom_vline(aes(xintercept=grid[10]),linetype='dashed',col="slategrey",lwd=1) + 
+  geom_vline(aes(xintercept=grid[11]),linetype='dashed',col="slategrey",lwd=1) + 
   geom_vline(aes(xintercept=0),linetype='dashed',lwd=1.5) +
-  geom_segment(aes(x = -700, y = 0, xend = -701, yend = 0,col="dark grey"), size=1.5)+
+  geom_segment(aes(x = -700, y = 0, xend = -701, yend = 0,col="slategrey"), size=1.5)+
   geom_segment(aes(x = -700, y = 0, xend = -701, yend = 0,col="black"), size=1.5)+
   theme_ipsum_fsc(grid="Y", plot_title_size = 20,
                   axis_text_size = 10,
@@ -1123,7 +1123,7 @@ ggplot(data2[data2[,tvar]==0,],aes(y=y,x=running_var, label=NA), fill="white")+g
   theme(axis.title.x = element_text(size=20, colour=col_text,margin = margin(t = 10, r = 0, b = 0, l = 0)),
         axis.text.x = element_text(size=12, colour=col_text),
         axis.title.y = element_text(size=20, colour=col_text,margin = margin(t = 0, r = 10, b = 0, l = 0)),
-        axis.text.y = element_text(size=12, colour=col_text),legend.position=c(0.1, 0.9),
+        axis.text.y = element_blank(),legend.position=c(0.1, 0.9),
         legend.title = element_blank(),
         legend.text = element_text(size=15, colour=col_text),
         legend.background = element_rect(fill=alpha("white",0),colour =alpha("white",0)),
@@ -1155,21 +1155,21 @@ d_match2 = d_match[random_t,]
 
 
 ggplot(data2[data2[,tvar]==0,],aes(y=y,x=running_var, label=NA), fill="white")+
-  geom_point(fill="white", color="slategrey", size=2, shape=21)+
+  geom_point(fill="white", color="dark grey", size=2, shape=21)+
   geom_point(data=d_match2[d_match2[,running_var]>=bandwidth[1] & bandwidth[2]>=d_match2[,running_var],],
              aes(x=running_var,y=y),fill=col2, color='grey', size=2, shape=21)+
-  geom_vline(aes(xintercept=grid[1]),linetype='dashed',col="dark grey",lwd=1) + 
-  geom_vline(aes(xintercept=grid[2]),linetype='dashed',col="dark grey",lwd=1) + 
-  geom_vline(aes(xintercept=grid[3]),linetype='dashed',col="dark grey",lwd=1) + 
-  geom_vline(aes(xintercept=grid[4]),linetype='dashed',col="dark grey",lwd=1) + 
-  geom_vline(aes(xintercept=grid[5]),linetype='dashed',col="dark grey",lwd=1) + 
-  geom_vline(aes(xintercept=grid[6]),linetype='dashed',col="dark grey",lwd=1) +
-  geom_vline(aes(xintercept=grid[8]),linetype='dashed',col="dark grey",lwd=1) + 
-  geom_vline(aes(xintercept=grid[9]),linetype='dashed',col="dark grey",lwd=1) + 
-  geom_vline(aes(xintercept=grid[10]),linetype='dashed',col="dark grey",lwd=1) + 
-  geom_vline(aes(xintercept=grid[11]),linetype='dashed',col="dark grey",lwd=1) + 
+  geom_vline(aes(xintercept=grid[1]),linetype='dashed',col="slategrey",lwd=1) + 
+  geom_vline(aes(xintercept=grid[2]),linetype='dashed',col="slategrey",lwd=1) + 
+  geom_vline(aes(xintercept=grid[3]),linetype='dashed',col="slategrey",lwd=1) + 
+  geom_vline(aes(xintercept=grid[4]),linetype='dashed',col="slategrey",lwd=1) + 
+  geom_vline(aes(xintercept=grid[5]),linetype='dashed',col="slategrey",lwd=1) + 
+  geom_vline(aes(xintercept=grid[7]),linetype='dashed',col="slategrey",lwd=1) +
+  geom_vline(aes(xintercept=grid[8]),linetype='dashed',col="slategrey",lwd=1) + 
+  geom_vline(aes(xintercept=grid[9]),linetype='dashed',col="slategrey",lwd=1) + 
+  geom_vline(aes(xintercept=grid[10]),linetype='dashed',col="slategrey",lwd=1) + 
+  geom_vline(aes(xintercept=grid[11]),linetype='dashed',col="slategrey",lwd=1) + 
   geom_vline(aes(xintercept=0),linetype='dashed',lwd=1.5) +
-  geom_segment(aes(x = -700, y = 0, xend = -701, yend = 0,col="dark grey"), size=1.5)+
+  geom_segment(aes(x = -700, y = 0, xend = -701, yend = 0,col="slategrey"), size=1.5)+
   geom_segment(aes(x = -700, y = 0, xend = -701, yend = 0,col="black"), size=1.5)+
   theme_ipsum_fsc(grid="Y", plot_title_size = 20,
                   axis_text_size = 10,
@@ -1186,7 +1186,7 @@ ggplot(data2[data2[,tvar]==0,],aes(y=y,x=running_var, label=NA), fill="white")+
   theme(axis.title.x = element_text(size=20, colour=col_text,margin = margin(t = 10, r = 0, b = 0, l = 0)),
         axis.text.x = element_text(size=12, colour=col_text),
         axis.title.y = element_text(size=20, colour=col_text,margin = margin(t = 0, r = 10, b = 0, l = 0)),
-        axis.text.y = element_text(size=12, colour=col_text),legend.position=c(0.1, 0.9),
+        axis.text.y = element_blank(),legend.position=c(0.1, 0.9),
         legend.title = element_blank(),
         legend.text = element_text(size=15, colour=col_text),
         legend.background = element_rect(fill=alpha("white",0),colour =alpha("white",0)),
@@ -1212,23 +1212,23 @@ ggplot(data2[data2[,tvar]==0,],aes(y=y,x=running_var, label=NA), fill="white")+
 ```{r grd2c, fig.height=6, fig.width=6.5, fig.align='center', dev='svg', echo = FALSE, warning = FALSE, message = FALSE}
 
 ggplot(data2[data2[,tvar]==0,],aes(y=y,x=running_var, label=NA), fill="white")+
-  geom_point(fill="white", color="slategrey", size=2, shape=21)+
+  geom_point(fill="white", color="dark grey", size=2, shape=21)+
   geom_point(data=d_match2[d_match2[,running_var]>=bandwidth[1] & bandwidth[2]>=d_match2[,running_var],],
              aes(x=running_var,y=y),fill=col2, color=col2, size=2, shape=21,alpha=0.2)+
   geom_point(data=d_match2[d_match2[,running_var]>=grid[4] & grid[5]>=d_match2[,running_var],],
              aes(x=running_var,y=y),fill=col2, color='grey', size=2, shape=21)+
-  geom_vline(aes(xintercept=grid[1]),linetype='dashed',col="dark grey",lwd=1) + 
-  geom_vline(aes(xintercept=grid[2]),linetype='dashed',col="dark grey",lwd=1) + 
-  geom_vline(aes(xintercept=grid[3]),linetype='dashed',col="dark grey",lwd=1) + 
-  geom_vline(aes(xintercept=grid[4]),linetype='dashed',col="dark grey",lwd=1) + 
-  geom_vline(aes(xintercept=grid[5]),linetype='dashed',col="dark grey",lwd=1) + 
-  geom_vline(aes(xintercept=grid[6]),linetype='dashed',col="dark grey",lwd=1) +
-  geom_vline(aes(xintercept=grid[8]),linetype='dashed',col="dark grey",lwd=1) + 
-  geom_vline(aes(xintercept=grid[9]),linetype='dashed',col="dark grey",lwd=1) + 
-  geom_vline(aes(xintercept=grid[10]),linetype='dashed',col="dark grey",lwd=1) + 
-  geom_vline(aes(xintercept=grid[11]),linetype='dashed',col="dark grey",lwd=1) + 
+  geom_vline(aes(xintercept=grid[1]),linetype='dashed',col="slategrey",lwd=1) + 
+  geom_vline(aes(xintercept=grid[2]),linetype='dashed',col="slategrey",lwd=1) + 
+  geom_vline(aes(xintercept=grid[3]),linetype='dashed',col="slategrey",lwd=1) + 
+  geom_vline(aes(xintercept=grid[4]),linetype='dashed',col="slategrey",lwd=1) + 
+  geom_vline(aes(xintercept=grid[5]),linetype='dashed',col="slategrey",lwd=1) + 
+  geom_vline(aes(xintercept=grid[7]),linetype='dashed',col="slategrey",lwd=1) +
+  geom_vline(aes(xintercept=grid[8]),linetype='dashed',col="slategrey",lwd=1) + 
+  geom_vline(aes(xintercept=grid[9]),linetype='dashed',col="slategrey",lwd=1) + 
+  geom_vline(aes(xintercept=grid[10]),linetype='dashed',col="slategrey",lwd=1) + 
+  geom_vline(aes(xintercept=grid[11]),linetype='dashed',col="slategrey",lwd=1) + 
   geom_vline(aes(xintercept=0),linetype='dashed',lwd=1.5) +
-  geom_segment(aes(x = -700, y = 0, xend = -701, yend = 0,col="dark grey"), size=1.5)+
+  geom_segment(aes(x = -700, y = 0, xend = -701, yend = 0,col="slategrey"), size=1.5)+
   geom_segment(aes(x = -700, y = 0, xend = -701, yend = 0,col="black"), size=1.5)+
   theme_ipsum_fsc(grid="Y", plot_title_size = 20,
                   axis_text_size = 10,
@@ -1245,7 +1245,7 @@ ggplot(data2[data2[,tvar]==0,],aes(y=y,x=running_var, label=NA), fill="white")+
   theme(axis.title.x = element_text(size=20, colour=col_text,margin = margin(t = 10, r = 0, b = 0, l = 0)),
         axis.text.x = element_text(size=12, colour=col_text),
         axis.title.y = element_text(size=20, colour=col_text,margin = margin(t = 0, r = 10, b = 0, l = 0)),
-        axis.text.y = element_text(size=12, colour=col_text),legend.position=c(0.1, 0.9),
+        axis.text.y = element_blank(),legend.position=c(0.1, 0.9),
         legend.title = element_blank(),
         legend.text = element_text(size=15, colour=col_text),
         legend.background = element_rect(fill=alpha("white",0),colour =alpha("white",0)),
@@ -1271,25 +1271,25 @@ ggplot(data2[data2[,tvar]==0,],aes(y=y,x=running_var, label=NA), fill="white")+
 ```{r grd2d, fig.height=6, fig.width=6.5, fig.align='center', dev='svg', echo = FALSE, warning = FALSE, message = FALSE}
 
 ggplot(data2[data2[,tvar]==0,],aes(y=y,x=running_var, label=NA), fill="white")+
-  geom_point(fill="white", color="slategrey", size=2, shape=21)+
+  geom_point(fill="white", color="dark grey", size=2, shape=21)+
   geom_point(data=d_match2[d_match2[,running_var]>=bandwidth[1] & bandwidth[2]>=d_match2[,running_var],],
              aes(x=running_var,y=y),fill=col2, color=col2, size=2, shape=21,alpha=0.2)+
   geom_point(data=d_match2[d_match2[,running_var]>=grid[4] & grid[5]>=d_match2[,running_var],],
              aes(x=running_var,y=y),fill=col2, color=col2, size=2, shape=21,alpha=0.2)+
   geom_point(data=d_match2[d_match2[,running_var]>=grid[3] & grid[4]>=d_match2[,running_var],],
              aes(x=running_var,y=y),fill=col2, color='grey', size=2, shape=21,alpha=1)+
-  geom_vline(aes(xintercept=grid[1]),linetype='dashed',col="dark grey",lwd=1) + 
-  geom_vline(aes(xintercept=grid[2]),linetype='dashed',col="dark grey",lwd=1) + 
-  geom_vline(aes(xintercept=grid[3]),linetype='dashed',col="dark grey",lwd=1) + 
-  geom_vline(aes(xintercept=grid[4]),linetype='dashed',col="dark grey",lwd=1) + 
-  geom_vline(aes(xintercept=grid[5]),linetype='dashed',col="dark grey",lwd=1) + 
-  geom_vline(aes(xintercept=grid[6]),linetype='dashed',col="dark grey",lwd=1) +
-  geom_vline(aes(xintercept=grid[8]),linetype='dashed',col="dark grey",lwd=1) + 
-  geom_vline(aes(xintercept=grid[9]),linetype='dashed',col="dark grey",lwd=1) + 
-  geom_vline(aes(xintercept=grid[10]),linetype='dashed',col="dark grey",lwd=1) + 
-  geom_vline(aes(xintercept=grid[11]),linetype='dashed',col="dark grey",lwd=1) + 
+  geom_vline(aes(xintercept=grid[1]),linetype='dashed',col="slategrey",lwd=1) + 
+  geom_vline(aes(xintercept=grid[2]),linetype='dashed',col="slategrey",lwd=1) + 
+  geom_vline(aes(xintercept=grid[3]),linetype='dashed',col="slategrey",lwd=1) + 
+  geom_vline(aes(xintercept=grid[4]),linetype='dashed',col="slategrey",lwd=1) + 
+  geom_vline(aes(xintercept=grid[5]),linetype='dashed',col="slategrey",lwd=1) + 
+  geom_vline(aes(xintercept=grid[7]),linetype='dashed',col="slategrey",lwd=1) +
+  geom_vline(aes(xintercept=grid[8]),linetype='dashed',col="slategrey",lwd=1) + 
+  geom_vline(aes(xintercept=grid[9]),linetype='dashed',col="slategrey",lwd=1) + 
+  geom_vline(aes(xintercept=grid[10]),linetype='dashed',col="slategrey",lwd=1) + 
+  geom_vline(aes(xintercept=grid[11]),linetype='dashed',col="slategrey",lwd=1) + 
   geom_vline(aes(xintercept=0),linetype='dashed',lwd=1.5) +
-  geom_segment(aes(x = -700, y = 0, xend = -701, yend = 0,col="dark grey"), size=1.5)+
+  geom_segment(aes(x = -700, y = 0, xend = -701, yend = 0,col="slategrey"), size=1.5)+
   geom_segment(aes(x = -700, y = 0, xend = -701, yend = 0,col="black"), size=1.5)+
   theme_ipsum_fsc(grid="Y", plot_title_size = 20,
                   axis_text_size = 10,
@@ -1306,7 +1306,7 @@ ggplot(data2[data2[,tvar]==0,],aes(y=y,x=running_var, label=NA), fill="white")+
   theme(axis.title.x = element_text(size=20, colour=col_text,margin = margin(t = 10, r = 0, b = 0, l = 0)),
         axis.text.x = element_text(size=12, colour=col_text),
         axis.title.y = element_text(size=20, colour=col_text,margin = margin(t = 0, r = 10, b = 0, l = 0)),
-        axis.text.y = element_text(size=12, colour=col_text),legend.position=c(0.1, 0.9),
+        axis.text.y = element_blank(),legend.position=c(0.1, 0.9),
         legend.title = element_blank(),
         legend.text = element_text(size=15, colour=col_text),
         legend.background = element_rect(fill=alpha("white",0),colour =alpha("white",0)),
@@ -1333,7 +1333,7 @@ ggplot(data2[data2[,tvar]==0,],aes(y=y,x=running_var, label=NA), fill="white")+
 ```{r grd2e, fig.height=6, fig.width=6.5, fig.align='center', dev='svg', echo = FALSE, warning = FALSE, message = FALSE}
 
 ggplot(data2[data2[,tvar]==0,],aes(y=y,x=running_var, label=NA), fill="white")+
-  geom_point(fill="white", color="slategrey", size=2, shape=21)+
+  geom_point(fill="white", color="dark grey", size=2, shape=21)+
   geom_point(data=d_match2[d_match2[,running_var]>=bandwidth[1] & bandwidth[2]>=d_match2[,running_var],],
              aes(x=running_var,y=y),fill=col2, color=col2, size=2, shape=21,alpha=0.2)+
   geom_point(data=d_match2[d_match2[,running_var]>=grid[4] & grid[5]>=d_match2[,running_var],],
@@ -1342,18 +1342,18 @@ ggplot(data2[data2[,tvar]==0,],aes(y=y,x=running_var, label=NA), fill="white")+
              aes(x=running_var,y=y),fill=col2, color=col2, size=2, shape=21,alpha=0.2)+
   geom_point(data=d_match2[d_match2[,running_var]>=grid[2] & grid[3]>=d_match2[,running_var],],
              aes(x=running_var,y=y),fill=col2, color='grey', size=2, shape=21,alpha=1)+
-  geom_vline(aes(xintercept=grid[1]),linetype='dashed',col="dark grey",lwd=1) + 
-  geom_vline(aes(xintercept=grid[2]),linetype='dashed',col="dark grey",lwd=1) + 
-  geom_vline(aes(xintercept=grid[3]),linetype='dashed',col="dark grey",lwd=1) + 
-  geom_vline(aes(xintercept=grid[4]),linetype='dashed',col="dark grey",lwd=1) + 
-  geom_vline(aes(xintercept=grid[5]),linetype='dashed',col="dark grey",lwd=1) + 
-  geom_vline(aes(xintercept=grid[6]),linetype='dashed',col="dark grey",lwd=1) +
-  geom_vline(aes(xintercept=grid[8]),linetype='dashed',col="dark grey",lwd=1) + 
-  geom_vline(aes(xintercept=grid[9]),linetype='dashed',col="dark grey",lwd=1) + 
-  geom_vline(aes(xintercept=grid[10]),linetype='dashed',col="dark grey",lwd=1) + 
-  geom_vline(aes(xintercept=grid[11]),linetype='dashed',col="dark grey",lwd=1) + 
+  geom_vline(aes(xintercept=grid[1]),linetype='dashed',col="slategrey",lwd=1) + 
+  geom_vline(aes(xintercept=grid[2]),linetype='dashed',col="slategrey",lwd=1) + 
+  geom_vline(aes(xintercept=grid[3]),linetype='dashed',col="slategrey",lwd=1) + 
+  geom_vline(aes(xintercept=grid[4]),linetype='dashed',col="slategrey",lwd=1) + 
+  geom_vline(aes(xintercept=grid[5]),linetype='dashed',col="slategrey",lwd=1) + 
+  geom_vline(aes(xintercept=grid[7]),linetype='dashed',col="slategrey",lwd=1) +
+  geom_vline(aes(xintercept=grid[8]),linetype='dashed',col="slategrey",lwd=1) + 
+  geom_vline(aes(xintercept=grid[9]),linetype='dashed',col="slategrey",lwd=1) + 
+  geom_vline(aes(xintercept=grid[10]),linetype='dashed',col="slategrey",lwd=1) + 
+  geom_vline(aes(xintercept=grid[11]),linetype='dashed',col="slategrey",lwd=1) + 
   geom_vline(aes(xintercept=0),linetype='dashed',lwd=1.5) +
-  geom_segment(aes(x = -700, y = 0, xend = -701, yend = 0,col="dark grey"), size=1.5)+
+  geom_segment(aes(x = -700, y = 0, xend = -701, yend = 0,col="slategrey"), size=1.5)+
   geom_segment(aes(x = -700, y = 0, xend = -701, yend = 0,col="black"), size=1.5)+
   theme_ipsum_fsc(grid="Y", plot_title_size = 20,
                   axis_text_size = 10,
@@ -1370,7 +1370,7 @@ ggplot(data2[data2[,tvar]==0,],aes(y=y,x=running_var, label=NA), fill="white")+
   theme(axis.title.x = element_text(size=20, colour=col_text,margin = margin(t = 10, r = 0, b = 0, l = 0)),
         axis.text.x = element_text(size=12, colour=col_text),
         axis.title.y = element_text(size=20, colour=col_text,margin = margin(t = 0, r = 10, b = 0, l = 0)),
-        axis.text.y = element_text(size=12, colour=col_text),legend.position=c(0.1, 0.9),
+        axis.text.y = element_blank(),legend.position=c(0.1, 0.9),
         legend.title = element_blank(),
         legend.text = element_text(size=15, colour=col_text),
         legend.background = element_rect(fill=alpha("white",0),colour =alpha("white",0)),
@@ -1402,20 +1402,20 @@ ggplot(d_match2,aes(y=y,x=running_var, label=NA), fill=col2)+
 #            fill = col2, alpha = 0.03) +
   geom_ribbon(aes(x=running_var,ymin = -60, ymax = 60),fill = col2, alpha = 0.3) +
   geom_point(fill=col2, color='grey', size=2, shape=21)+
-  geom_point(data=data2[data2[,tvar]==0,],aes(y=y,x=running_var, label=NA), fill="white",col="slategrey",shape=21,alpha=0.5)+
-  geom_vline(aes(xintercept=grid[1]),linetype='dashed',col="dark grey",lwd=0.6) + 
-  geom_vline(aes(xintercept=grid[2]),linetype='dashed',col="dark grey",lwd=0.6) + 
-  geom_vline(aes(xintercept=grid[3]),linetype='dashed',col="dark grey",lwd=0.6) + 
-  geom_vline(aes(xintercept=grid[4]),linetype='dashed',col="dark grey",lwd=0.6) + 
-  geom_vline(aes(xintercept=grid[5]),linetype='dashed',col="dark grey",lwd=0.6) + 
-  geom_vline(aes(xintercept=grid[6]),linetype='dashed',col="dark grey",lwd=0.6) +
-  geom_vline(aes(xintercept=grid[8]),linetype='dashed',col="dark grey",lwd=0.6) + 
-  geom_vline(aes(xintercept=grid[9]),linetype='dashed',col="dark grey",lwd=0.6) + 
-  geom_vline(aes(xintercept=grid[10]),linetype='dashed',col="dark grey",lwd=0.6) + 
-  geom_vline(aes(xintercept=grid[11]),linetype='dashed',col="dark grey",lwd=0.6) + 
-  geom_vline(aes(xintercept=0),linetype='dashed',lwd=1.1) +
-  geom_segment(aes(x = -700, y = 0, xend = -701, yend = 0,col="dark grey"), size=1)+
-  geom_segment(aes(x = -700, y = 0, xend = -701, yend = 0,col="black"), size=1)+
+  geom_point(data=data2[data2[,tvar]==0,],aes(y=y,x=running_var, label=NA), fill="white",col="dark grey",shape=21,alpha=0.5)+
+  geom_vline(aes(xintercept=grid[1]),linetype='dashed',col="slategrey",lwd=1) + 
+  geom_vline(aes(xintercept=grid[2]),linetype='dashed',col="slategrey",lwd=1) + 
+  geom_vline(aes(xintercept=grid[3]),linetype='dashed',col="slategrey",lwd=1) + 
+  geom_vline(aes(xintercept=grid[4]),linetype='dashed',col="slategrey",lwd=1) + 
+  geom_vline(aes(xintercept=grid[5]),linetype='dashed',col="slategrey",lwd=1) + 
+  geom_vline(aes(xintercept=grid[7]),linetype='dashed',col="slategrey",lwd=1) +
+  geom_vline(aes(xintercept=grid[8]),linetype='dashed',col="slategrey",lwd=1) + 
+  geom_vline(aes(xintercept=grid[9]),linetype='dashed',col="slategrey",lwd=1) + 
+  geom_vline(aes(xintercept=grid[10]),linetype='dashed',col="slategrey",lwd=1) + 
+  geom_vline(aes(xintercept=grid[11]),linetype='dashed',col="slategrey",lwd=1) + 
+  geom_vline(aes(xintercept=0),linetype='dashed',lwd=1.5) +
+  geom_segment(aes(x = -700, y = 0, xend = -701, yend = 0,col="slategrey"), size=1.5)+
+  geom_segment(aes(x = -700, y = 0, xend = -701, yend = 0,col="black"), size=1.5)+
   theme_ipsum_fsc(grid="Y", plot_title_size = 20,
                   axis_text_size = 10,
                   axis_title_size=12,
@@ -1429,7 +1429,7 @@ ggplot(d_match2,aes(y=y,x=running_var, label=NA), fill=col2)+
   theme(axis.title.x = element_text(size=20, colour=col_text,margin = margin(t = 10, r = 0, b = 0, l = 0)),
         axis.text.x = element_text(size=12, colour=col_text),
         axis.title.y = element_text(size=20, colour=col_text,margin = margin(t = 0, r = 10, b = 0, l = 0)),
-        axis.text.y = element_text(size=12, colour=col_text),legend.position=c(0.1, 0.9),
+        axis.text.y = element_blank(),legend.position=c(0.1, 0.9),
         legend.title = element_blank(),
         legend.text = element_text(size=15, colour=col_text),
         legend.background = element_rect(fill=alpha("white",0),colour =alpha("white",0)),
@@ -1475,7 +1475,7 @@ ggplot(data3,aes(y=y,x=running_var, label=NA), fill="white")+
   geom_vline(aes(xintercept=grid[3]),linetype='dashed',col="dark grey",lwd=0.6) + 
   geom_vline(aes(xintercept=grid[4]),linetype='dashed',col="dark grey",lwd=0.6) + 
   geom_vline(aes(xintercept=grid[5]),linetype='dashed',col="dark grey",lwd=0.6) + 
-  geom_vline(aes(xintercept=grid[6]),linetype='dashed',col="dark grey",lwd=0.6) +
+  geom_vline(aes(xintercept=grid[7]),linetype='dashed',col="dark grey",lwd=0.6) +
   geom_vline(aes(xintercept=grid[8]),linetype='dashed',col="dark grey",lwd=0.6) + 
   geom_vline(aes(xintercept=grid[9]),linetype='dashed',col="dark grey",lwd=0.6) + 
   geom_vline(aes(xintercept=grid[10]),linetype='dashed',col="dark grey",lwd=0.6) + 
@@ -1500,7 +1500,7 @@ ggplot(data3,aes(y=y,x=running_var, label=NA), fill="white")+
   theme(axis.title.x = element_text(size=20, colour=col_text,margin = margin(t = 10, r = 0, b = 0, l = 0)),
         axis.text.x = element_text(size=12, colour=col_text),
         axis.title.y = element_text(size=20, colour=col_text,margin = margin(t = 0, r = 10, b = 0, l = 0)),
-        axis.text.y = element_text(size=12, colour=col_text),legend.position=c(0.1, 0.9),
+        axis.text.y = element_blank(),legend.position=c(0.1, 0.9),
         legend.title = element_blank(),
         legend.text = element_text(size=15, colour=col_text),
         legend.background = element_rect(fill=alpha("white",0),colour =alpha("white",0)),
@@ -1542,7 +1542,7 @@ ggplot(data3,aes(y=y,x=running_var, label=NA), fill="white")+
   geom_vline(aes(xintercept=grid[3]),linetype='dashed',col="dark grey",lwd=0.6) + 
   geom_vline(aes(xintercept=grid[4]),linetype='dashed',col="dark grey",lwd=0.6) + 
   geom_vline(aes(xintercept=grid[5]),linetype='dashed',col="dark grey",lwd=0.6) + 
-  geom_vline(aes(xintercept=grid[6]),linetype='dashed',col="dark grey",lwd=0.6) +
+  geom_vline(aes(xintercept=grid[7]),linetype='dashed',col="dark grey",lwd=0.6) +
   geom_vline(aes(xintercept=grid[8]),linetype='dashed',col="dark grey",lwd=0.6) + 
   geom_vline(aes(xintercept=grid[9]),linetype='dashed',col="dark grey",lwd=0.6) + 
   geom_vline(aes(xintercept=grid[10]),linetype='dashed',col="dark grey",lwd=0.6) + 
@@ -1570,7 +1570,7 @@ ggplot(data3,aes(y=y,x=running_var, label=NA), fill="white")+
   theme(axis.title.x = element_text(size=20, colour=col_text,margin = margin(t = 10, r = 0, b = 0, l = 0)),
         axis.text.x = element_text(size=12, colour=col_text),
         axis.title.y = element_text(size=20, colour=col_text,margin = margin(t = 0, r = 10, b = 0, l = 0)),
-        axis.text.y = element_text(size=12, colour=col_text),legend.position=c(0.1, 0.9),
+        axis.text.y = element_blank(),legend.position=c(0.1, 0.9),
         legend.title = element_blank(),
         legend.text = element_text(size=15, colour=col_text),
         legend.background = element_rect(fill=alpha("white",0),colour =alpha("white",0)),
@@ -1612,7 +1612,7 @@ ggplot(data3,aes(y=y,x=running_var, label=NA), fill="white")+
   geom_vline(aes(xintercept=grid[3]),linetype='dashed',col="dark grey",lwd=0.6) + 
   geom_vline(aes(xintercept=grid[4]),linetype='dashed',col="dark grey",lwd=0.6) + 
   geom_vline(aes(xintercept=grid[5]),linetype='dashed',col="dark grey",lwd=0.6) + 
-  geom_vline(aes(xintercept=grid[6]),linetype='dashed',col="dark grey",lwd=0.6) +
+  geom_vline(aes(xintercept=grid[7]),linetype='dashed',col="dark grey",lwd=0.6) +
   geom_vline(aes(xintercept=grid[8]),linetype='dashed',col="dark grey",lwd=0.6) + 
   geom_vline(aes(xintercept=grid[9]),linetype='dashed',col="dark grey",lwd=0.6) + 
   geom_vline(aes(xintercept=grid[10]),linetype='dashed',col="dark grey",lwd=0.6) + 
@@ -1640,7 +1640,7 @@ ggplot(data3,aes(y=y,x=running_var, label=NA), fill="white")+
   theme(axis.title.x = element_text(size=20, colour=col_text,margin = margin(t = 10, r = 0, b = 0, l = 0)),
         axis.text.x = element_text(size=12, colour=col_text),
         axis.title.y = element_text(size=20, colour=col_text,margin = margin(t = 0, r = 10, b = 0, l = 0)),
-        axis.text.y = element_text(size=12, colour=col_text),legend.position=c(0.1, 0.9),
+        axis.text.y = element_blank(),legend.position=c(0.1, 0.9),
         legend.title = element_blank(),
         legend.text = element_text(size=15, colour=col_text),
         legend.background = element_rect(fill=alpha("white",0),colour =alpha("white",0)),
@@ -1676,10 +1676,10 @@ template_post <- dplyr::filter(data2_post, running_var>=grid[4] & running_var<=0
 
 id <- sample(seq(1,nrow(template_post)), 100)
   
-ggplot(data2_post,aes(y=y,x=running_var, label=NA), fill="white")+geom_point(fill="white", color="slategrey", size=2, shape=21)+
+ggplot(data2_post,aes(y=y,x=running_var, label=NA), fill="white")+geom_point(fill="white", color="dark grey", size=2, shape=21)+
   geom_point(data = template_post[id,],fill=alpha("#F89441",0.5), color="#F89441", size=3, shape=21)+
-  geom_vline(aes(xintercept=grid[4]),linetype='dashed',col="dark grey",lwd=1) + 
-  geom_vline(aes(xintercept=grid[5]),linetype='dashed',col="dark grey",lwd=1) + 
+  geom_vline(aes(xintercept=grid[4]),linetype='dashed',col="slategrey",lwd=1) + 
+  geom_vline(aes(xintercept=grid[5]),linetype='dashed',col="slategrey",lwd=1) + 
   geom_vline(aes(xintercept=0),linetype='dashed',lwd=1.5) +
   geom_segment(aes(x = -700, y = 0, xend = -701, yend = 0,col="dark grey"), size=1.5)+
   geom_segment(aes(x = -700, y = 0, xend = -701, yend = 0,col="black"), size=1.5)+
@@ -1689,7 +1689,7 @@ ggplot(data2_post,aes(y=y,x=running_var, label=NA), fill="white")+geom_point(fil
                   axis_col = col_text)+
   xlab("Running variable") + ylab("Outcome")+ggtitle("Post-intervention")+
   scale_color_identity(name='Potential Outcomes',
-                       breaks=c('dark grey','black'),
+                       breaks=c('slategrey','black'),
                        labels = c("Grid","Cutoff"),
                        guide = "legend")+
   #  annotate("pointrage",x=-600,y=41,xend=-600,yend=41,shape=21,size=2,col="dark grey") +
@@ -1698,7 +1698,7 @@ ggplot(data2_post,aes(y=y,x=running_var, label=NA), fill="white")+geom_point(fil
   theme(axis.title.x = element_text(size=20, colour=col_text,margin = margin(t = 10, r = 0, b = 0, l = 0)),
         axis.text.x = element_text(size=12, colour=col_text),
         axis.title.y = element_text(size=20, colour=col_text,margin = margin(t = 0, r = 10, b = 0, l = 0)),
-        axis.text.y = element_text(size=12, colour=col_text),legend.position=c(0.1, 0.9),
+        axis.text.y = element_blank(),legend.position=c(0.1, 0.9),
         legend.title = element_blank(),
         legend.text = element_text(size=15, colour=col_text),
         legend.background = element_rect(fill=alpha("white",0),colour =alpha("white",0)),
@@ -1755,7 +1755,7 @@ ggplot(data3,aes(y=y,x=running_var, label=NA), fill="white")+
   geom_vline(aes(xintercept=grid[3]),linetype='dashed',col="dark grey",lwd=0.6) + 
   geom_vline(aes(xintercept=grid[4]),linetype='dashed',col="dark grey",lwd=0.6) + 
   geom_vline(aes(xintercept=grid[5]),linetype='dashed',col="dark grey",lwd=0.6) + 
-  geom_vline(aes(xintercept=grid[6]),linetype='dashed',col="dark grey",lwd=0.6) +
+  geom_vline(aes(xintercept=grid[7]),linetype='dashed',col="dark grey",lwd=0.6) +
   geom_vline(aes(xintercept=grid[8]),linetype='dashed',col="dark grey",lwd=0.6) + 
   geom_vline(aes(xintercept=grid[9]),linetype='dashed',col="dark grey",lwd=0.6) + 
   geom_vline(aes(xintercept=grid[10]),linetype='dashed',col="dark grey",lwd=0.6) + 
@@ -1783,7 +1783,7 @@ ggplot(data3,aes(y=y,x=running_var, label=NA), fill="white")+
   theme(axis.title.x = element_text(size=20, colour=col_text,margin = margin(t = 10, r = 0, b = 0, l = 0)),
         axis.text.x = element_text(size=12, colour=col_text),
         axis.title.y = element_text(size=20, colour=col_text,margin = margin(t = 0, r = 10, b = 0, l = 0)),
-        axis.text.y = element_text(size=12, colour=col_text),legend.position=c(0.1, 0.9),
+        axis.text.y = element_blank(),legend.position=c(0.1, 0.9),
         legend.title = element_blank(),
         legend.text = element_text(size=15, colour=col_text),
         legend.background = element_rect(fill=alpha("white",0),colour =alpha("white",0)),
@@ -1811,7 +1811,7 @@ d_match1 = data2_post_opt1[random_t1,]
 d_match2 = data2_post_opt2[random_t2,]
 
 
-g <- ggplot(data2_post,aes(y=y,x=running_var, label=NA), fill="white")+geom_point(fill="white", color="slategrey", size=2, shape=21)+
+g <- ggplot(data2_post,aes(y=y,x=running_var, label=NA), fill="white")+geom_point(fill="white", color="dark grey", size=2, shape=21)+
   geom_vline(aes(xintercept=optimal_bandwidth[1]+15),linetype='dashed',col=col3,lwd=1.1) + 
   geom_vline(aes(xintercept=optimal_bandwidth[2]),linetype='dashed',col=col3,lwd=1.1) + 
   geom_point(data = d_match1, fill = alpha("#F89441",0.4), color = "#F89441", pch=21, size = 3)+
@@ -1834,7 +1834,7 @@ g <- ggplot(data2_post,aes(y=y,x=running_var, label=NA), fill="white")+geom_poin
   theme(axis.title.x = element_text(size=20, colour=col_text,margin = margin(t = 10, r = 0, b = 0, l = 0)),
         axis.text.x = element_text(size=12, colour=col_text),
         axis.title.y = element_text(size=20, colour=col_text,margin = margin(t = 0, r = 10, b = 0, l = 0)),
-        axis.text.y = element_text(size=12, colour=col_text),legend.position=c(0.1, 0.9),
+        axis.text.y = element_blank(),legend.position=c(0.1, 0.9),
         legend.title = element_blank(),
         legend.text = element_text(size=15, colour=col_text),
         legend.background = element_rect(fill=alpha("white",0),colour =alpha("white",0)),
@@ -2501,22 +2501,11 @@ tbl <- tab %>%
     
   )
 
-div(
-  # this class can be called with CSS now via .salary
-  class = "tab",
-#  div(
-    # this can be called with CSS now via .title
-#    class = "title",
-#    h3("Balance Table by Stratum")
-#  ),
-  # The actual table
-  tbl,
-  # I use a span here so I can assigna  color to this text
-tags$span(style = "color:#ffffff", "space"),
-  tags$span(style = "color:#333f48", "Note: Generalization interval [-M$500, M$301]. 95% CI in brackets.")
-)
+tbl
 
 ```
+
+.source[Note: Generalization interval \[-M$500, M$301\]. 95% CI in brackets.]
 ]
 
 ---
@@ -2573,22 +2562,10 @@ tbl <- tab %>%
     
   )
 
-div(
-  # this class can be called with CSS now via .salary
-  class = "tab",
-#  div(
-    # this can be called with CSS now via .title
-#    class = "title",
-#    h3("Balance Table by Stratum")
-#  ),
-  # The actual table
-  tbl,
-  # I use a span here so I can assigna  color to this text
-tags$span(style = "color:#ffffff", "space"),
-tags$span(style = "color:#333f48", "Note: Generalization interval [-M$500, M$301]. 95% CI in brackets.")
-)
-
+tbl
 ```
+
+.source[Note: Generalization interval \[-M$500, M$301\]. 95% CI in brackets.]
 ]
 
 ---
@@ -2615,7 +2592,7 @@ tbl <- tab %>%
     defaultColDef = colDef(
       align = "center",
       style = function(value) {
-      if (tab[1, "Enrollment_RD"]!="" | tab[2, "Enrollment_RD"]!="" | value=="0.077***" | value=="[0.029, 0.125]") {
+      if (value=="0.069**" | value=="[0.026, 0.112]" | value=="0.077***" | value=="[0.029, 0.125]") {
         color <- "#E16462"
         background <- "rgba(225, 100, 98,0.3)"
         weight <- "bold"
@@ -2632,7 +2609,18 @@ tbl <- tab %>%
     columns = list(
       Application_RD = colDef(name = "Application"),
       Enrollment_RD = colDef(name = "Enrollment",
-                  style = list(borderRight = "1px solid rgba(0, 0, 0, 0.1)")),
+                  style = function(value) {
+      if (value=="0.069**" | value=="[0.026, 0.112]" | value=="0.077***" | value=="[0.029, 0.125]") {
+        color <- "#E16462"
+        background <- "rgba(225, 100, 98,0.3)"
+        weight <- "bold"
+      }
+        else{
+          color <- "#333f48"
+          background <- "white"
+          weight <- "normal"
+        }
+                    list(color = color, background = background, fontWeight = weight, borderRight = "1px solid rgba(0, 0, 0, 0.1)")}),
       Application_GRD = colDef(name = "Application"),
       Enrollment_RD = colDef(name = "Enrollment")
     ),
@@ -2645,22 +2633,11 @@ tbl <- tab %>%
     
   )
 
-div(
-  # this class can be called with CSS now via .salary
-  class = "tab",
-#  div(
-    # this can be called with CSS now via .title
-#    class = "title",
-#    h3("Balance Table by Stratum")
-#  ),
-  # The actual table
-  tbl,
-  # I use a span here so I can assigna  color to this text
-tags$span(style = "color:#ffffff", "space"),
-  tags$span(style = "color:#333f48", "Note: Generalization interval [-M$500, M$301]. 95% CI in brackets.")
-)
+tbl
 
 ```
+
+.source[Note: Generalization interval \[-M$500, M$301\]. 95% CI in brackets.]
 ]
 ---
 # How does the effect change with interval width?

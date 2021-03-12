@@ -279,7 +279,7 @@ library(knitr)
 library(showtext)
 library(xaringanExtra)
 
-#xaringanExtra::use_scribble()
+xaringanExtra::use_scribble()
 
 ```
 

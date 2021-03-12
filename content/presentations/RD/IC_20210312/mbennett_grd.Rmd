@@ -912,7 +912,7 @@ Getting our hands dirty...
 # Diagram for GRD
 
 .center[
-![](https://raw.githubusercontent.com/maibennett/presentations/main/content/presentations/RD/IC_20210312/images/diagram_grd.png)
+![:scale 90%](https://raw.githubusercontent.com/maibennett/presentations/main/content/presentations/RD/IC_20210312/images/diagram_grd.png)
 ]
 ---
 # Step 0: Identification of narrow interval
@@ -1672,9 +1672,14 @@ ggplot(data3,aes(y=y,x=running_var, label=NA), fill="white")+
 ```{r grd5a, fig.height=6, fig.width=6.5, fig.align='center', dev='svg', echo = FALSE, warning = FALSE, message = FALSE}
 
 ### Plot 1
+set.seed(1)
 
+template_post <- dplyr::filter(data2_post, running_var>=grid[4] & running_var<=0)
+
+id <- sample(seq(1,nrow(template_post)), 100)
+  
 ggplot(data2_post,aes(y=y,x=running_var, label=NA), fill="white")+geom_point(fill="white", color="slategrey", size=2, shape=21)+
-  geom_point(data = dplyr::filter(data2_post, running_var>=grid[4] & running_var<=0),fill=alpha("#F89441",0.5), color="#F89441", size=3, shape=21)+
+  geom_point(data = template_post[id,],fill=alpha("#F89441",0.5), color="#F89441", size=3, shape=21)+
   geom_vline(aes(xintercept=grid[4]),linetype='dashed',col="dark grey",lwd=1) + 
   geom_vline(aes(xintercept=grid[5]),linetype='dashed',col="dark grey",lwd=1) + 
   geom_vline(aes(xintercept=0),linetype='dashed',lwd=1.5) +
@@ -2448,7 +2453,81 @@ abline(v = 0.05, col="dark grey",lty = 2)
 -->
 ---
 # Effects of introduction of FHE: RD and GRD
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+library(reactable)
+library(htmltools)
 
+tab <- rbind(c("0.035","0.069*","0.052**", "0.077**"),
+             c("[-0.007, 0.077]", "[0.026, 0.112]", "[0.008, 0.096]", "[0.029, 0.125]"),
+             c("6,588", "6,458", "2,000", "2,000"),
+             c("0.606","0.515","0.568","0.472"))
+
+colnames(tab) <- c("Application_RD","Enrollment_RD","Application_GRD","Enrollment_GRD")
+rownames (tab) <- c("Effect", "", "Effective N Obs", "Control Mean")
+
+
+tbl <- tab %>%
+  reactable(
+    # ALL one page (no scrolling or page swapping)
+    pagination = TRUE,
+    rownames = TRUE,
+    # compact for an overall smaller table width wise
+    compact = FALSE,
+    # borderless - TRUE or FALSE
+    borderless = FALSE,
+    # Stripes - TRUE or FALSE
+    striped = TRUE,
+    # fullWidth - either fit to width or not
+    fullWidth = TRUE,
+    # apply defaults
+    # 100 px and align to center of column
+    defaultColDef = colDef(
+      align = "center"),
+    style = list(fontFamily = "Jost, sans-serif"),
+    
+    columns = list(
+      Application_RD = colDef(name = "Application"),
+      Enrollment_RD = colDef(name = "Enrollment",
+                  style = list(borderRight = "1px solid rgba(0, 0, 0, 0.1)")),
+      Application_GRD = colDef(name = "Application"),
+      Enrollment_RD = colDef(name = "Enrollment")
+    ),
+    columnGroups = list(
+      colGroup(name = "Robust RD results", columns = c("Application_RD", "Enrollment_RD")),
+      colGroup(name = "GRD results", columns = c("Application_GRD", "Enrollment_GRD"))
+      
+    ),
+    highlight = TRUE,
+    rowStyle = JS("
+    function(rowInfo, state) {
+      var firstSorted = state.sorted[0]
+      if (firstSorted && firstSorted.id === 'School') {
+        var nextRow = state.pageRows[rowInfo.viewIndex + 1]
+        if (nextRow && rowInfo.row['School'] !== nextRow['School']) {
+          // Use box-shadow to add a 2px border without taking extra space
+          return { boxShadow: 'inset 0 -2px 0 rgba(0, 0, 0, 0.1)' }
+        }
+      }
+    }
+  ")
+    
+  )
+
+div(
+  # this class can be called with CSS now via .salary
+  class = "tab",
+#  div(
+    # this can be called with CSS now via .title
+#    class = "title",
+#    h3("Balance Table by Stratum")
+#  ),
+  # The actual table
+  tbl,
+  # I use a span here so I can assigna  color to this text
+  tags$span(style = "color:#333f48", "Note: Generalization interval [-M$500, M$301]. 95% CI in brackets.")
+)
+
+```
 ---
 # Effects of introduction of FHE: Application
 
@@ -2465,20 +2544,20 @@ abline(v = 0.05, col="dark grey",lty = 2)
 - GRD as a **gradual approach** (not all or nothing)
 --
 
-
+<br>
 - Use data to inform interval for generalization
 --
 
-
+<br>
 - Use of matching to avoid extrapolation
 --
 
-
+<br>
 - Limitations:
   - More data: two periods
   - Conditional time invariance assumption for $t=1$
 --
 
-
+<br>
 - Multiple applications for DD-RD: e.g. geographic RDs.
 

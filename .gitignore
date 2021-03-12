@@ -3,3 +3,4 @@ node_modules
 public
 resources
 content/presentations/RD/IC_20210312/data/data0_application.RData
+content/presentations/RD/IC_20210312/code/00_optimal_bandwidthv3_test_ppt.R

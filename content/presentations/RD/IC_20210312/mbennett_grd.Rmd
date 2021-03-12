@@ -2305,3 +2305,7 @@ ggplot(data2016,aes(y=y,x=x, label=NA), fill="white")+
 
 ```
 -->
+
+---
+# Testing time invariance on control side for t=1
+

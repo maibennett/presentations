@@ -64,7 +64,7 @@ style_mono_accent(
     #".remark-slide-number" = list("display" = "none"),
     
     ".strong" = list("font-weight" = "400"),
-    ".big" = list("font-size" = "350%",
+    ".big" = list("font-size" = "250%",
                      "font-family" = "Yanone Kaffeesatz",
                      "font-weight"="400"),
     ".small" = list("font-size" = "80%"),

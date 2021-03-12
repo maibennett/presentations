@@ -304,7 +304,7 @@ table.dataTable.hover tbody tr:hover, table.dataTable.display tbody tr:hover {
   font-weight: 400;
 }
 .big {
-  font-size: 350%;
+  font-size: 250%;
   font-family: Yanone Kaffeesatz;
   font-weight: 400;
 }

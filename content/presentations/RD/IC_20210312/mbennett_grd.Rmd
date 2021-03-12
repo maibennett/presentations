@@ -2690,3 +2690,4 @@ How Far is too Far? Generalization of a Regression Discontinuity Design Away fro
 <br>
 New version of the paper is coming.
 <p href="https://magdalenabennett.com">www.magdalenabennett.com</p>
+<!-- pagedown::chrome_print('C:/Users/mc72574/Dropbox/Hugo/Sites/presentations/content/presentations/RD/IC_20210312/mbennett_grd.html', wait = 5, timeout = 60) -->

@@ -536,3 +536,6 @@ ggplot(data3,aes(y=y,x=running_var, label=NA), fill="white")+
   annotate("rect",xmin=-600,xmax=-580,ymin=5.2,ymax=6.8,col="dark gray",fill="light grey",alpha=0.5)+
   annotate("text",x=-550,y=6,label = "Template region", size=5, colour=col_text,hjust = 0,family=font_fsc)
 
+
+### Post - intervention
+

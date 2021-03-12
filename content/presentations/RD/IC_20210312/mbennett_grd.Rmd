@@ -2226,7 +2226,7 @@ Application: Free Higher Education
   
 --
 
-**Generalization interval: [-M\$500.3, M\$300.9]**
+**Generalization interval: [-M$500.3, M$300.9]**
 
 ---
 # For what population are we generalizing for?
@@ -2308,4 +2308,44 @@ ggplot(data2016,aes(y=y,x=x, label=NA), fill="white")+
 
 ---
 # Testing time invariance on control side for t=1
+
+---
+# Balance for the entire sample
+
+---
+# Balance within generalization interval (before matching)
+
+---
+# Balance within generalization interval (after matching)
+
+---
+# Effects of introduction of FHE: RD and GRD
+
+---
+# Effects of introduction of FHE: Application
+
+---
+# Effects of introduction of FHE: Enrollment
+
+---
+# How does the effect change with interval width?
+
+---
+# Conclusions
+
+- GRD as a **gradual approach** (not all or nothing)
+--
+
+- Use data to inform interval for generalization
+--
+
+- Use of matching to avoid extrapolation
+--
+
+- Limitations:
+  - More data: two periods
+  - Conditional time invariance assumption for $t=1$
+--
+
+- Multiple applications for DD-RD: e.g. geographic RDs.
 

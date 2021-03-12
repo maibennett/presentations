@@ -2684,7 +2684,7 @@ tbl
 background-position: 50% 50%
 class: center, middle, inverse, nonum
 .big[
-How Far is too Far? Generalization of a Regression Discontinuity Design Away from the cutoff
+How Far is too Far? Generalization of a Regression Discontinuity Design Away from the Cutoff
 ]
 <br>
 <br>

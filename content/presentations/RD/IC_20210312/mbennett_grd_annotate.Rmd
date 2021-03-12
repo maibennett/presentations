@@ -2101,7 +2101,7 @@ Straightforward estimation given the matched sample:
 
 - E.g. paired t-test:
 
-$$\hat{\tau}_{ATT}= \sum_{k=1}^N\frac{Y_{k(1)1} - Y_{k(0)1} - (Y_{k(1)0} - Y_{k(0)0})}{N} = \sum_k=1^N\frac{d_k}{N}$$
+$$\hat{\tau}_{ATT}= \sum_{k=1}^N\frac{Y_{k(1)1} - Y_{k(0)1} - (Y_{k(1)0} - Y_{k(0)0})}{N} = \sum_{k=1}^N\frac{d_k}{N}$$
 
 $Y_{k(z)t}$: Outcome within matched group $k$ with treatment $z$ for period $t$.
 ---
@@ -2403,7 +2403,7 @@ dotchart(abs_std_dif_all[n_aux:1], labels = names_mom_format[n_aux:1], cex = 1, 
          pch = "", color = col_text, main = "", xlim = c(0, 1), 
          xlab = "Absolute standardized differences in means")
 points(abs_std_dif_all[n_aux:1], y = 1:n_aux, cex = 1.5, pch = 1, lwd=2)
-legend("topright", c("All T-C","BW* T-C Before matching", "BW* T-C After matching"), cex = 1.2, 
+legend("topright", c("All T-C","H* T-C Before matching", "H* T-C After matching"), cex = 1.2, 
        pch = c(1,0, 8), col = c("black",col2,col1),
        lwd=c(2,2,2),lty=c(NA,NA,NA))
 abline(v = 0, lty = 2)
@@ -2426,7 +2426,7 @@ dotchart(abs_std_dif_all[n_aux:1], labels = names_mom_format[n_aux:1], cex = 1, 
 points(abs_std_dif_all[n_aux:1], y = 1:n_aux, cex = 1.5, pch = 1, lwd=2)
 points(abs_std_dif_before[n_aux:1], y = 1:n_aux, cex = 1.5, pch = 0, 
        col=col2,lwd=2)
-legend("topright", c("All T-C","BW* T-C Before matching", "BW* T-C After matching"), cex = 1.2, 
+legend("topright", c("All T-C","H* T-C Before matching", "H* T-C After matching"), cex = 1.2, 
        pch = c(1,0, 8), col = c("black",col2,col1),
        lwd=c(2,2,2),lty=c(NA,NA,NA))
 abline(v = 0, lty = 2)
@@ -2451,7 +2451,7 @@ points(abs_std_dif_before[n_aux:1], y = 1:n_aux, cex = 1.5, pch = 0,
        col=col2,lwd=2)
 points(abs_std_dif_after[n_aux:1], y = 1:n_aux, cex = 1.5, pch = 8, 
        col = col1,lwd=2)
-legend("topright", c("All T-C","BW* T-C Before matching", "BW* T-C After matching"), cex = 1.2, 
+legend("topright", c("All T-C","H* T-C Before matching", "H* T-C After matching"), cex = 1.2, 
        pch = c(1,0, 8), col = c("black",col2,col1),
        lwd=c(2,2,2),lty=c(NA,NA,NA))
 abline(v = 0, lty = 2)
@@ -2499,7 +2499,7 @@ tbl <- tab %>%
       Enrollment_RD = colDef(name = "Enrollment",
                   style = list(borderRight = "1px solid rgba(0, 0, 0, 0.1)")),
       Application_GRD = colDef(name = "Application"),
-      Enrollment_RD = colDef(name = "Enrollment")
+      Enrollment_GRD = colDef(name = "Enrollment")
     ),
     columnGroups = list(
       colGroup(name = "Robust RD results", columns = c("Application_RD", "Enrollment_RD")),
@@ -2560,7 +2560,7 @@ tbl <- tab %>%
       Enrollment_RD = colDef(name = "Enrollment",
                   style = list(borderRight = "1px solid rgba(0, 0, 0, 0.1)")),
       Application_GRD = colDef(name = "Application"),
-      Enrollment_RD = colDef(name = "Enrollment")
+      Enrollment_GRD = colDef(name = "Enrollment")
     ),
     columnGroups = list(
       colGroup(name = "Robust RD results", columns = c("Application_RD", "Enrollment_RD")),
@@ -2631,7 +2631,7 @@ tbl <- tab %>%
         }
                     list(color = color, background = background, fontWeight = weight, borderRight = "1px solid rgba(0, 0, 0, 0.1)")}),
       Application_GRD = colDef(name = "Application"),
-      Enrollment_RD = colDef(name = "Enrollment")
+      Enrollment_GRD = colDef(name = "Enrollment")
     ),
     columnGroups = list(
       colGroup(name = "Robust RD results", columns = c("Application_RD", "Enrollment_RD")),

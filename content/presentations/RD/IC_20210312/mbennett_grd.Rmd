@@ -1350,7 +1350,7 @@ ggplot(d_match2,aes(y=y,x=running_var, label=NA), fill=col2)+
 ```
 ]
 ---
-# Step 3 and 4: Fit a local polynomial and identify new interval
+# Step 3: Fit a local polynomial 
 
 .pull-left[
 .center[
@@ -1425,7 +1425,7 @@ ggplot(data3,aes(y=y,x=running_var, label=NA), fill="white")+
 ]
 
 ---
-# Step 3 and 4: Fit a local polynomial and identify new interval
+# Step 4: Identify new generalization interval
 
 .pull-left[
 .center[
@@ -1623,144 +1623,214 @@ This can break in two ways:
 
 library(ggplot2)
 library(firasans)
+library(leaflet)
+library(hrbrthemes)
 library(plotly)
 
-githubURL <- "https://github.com/maibennett/presentations/raw/main/content/presentations/RD/IC_20210312/data/grd1.RData"
+githubURL <- "https://github.com/maibennett/presentations/raw/main/content/presentations/RD/IC_20210312/data/grd1.Rdata"
 load(url(githubURL))
 
-data1 = data3
-data1$f = 1
+intercepts1 = c(-80,-130,-162.56369)
+intercepts2 = c(120,80,48.81405)
 
-d_m1 = d_match2
-d_m1$f = 1
+d1 = data3
+d1$f = 1
+d1$intercepts1 = intercepts1[1]
+d1$intercepts2 = intercepts2[1]
+d1$color = "#eee473"
 
-optimal_bandwidth1 = optimal_bandwidth
+### Adjust EST
+y0 = d1$est[d1$running_var<=(intercepts1[1]+10) &
+              !is.na(d1$est)][length(d1$est[d1$running_var<=(intercepts1[1]+10) 
+                                                                   & !is.na(d1$est)])]
+x0 = (intercepts1[1]+10)
+mp = 7/(d1$running_var[d1$running_var<=(intercepts1[1]+10) & 
+                          !is.na(d1$est)][length(d1$est[d1$running_var<=(intercepts1[1]+10) & 
+                                                          !is.na(d1$est)])] -
+           d1$running_var[d1$running_var<=(intercepts1[1]+10) & 
+                          !is.na(d1$est)][1])
 
-rm(data3,d_match2,optimal_bandwidth)
+adjust = 0.01*(mp*(d1$running_var[d1$running_var<=(intercepts1[1]+10) & !is.na(d1$est)] - x0)^2 + y0)
 
+adjust = c(adjust[2:length(adjust)], 0)
 
-load(paste0(dir_data,"grd2.Rdata"))
+d1$est[d1$running_var<=(intercepts1[1]+10) & !is.na(d1$est)] = d1$est[d1$running_var<=(intercepts1[1]+10) &
+                                                                   !is.na(d1$est)] - adjust
 
-data2 = data3
-data2$f = 2
+###### Adjust CIL
+y0 = d1$cil[d1$running_var<=(intercepts1[1]+10) &
+              !is.na(d1$est)][length(d1$est[d1$running_var<=(intercepts1[1]+10) 
+                                                                   & !is.na(d1$est)])]
+x0 = (intercepts1[1]+10)
+mp = 7.7/(d1$running_var[d1$running_var<=(intercepts1[1]+10) & 
+                          !is.na(d1$est)][length(d1$est[d1$running_var<=(intercepts1[1]+10) & 
+                                                          !is.na(d1$est)])] -
+           d1$running_var[d1$running_var<=(intercepts1[1]+10) & 
+                          !is.na(d1$est)][1])
 
-d_m2 = d_match2
-d_m2$f = 2
+adjust = 0.01*(mp*(d1$running_var[d1$running_var<=(intercepts1[1]+10) & !is.na(d1$est)] - x0)^2 + y0)
 
-optimal_bandwidth2 = optimal_bandwidth
+adjust = c(adjust[2:length(adjust)], 0)
 
-rm(data3,d_match2,optimal_bandwidth)
+d1$cil[d1$running_var<=(intercepts1[1]+10) & !is.na(d1$cil)] = d1$cil[d1$running_var<=(intercepts1[1]+10) &
+                                                                   !is.na(d1$cil)] - adjust
 
-load(paste0(dir_data,"grd3.Rdata"))
+#### Adjust CIU
+y0 = d1$ciu[d1$running_var<=intercepts1[1] & !is.na(d1$est)][length(d1$est[d1$running_var<=intercepts1[1] 
+                                                                   & !is.na(d1$est)])]
+x0 = intercepts1[1]
+mp = 6.3/(d1$running_var[d1$running_var<=intercepts1[1] & 
+                          !is.na(d1$est)][length(d1$est[d1$running_var<=intercepts1[1] & 
+                                                          !is.na(d1$est)])] -
+           d1$running_var[d1$running_var<=intercepts1[1] & 
+                          !is.na(d1$est)][1])
 
-data3 = data3
-data3$f = 3
+adjust = 0.01*(mp*(d1$running_var[d1$running_var<=intercepts1[1] & !is.na(d1$est)] - x0)^2 + y0)
 
-d_m3 = d_match2
-d_m3$f = 3
+adjust = c(adjust[2:length(adjust)], 0)
 
-optimal_bandwidth3 = optimal_bandwidth
+d1$ciu[d1$running_var<=intercepts1[1] & !is.na(d1$ciu)] = d1$ciu[d1$running_var<=intercepts1[1] &
+                                                                   !is.na(d1$ciu)] - adjust
 
-rm(d_match2,optimal_bandwidth)
+d1$title = ""
 
-dm = rbind(d_m1,d_m2,d_m3)
-d = rbind(data1,data2,data3)
+githubURL <- "https://github.com/maibennett/presentations/raw/main/content/presentations/RD/IC_20210312/data/grd2.Rdata"
+load(url(githubURL))
 
-d$obw1 = NA
-d$obw1[d$f==1] = optimal_bandwidth1[1]
-d$obw1[d$f==2] = optimal_bandwidth2[1]
-d$obw1[d$f==3] = optimal_bandwidth3[1]
+d2 = data3
+d2$f = 2
+d2$intercepts1 = intercepts1[2]
+d2$intercepts2 = intercepts2[2]
+d2$color = "#eee473"
 
-d$obw2 = NA
-d$obw2[d$f==1] = optimal_bandwidth1[2]
-d$obw2[d$f==2] = optimal_bandwidth2[2]
-d$obw2[d$f==3] = optimal_bandwidth3[2]
+d2$title = ""
+
+githubURL <- "https://github.com/maibennett/presentations/raw/main/content/presentations/RD/IC_20210312/data/grd3.Rdata"
+load(url(githubURL))
+
+data3$running_var[!is.na(data3$est)] = data3$running_var[!is.na(data3$est)]+25
+d3 = data3
+d3$f = 3
+d3$intercepts1 = intercepts1[3]
+d3$intercepts2 = intercepts2[3]
+d3$color = "#eee473"
+
+d3$title = "Optimal interval H*"
+
+d4 = data3
+d4$f = 4
+d4$intercepts1 = intercepts1[3]
+d4$intercepts2 = intercepts2[3]
+d4$color = "#FF1654"
+
+d4$title = "Optimal interval H*"
+
+dfull = rbind(d1,d2,d3,d4)
+
+dfull$ribbon_x = NA
+dfull$ribbon_y = NA
+
+dfull$ribbon_x[dfull$f==1][1:4] = c(0,-40,-40,0)
+dfull$ribbon_y[dfull$f==1][1:4] = c(-50,-50,50,50)
+dfull$ribbon_x[dfull$f==2][1:4] = c(0,-80,-80,0)
+dfull$ribbon_y[dfull$f==2][1:4] = c(-50,-50,50,50)
+dfull$ribbon_x[dfull$f==3][1:4] = c(0,intercepts1[3],intercepts1[3],0)
+dfull$ribbon_y[dfull$f==3][1:4] = c(-50,-50,50,50)
+
+dfull$ribbon_x[dfull$f==4][1:4] = c(0,intercepts1[3],intercepts1[3],0)
+dfull$ribbon_y[dfull$f==4][1:4] = c(-50,-50,50,50)
 
 
 m <- list(
-  l = 50,
+  l = 80,
   r = 50,
   b = 10,
   t = 50,
   pad = 4
 )
 
-fig <- dm %>% plot_ly() %>%
-  layout(xaxis = list(title = "Running variable",
-                      range = c(-600,400)),
-         yaxis = list(title = "Outcome",
-                      range = c(-30,30)),
+t <- list(
+  family = "Fira Sans Condensed",
+  size = 32,
+  color = '#6C6C6C',
+  weight = 300)
+
+t2 <- list(
+  family = "Fira Sans Condensed",
+  size = 25,
+  color = '#6C6C6C',
+  weight = 300)
+
+t3 <- list(
+  family = "Fira Sans Condensed",
+  size = 15,
+  color = '#6C6C6C')
+
+dfull$change=0
+dfull$change[dfull$f==4] = 1
+#eee473
+colors = c(rep("#900DA4",3),"#FCCE25")
+
+colNum = colorBin(colors,domain = dfull$change,bins=2)
+
+fig <- dfull %>% plot_ly(frame = ~f, colors = colors) %>%
+  layout(xaxis = list(title = "",
+                      titlefont = t2,
+                      showgrid = FALSE, zeroline = FALSE,
+                      showline = FALSE,
+                      showticklabels = TRUE,
+                      range = c(-400,400), titlefont = t2, tickfont = t3),
+         yaxis = list(title = "",
+                      showgrid = TRUE, zeroline = FALSE,
+                      showline = FALSE,
+                      showticklabels = FALSE,
+                      range = c(-30,30), titlefont = t2),
          plot_bgcolor="rgba(0, 0, 0, 0)",
          paper_bgcolor="rgba(0, 0, 0, 0)",
-         margin=m,
-         showlegend = FALSE)  %>%
+         margin = m, showlegend = FALSE,autosize = F, width = 550, height = 528) %>%
+ # add_annotations(text = sprintf("<b>Pre-intervention</b>"),yref="paper", xref="paper", 
+#                  y=1.1, x=0, align = 'left',
+#                  showarrow=F, font = t)%>%
+  add_annotations(text = sprintf("Running variable"),yref="paper", xref="paper", 
+                  y=-0.2, x=1, align = 'right',
+                  showarrow=F, font = t2)%>%
+  add_annotations(text = sprintf("Outcome"),yref="paper", xref="paper", 
+                  y=1, x=-0.1, align = 'right', textangle = -90,
+                  showarrow=F, font = t2)%>%
+  add_annotations(text = sprintf("Cutoff"),yref="paper", xref="paper", 
+                  y=1.1, x=0.5, align = 'center',
+                  showarrow=F, font = t3)%>%
+  #add_text(x = -300, y = 25, frame=~f, text = ~title, textfont = t) %>%
   add_trace(x=~running_var,y=~y, frame=~f,type='scatter',mode='markers',
-            marker = list(color=alpha("#97D1C7",0.3),size=7,
+            marker = list(color=alpha('#c1c1c1',0),size=5, opacity = 1,
             line = list(
-              color = "#70C1B3",
-              width = 1.5
+              color = alpha('#c1c1c1',0.6),
+              width = 1
             ))) %>%
-  add_trace(d,x=~running_var,y=~y,type='scatter',mode='markers',
-            marker = list(color=alpha("#97D1C7",0.0),size=3,
-            line = list(
-              color = alpha("#babbbf",0.4),
-              width = 1.2
-            )))
+  add_lines(data = dfull[!is.na(dfull$est),], x=~running_var,y=~est, frame=~f,
+              line = list(color = alpha('#900DA4',0.8), width = 2.5)) %>%
+  add_lines(data = dfull[!is.na(dfull$est),], x=~running_var,y=~cil, frame=~f,
+              line = list(color = alpha('#900DA4',0), width = 1.5, dash='dash')) %>%
+  add_lines(data = dfull[!is.na(dfull$est),], x=~running_var,y=~ciu, frame=~f,
+              line = list(color = alpha('#900DA4',0), width = 1.5, dash='dash')) %>%
+  add_ribbons(data = dfull[!is.na(dfull$est),], x=~running_var, ymin=~cil, ymax=~ciu, frame=~f,
+              fillcolor = alpha('#900DA4',0.3), line = list(color = alpha('#900DA4',0.3), width = 0)) %>%
+  add_trace(data = dfull[!is.na(dfull$ribbon_x),],x=~ribbon_x, y=~ribbon_y, frame=~f,
+            fill = "toself",type='scatter',mode='lines',
+              fillcolor = alpha('#D6D4D4',0.3), line = list(color = alpha('#D6D4D4',0.3), width = 0)) %>%
+  add_segments(x = ~intercepts1, y = -50, xend = ~intercepts1, yend = 50, frame = ~f,
+               color = ~f,
+               line = list(width = 3, dash = 'dash')) %>%
+  add_segments(x = ~intercepts2, y = -50, xend = ~intercepts2, yend = 50, frame = ~f,
+               color = ~f,
+               line = list(width = 3, dash = 'dash')) %>%
+  add_segments(x = 0, y = -50, xend = 0, yend = 50, frame = ~f,
+               line = list(color = alpha("#838383",0.7), width = 1.2, dash = 'dash')) %>%
+  animation_opts(frame=1200,transition=800,redraw = FALSE) %>%
+  animation_slider(hide = TRUE) %>% config(displayModeBar = FALSE) %>% 
+  animation_button(visible = TRUE) %>% hide_colorbar()
 
-
-g = ggplot(data3,aes(y=y,x=running_var, label=NA), fill="white")+
-  geom_point(fill=alpha("white",0),color="light grey",shape=21,size=1.2) +
-  #geom_rect(aes(xmin = grid[5], xmax = grid[6], ymin = -Inf, ymax = Inf),
-  #          fill = "light grey", alpha = 0.03) +
-  geom_ribbon(data=data3[data3$running_var>=grid[3] & data3$running_var<=grid[6],],
-              aes(ymin=-30,ymax=30),fill="light grey",alpha=0.5) +
-  #geom_point(fill="white", color="slategrey", size=2, shape=21)+
-  geom_point(data=d_match2,
-             aes(x=running_var,y=y),fill="#97D1C7",lwd=2, color="#70C1B3", size=2, shape=21,alpha=0.4)+
-  geom_vline(aes(xintercept=grid[5]),linetype='dashed',col="#FF1654",lwd=1.1) + 
-  geom_vline(aes(xintercept=optimal_bandwidth[2]),linetype='dashed',col="#FF1654",lwd=1.1) + 
-  geom_vline(aes(xintercept=0),linetype='dashed',col="slategrey",lwd=1) +
-  geom_segment(aes(x = -700, y = 0, xend = -701, yend = 0,col="slategrey"), size=1)+
-  geom_segment(aes(x = -700, y = 0, xend = -701, yend = 0,col="#FF1654"), size=1)+
-  geom_line(data=data3[!is.na(data3$est),],aes(x=running_var,y=est),col="slategrey",lwd=1) +
-  geom_ribbon(data=data3[!is.na(data3$est),],aes(x=running_var,ymin=cil,ymax=ciu),fill="#73ABC2",alpha=0.3) +
-  geom_line(data=data3[!is.na(data3$est),],aes(x=running_var,y=cil), col="#247BA0", lty=4) +
-  geom_line(data=data3[!is.na(data3$est),],aes(x=running_var,y=ciu), col="#247BA0", lty=4) +
-  theme_ipsum_fsc(grid="Y", plot_title_size = 20,
-                  axis_text_size = 10,
-                  axis_title_size=12,
-                  axis_col = col_text)+
-  xlab("Running variable") + ylab("Outcome")+ggtitle("Pre-intervention")+
-  scale_color_identity(name='Potential Outcomes',
-                       breaks=c('slategrey',"#FF1654"),
-                       labels = c("Cutoff","H1"),
-                       guide = "legend")+
-  theme(plot.margin=unit(c(1,1,1.5,1.2),"cm"))+
-  theme(axis.title.x = element_text(size=20, colour=col_text),
-        axis.text.x = element_text(size=12, colour=col_text),
-        axis.title.y = element_text(size=20, colour=col_text),
-        axis.text.y = element_text(size=12, colour=col_text),legend.position=c(0.1, 0.9),
-        legend.title = element_blank(),
-        legend.text = element_text(size=15, colour=col_text),
-        legend.background = element_rect(fill=alpha("white",0),colour =alpha("white",0)),
-        title = element_text(size=25, colour=col_text),
-        panel.background = element_rect(fill =alpha("white",0), colour = NA),
-        plot.background = element_rect(fill = alpha("white",0), colour = NA))+
-  ylim(-30,30) + xlim(-600,400)+
-  annotate("pointrange",x=-588,y=15,ymin=15,ymax=15,shape=21,size=1,col="#70C1B3",fill="#97D1C7",
-           alpha=0.4)+
-  annotate("text",x=-550,y=15,label = "Matched Obs", size=5, colour=col_text,hjust = 0,family=font_fsc)+
-  annotate("rect",xmin=-600,xmax=-580,ymin=10,ymax=11.5,col="dark gray",fill="#73ABC2",alpha=0.3)+
-  annotate("text",x=-550,y=10.5,label = "Loc. Poly. 95% CI", size=5, colour=col_text,hjust = 0,family=font_fsc) +
-  annotate("rect",xmin=-600,xmax=-580,ymin=5.2,ymax=6.8,col="dark gray",fill="light grey",alpha=0.5)+
-  annotate("text",x=-550,y=6,label = "Template region", size=5, colour=col_text,hjust = 0,family=font_fsc)
-
-fig <- ggplotly(g)
-
-fig <- fig %>% layout(plot_bgcolor="rgba(0, 0, 0, 0)",
-         paper_bgcolor="rgba(0, 0, 0, 0)")
-
-g
+fig
 
 ```
 ]

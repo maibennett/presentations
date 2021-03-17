@@ -392,7 +392,7 @@ ggplot(d, aes(x = Year, y = Pub), fill="white") +
 ]
 --
 .pull-right[
-.
+<br>
 .box-5[Simulations:<br/>Different DGP scenarios]
 <br>
 .box-5[Application:<br/>School segregation & vouchers]
@@ -838,7 +838,7 @@ Application
 # [Pre] parallel trends
 
 .pull-left[
-<img src="https://raw.githubusercontent.com/maibennett/presentations/main/content/presentations/DD/aefp_20210319images/pta_all.svg" alt="diagram" width="800"/>
+<img src="https://raw.githubusercontent.com/maibennett/presentations/main/content/presentations/DD/aefp_20210319/images/pta_all.svg" alt="diagram" width="800"/>
 ]
 .pull-right[
 <img src="https://raw.githubusercontent.com/maibennett/presentations/main/content/presentations/DD/aefp_20210319/images/pta_match.svg" alt="diagram" width="800"/>

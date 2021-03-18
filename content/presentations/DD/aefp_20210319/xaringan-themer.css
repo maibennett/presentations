@@ -399,6 +399,39 @@ table.dataTable.hover tbody tr:hover, table.dataTable.display tbody tr:hover {
   font-family: Fira Sans;
   border-radius: 15px;
 }
+.box-7n, .box-6n, .box-5n, .box-4n, .box-3n, .box-2n, .box-1n {
+  color: #FFFFFF;
+  margin: 0em auto;
+  overflow: hidden;
+  padding: 0.4em 0.4em;
+  font-weight: 600;
+  font-size: 31px;
+  display: table;
+  text-align: center;
+  font-family: Fira Sans;
+  border-radius: 15px;
+}
+.box-1n {
+  background-color: rgba(13, 8, 135,0.3);
+}
+.box-2n {
+  background-color: rgba(86, 1, 164,0.3);
+}
+.box-3n {
+  background-color: rgba(144, 13, 164,0.3);
+}
+.box-4n {
+  background-color: rgba(191, 57, 132,0.3);
+}
+.box-5n {
+  background-color: rgba(225, 100, 98,0.3);
+}
+.box-6n {
+  background-color: rgba(248, 148, 65,0.3);
+}
+.box-7n {
+  background-color: rgba(252, 206, 37,0.3);
+}
 .box-7a, .box-6a, .box-5a, .box-4a, .box-3a, .box-2a, .box-1a {
   color: #FFFFFF;
   left: 0px;

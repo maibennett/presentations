@@ -38,11 +38,6 @@ class: center, middle, inverse, title-slide
 &lt;img src="mbennett_did_files/figure-html/dd3-1.svg" style="display: block; margin: auto;" /&gt;
 
 ---
-# Very popular for policy evaluation
-
-&lt;img src="mbennett_did_files/figure-html/gg-1.svg" style="display: block; margin: auto;" /&gt;
-.source[Source: Google Scholar]
----
 
 # What about parallel trends?
 
@@ -124,7 +119,7 @@ $$
 .pull-left[
 - Under PTA, `\(g_1(t) = g_0(t) + h(t)\)`, where:
 
-  - `\(g_z(t) = E[Y^0_i(t) | Z=z, T=t]\)`
+  - `\(g_z(t) = E[Y_{it}(0) | Z=z, T=t]\)`
   - `\(h(t) = \alpha\)`
   
 - Bias in a DD setting depends on the structure of `\(h(t)\)`.
@@ -195,6 +190,27 @@ Simulations
 .box-7[S6: Evolution diverges in post]
 ]
 .source[Following Zeldow &amp; Hatfield (2019)]
+
+
+---
+
+# Different scenarios
+
+.small[
+.box-1n[S1: Time-invariant covariate effect]
+
+.box-2n[S2: Time-varying covariate effect]
+
+.box-3n[S3: Treatment-independent covariate]
+
+.box-4[S4: Parallel evolution]
+
+.box-6[S5: Evolution differs by group]
+
+.box-7[S6: Evolution diverges in post]
+]
+.source[Following Zeldow &amp; Hatfield (2019)]
+
 
 ---
 #Parameters:

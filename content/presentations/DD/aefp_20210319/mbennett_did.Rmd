@@ -110,6 +110,25 @@ style_mono_accent(
                                                                     "text-align" = "center",
                                                                     "font-family" = "Fira Sans",
                                                                     "border-radius" = "15px"),
+   ".box-7n, .box-6n, .box-5n, .box-4n, .box-3n, .box-2n, .box-1n" = list("color" = "#FFFFFF",
+                                                                    "margin" = "0em auto",
+                                                                    "overflow" = "hidden",
+                                                                    "padding" = "0.4em 0.4em",
+                                                                    "font-weight" = "600",
+                                                                    "font-size" = "31px",
+                                                                    "display" = "table",
+                                                                    "text-align" = "center",
+                                                                    "font-family" = "Fira Sans",
+                                                                    "border-radius" = "15px"),
+      ".box-1n" = list("background-color" = "rgba(13, 8, 135,0.3)"),
+    ".box-2n" = list("background-color" = "rgba(86, 1, 164,0.3)"),
+    ".box-3n" = list("background-color" = "rgba(144, 13, 164,0.3)"),
+    ".box-4n" = list("background-color" = "rgba(191, 57, 132,0.3)"),
+    ".box-5n" = list("background-color" = "rgba(225, 100, 98,0.3)"),
+    ".box-6n" = list("background-color" = "rgba(248, 148, 65,0.3)"),
+    ".box-7n" = list("background-color" = "rgba(252, 206, 37,0.3)"),
+   
+   
     ".box-7a, .box-6a, .box-5a, .box-4a, .box-3a, .box-2a, .box-1a" = list("color" = "#FFFFFF",
                                                                           "left" = "0px",
                                                                           "overflow" = "hidden",
@@ -309,59 +328,6 @@ ggplot(d, aes(x = t, y = Y, group=factor(Z), color=factor(Z)), fill="white") +
 ```
 
 ---
-# Very popular for policy evaluation
-
-```{r gg, fig.height=5, fig.align='center', dev='svg', echo=FALSE, warning=FALSE}
-#Data for publications
-d = data.frame(cbind(as.numeric(seq(2020,2000,-1)),c(2143,
-	1826,
-	1406,
-	1165,
-	923,
-	700,
-	599,
-	485,
-	379,
-	301,
-	224,
-	174,
-	147,
-	96,
-	74,
-	57,
-	44,
-	26,
-	10,
-	17,
-	10)))
-names(d) = c("Year","Pub")
-
-ggplot(d, aes(x = Year, y = Pub), fill="white") +
-  geom_line(lwd=1.1, color = "#900DA4") +
-  geom_point(size=3, color = "#900DA4") +
-  theme_bw()+
-  theme_ipsum_fsc(plot_title_face = "bold") + #plain 
-  xlab("Year") + ylab("Num. Publications")+
-  xlim(2000,2020) +
-  
-  theme(plot.margin=unit(c(1,1,1.5,1.2),"cm"),
-        panel.grid.major.x = element_blank(),
-        panel.grid.minor.x = element_blank(),
-        panel.grid.major.y = element_blank(),
-        panel.grid.minor.y = element_blank(),
-        axis.line = element_line(colour = "dark grey"))+
-  theme(axis.title.x = element_text(size=16),#margin = margin(t = 10, r = 0, b = 0, l = 0)),
-        axis.text.x = element_text(size=10),
-        axis.title.y = element_text(size=16),#margin = margin(t = 0, r = 10, b = 0, l = 0)),
-        axis.text.y = element_text(size=10),legend.position="none",
-        legend.title = element_blank(),
-        legend.text = element_text(size=15),
-        legend.background = element_rect(fill="white",colour ="white"),
-        title = element_text(size=14))
-
-```
-.source[Source: Google Scholar]
----
 
 # What about parallel trends?
 
@@ -443,7 +409,7 @@ $$
 .pull-left[
 - Under PTA, $g_1(t) = g_0(t) + h(t)$, where:
 
-  - $g_z(t) = E[Y^0_i(t) | Z=z, T=t]$
+  - $g_z(t) = E[Y_{it}(0) | Z=z, T=t]$
   - $h(t) = \alpha$
   
 - Bias in a DD setting depends on the structure of $h(t)$.
@@ -612,6 +578,27 @@ Simulations
 .box-7[S6: Evolution diverges in post]
 ]
 .source[Following Zeldow & Hatfield (2019)]
+
+
+---
+
+# Different scenarios
+
+.small[
+.box-1n[S1: Time-invariant covariate effect]
+
+.box-2n[S2: Time-varying covariate effect]
+
+.box-3n[S3: Treatment-independent covariate]
+
+.box-4[S4: Parallel evolution]
+
+.box-6[S5: Evolution differs by group]
+
+.box-7[S6: Evolution diverges in post]
+]
+.source[Following Zeldow & Hatfield (2019)]
+
 
 ---
 #Parameters:

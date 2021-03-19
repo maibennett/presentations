@@ -162,21 +162,6 @@ style_mono_accent(
 #FCCE25
 ```
 
-```{r setup2, echo=FALSE, message=FALSE, warning = FALSE}
-library(knitr)
-library(showtext)
-library(xaringanExtra)
-
-xaringanExtra::use_scribble()
-
-```
-
-```{r fonts, message=FALSE, echo=FALSE, warning = FALSE}
-font_add_google("Fira Sans Condensed", "Fira Sans Condensed")
-font_add_google("Fira Sans", "Fira Sans")
-font_add_google("Jost", "Jost")
-```
-
 # Diff-in-Diff as an identification strategy
 
 ```{r dd, fig.height=5, fig.align='center', dev='svg', echo=FALSE, warning=FALSE}

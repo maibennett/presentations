@@ -805,7 +805,6 @@ Additional Slides
 ---
 # Results: Time-invariant covariates
 
-
 ```{r res1, fig.width=9, fig.height=5.5, fig.align='center', dev='svg', echo=FALSE, warning=FALSE, message=FALSE}
 
 ggplot(d[d$var=="Constant",], aes(x = factor(adj, levels=unique(d$adj)), y = bias), fill="white") +

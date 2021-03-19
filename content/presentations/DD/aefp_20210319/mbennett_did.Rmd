@@ -803,32 +803,10 @@ Additional Slides
 ]
 
 ---
-## Results: Time-invariant covariates
+# Results: Time-invariant covariates
 
 
-```{r res1, fig.width=9, fig.height=5.5, fig.align='center', dev='svg', echo=FALSE, warning=FALSE}
-d = read.csv("https://raw.githubusercontent.com/maibennett/presentations/main/content/presentations/DD/aefp_20210319/sim_ppt.csv")
-
-attach(d)
-
-d = data.frame(cbind(c(s1,s2,s3,s4,s5,s5alt,s6),rep(c("Simple","CA","TVA","Match (level)",
-                                                      "Match (trend)","Match (cov PS)",
-                                                      "Match (cov MIP)",
-                                                      "Match (cov MIP all)"),7),
-                     c(rep("S1: Time-invariant_cov effect",8),
-                       rep("S2: Time-varying_cov effect",8),
-                       rep("S3: Treat-independent_cov effect",8),
-                       rep("S4: Parallel_evolution",8),
-                       rep("S5: Evolution diff._by group",8),
-                       rep("S5: Evolution diff._by group (adj)",8),
-                       rep("S6: Evolution diff._in post",8)),
-                     c(rep("Constant",24),rep("Varying",32))))
-names(d) = c("bias","adj","type","var")
-
-d$bias = as.numeric(d$bias)
-d$type = factor(d$type,levels = unique(d$type))
-
-levels(d$type) <- gsub("_", "\n", levels(d$type)) 
+```{r res1, fig.width=9, fig.height=5.5, fig.align='center', dev='svg', echo=FALSE, warning=FALSE, message=FALSE}
 
 ggplot(d[d$var=="Constant",], aes(x = factor(adj, levels=unique(d$adj)), y = bias), fill="white") +
     geom_hline(yintercept = 0,lty=2,col="dark grey",lwd=1)+

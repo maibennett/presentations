@@ -1,7 +1,7 @@
 ---
 title: "A Difference-in-Differences Approach<br/>using Mixed-Integer Programming Matching"
 subtitle: "Magdalena Bennett<br/><span class='small'>McCombs School of Business, UT Austin<span>"
-author: "AEFP 46th Annual Conference<br/>Mar 18, 2021"
+author: "AEFP 46th Annual Conference<br/>Mar 19, 2021"
 output:
   xaringan::moon_reader:
     css: ["xaringan-themer.css", "style.css"]
@@ -336,7 +336,7 @@ ggplot(d, aes(x = t, y = Y, group=factor(Z), color=factor(Z)), fill="white") +
 ![:scale 80%](https://raw.githubusercontent.com/maibennett/website_github/master/exampleSite/content/images/data_comic.jpg)]]
 
 .pull-right[
-- Can matching work to solve this? 
+- Can matching help solve this? 
 
   - It's complicated (?) .small[(Zeldow & Hatfield, 2019;Lindner & McConnell, 2018; Daw & Hatfield, 2018 (x2); Ryan, 2018; Ryan et al., 2018)]
   
@@ -414,10 +414,6 @@ $$
   
 - Bias in a DD setting depends on the structure of $h(t)$.
 
-- Confounding in DD affect **.darkorange[trends]** and not **.darkorange[levels]**.
-
-- Contextual knowledge is important!
-  - Do groups come from different populations? 
 ]
 
 .pull-right[
@@ -538,21 +534,7 @@ g2 = ggplot(data = dm, aes(x = factor(t), y = y, fill=factor(z), color=factor(z)
 grid.arrange(g1,g2)
 ```
 ]
----
-# How do we match?
 
-- Match covariates or outcomes? Levels or trends?
-
-- Use of **.darkorange[MIP Matching]** .small[(Zubizarreta, 2015; Bennett, Zubizarreta, & Vielma, 2020)]:
-  
-  - Balance covariates directly
-  
-  - Yield largest matched sample under balancing constraints
-  
-  - Use of template matching to match multiple groups
-  
-  - Works with large samples
-  
 ---
 background-position: 50% 50%
 class: left, bottom, inverse
@@ -617,10 +599,27 @@ Number of simulations | 1,000
 
 - Estimate compared to sample ATT (_different for matching_)
 - When matching with post-treat covariates $\rightarrow$ compared with direct effect $\tau$
----
-#Results: Time-constant covariates
 
-```{r res1, fig.width=9, fig.height=5.5, fig.align='center', dev='svg', echo=FALSE, warning=FALSE}
+---
+# Summary of results
+
+.pull-left[
+- For **.darkorange[time-invariant covariates]**, matching actually **.darkorange[helps]**.
+
+
+- For **.darkorange[time-varying covariates]**, matching on pre-intervention covariates can improve estimation **.darkorange[unless they diverge post]**.
+
+  - Can try to **.darkorange[bind effects]**.
+  
+  
+- **.darkorange[Autocorrelation]** for time-varying covariates also plays an important role:
+
+  - If they come from different distributions, **.darkorange[high-autocorrelation is better]**.
+
+]
+
+.pull-right[
+```{r res2b, fig.width=6, fig.height=6, fig.align='center', dev='svg', echo=FALSE, warning=FALSE}
 d = read.csv("https://raw.githubusercontent.com/maibennett/presentations/main/content/presentations/DD/aefp_20210319/sim_ppt.csv")
 
 attach(d)
@@ -644,41 +643,6 @@ d$type = factor(d$type,levels = unique(d$type))
 
 levels(d$type) <- gsub("_", "\n", levels(d$type)) 
 
-ggplot(d[d$var=="Constant",], aes(x = factor(adj, levels=unique(d$adj)), y = bias), fill="white") +
-    geom_hline(yintercept = 0,lty=2,col="dark grey",lwd=1)+
-  geom_point(size=3)+
-  geom_segment(aes(x = factor(adj, levels=unique(d$adj)), y = 0, 
-                   xend = factor(adj, levels=unique(d$adj)), yend = bias), 
-               lty=1,lwd=1,col="#E16462") +
-  scale_color_manual(values=c("#F89441","#E16462")) +
-  
-  theme_bw()+
-  theme_ipsum_fsc(plot_title_face = "bold") + #plain 
-  xlab("") + ylab("% Bias")+
-  theme(plot.margin=unit(c(1,1,1.5,1.2),"cm"),
-        panel.grid.major.x = element_blank(),
-        panel.grid.minor.x = element_blank(),
-        panel.grid.major.y = element_blank(),
-        panel.grid.minor.y = element_blank(),
-        axis.line = element_line(colour = "dark grey"))+
-  theme(axis.title.x = element_text(size=16),#margin = margin(t = 10, r = 0, b = 0, l = 0)),
-        axis.text.x = element_text(size=10,angle = 45,hjust=1,vjust=1,margin=margin(0.1,0,0,0)),
-        axis.title.y = element_text(size=16),#margin = margin(t = 0, r = 10, b = 0, l = 0)),
-        axis.text.y = element_text(size=10),legend.position="none",
-        legend.title = element_blank(),
-        legend.text = element_text(size=15),
-        legend.background = element_rect(fill="white",colour ="white"),
-        title = element_text(size=14),
-        strip.text = element_text(family="Fira Sans Condensed")) + ylim(-0.5,1) +
-  facet_grid(cols=vars(type))
-
-```
-
-
----
-# Results: Time-varying covariates
-
-```{r res2, fig.width=9, fig.height=5.5, fig.align='center', dev='svg', echo=FALSE, warning=FALSE}
 ggplot(d[d$var=="Varying" & d$type!="S5: Evolution diff.\nby group",], 
        aes(x = factor(adj, levels=unique(d$adj)), y = bias), fill="white") +
     geom_hline(yintercept = 0,lty=2,col="dark grey",lwd=1)+
@@ -690,7 +654,7 @@ ggplot(d[d$var=="Varying" & d$type!="S5: Evolution diff.\nby group",],
   
   theme_bw()+
   theme_ipsum_fsc(plot_title_face = "bold") + #plain 
-  xlab("") + ylab("% Bias")+
+  xlab("") + ylab("% Bias")+ggtitle("Time-varying covariates") +
   theme(plot.margin=unit(c(1,1,1.5,1.2),"cm"),
         panel.grid.major.x = element_blank(),
         panel.grid.minor.x = element_blank(),
@@ -711,56 +675,7 @@ ggplot(d[d$var=="Varying" & d$type!="S5: Evolution diff.\nby group",],
                                                             "Evolution differs by group"]))))
 
 ```
----
-# Other simulations
-
-- Test **.darkorange[regression to the mean]** under no effect:
-
-  - Vary autocorrelation of $X_i(t)$ (low vs. high)
-  - $X_0(t)$ and $X_1(t)$ come from the same or different distributions.
-
-```{r res3, fig.width=9, fig.height=4.5, fig.align='center', dev='svg', echo=FALSE, warning=FALSE}
-
-#different-high/different-low - same-high/same-low
-results = c(0.039/1.067,0.192/1.063,0.028/1.013,0.10/1.015)
-
-d = data.frame(cbind(results,c("Different dist.","Different dist.",
-                               "Same dist.","Same dist."),c("High corr","Low corr",
-                                                            "High corr","Low corr")))
-names(d) = c("bias","dist","corr")
-d$bias = as.numeric(d$bias)
-
-ggplot(d, aes(x = factor(corr, levels=unique(d$corr)), y = bias), fill="white") +
-    geom_hline(yintercept = 0,lty=2,col="dark grey",lwd=1)+
-  geom_point(size=3)+
-  geom_segment(aes(x = factor(corr, levels=unique(d$corr)), y = 0, 
-                   xend = factor(corr, levels=unique(d$corr)), yend = bias), 
-               lty=1,lwd=1,col="#E16462") +
-  scale_color_manual(values=c("#F89441","#E16462")) +
-  
-  theme_bw()+
-  theme_ipsum_fsc(plot_title_face = "bold") + #plain 
-  xlab("") + ylab("% Bias")+
-  theme(plot.margin=unit(c(1,1,1.5,1.2),"cm"),
-        panel.grid.major.x = element_blank(),
-        panel.grid.minor.x = element_blank(),
-        panel.grid.major.y = element_blank(),
-        panel.grid.minor.y = element_blank(),
-        axis.line = element_line(colour = "dark grey"))+
-  theme(axis.title.x = element_text(size=16, family="Fira Sans Condensed"),
-        #margin = margin(t = 10, r = 0, b = 0, l = 0)),
-        axis.text.x = element_text(size=10,angle = 45,hjust=1,vjust=1,margin=margin(0.1,0,0,0)),
-        axis.title.y = element_text(size=16),#margin = margin(t = 0, r = 10, b = 0, l = 0)),
-        axis.text.y = element_text(size=10),legend.position="none",
-        legend.title = element_blank(),
-        legend.text = element_text(size=15),
-        legend.background = element_rect(fill="white",colour ="white"),
-        title = element_text(size=14, family="Fira Sans Condensed"),
-        strip.text = element_text(family="Fira Sans Condensed")) + ylim(-0.5,0.5) +
-  facet_grid(cols=vars(factor(dist,levels = unique(d$dist))))
-
-```
-
+]
 
 ---
 background-position: 50% 50%
@@ -774,6 +689,7 @@ Application
 - Universal **.darkorange[flat voucher]** scheme $\stackrel{\mathbf{2008}}{\mathbf{\longrightarrow}}$ Universal + **.darkorange[preferential voucher]** scheme
 
 - Preferential voucher scheme:
+
   - Targeted to bottom 40% of vulnerable students
 
   - Additional 50% of voucher per student
@@ -861,10 +777,9 @@ Let's wrap it up
 
 - **.darkorange[Serial correlation]** also plays an important role: Don't match on random noise.
 
-- Adopt **.darkorange[flexibility]** when estimating effects (event study)
 .center[
-.box-7a[Match well and match smart!]
-]]
+.box-7a[Match well and match smart!]]
+]
 .pull-right[
 ![](https://media.giphy.com/media/drwxYI2fxqQGqRZ9Pe/giphy.gif)
 ]
@@ -879,4 +794,158 @@ A Difference-in-Differences Approach<br/>using Mixed-Integer Programming Matchin
 <br/>
 <br/>
 <span> www.magdalenabennett.com <span>
+
+---
+background-position: 50% 50%
+class: center, middle
+.notsobig[
+Additional Slides
+]
+
+---
+## Results: Time-invariant covariates
+
+
+```{r res1, fig.width=9, fig.height=5.5, fig.align='center', dev='svg', echo=FALSE, warning=FALSE}
+d = read.csv("https://raw.githubusercontent.com/maibennett/presentations/main/content/presentations/DD/aefp_20210319/sim_ppt.csv")
+
+attach(d)
+
+d = data.frame(cbind(c(s1,s2,s3,s4,s5,s5alt,s6),rep(c("Simple","CA","TVA","Match (level)",
+                                                      "Match (trend)","Match (cov PS)",
+                                                      "Match (cov MIP)",
+                                                      "Match (cov MIP all)"),7),
+                     c(rep("S1: Time-invariant_cov effect",8),
+                       rep("S2: Time-varying_cov effect",8),
+                       rep("S3: Treat-independent_cov effect",8),
+                       rep("S4: Parallel_evolution",8),
+                       rep("S5: Evolution diff._by group",8),
+                       rep("S5: Evolution diff._by group (adj)",8),
+                       rep("S6: Evolution diff._in post",8)),
+                     c(rep("Constant",24),rep("Varying",32))))
+names(d) = c("bias","adj","type","var")
+
+d$bias = as.numeric(d$bias)
+d$type = factor(d$type,levels = unique(d$type))
+
+levels(d$type) <- gsub("_", "\n", levels(d$type)) 
+
+ggplot(d[d$var=="Constant",], aes(x = factor(adj, levels=unique(d$adj)), y = bias), fill="white") +
+    geom_hline(yintercept = 0,lty=2,col="dark grey",lwd=1)+
+  geom_point(size=3)+
+  geom_segment(aes(x = factor(adj, levels=unique(d$adj)), y = 0, 
+                   xend = factor(adj, levels=unique(d$adj)), yend = bias), 
+               lty=1,lwd=1,col="#E16462") +
+  scale_color_manual(values=c("#F89441","#E16462")) +
+  
+  theme_bw()+
+  theme_ipsum_fsc(plot_title_face = "bold") + #plain 
+  xlab("") + ylab("% Bias")+
+  theme(plot.margin=unit(c(1,1,1.5,1.2),"cm"),
+        panel.grid.major.x = element_blank(),
+        panel.grid.minor.x = element_blank(),
+        panel.grid.major.y = element_blank(),
+        panel.grid.minor.y = element_blank(),
+        axis.line = element_line(colour = "dark grey"))+
+  theme(axis.title.x = element_text(size=16),#margin = margin(t = 10, r = 0, b = 0, l = 0)),
+        axis.text.x = element_text(size=10,angle = 45,hjust=1,vjust=1,margin=margin(0.1,0,0,0)),
+        axis.title.y = element_text(size=16),#margin = margin(t = 0, r = 10, b = 0, l = 0)),
+        axis.text.y = element_text(size=10),legend.position="none",
+        legend.title = element_blank(),
+        legend.text = element_text(size=15),
+        legend.background = element_rect(fill="white",colour ="white"),
+        title = element_text(size=14),
+        strip.text = element_text(family="Fira Sans Condensed")) + ylim(-0.5,1) +
+  facet_grid(cols=vars(type))
+
+```
+
+
+---
+# Results: Time-varying covariates
+
+
+```{r res2, fig.width=9, fig.height=5.5, fig.align='center', dev='svg', echo=FALSE, warning=FALSE}
+ggplot(d[d$var=="Varying" & d$type!="S5: Evolution diff.\nby group",], 
+       aes(x = factor(adj, levels=unique(d$adj)), y = bias), fill="white") +
+    geom_hline(yintercept = 0,lty=2,col="dark grey",lwd=1)+
+  geom_point(size=3)+
+  geom_segment(aes(x = factor(adj, levels=unique(d$adj)), y = 0, 
+                   xend = factor(adj, levels=unique(d$adj)), yend = bias), 
+               lty=1,lwd=1,col="#E16462") +
+  scale_color_manual(values=c("#F89441","#E16462")) +
+  
+  theme_bw()+
+  theme_ipsum_fsc(plot_title_face = "bold") + #plain 
+  xlab("") + ylab("% Bias")+
+  theme(plot.margin=unit(c(1,1,1.5,1.2),"cm"),
+        panel.grid.major.x = element_blank(),
+        panel.grid.minor.x = element_blank(),
+        panel.grid.major.y = element_blank(),
+        panel.grid.minor.y = element_blank(),
+        axis.line = element_line(colour = "dark grey"))+
+  theme(axis.title.x = element_text(size=16, family="Fira Sans Condensed"),
+        #margin = margin(t = 10, r = 0, b = 0, l = 0)),
+        axis.text.x = element_text(size=10,angle = 45,hjust=1,vjust=1,margin=margin(0.1,0,0,0)),
+        axis.title.y = element_text(size=16),#margin = margin(t = 0, r = 10, b = 0, l = 0)),
+        axis.text.y = element_text(size=10),legend.position="none",
+        legend.title = element_blank(),
+        legend.text = element_text(size=15),
+        legend.background = element_rect(fill="white",colour ="white"),
+        title = element_text(size=14, family="Fira Sans Condensed"),
+        strip.text = element_text(family="Fira Sans Condensed")) + ylim(-0.5,1) +
+  facet_grid(cols=vars(factor(type,levels = unique(d$type[d$var=="Varying" & d$type!=
+                                                            "Evolution differs by group"]))))
+
+```
+---
+# Other simulations
+
+- Test **.darkorange[regression to the mean]** under no effect:
+
+  - Vary autocorrelation of $X_i(t)$ (low vs. high)
+  - $X_0(t)$ and $X_1(t)$ come from the same or different distributions.
+
+```{r res3, fig.width=9, fig.height=4.5, fig.align='center', dev='svg', echo=FALSE, warning=FALSE}
+
+#different-high/different-low - same-high/same-low
+results = c(0.039/1.067,0.192/1.063,0.028/1.013,0.10/1.015)
+
+d = data.frame(cbind(results,c("Different dist.","Different dist.",
+                               "Same dist.","Same dist."),c("High corr","Low corr",
+                                                            "High corr","Low corr")))
+names(d) = c("bias","dist","corr")
+d$bias = as.numeric(d$bias)
+
+ggplot(d, aes(x = factor(corr, levels=unique(d$corr)), y = bias), fill="white") +
+    geom_hline(yintercept = 0,lty=2,col="dark grey",lwd=1)+
+  geom_point(size=3)+
+  geom_segment(aes(x = factor(corr, levels=unique(d$corr)), y = 0, 
+                   xend = factor(corr, levels=unique(d$corr)), yend = bias), 
+               lty=1,lwd=1,col="#E16462") +
+  scale_color_manual(values=c("#F89441","#E16462")) +
+  
+  theme_bw()+
+  theme_ipsum_fsc(plot_title_face = "bold") + #plain 
+  xlab("") + ylab("% Bias")+
+  theme(plot.margin=unit(c(1,1,1.5,1.2),"cm"),
+        panel.grid.major.x = element_blank(),
+        panel.grid.minor.x = element_blank(),
+        panel.grid.major.y = element_blank(),
+        panel.grid.minor.y = element_blank(),
+        axis.line = element_line(colour = "dark grey"))+
+  theme(axis.title.x = element_text(size=16, family="Fira Sans Condensed"),
+        #margin = margin(t = 10, r = 0, b = 0, l = 0)),
+        axis.text.x = element_text(size=10,angle = 45,hjust=1,vjust=1,margin=margin(0.1,0,0,0)),
+        axis.title.y = element_text(size=16),#margin = margin(t = 0, r = 10, b = 0, l = 0)),
+        axis.text.y = element_text(size=10),legend.position="none",
+        legend.title = element_blank(),
+        legend.text = element_text(size=15),
+        legend.background = element_rect(fill="white",colour ="white"),
+        title = element_text(size=14, family="Fira Sans Condensed"),
+        strip.text = element_text(family="Fira Sans Condensed")) + ylim(-0.5,0.5) +
+  facet_grid(cols=vars(factor(dist,levels = unique(d$dist))))
+
+```
+
 

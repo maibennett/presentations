@@ -3,7 +3,7 @@
   <head>
     <title>A Difference-in-Differences Approach using Mixed-Integer Programming Matching</title>
     <meta charset="utf-8" />
-    <meta name="author" content="AEFP 46th Annual Conference Mar 18, 2021" />
+    <meta name="author" content="AEFP 46th Annual Conference Mar 19, 2021" />
     <script src="libs/header-attrs/header-attrs.js"></script>
     <script src="https://use.fontawesome.com/5235085b15.js"></script>
     <link rel="stylesheet" href="xaringan-themer.css" type="text/css" />
@@ -15,7 +15,7 @@ class: center, middle, inverse, title-slide
 
 # A Difference-in-Differences Approach<br/>using Mixed-Integer Programming Matching
 ## Magdalena Bennett<br/><span class='small'>McCombs School of Business, UT Austin<span>
-### AEFP 46th Annual Conference<br/>Mar 18, 2021
+### AEFP 46th Annual Conference<br/>Mar 19, 2021
 
 ---
 
@@ -46,7 +46,7 @@ class: center, middle, inverse, title-slide
 ![:scale 80%](https://raw.githubusercontent.com/maibennett/website_github/master/exampleSite/content/images/data_comic.jpg)]]
 
 .pull-right[
-- Can matching work to solve this? 
+- Can matching help solve this? 
 
   - It's complicated (?) .small[(Zeldow &amp; Hatfield, 2019;Lindner &amp; McConnell, 2018; Daw &amp; Hatfield, 2018 (x2); Ryan, 2018; Ryan et al., 2018)]
   
@@ -124,10 +124,6 @@ $$
   
 - Bias in a DD setting depends on the structure of `\(h(t)\)`.
 
-- Confounding in DD affect **.darkorange[trends]** and not **.darkorange[levels]**.
-
-- Contextual knowledge is important!
-  - Do groups come from different populations? 
 ]
 
 .pull-right[
@@ -150,21 +146,7 @@ $$
 .pull-right[
 &lt;img src="mbennett_did_files/figure-html/reg_to_the_mean-1.svg" style="display: block; margin: auto;" /&gt;
 ]
----
-# How do we match?
 
-- Match covariates or outcomes? Levels or trends?
-
-- Use of **.darkorange[MIP Matching]** .small[(Zubizarreta, 2015; Bennett, Zubizarreta, &amp; Vielma, 2020)]:
-  
-  - Balance covariates directly
-  
-  - Yield largest matched sample under balancing constraints
-  
-  - Use of template matching to match multiple groups
-  
-  - Works with large samples
-  
 ---
 background-position: 50% 50%
 class: left, bottom, inverse
@@ -229,26 +211,28 @@ Number of simulations | 1,000
 
 - Estimate compared to sample ATT (_different for matching_)
 - When matching with post-treat covariates `\(\rightarrow\)` compared with direct effect `\(\tau\)`
----
-#Results: Time-constant covariates
-
-&lt;img src="mbennett_did_files/figure-html/res1-1.svg" style="display: block; margin: auto;" /&gt;
-
 
 ---
-# Results: Time-varying covariates
+# Summary of results
 
-&lt;img src="mbennett_did_files/figure-html/res2-1.svg" style="display: block; margin: auto;" /&gt;
----
-# Other simulations
+.pull-left[
+- For **.darkorange[time-invariant covariates]**, matching actually **.darkorange[helps]**.
 
-- Test **.darkorange[regression to the mean]** under no effect:
 
-  - Vary autocorrelation of `\(X_i(t)\)` (low vs. high)
-  - `\(X_0(t)\)` and `\(X_1(t)\)` come from the same or different distributions.
+- For **.darkorange[time-varying covariates]**, matching on pre-intervention covariates can improve estimation **.darkorange[unless they diverge post]**.
 
-&lt;img src="mbennett_did_files/figure-html/res3-1.svg" style="display: block; margin: auto;" /&gt;
+  - Can try to **.darkorange[bind effects]**.
+  
+  
+- **.darkorange[Autocorrelation]** for time-varying covariates also plays an important role:
 
+  - If they come from different distributions, **.darkorange[high-autocorrelation is better]**.
+
+]
+
+.pull-right[
+&lt;img src="mbennett_did_files/figure-html/res2b-1.svg" style="display: block; margin: auto;" /&gt;
+]
 
 ---
 background-position: 50% 50%
@@ -262,6 +246,7 @@ Application
 - Universal **.darkorange[flat voucher]** scheme `\(\stackrel{\mathbf{2008}}{\mathbf{\longrightarrow}}\)` Universal + **.darkorange[preferential voucher]** scheme
 
 - Preferential voucher scheme:
+
   - Targeted to bottom 40% of vulnerable students
 
   - Additional 50% of voucher per student
@@ -349,10 +334,9 @@ Let's wrap it up
 
 - **.darkorange[Serial correlation]** also plays an important role: Don't match on random noise.
 
-- Adopt **.darkorange[flexibility]** when estimating effects (event study)
 .center[
-.box-7a[Match well and match smart!]
-]]
+.box-7a[Match well and match smart!]]
+]
 .pull-right[
 ![](https://media.giphy.com/media/drwxYI2fxqQGqRZ9Pe/giphy.gif)
 ]
@@ -367,6 +351,43 @@ A Difference-in-Differences Approach&lt;br/&gt;using Mixed-Integer Programming M
 &lt;br/&gt;
 &lt;br/&gt;
 &lt;span&gt; www.magdalenabennett.com &lt;span&gt;
+
+---
+background-position: 50% 50%
+class: center, middle
+.notsobig[
+Additional Slides
+]
+
+---
+## Results: Time-invariant covariates
+
+
+
+```
+## The following objects are masked from d (pos = 3):
+## 
+##     s1, s2, s3, s4, s5, s5alt, s6, X
+```
+
+&lt;img src="mbennett_did_files/figure-html/res1-1.svg" style="display: block; margin: auto;" /&gt;
+
+
+---
+# Results: Time-varying covariates
+
+
+&lt;img src="mbennett_did_files/figure-html/res2-1.svg" style="display: block; margin: auto;" /&gt;
+---
+# Other simulations
+
+- Test **.darkorange[regression to the mean]** under no effect:
+
+  - Vary autocorrelation of `\(X_i(t)\)` (low vs. high)
+  - `\(X_0(t)\)` and `\(X_1(t)\)` come from the same or different distributions.
+
+&lt;img src="mbennett_did_files/figure-html/res3-1.svg" style="display: block; margin: auto;" /&gt;
+
 
     </textarea>
 <style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>

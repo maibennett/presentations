@@ -1,0 +1,2693 @@
+---
+title: "How far is too far? <br/>Generalization of a regression discontinuity design away from the cutoff"
+subtitle: "Magdalena Bennett"
+author: "International Methods Colloquium<br/>Mar 12, 2021"
+output:
+  xaringan::moon_reader:
+    css: ["xaringan-themer.css", "style.css"]
+    lib_dir: libs
+    nature:
+      slideNumberFormat: |
+        <div class="progress-bar-container">
+          <div class="progress-bar" style="width: calc(%current% / %total% * 100%);">
+          </div>
+        </div>
+      highlightStyle: github
+      highlightLines: true
+      ratio: "16:9"
+      beforeInit: "macros.js"
+    includes:
+      in_header: header.html
+---
+
+```{r setup, include=FALSE}
+options(htmltools.dir.version = FALSE)
+knitr::opts_chunk$set(fig.showtext = TRUE)
+```
+
+```{r xaringan-themer, include=FALSE, warning=FALSE}
+library(xaringanthemer)
+
+theme_xaringan(
+  text_color = "#333f48",
+  background_color = "#FFFFFF",
+  accent_color = "#900DA4",
+  text_font = "Fira Mono",
+  text_font_use_google = TRUE,
+  title_font = "Fira Sans Condensed",
+  title_font_use_google = TRUE
+)
+
+style_mono_accent(
+  #base_color = "#bf5700",
+  extra_fonts = list(google_font("Fira Sans","200","300","400","500","600"),
+                     google_font("Fira Sans Condensed"),
+                     google_font("Jost")),
+  base_color = "#333f48",
+  header_font_google = google_font("Yanone Kaffeesatz","200","300","400","500","600","700"),
+  text_font_google   = google_font("Jost"),
+  code_font_google   = google_font("Fira Mono"),
+  text_bold_color = "#333f48",
+  text_font_size = "130%",
+  colors = c(
+    red = "#f34213",
+    purple = "#900DA4",
+    orange = "#ff8811",
+    green = "#136f63",
+    white = "#FFFFFF"),
+  extra_css = list(
+    ".body" = list("font-family" = "Jost"),
+    ".remark-slide table" = list("display" = "table",
+                   "width" = "80%",
+                   "text-align" = "left"),
+    
+    #".remark-slide-number" = list("display" = "none"),
+    
+    ".strong" = list("font-weight" = "400"),
+    ".big" = list("font-size" = "250%",
+                     "font-family" = "Yanone Kaffeesatz",
+                     "font-weight"="400"),
+    ".small" = list("font-size" = "80%"),
+    ".tiny" = list("font-size" = "50%"),
+    ".tinylist" = list("font-size" = "62.5%"),
+    ".source" = list("color" = "#8c8c8c",
+                     "font-size" = "80%"),
+    ".remark-slide table td#highlight" = list("background-color" = "#eee1f0",
+                                  "color" = "#900DA4",
+                                  "font-weight" = "500"),
+   # ".remark-slide table thead th" = list(),
+    ".title-slide h1" = list("font-weight" = "500"),
+    ".title-slide h2" = list("font-weight" = "400",
+                             "font-size" =  "170%"),
+    ".title-slide h3" = list("font-family" = "Jost",
+                             "font-size" = "100%",
+                             "font-weight" = "200"),
+    ".center2" = list("margin" = "0",
+                      "position" = "absolute",
+                      "top" = "50%",
+                      "left" = "50%",
+                      "-ms-transform" = "translate(-50%, -50%)",
+                      "transform" = "translate(-50%, -50%)"),
+    ".section-title h1" = list("color" = "#FFFFFF",
+                               "font-size" = "2.3em",
+                               "line-height" = "1.3"),
+    ".medium" = list("font-size" = "1.4em"),
+    ".sp-after-half" = list("margin-bottom" = "0.7em !important"),
+    ".box-1,.box-1a,.box-1b,.section-title-1" = list("background-color" = "#0D0887"),
+    ".box-2,.box-2a,.box-2b,.section-title-2" = list("background-color" = "#5601A4"),
+    ".box-3,.box-3a,.box-3b,.section-title-3" = list("background-color" = "#900DA4"),
+    ".box-4,.box-4a,.box-4b,.section-title-4" = list("background-color" = "#BF3984"),
+    ".box-5,.box-5a,.box-5b,.section-title-5" = list("background-color" = "#E16462"),
+    ".box-6,.box-6a,.box-6b,.section-title-6" = list("background-color" = "#F89441"),
+    ".box-7,.box-7a,.box-7b,.section-title-7" = list("background-color" = "#FCCE25"),
+    ".box-7, .box-6, .box-5, .box-4, .box-3, .box-2, .box-1" = list("color" = "#FFFFFF",
+                                                                    "margin" = "0em auto",
+                                                                    "overflow" = "hidden",
+                                                                    "padding" = "0.4em 0.4em",
+                                                                    "font-weight" = "600",
+                                                                    "font-size" = "31px",
+                                                                    "display" = "table",
+                                                                    "text-align" = "center",
+                                                                    "font-family" = "Jost"),
+    ".box-7a, .box-6a, .box-5a, .box-4a, .box-3a, .box-2a, .box-1a" = list("color" = "#FFFFFF",
+                                                                          "left" = "0px",
+                                                                          "overflow" = "hidden",
+                                                                      "padding" = "0.4em 0.4em",
+                                                                      "font-weight" = "600",
+                                                                      "font-size" = "25px",
+                                                                      "display" = "table",
+                                                                      "text-align" = "center",
+                                                                      "font-family" = "Fira Sans"),
+       ".box-7b, .box-6b, .box-5b, .box-4b, .box-3b, .box-2b, .box-1b" = list("color" = "#FFFFFF",
+                                                                          "left" = "0px",
+                                                                          "overflow" = "hidden",
+                                                                      "padding" = "0.4em 0.4em",
+                                                                      "font-weight" = "600",
+                                                                      "font-size" = "25px",
+                                                                      "display" = "table",
+                                                                      "text-align" = "left",
+                                                                      "font-family" = "Fira Sans"),
+       ".medium" = list("font-size" = "1.4em"),
+    ".sp-after-half" = list("margin-bottom" = "0.7em !important"),
+    ".box-0" = list("background-color" = "#E16462",
+                    "border-radius" = "15px",
+                    "font-size" = "110%",
+                    "color" = "#FFFFFF",
+                    "margin" = "0em auto",
+                    "overflow" = "hidden",
+                    "padding" = "0.4em 0.4em",
+                    "display" = "table"),
+    ".box-1,.box-1a,.box-1s,.box-1b,.box-1l,.box-1LA,.section-title-1" = list("background-color" = "#0D0887",
+                                                                              "border-radius" = "15px"),
+    ".box-2,.box-2a,.box-2s,.box-2b,.box-2l,.box-2LA,.section-title-2" = list("background-color" = "#5601A4",
+                                                                              "border-radius" = "15px"),
+    ".box-3,.box-3a,.box-3s,.box-3b,.box-3l,.box-3LA,.section-title-3" = list("background-color" = "#900DA4",
+                                                                              "border-radius" = "15px"),
+    ".box-4,.box-4a,.box-4s,.box-4b,.box-4l,.box-4LA,.section-title-4" = list("background-color" = "#BF3984",
+                                                                              "border-radius" = "15px"),
+    ".box-5,.box-5a,.box-5s,.box-5b,.box-5l,.box-5LA,.section-title-5" = list("background-color" = "#E16462",
+                                                                              "border-radius" = "15px"),
+    ".box-6,.box-6a,.box-6s,.box-6b,.box-6l,.box-6LA,.section-title-6" = list("background-color" = "#F89441",
+                                                                              "border-radius" = "15px"),
+    ".box-7,.box-7a,.box-7s,.box-7b,.box-7l,.box-7LA,.section-title-7" = list("background-color" = "#FCCE25",
+                                                                              "border-radius" = "15px"),
+   
+   ".box-1t,.box-1tL,.section-title-1t" = list("background-color" = "rgba(13, 8, 135,0.3)",
+                                      "color"="rgba(13, 8, 135,1)",
+                                      "font-family" = "Yanone Kaffeesatz",
+                                      "border-radius" = "15px"),
+    ".box-2t,.box-2tL,.section-title-2t" = list("background-color" = "rgba(86, 1, 164,0.3)",
+                                       "color" = "rgba(86, 1, 164,1)",
+                                       "font-family" = "Yanone Kaffeesatz",
+                                       "border-radius" = "15px"),
+    ".box-3t,.box-3tL,.section-title-3t" = list("background-color" = "rgba(144, 13, 164,0.3)",
+                                       "color" = "rgba(144, 13, 164,1)",
+                                       "font-family" = "Yanone Kaffeesatz",
+                                       "border-radius" = "15px"),
+    ".box-4t,.box-4tL,.section-title-4t" = list("background-color" = "rgba(191, 57, 132,0.3)",
+                                       "color" = "rgba(191, 57, 132,1)",
+                                       "font-family" = "Yanone Kaffeesatz",
+                                       "border-radius" = "15px"),
+    ".box-5t,.box-5tL,.section-title-5t" = list("background-color" = "rgba(225, 100, 98,0.3)",
+                                       "color" = "rgba(225, 100, 98,1)",
+                                       "font-family" = "Jost",
+                                       "border-radius" = "15px"),
+    ".box-6t,.box-6tL,.section-title-6t" = list("background-color" = "rgba(248, 148, 65,0.3)",
+                                       "color" = "rgba(248, 148, 65,1)",
+                                       "font-family" = "Yanone Kaffeesatz",
+                                       "border-radius" = "15px"),
+    ".box-7t,.box-7tL,.section-title-7t" = list("background-color" = "rgba(252, 206, 37,0.3)",
+                                       "color" = "rgba(252, 206, 37,1)",
+                                       "font-family" = "Yanone Kaffeesatz",
+                                       "border-radius" = "15px"),
+   
+   ".box-7t, .box-6t, .box-5t, .box-4t, .box-3t, .box-2t, .box-1t" = list("margin" = "0em auto",
+                                                                    "overflow" = "hidden",
+                                                                    "padding" = "0.4em 0.4em",
+                                                                    "font-weight" = "600",
+                                                                    "font-size" = "25px",
+                                                                    "display" = "table",
+                                                                    "text-align" = "center"),
+   
+   ".box-7tL, .box-6tL, .box-5tL, .box-4tL, .box-3tL, .box-2tL, .box-1tL" = list("margin" = "0em auto",
+                                                                    "overflow" = "hidden",
+                                                                    "padding" = "0.4em 0.4em",
+                                                                    "font-weight" = "600",
+                                                                    "font-size" = "50px",
+                                                                    "display" = "table",
+                                                                    "text-align" = "center"),
+   
+    ".box-7, .box-6, .box-5, .box-4, .box-3, .box-2, .box-1" = list("color" = "#FFFFFF",
+                                                                    "margin" = "0em auto",
+                                                                    "overflow" = "hidden",
+                                                                    "padding" = "0.4em 0.4em",
+                                                                    "font-weight" = "600",
+                                                                    "font-size" = "31px",
+                                                                    "display" = "table",
+                                                                    "text-align" = "center",
+                                                                    "font-family" = "Jost"),
+    ".box-7a, .box-6a, .box-5a, .box-4a, .box-3a, .box-2a, .box-1a" = list("color" = "#FFFFFF",
+                                                                          "left" = "0px",
+                                                                          "overflow" = "hidden",
+                                                                      "padding" = "0.4em 0.4em",
+                                                                      "font-weight" = "600",
+                                                                      "font-size" = "25px",
+                                                                      "display" = "table",
+                                                                      "text-align" = "center",
+                                                                      "font-family" = "Yanone Kaffeesatz"),
+   ".box-7s, .box-6s, .box-5s, .box-4s, .box-3s, .box-2s, .box-1s" = list("color" = "#FFFFFF",
+                                                                          "left" = "0px",
+                                                                          "overflow" = "hidden",
+                                                                      "padding" = "0.2em 0.2em",
+                                                                      "font-weight" = "400",
+                                                                      "font-size" = "100%",
+                                                                      "display" = "inline",
+                                                                      "text-align" = "center",
+                                                                      "font-family" = "Yanone Kaffeesatz"),
+       ".box-7b, .box-6b, .box-5b, .box-4b, .box-3b, .box-2b, .box-1b" = list("color" = "#FFFFFF",
+                                                                          "left" = "0px",
+                                                                          "overflow" = "hidden",
+                                                                      "padding" = "0.4em 0.4em",
+                                                                      "font-weight" = "600",
+                                                                      "font-size" = "25px",
+                                                                      "display" = "table",
+                                                                      "text-align" = "left",
+                                                                      "font-family" = "Yanone Kaffeesatz"),
+   ".box-7l, .box-6l, .box-5l, .box-4l, .box-3l, .box-2l, .box-1l" = list("color" = "#FFFFFF",
+                                                                    "margin" = "0em auto",
+                                                                    "overflow" = "hidden",
+                                                                    "padding" = "0.4em 0.4em",
+                                                                    "font-weight" = "600",
+                                                                    "font-size" = "45px",
+                                                                    "display" = "table",
+                                                                    "text-align" = "center",
+                                                                      "font-family" = "Yanone Kaffeesatz"),
+   ".box-7LA, .box-6LA, .box-5LA, .box-4LA, .box-3LA, .box-2LA, .box-1LA" = list("color" = "#FFFFFF",
+                                                                    "margin" = "0em auto",
+                                                                    "overflow" = "hidden",
+                                                                    "padding" = "0.4em 0.4em",
+                                                                    "font-weight" = "600",
+                                                                    "font-size" = "55px",
+                                                                    "display" = "table",
+                                                                    "text-align" = "center",
+                                                                      "font-family" = "Yanone Kaffeesatz"),
+   ".image-80 img" = list("scale" = "80%"),
+   ".pull-left-little_l" = list("float" = "left",
+                                "width" = "67%"),
+   ".pull-right-little_l" = list("float" = "right",
+                                "width" = "27%"),
+   ".pull-left-little_r" = list("float" = "left",
+                                "width" = "27%"),
+   ".pull-right-little_r" = list("float" = "right",
+                                "width" = "67%")
+
+  )
+)
+
+#,"li" = list("font-size" = "150%")
+#    "li" = list("font-size" = "110%"),
+#    "ul" = list("font-size" = "110%"),
+#color palette
+#5601A4
+#900DA4
+#F89441
+#FCCE25
+```
+
+```{r setup2, echo=FALSE, message=FALSE, warning = FALSE}
+library(knitr)
+library(showtext)
+library(xaringanExtra)
+
+#xaringanExtra::use_scribble()
+
+```
+
+```{r fonts, message=FALSE, echo=FALSE, warning = FALSE}
+font_add_google("Fira Sans Condensed", "Fira Sans Condensed")
+font_add_google("Fira Sans", "Fira Sans")
+font_add_google("Jost", "Jost")
+```
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
+library(tidyverse)
+library(ggthemes)
+library(ggplot2)
+library(firasans)
+library(hrbrthemes)
+library(extrafont)
+library(RColorBrewer)
+library(viridis)
+library(firasans)
+library(hrbrthemes)
+library(extrafont)
+library(gridExtra)
+library(pBrackets)
+library(patchwork)
+
+options(scipen = 0)
+```
+
+# Regression discontinuity design
+
+```{r rd_intro1, fig.height=5.25, fig.width=12, fig.align='center', dev='svg', echo = FALSE, warning = FALSE, message = FALSE}
+
+set.seed(110)
+
+n = 500
+
+r = rnorm(n, 10,7)
+
+treat = as.numeric(r>=10)
+
+error = rnorm(n,0,7)
+
+y = 2 - 1.5*(10-r) + 18*treat + 0.5*treat*(10-r) -  0.01*treat*(10-r)^2 + error
+
+d = data.frame("r" = r,
+               "treat" = treat,
+               "y" = y)
+
+ggplot(data = d, aes(x=r, y=y)) +
+  geom_point(size = 3, pch = 21, color = "dark grey", fill="white") +
+  geom_vline(aes(xintercept=10), lty = 2, color = "#333f48", lwd = 1.5) +
+  ggplot2::annotate("rect", color="white", fill="white", xmin = 7, xmax = 13, ymin=38, ymax = 48) +
+  ggplot2::annotate("text", label = "Cutoff", size = 10, hjust = 0.5, x = 10, y = 43, color = "#333f48",
+                    family = "Fira Sans Condensed")+
+  theme_bw() +
+  theme_ipsum_fsc()+
+  xlab("Running variable") + ylab("Outcome") + 
+  theme(plot.margin=unit(c(1,1,1.5,1.2),"cm"),
+        panel.grid.major.x = element_blank(),
+        panel.grid.minor.x = element_blank(),
+        panel.grid.major.y = element_line(colour = "light grey"),
+        panel.grid.minor.y = element_blank(),
+        axis.line = element_blank())+
+  theme(axis.title.x = element_text(size = 24, color = "#333f48"),#margin = margin(t = 10, r = 0, b = 0, l = 0)),
+        axis.text.x = element_blank(),
+        axis.title.y = element_text(size = 24, color = "#333f48"),#margin = margin(t = 0, r = 10, b = 0, l = 0)),
+        axis.text.y = element_blank(),legend.position="none",
+        legend.title = element_text(size=12),
+        legend.text = element_text(size=10),
+        legend.background = element_rect(fill="white",colour ="white"),
+        title = element_text(size=12))
+
+
+```
+
+<!--
+```{r rd_publications, fig.height=5.25, fig.width=12, fig.align='center', dev='svg', echo = FALSE, warning = FALSE, message = FALSE}
+pub <- read.csv("https://raw.githubusercontent.com/maibennett/presentations/main/content/presentations/RD/IC_20210312/data/regression_discontinuityv2.csv")
+
+names(pub) <- c("year","results")
+
+ggplot(data = pub, aes(x=year, y=results)) +
+  geom_point(size = 4, pch = 21, color = "#E16462", fill="#E16462") +
+  geom_line(color = "#E16462", lty = 2, lwd = 1.5) +
+  theme_bw() +
+  theme_ipsum_fsc()+
+  xlab("Year") + ylab("Number of publications") + 
+  labs(caption = "Note: Publications including 'Regression Discontinuity' in their title or abstract for research fields of Social Sciences.\nSource: Dimensions.ai") + 
+  theme(plot.margin=unit(c(1,1,1.5,1.2),"cm"),
+        panel.grid.major.x = element_blank(),
+        panel.grid.minor.x = element_blank(),
+        panel.grid.major.y = element_line(colour = "light grey"),
+        panel.grid.minor.y = element_blank(),
+        axis.line = element_blank())+
+  theme(axis.title.x = element_text(size = 24, color = "#333f48"),#margin = margin(t = 10, r = 0, b = 0, l = 0)),
+        axis.text.x = element_text(size = 14),
+        axis.title.y = element_text(size = 24, color = "#333f48"),#margin = margin(t = 0, r = 10, b = 0, l = 0)),
+        axis.text.y = element_text(size = 14),legend.position="none",
+        legend.title = element_text(size=12),
+        legend.text = element_text(size=10),
+        legend.background = element_rect(fill="white",colour ="white"),
+        title = element_text(size=28, color = "#333f48"))
+```
+-->
+
+---
+# Strong internal validity
+
+```{r rd_intro2, fig.height=5.25, fig.width=12, fig.align='center', dev='svg', echo = FALSE, warning = FALSE, message = FALSE}
+
+ggplot(data = d, aes(x=r, y=y)) +
+  geom_point(size = 3, pch = 21, color = alpha("dark grey",0.8), fill="white") +
+  geom_vline(aes(xintercept=10), lty = 2, color = "grey", lwd = 1.5) +
+  
+  geom_smooth(data = dplyr::filter(d, r<10), method = "gam", se = FALSE, color = "grey", lwd = 2) + 
+  geom_smooth(data = dplyr::filter(d, r>=10), method = "gam", se = FALSE, color = "grey", lwd = 2) + 
+  
+  ggplot2::annotate("rect", color="white", fill="white", xmin = 11, xmax = 14, ymin=11, ymax = 15) +
+  ggplot2::annotate("text", label = "LATE", size = 10, hjust = 0.5, x = 12.5, y =13, color = "#E16462",
+                    family = "Fira Sans Condensed")+
+  
+  ggplot2::annotate("segment",x = 10, xend = 10, y = 1.44, yend = 19.6, color = "#E16462", lwd = 2) +
+  
+  theme_bw() +
+  theme_ipsum_fsc()+
+  xlab("Running variable") + ylab("Outcome") + 
+  theme(plot.margin=unit(c(1,1,1.5,1.2),"cm"),
+        panel.grid.major.x = element_blank(),
+        panel.grid.minor.x = element_blank(),
+        panel.grid.major.y = element_line(colour = "light grey"),
+        panel.grid.minor.y = element_blank(),
+        axis.line = element_blank())+
+  theme(axis.title.x = element_text(size = 24, color = "#333f48"),#margin = margin(t = 10, r = 0, b = 0, l = 0)),
+        axis.text.x = element_blank(),
+        axis.title.y = element_text(size = 24, color = "#333f48"),#margin = margin(t = 0, r = 10, b = 0, l = 0)),
+        axis.text.y = element_blank(),legend.position="none",
+        legend.title = element_text(size=12),
+        legend.text = element_text(size=10),
+        legend.background = element_rect(fill="white",colour ="white"),
+        title = element_text(size=12))
+
+
+```
+
+---
+# ... But limited external validity
+
+```{r rd_intro3, fig.height=5.25, fig.width=12, fig.align='center', dev='svg', echo = FALSE, warning = FALSE, message = FALSE}
+
+ggplot(data = d, aes(x=r, y=y)) +
+  geom_point(size = 3, pch = 21, color = alpha("dark grey",0.8), fill="white") +
+  geom_vline(aes(xintercept=10), lty = 2, color = "grey", lwd = 1.5) +
+  
+  geom_smooth(data = dplyr::filter(d, r<10), method = "gam", se = FALSE, color = "#E16462", lwd = 2) + 
+  geom_smooth(data = dplyr::filter(d, r>=10), method = "gam", se = FALSE, color = "#E16462", lwd = 2) + 
+  
+  ggplot2::annotate("rect", color="white", fill="white", xmin = 11, xmax = 14, ymin=11, ymax = 15) +
+  ggplot2::annotate("text", label = "LATE", size = 10, hjust = 0.5, x = 12.5, y =13, color = "grey",
+                    family = "Fira Sans Condensed")+
+  
+  ggplot2::annotate("segment",x = 10, xend = 10, y = 1.44, yend = 19.6, color = "grey", lwd = 2) +
+  
+  theme_bw() +
+  theme_ipsum_fsc()+
+  xlab("Running variable") + ylab("Outcome") + 
+  theme(plot.margin=unit(c(1,1,1.5,1.2),"cm"),
+        panel.grid.major.x = element_blank(),
+        panel.grid.minor.x = element_blank(),
+        panel.grid.major.y = element_line(colour = "light grey"),
+        panel.grid.minor.y = element_blank(),
+        axis.line = element_blank())+
+  theme(axis.title.x = element_text(size = 24, color = "#333f48"),#margin = margin(t = 10, r = 0, b = 0, l = 0)),
+        axis.text.x = element_blank(),
+        axis.title.y = element_text(size = 24, color = "#333f48"),#margin = margin(t = 0, r = 10, b = 0, l = 0)),
+        axis.text.y = element_blank(),legend.position="none",
+        legend.title = element_text(size=12),
+        legend.text = element_text(size=10),
+        legend.background = element_rect(fill="white",colour ="white"),
+        title = element_text(size=12))
+
+
+```
+
+---
+# Missing data and no overlap
+
+```{r rd_intro4, fig.height=5.25, fig.width=12, fig.align='center', dev='svg', echo = FALSE, warning = FALSE, message = FALSE}
+
+y1 = 2 - 1.5*(10-r) + 18 + 0.5*(10-r) -  0.01*(10-r)^2 + error
+y0 = 2 - 1.5*(10-r) + error
+
+d$y1 <- y1
+d$y0 <- y0
+
+ggplot(data = d, aes(x=r, y=y)) +
+  geom_point(size = 3, pch = 21, color = alpha("dark grey",0.8), fill="white") +
+  geom_vline(aes(xintercept=10), lty = 2, color = "grey", lwd = 1.5) +
+  
+  geom_smooth(data = dplyr::filter(d, r<10), method = "gam", se = FALSE, color = "#E16462", lwd = 2) + 
+  geom_smooth(data = dplyr::filter(d, r>=10), method = "gam", se = FALSE, color = "#E16462", lwd = 2) +
+  
+  geom_smooth(data = dplyr::filter(d, r<10), aes(x = r, y = y1), method = "gam", se = FALSE, color = "#E16462", lwd = 2, lty = 2) + 
+  geom_smooth(data = dplyr::filter(d, r>=10), aes(x = r, y = y0), method = "gam", se = FALSE, color = "#E16462", lwd = 2, lty = 2) +
+  
+  ggplot2::annotate("rect", color="white", fill="white", xmin = 11, xmax = 14, ymin=11, ymax = 15) +
+  ggplot2::annotate("text", label = "LATE", size = 10, hjust = 0.5, x = 12.5, y =13, color = "grey",
+                    family = "Fira Sans Condensed")+
+  
+  ggplot2::annotate("segment",x = 10, xend = 10, y = 1.44, yend = 19.6, color = "grey", lwd = 2) +
+  
+  theme_bw() +
+  theme_ipsum_fsc()+
+  xlab("Running variable") + ylab("Outcome") + 
+  theme(plot.margin=unit(c(1,1,1.5,1.2),"cm"),
+        panel.grid.major.x = element_blank(),
+        panel.grid.minor.x = element_blank(),
+        panel.grid.major.y = element_line(colour = "light grey"),
+        panel.grid.minor.y = element_blank(),
+        axis.line = element_blank())+
+  theme(axis.title.x = element_text(size = 24, color = "#333f48"),#margin = margin(t = 10, r = 0, b = 0, l = 0)),
+        axis.text.x = element_blank(),
+        axis.title.y = element_text(size = 24, color = "#333f48"),#margin = margin(t = 0, r = 10, b = 0, l = 0)),
+        axis.text.y = element_blank(),legend.position="none",
+        legend.title = element_text(size=12),
+        legend.text = element_text(size=10),
+        legend.background = element_rect(fill="white",colour ="white"),
+        title = element_text(size=12))
+
+
+```
+
+
+---
+# Can we find a generalization interval?
+
+```{r rd_intro5, fig.height=5.25, fig.width=12, fig.align='center', dev='svg', echo = FALSE, warning = FALSE, message = FALSE}
+
+ggplot(data = d, aes(x=r, y=y)) +
+  geom_point(size = 3, pch = 21, color = alpha("dark grey",0.8), fill="white") +
+  geom_vline(aes(xintercept=10), lty = 2, color = "grey", lwd = 1.5) +
+  
+  geom_smooth(data = dplyr::filter(d, r<10), method = "gam", se = FALSE, color = "grey", lwd = 2) + 
+  geom_smooth(data = dplyr::filter(d, r>=10), method = "gam", se = FALSE, color = "grey", lwd = 2) + 
+  
+  geom_vline(aes(xintercept = 5), lty = 2, color = "#E16462", lwd = 2) +
+  geom_vline(aes(xintercept = 15), lty = 2, color = "#E16462", lwd = 2) +
+  
+  ggplot2::annotate("rect", color="white", fill="white", xmin = 11, xmax = 14, ymin=11, ymax = 15) +
+  ggplot2::annotate("text", label = "LATE", size = 10, hjust = 0.5, x = 12.5, y =13, color = "grey",
+                    family = "Fira Sans Condensed")+
+  
+  ggplot2::annotate("segment",x = 10, xend = 10, y = 1.44, yend = 19.6, color = "grey", lwd = 2) +
+  
+  theme_bw() +
+  theme_ipsum_fsc()+
+  xlab("Running variable") + ylab("Outcome") + 
+  theme(plot.margin=unit(c(1,1,1.5,1.2),"cm"),
+        panel.grid.major.x = element_blank(),
+        panel.grid.minor.x = element_blank(),
+        panel.grid.major.y = element_line(colour = "light grey"),
+        panel.grid.minor.y = element_blank(),
+        axis.line = element_blank())+
+  theme(axis.title.x = element_text(size = 24, color = "#333f48"),#margin = margin(t = 10, r = 0, b = 0, l = 0)),
+        axis.text.x = element_blank(),
+        axis.title.y = element_text(size = 24, color = "#333f48"),#margin = margin(t = 0, r = 10, b = 0, l = 0)),
+        axis.text.y = element_blank(),legend.position="none",
+        legend.title = element_text(size=12),
+        legend.text = element_text(size=10),
+        legend.background = element_rect(fill="white",colour ="white"),
+        title = element_text(size=12))
+
+```
+
+---
+# This paper
+
+**Identification of generalization interval and estimation of ATT for population within such interval:**
+--
+
+  - Pre-intervention period informs the generalization bandwidth <br>
+  .tiny[(Wing & Cook, 2013; Keele, Small, Hsu, & Fogarty, 2020)]
+    
+  - Leverage the use of predictive covariates for breaking link between running variable and outcome <br>
+  .tiny[(Angrist & Rokkanen, 2015; Rokkanen, 2015; Keele, Titiunik, & Zubizarreta, 2015)]
+  
+  - Based on idea of local randomization near the cutoff <br>
+  .tiny[(Lee, 2008; Cattaneo, Frandsen, & Titiunik, 2015)]
+  
+---
+# This paper
+
+**Main advantages:**
+--
+
+- Gradual approach
+  - No need for "All or Nothing"
+  - Interval informed by the data .tinylist[(Cattaneo et al., 2015)]
+--
+
+- No extrapolation of population characteristics
+  - Compare like-to-like .tinylist[(Rosenbaum, 1987)]
+  - Makes overlap region explicit
+--
+
+- Generalization to population of interest
+  - Use of representative template matching .tinylist[(Silber et al., 2014; Bennett, Vielma, & Zubizarreta, 2020)]
+--
+
+- Sensitivity analysis to hidden bias .tiny[(Rosenbaum, 2010; Keele et al., 2020)]
+
+---
+# Outline
+
+1. Motivation
+<br>
+<br>
+2. Generalized Regression Discontinuity Design (GRD)
+
+  2.1 Framework
+  
+  2.2 GRD in practice
+<br>
+<br>
+3. Application: Free Higher Education in Chile
+<br>
+<br>
+4. Conclusions
+
+---
+
+background-position: 50% 50%
+class: left,middle, inverse, nonum
+.big[
+Generalized Regression Discontinuity Design
+]
+
+
+---
+# Generalized Regression Discontinuity Design (GRD)
+
+--
+Two-part problem with pre- and post-intervention periods:
+<br>
+
+--
+<br>
+<span class="box-5">1) Identification of generalization interval H<sup>\*</sup></span>
+
+.box-5t[(using pre-intervention period)]
+
+--
+<br>
+<span class="box-5">2) Estimation of ATT for population within H<sup>\*</sup></span>
+
+.box-5t[(using post-intervention period)]
+
+---
+#The setup
+
+- **Two periods**: pre- and post-intervention, $t=0$ and $t=1$.
+
+- Running variable $R$ determines assingment $Z$ in $t=1$. E.g.:
+$$Z_{it} = \mathrm{I}(R_{it}<c)$$
+
+- Potential outcomes under treatmet $z = 0,1$:
+$$Y^{(z)}_{it} = g_z(\mathbf{X}_{it},\mathbf{u}_{it},r_{it}) + z_{it}\cdot \underbrace{\tau(\mathbf{X}_{it},\mathbf{u}_{it},r_{it})}_{\color{#E16462}{\style{font-family:inherit}{\text{Treat. Effect}}}} + \underbrace{\alpha_t}_{\color{#E16462}{\style{font-family:inherit}{\text{Period FE}}}}$$
+  - $\mathbf{X}_{it}$: Predictive covariates
+  
+  - $\mathbf{u}_{it}$: Unobserved confounders
+  
+  - $\tau(\cdot)$: Causal effect
+  
+---
+# Two periods for GRD
+
+```{r grd_setup, fig.height=5.7, fig.width=12, fig.align='center', dev='svg', echo = FALSE, warning = FALSE, message = FALSE}
+set.seed(100)
+
+df_pre <- data.frame(xaxisTime=runif(300)*20) %>%
+  mutate(Y = .3*xaxisTime+rnorm(300),
+         state="1",
+         groupX=floor(xaxisTime)+.5,
+         groupLine=floor(xaxisTime),
+         cutLine=rep(c(9,11),150)) %>%
+  group_by(groupX) %>%
+  mutate(mean_Y=mean(Y)) %>%
+  ungroup() %>%
+  arrange(groupX)
+
+df_pre$id = seq(1,nrow(df_pre),1)
+
+df_post <- data.frame(xaxisTime=runif(300)*20) %>%
+  mutate(Y = .3*xaxisTime+5*(xaxisTime>10)-.15*xaxisTime*(xaxisTime>10)+rnorm(300),
+         state="1",
+         groupX=floor(xaxisTime)+.5,
+         groupLine=floor(xaxisTime),
+         cutLine=rep(c(9,11),150)) %>%
+  group_by(groupX) %>%
+  mutate(mean_Y=mean(Y)) %>%
+  ungroup() %>%
+  arrange(groupX)
+
+y1 = df_pre$Y + exp(-2*(df_pre$xaxisTime-3)) + 1 - 0.04*df_pre$xaxisTime
+poly_fit_y1 <- as.data.frame(lowess(df_pre$xaxisTime, y1, f=0.4))
+
+df_post2 <- data.frame(xaxisTime=runif(300)*20) %>%
+  mutate(Y = .3*xaxisTime+(xaxisTime<10)*(poly_fit_y1$y-df_pre$Y)+rnorm(300),
+         state="1",
+         groupX=floor(xaxisTime)+.5,
+         groupLine=floor(xaxisTime),
+         cutLine=rep(c(9,11),150)) %>%
+  group_by(groupX) %>%
+  mutate(mean_Y=mean(Y)) %>%
+  ungroup() %>%
+  arrange(groupX)
+
+df_post2_detrend <- data.frame(xaxisTime=runif(300)*20) %>%
+  mutate(Y = rnorm(300)+2.8 + (xaxisTime<10)*(poly_fit_y1$y-df_pre$Y),
+         state="1",
+         groupX=floor(xaxisTime)+.5,
+         groupLine=floor(xaxisTime),
+         cutLine=rep(c(9,11),150)) %>%
+  group_by(groupX) %>%
+  mutate(mean_Y=mean(Y)) %>%
+  ungroup() %>%
+  arrange(groupX)
+
+df_post$id = seq(1,nrow(df_post),1)
+df_post2$id = seq(1,nrow(df_post2),1)
+df_post2_detrend$id = seq(1,nrow(df_post2_detrend),1)
+
+
+poly_fit_y0 <- as.data.frame(lowess(df_pre$xaxisTime, df_pre$Y, f=0.4))
+
+y1 = df_pre$Y + exp(-2*(df_pre$xaxisTime-3)) + 1 - 0.04*df_pre$xaxisTime
+poly_fit_y1 <- as.data.frame(lowess(df_pre$xaxisTime, y1, f=0.4))
+
+#Pre-period
+g1 <- ggplot(df_pre,aes(y=Y,x=xaxisTime, label=NA), fill="#333f48")+geom_point(pch=21, fill="white", color="#333f48")+
+  geom_line(data = poly_fit_y0, aes(x=x, y=y, color='#E16462'), size=1)+
+  geom_line(data = poly_fit_y1, aes(x=x, y=y, color = '#900DA4'), size=1, lty=2)+
+  geom_vline(aes(xintercept=10),linetype='dashed') + theme_bw()+
+  xlab("Running variable") + ylab("Outcome")+ggtitle("Pre-intervention")+
+  scale_colour_identity(name='',breaks=c('#E16462','#900DA4'),
+                        labels = c(bquote(Y^{(0)}~(R)),bquote(Y^{(1)}~(R))), guide="legend") +
+  theme_bw() +
+  theme_ipsum_fsc()+
+  theme(plot.margin=unit(c(1,1,1.5,1.2),"cm"))+
+  theme(plot.margin=unit(c(1,1,1.5,1.2),"cm"),
+        panel.grid.major.x = element_blank(),
+        panel.grid.minor.x = element_blank(),
+        panel.grid.major.y = element_line(colour = "light grey"),
+        panel.grid.minor.y = element_blank(),
+        axis.line = element_blank())+
+  theme(axis.title.x = element_text(size=20,margin = margin(t = 10, r = 0, b = 0, l = 0), color = "#333f48"),
+        axis.text.x = element_text(size=15),
+        axis.title.y = element_text(size=20,margin = margin(t = 0, r = 10, b = 0, l = 0), color = "#333f48"),
+        axis.text.y = element_text(size=15),legend.position="bottom",
+        title = element_text(color = "#333f48", size = 22, face = "plain"),
+        legend.text = element_text(size=15, color = "#333f48"),
+        legend.title = element_text(size=18, color = "#333f48"))+
+  ylim(-2,10)
+
+
+#Post-period
+g2 <- ggplot(df_post2,aes(y=Y,x=xaxisTime, label=NA))+geom_point(pch=21, fill="white", color="#333f48")+
+  geom_line(data = poly_fit_y0[poly_fit_y0$x>10,], aes(x=x, y=y,color='#E16462'), size=1)+
+  geom_line(color='#E16462',data = poly_fit_y0[poly_fit_y0$x<10,], aes(x=x, y=y), size=1,lty=2)+
+  geom_line(data = poly_fit_y1[poly_fit_y1$x>10,], aes(x=x, y=y, color='#900DA4'), size=1, lty=2)+
+  geom_line(color='#900DA4',data = poly_fit_y1[poly_fit_y1$x<10,], aes(x=x, y=y), size=1, lty=1)+
+  geom_vline(aes(xintercept=10),linetype='dashed') + theme_bw()+
+  xlab("Running variable") + ylab("Outcome")+ggtitle("Post-intervention")+
+  scale_colour_identity(name='',breaks=c('#E16462','#900DA4'),
+                        labels = c(bquote(Y^{(0)}~(R)),bquote(Y^{(1)}~(R))), guide="legend") +
+  theme_bw() +
+  theme_ipsum_fsc()+
+  theme(plot.margin=unit(c(1,1,1.5,1.2),"cm"))+
+  theme(plot.margin=unit(c(1,1,1.5,1.2),"cm"),
+        panel.grid.major.x = element_blank(),
+        panel.grid.minor.x = element_blank(),
+        panel.grid.major.y = element_line(colour = "light grey"),
+        panel.grid.minor.y = element_blank(),
+        axis.line = element_blank())+
+  theme(axis.title.x = element_text(size=20,margin = margin(t = 10, r = 0, b = 0, l = 0), color = "#333f48"),
+        axis.text.x = element_text(size=15),
+        axis.title.y = element_text(size=20,margin = margin(t = 0, r = 10, b = 0, l = 0), color = "#333f48"),
+        axis.text.y = element_text(size=15),legend.position="bottom",
+        title = element_text(color = "#333f48", size = 22, face = "plain"),
+        legend.text = element_text(size=15, color = "#333f48"),
+        legend.title = element_text(size=18, color = "#333f48")) +
+  ylim(-2,10)
+
+g1 + g2 + plot_layout(guides = "collect") &
+  theme(legend.position='bottom')
+```
+---
+# A gradual approach
+
+- Conditional expectations of potential outcomes, $Y^{(z)}_t(R)$:
+$$Y^{(0)}_0(R) = \mathbb{E}[Y^{(0)}_{i0}|R] = \mu_0(R)$$
+$$Y^{(1)}_0(R) = \mathbb{E}[Y^{(1)}_{i0}|R] = \underbrace{\mu_0(R)}_{\color{#E16462}{\style{font-family:inherit}{\text{Avg. Outcome by R}}}} + \underbrace{\tau_0(R)}_{\color{#E16462}{\style{font-family:inherit}{\text{Treat. Effect by R}}}}$$
+
+--
+
+- Identify generalization interval $H = [H_{-},H_{+}]$ for $t=0$:
+$$R_{i} = h(\mathbf{X}_{i}) + \eta_i \ \ \forall \ R_i \in H$$
+--
+
+- If $H^* = \max\{|H|\}$ exists, then for a set of covariates $\mathbf{X} = \mathbf{X}_T$:
+$$Y^{(0)}_0(R')|\mathbf{X}_T = Y^{(0)}_0(R'')|\mathbf{X}_T \ \ \ \ \ \ \style{font-family:inherit}{\text{for any}} \ R', R'' \in H^*$$
+
+---
+# Conditional outcome within the generalization interval
+
+```{r grd_setup_pre, fig.height=5.7, fig.width=12, fig.align='center', dev='svg', echo = FALSE, warning = FALSE, message = FALSE}
+df_pre_sub <- df_pre %>% filter(xaxisTime>=5 & xaxisTime<=15)
+
+set.seed(100)
+
+df_pre_detrend <- df_pre_sub %>% mutate(Y = rnorm(nrow(df_pre_sub),2.5,1))
+
+#Post-period after matching
+ggplot(df_pre_detrend,aes(y=Y,x=xaxisTime, label=NA), fill="slategrey")+geom_point(size = 3, pch=21, fill="white", color="#333f48") + 
+  geom_smooth(aes(color = "#E16462"), method = "loess", se = FALSE, lwd = 1.7)+ylim(0,10) + xlim(5,15) + 
+  geom_vline(aes(xintercept = 10), lty = 2, lwd = 1.2, color="slategrey") +
+  geom_hline(aes(yintercept = 15, color = "#FCCE25"), lty = 2, lwd = 2.1) + 
+  geom_vline(aes(xintercept = 5), lty = 2, lwd = 2.1, color = "#FCCE25") + 
+  geom_vline(aes(xintercept = 15), lty = 2, lwd = 2.1, color = "#FCCE25") + 
+  theme_bw()+
+  theme_ipsum_fsc() +
+  xlab("Running variable") + ylab("Outcome")+ggtitle("Pre-intervention")+
+  scale_colour_identity(name='',breaks=c('#E16462','#FCCE25'),
+                        labels = c(bquote(Y^{(0)}~(R)~"|X"),"H*"), guide="legend") +
+  theme(plot.margin=unit(c(1,1,1.5,1.2),"cm"))+
+  theme(plot.margin=unit(c(1,1,1.5,1.2),"cm"),
+        panel.grid.major.x = element_blank(),
+        panel.grid.minor.x = element_blank(),
+        panel.grid.major.y = element_line(colour = "light grey"),
+        panel.grid.minor.y = element_blank(),
+        axis.line = element_blank())+
+  theme(axis.title.x = element_text(size=20,margin = margin(t = 10, r = 0, b = 0, l = 0), color = "#333f48"),
+        axis.text.x = element_text(size=15),
+        axis.title.y = element_text(size=20,margin = margin(t = 0, r = 10, b = 0, l = 0), color = "#333f48"),
+        axis.text.y = element_text(size=15),legend.position=c(0.8,0.9),
+        title = element_text(color = "#333f48", size = 22, face = "plain"),
+        legend.text = element_text(size=15, color = "#333f48"),
+        legend.title = element_text(size=18, color = "#333f48"),
+        legend.background = element_rect(fill="white",colour ="white"))
+
+```
+---
+# Main assumption for generalization to t=1
+
+<br>
+<br>
+.box-0[<b>Assumption: Conditional time-invariance under control</b>
+$$Y^{(0)}_0(R|\mathbf{X}) = Y_1^{(0)}(R|\mathbf{X}) + \alpha, \ \ \ \forall R \in H^*$$]
+
+--
+
+- No changes in unobserved confounders between $t=0$ and $t=1$ for units within $H^\ast$
+
+- Partially testable for $Z=0$ in $t=1$
+
+---
+# Estimating an effect away from the cutoff
+
+```{r grd_setup_post, fig.height=5.7, fig.width=12, fig.align='center', dev='svg', echo = FALSE, warning = FALSE, message = FALSE}
+y1 = df_post2_detrend$Y + exp(-2*(df_post2_detrend$xaxisTime-3)) + 1 - 0.04*df_post2_detrend$xaxisTime
+poly_fit_y1 <- as.data.frame(lowess(df_post2_detrend$xaxisTime, y1, f=0.4))
+
+#Randomly choose some points for matching:
+set.seed(1)
+T_matched = sample(df_post2_detrend$id[df_post2_detrend$xaxisTime<10 & df_post2_detrend$xaxisTime>5],size=30) 
+C_matched = sample(df_post2_detrend$id[df_post2_detrend$xaxisTime>10 & df_post2_detrend$xaxisTime<15],size=30)
+
+#Post-period after matching
+ggplot(df_post2_detrend[df_post2_detrend$xaxisTime>=5 & df_post2_detrend$xaxisTime<=15,],
+       aes(y=Y,x=xaxisTime, label=NA), fill="slategrey")+geom_point(size = 3, pch=21, fill="white", color="#333f48") + 
+
+  geom_line(data = poly_fit_y0[poly_fit_y0$x>10,], aes(x=x, y=2.8,color="#E16462"), size=1.7)+
+  geom_line(color="#E16462",data = poly_fit_y0[poly_fit_y0$x<10,], aes(x=x, y=2.8), size=1.7,lty=2)+
+  geom_line(data = poly_fit_y1[poly_fit_y1$x>10,], aes(x=x, y=y, color="#900DA4"), size=1.7, lty=2)+
+  geom_line(color="#900DA4",data = poly_fit_y1[poly_fit_y1$x<10,], aes(x=x, y=y), size=1.7, lty=1)+
+  geom_vline(aes(xintercept = 10), lty = 2, lwd = 1.2, color="slategrey") +
+  geom_hline(aes(yintercept = 15, color = "#FCCE25"), lty = 2, lwd = 2.1) + 
+  geom_vline(aes(xintercept = 5), lty = 2, lwd = 2.1, color = "#FCCE25") + 
+  geom_vline(aes(xintercept = 15), lty = 2, lwd = 2.1, color = "#FCCE25") + 
+  theme_bw()+
+  theme_ipsum_fsc() + xlim(5,15) + ylim(0,10)+
+  xlab("Running variable") + ylab("Outcome")+ggtitle("Post-intervention")+
+  scale_colour_identity(name='',breaks=c("#900DA4",'#E16462','#FCCE25'),
+                        labels = c(bquote(Y^{(1)}~(R)~"|X"),bquote(Y^{(0)}~(R)~"|X"),"H*"), guide="legend") +
+  theme(plot.margin=unit(c(1,1,1.5,1.2),"cm"))+
+  theme(plot.margin=unit(c(1,1,1.5,1.2),"cm"),
+        panel.grid.major.x = element_blank(),
+        panel.grid.minor.x = element_blank(),
+        panel.grid.major.y = element_line(colour = "light grey"),
+        panel.grid.minor.y = element_blank(),
+        axis.line = element_blank())+
+  theme(axis.title.x = element_text(size=20,margin = margin(t = 10, r = 0, b = 0, l = 0), color = "#333f48"),
+        axis.text.x = element_text(size=15),
+        axis.title.y = element_text(size=20,margin = margin(t = 0, r = 10, b = 0, l = 0), color = "#333f48"),
+        axis.text.y = element_text(size=15),legend.position=c(0.8,0.9),
+        title = element_text(color = "#333f48", size = 22, face = "plain"),
+        legend.text = element_text(size=15, color = "#333f48"),
+        legend.title = element_text(size=18, color = "#333f48"),
+        legend.background = element_rect(fill="white",colour ="white"))
+
+```
+
+---
+
+background-position: 50% 50%
+class: left,middle, inverse, nonum
+.big[
+GRD in practice
+]
+
+---
+# Context: Representative template matching
+
+.center[
+![:scale 60%](https://raw.githubusercontent.com/maibennett/presentations/main/content/presentations/RD/IC_20210312/images/diagram3v2.svg)
+]
+
+---
+# Diagram for GRD
+
+.center[
+![:scale 80%](https://raw.githubusercontent.com/maibennett/presentations/main/content/presentations/RD/IC_20210312/images/diagram_grd.png)
+]
+---
+# Step 0: Identification of narrow interval
+
+.pull-left[
+.center[
+![](https://raw.githubusercontent.com/maibennett/presentations/main/content/presentations/RD/IC_20210312/images/diagram_grd1.png)
+]
+]
+
+.pull-right[
+```{r grd1, fig.height=6, fig.width=6.5, fig.align='center', dev='svg', echo = FALSE, warning = FALSE, message = FALSE}
+## Load libraries
+library(designmatch)
+library(Rglpk)
+library(gurobi)
+library(xtable)
+library(dplyr)
+library(rdrobust)
+library(exact2x2)
+library(simstudy)
+library(exact2x2)
+library(foreign)
+library(rbounds)
+library(stats)
+library(sensitivitymv)
+library(DTComPair)
+library(Rlab)
+library(nprobust)
+library(KernSmooth)
+library(lpdensity)
+library(Smisc)
+library(ggplot2)
+library(firasans)
+
+##############################################################################################
+
+#sim 3, 33 corr low sample large
+
+githubURL <- "https://github.com/maibennett/presentations/raw/main/content/presentations/RD/IC_20210312/data/example_grd.RData"
+load(url(githubURL))
+
+#Constant effect: (0.1)
+effect_c = 4
+      
+#Incremental effect: (-0.0001)
+effect_i = -0.3
+      
+seed2 = 1001
+      
+set.seed(seed2)
+      
+#CHANGED THIS IN AR
+#dt1$y = y1 + rnorm(n,0,10)
+#dt1$y[dt1$r>-b & dt1$r<b] = y1[dt1$r>-b & dt1$r<b] + rnorm(sum(dt1$r>-b & dt1$r<b),0,10)
+dt1$y = y1 + rnorm(n,0,1)
+dt1$y[dt1$r>-b & dt1$r<b] = y1[dt1$r>-b & dt1$r<b] + rnorm(sum(dt1$r>-b & dt1$r<b),0,1)
+dt1$y = dt1$y + (dt1$running_var<0)*(-effect_i*10*log(abs(dt1$x)+1) + effect_c)      
+      
+col_text = "#23373B"
+
+#palette v2
+col1 = "#900DA4"
+#col2 = "#28A4FF"
+#col3 = "#FFDB00"
+
+#palette v3
+#col1 = "#8A1C7C"
+#col1 = "#8A1C8D"
+col2 = "#E16462"
+col3 = "#FCCE25"
+
+set.seed(1)
+
+random = sample(1:nrow(data),2000,replace=FALSE)
+
+par(mfrow=c(1,1),mar=c(4,3.5,1.5,2))
+
+data2_post = dt1[random,]
+
+
+### Plot 1
+
+ggplot(data2_post,aes(y=y,x=running_var, label=NA), fill="white")+geom_point(fill="white", color="dark grey", size=2, shape=21)+
+  geom_vline(aes(xintercept=grid[5]),linetype='dashed',col="slategrey",lwd=1) + 
+  geom_vline(aes(xintercept=grid[7]),linetype='dashed',col="slategrey",lwd=1) + 
+  geom_vline(aes(xintercept=0),linetype='dashed',lwd=1.5) +
+  geom_segment(aes(x = -700, y = 0, xend = -701, yend = 0,col="slategrey"), size=1.5)+
+  geom_segment(aes(x = -700, y = 0, xend = -701, yend = 0,col="black"), size=1.5)+
+  theme_ipsum_fsc(grid="Y", plot_title_size = 20,
+                  axis_text_size = 10,
+                  axis_title_size=12,
+                  axis_col = col_text)+
+  xlab("Running variable") + ylab("Outcome")+ggtitle("Post-intervention")+
+  scale_color_identity(name='Potential Outcomes',
+                       breaks=c('slategrey','black'),
+                       labels = c("Narrow BW","Cutoff"),
+                       guide = "legend")+
+  #  annotate("pointrage",x=-600,y=41,xend=-600,yend=41,shape=21,size=2,col="dark grey") +
+  #  annotate("text",x=13.05,y=8.4,label = "H*", size=5.5, colour=col_text)+
+  theme(plot.margin=unit(c(1,1,1.5,1.2),"cm"))+
+  theme(axis.title.x = element_text(size=20, colour=col_text,margin = margin(t = 10, r = 0, b = 0, l = 0)),
+        axis.text.x = element_text(size=12, colour=col_text),
+        axis.title.y = element_text(size=20, colour=col_text,margin = margin(t = 0, r = 10, b = 0, l = 0)),
+        axis.text.y = element_blank(),legend.position=c(0.15, 0.9),
+        legend.title = element_blank(),
+        legend.text = element_text(size=15, colour=col_text),
+        legend.background = element_rect(fill=alpha("white",0),colour =alpha("white",0)),
+        title = element_text(size=25, colour=col_text))+
+  ylim(-60,60) + xlim(-600,600)+
+  annotate("pointrange",x=-588,y=35,ymin=35,ymax=35,shape=21,size=1,col="slategrey",fill="white",alpha=1)+
+  annotate("text",x=-550,y=35,label = "Observations", size=5, colour=col_text,hjust = 0,family=font_fsc)
+
+```
+]
+
+---
+# Step 1: Template selection
+
+.pull-left[
+.center[
+![](https://raw.githubusercontent.com/maibennett/presentations/main/content/presentations/RD/IC_20210312/images/diagram_grd2.png)
+]
+]
+
+.pull-right[
+```{r grd2, fig.height=6, fig.width=6.5, fig.align='center', dev='svg', echo = FALSE, warning = FALSE, message = FALSE}
+
+### Plot 1
+
+ggplot(data2_post,aes(y=y,x=running_var, label=NA), fill="white")+geom_point(fill="white", color="dark grey", size=2, shape=21)+
+  geom_point(data = dplyr::filter(data2_post, running_var>=grid[5] & running_var<=0),fill=alpha("#F89441",0.4), color="#F89441", size=3, shape=21)+
+  geom_vline(aes(xintercept=grid[5]),linetype='dashed',col="slategrey",lwd=1) + 
+  geom_vline(aes(xintercept=0),linetype='dashed',lwd=1.5) +
+  geom_segment(aes(x = -700, y = 0, xend = -701, yend = 0,col="dark grey"), size=1.5)+
+  geom_segment(aes(x = -700, y = 0, xend = -701, yend = 0,col="black"), size=1.5)+
+  theme_ipsum_fsc(grid="Y", plot_title_size = 20,
+                  axis_text_size = 10,
+                  axis_title_size=12,
+                  axis_col = col_text)+
+  xlab("Running variable") + ylab("Outcome")+ggtitle("Post-intervention")+
+#  scale_color_identity(name='Potential Outcomes',
+#                       breaks=c('slategrey','black'),
+#                       labels = c("Narrow BW","Cutoff"),
+#                       guide = "legend")+
+  #  annotate("pointrage",x=-600,y=41,xend=-600,yend=41,shape=21,size=2,col="dark grey") +
+  #  annotate("text",x=13.05,y=8.4,label = "H*", size=5.5, colour=col_text)+
+  theme(plot.margin=unit(c(1,1,1.5,1.2),"cm"))+
+  theme(axis.title.x = element_text(size=20, colour=col_text,margin = margin(t = 10, r = 0, b = 0, l = 0)),
+        axis.text.x = element_text(size=12, colour=col_text),
+        axis.title.y = element_text(size=20, colour=col_text,margin = margin(t = 0, r = 10, b = 0, l = 0)),
+        axis.text.y = element_blank(),legend.position="none",
+        legend.title = element_blank(),
+        legend.text = element_text(size=15, colour=col_text),
+        legend.background = element_rect(fill=alpha("white",0),colour =alpha("white",0)),
+        title = element_text(size=25, colour=col_text))+
+  ylim(-60,60) + xlim(-600,600)+
+  annotate("pointrange",x=-600,y=40,ymin=40,ymax=40,shape=21,size=1,col="#F89441",fill="#F89441",alpha=0.6)+
+  annotate("text",x=-570,y=40,label = "Template", size=5, colour=col_text,hjust = 0,family=font_fsc)
+
+```
+]
+
+---
+# Step 2: Matching units in pre-intervention period
+
+.pull-left[
+.center[
+![](https://raw.githubusercontent.com/maibennett/presentations/main/content/presentations/RD/IC_20210312/images/diagram_grd3.png)
+]
+]
+
+.pull-right[
+```{r grd2a, fig.height=6, fig.width=6.5, fig.align='center', dev='svg', echo = FALSE, warning = FALSE, message = FALSE}
+
+
+par(mfrow=c(1,1),mar=c(4,3.5,1.5,2))
+
+data2 = data[random,]
+
+
+### Plot 1
+
+ggplot(data2[data2[,tvar]==0,],aes(y=y,x=running_var, label=NA), fill="white")+geom_point(fill="white", color="dark grey", size=2, shape=21)+
+  geom_vline(aes(xintercept=grid[1]),linetype='dashed',col="slategrey",lwd=1) + 
+  geom_vline(aes(xintercept=grid[2]),linetype='dashed',col="slategrey",lwd=1) + 
+  geom_vline(aes(xintercept=grid[3]),linetype='dashed',col="slategrey",lwd=1) + 
+  geom_vline(aes(xintercept=grid[4]),linetype='dashed',col="slategrey",lwd=1) + 
+  geom_vline(aes(xintercept=grid[5]),linetype='dashed',col="slategrey",lwd=1) + 
+  geom_vline(aes(xintercept=grid[7]),linetype='dashed',col="slategrey",lwd=1) +
+  geom_vline(aes(xintercept=grid[8]),linetype='dashed',col="slategrey",lwd=1) + 
+  geom_vline(aes(xintercept=grid[9]),linetype='dashed',col="slategrey",lwd=1) + 
+  geom_vline(aes(xintercept=grid[10]),linetype='dashed',col="slategrey",lwd=1) + 
+  geom_vline(aes(xintercept=grid[11]),linetype='dashed',col="slategrey",lwd=1) + 
+  geom_vline(aes(xintercept=0),linetype='dashed',lwd=1.5) +
+  geom_segment(aes(x = -700, y = 0, xend = -701, yend = 0,col="slategrey"), size=1.5)+
+  geom_segment(aes(x = -700, y = 0, xend = -701, yend = 0,col="black"), size=1.5)+
+  theme_ipsum_fsc(grid="Y", plot_title_size = 20,
+                  axis_text_size = 10,
+                  axis_title_size=12,
+                  axis_col = col_text)+
+  xlab("Running variable") + ylab("Outcome")+ggtitle("Pre-intervention")+
+  scale_color_identity(name='Potential Outcomes',
+                       breaks=c('slategrey','black'),
+                       labels = c("Grid","Cutoff"),
+                       guide = "legend")+
+  #  annotate("pointrage",x=-600,y=41,xend=-600,yend=41,shape=21,size=2,col="dark grey") +
+  #  annotate("text",x=13.05,y=8.4,label = "H*", size=5.5, colour=col_text)+
+  theme(plot.margin=unit(c(1,1,1.5,1.2),"cm"))+
+  theme(axis.title.x = element_text(size=20, colour=col_text,margin = margin(t = 10, r = 0, b = 0, l = 0)),
+        axis.text.x = element_text(size=12, colour=col_text),
+        axis.title.y = element_text(size=20, colour=col_text,margin = margin(t = 0, r = 10, b = 0, l = 0)),
+        axis.text.y = element_blank(),legend.position=c(0.1, 0.9),
+        legend.title = element_blank(),
+        legend.text = element_text(size=15, colour=col_text),
+        legend.background = element_rect(fill=alpha("white",0),colour =alpha("white",0)),
+        title = element_text(size=25, colour=col_text))+
+  ylim(-60,60) + xlim(-600,600)+
+  annotate("pointrange",x=-588,y=35,ymin=35,ymax=35,shape=21,size=1,col="slategrey",fill="white",alpha=1)+
+  annotate("text",x=-550,y=35,label = "Observations", size=5, colour=col_text,hjust = 0,family=font_fsc)
+```
+]
+
+---
+# Step 2: Matching units in pre-intervention period
+
+.pull-left[
+.center[
+![](https://raw.githubusercontent.com/maibennett/presentations/main/content/presentations/RD/IC_20210312/images/diagram_grd3.png)
+]
+]
+
+.pull-right[
+```{r grd2b, fig.height=6, fig.width=6.5, fig.align='center', dev='svg', echo = FALSE, warning = FALSE, message = FALSE}
+
+### Plot 2
+
+set.seed(1)
+
+random_t = sample(1:nrow(d_match),600,replace=FALSE)
+d_match2 = d_match[random_t,]
+
+
+ggplot(data2[data2[,tvar]==0,],aes(y=y,x=running_var, label=NA), fill="white")+
+  geom_point(fill="white", color="dark grey", size=2, shape=21)+
+  geom_point(data=d_match2[d_match2[,running_var]>=bandwidth[1] & bandwidth[2]>=d_match2[,running_var],],
+             aes(x=running_var,y=y),fill=col2, color='grey', size=2, shape=21)+
+  geom_vline(aes(xintercept=grid[1]),linetype='dashed',col="slategrey",lwd=1) + 
+  geom_vline(aes(xintercept=grid[2]),linetype='dashed',col="slategrey",lwd=1) + 
+  geom_vline(aes(xintercept=grid[3]),linetype='dashed',col="slategrey",lwd=1) + 
+  geom_vline(aes(xintercept=grid[4]),linetype='dashed',col="slategrey",lwd=1) + 
+  geom_vline(aes(xintercept=grid[5]),linetype='dashed',col="slategrey",lwd=1) + 
+  geom_vline(aes(xintercept=grid[7]),linetype='dashed',col="slategrey",lwd=1) +
+  geom_vline(aes(xintercept=grid[8]),linetype='dashed',col="slategrey",lwd=1) + 
+  geom_vline(aes(xintercept=grid[9]),linetype='dashed',col="slategrey",lwd=1) + 
+  geom_vline(aes(xintercept=grid[10]),linetype='dashed',col="slategrey",lwd=1) + 
+  geom_vline(aes(xintercept=grid[11]),linetype='dashed',col="slategrey",lwd=1) + 
+  geom_vline(aes(xintercept=0),linetype='dashed',lwd=1.5) +
+  geom_segment(aes(x = -700, y = 0, xend = -701, yend = 0,col="slategrey"), size=1.5)+
+  geom_segment(aes(x = -700, y = 0, xend = -701, yend = 0,col="black"), size=1.5)+
+  theme_ipsum_fsc(grid="Y", plot_title_size = 20,
+                  axis_text_size = 10,
+                  axis_title_size=12,
+                  axis_col = col_text)+
+  xlab("Running variable") + ylab("Outcome")+ggtitle("Pre-intervention")+
+#  scale_color_identity(name='Potential Outcomes',
+#                       breaks=c('dark grey','black'),
+#                       labels = c("Grid","Cutoff"),
+#                       guide = "legend")+
+  #  annotate("pointrage",x=-600,y=41,xend=-600,yend=41,shape=21,size=2,col="dark grey") +
+  #  annotate("text",x=13.05,y=8.4,label = "H*", size=5.5, colour=col_text)+
+  theme(plot.margin=unit(c(1,1,1.5,1.2),"cm"))+
+  theme(axis.title.x = element_text(size=20, colour=col_text,margin = margin(t = 10, r = 0, b = 0, l = 0)),
+        axis.text.x = element_text(size=12, colour=col_text),
+        axis.title.y = element_text(size=20, colour=col_text,margin = margin(t = 0, r = 10, b = 0, l = 0)),
+        axis.text.y = element_blank(),legend.position="none",
+        legend.title = element_blank(),
+        legend.text = element_text(size=15, colour=col_text),
+        legend.background = element_rect(fill=alpha("white",0),colour =alpha("white",0)),
+        title = element_text(size=25, colour=col_text))+
+  ylim(-60,60) + xlim(-600,600)+
+  annotate("pointrange",x=-588,y=50,ymin=50,ymax=50,shape=21,size=1,col=col2,fill=col2,alpha=1)+
+  annotate("text",x=-550,y=50,label = "Matched Obs", size=5, colour=col_text,hjust = 0,family=font_fsc)
+
+
+```
+]
+
+---
+# Step 2: Matching units in pre-intervention period
+
+.pull-left[
+.center[
+![](https://raw.githubusercontent.com/maibennett/presentations/main/content/presentations/RD/IC_20210312/images/diagram_grd3.png)
+]
+]
+
+.pull-right[
+```{r grd2c, fig.height=6, fig.width=6.5, fig.align='center', dev='svg', echo = FALSE, warning = FALSE, message = FALSE}
+
+ggplot(data2[data2[,tvar]==0,],aes(y=y,x=running_var, label=NA), fill="white")+
+  geom_point(fill="white", color="dark grey", size=2, shape=21)+
+  geom_point(data=d_match2[d_match2[,running_var]>=bandwidth[1] & bandwidth[2]>=d_match2[,running_var],],
+             aes(x=running_var,y=y),fill=col2, color=col2, size=2, shape=21,alpha=0.2)+
+  geom_point(data=d_match2[d_match2[,running_var]>=grid[4] & grid[5]>=d_match2[,running_var],],
+             aes(x=running_var,y=y),fill=col2, color='grey', size=2, shape=21)+
+  geom_vline(aes(xintercept=grid[1]),linetype='dashed',col="slategrey",lwd=1) + 
+  geom_vline(aes(xintercept=grid[2]),linetype='dashed',col="slategrey",lwd=1) + 
+  geom_vline(aes(xintercept=grid[3]),linetype='dashed',col="slategrey",lwd=1) + 
+  geom_vline(aes(xintercept=grid[4]),linetype='dashed',col="slategrey",lwd=1) + 
+  geom_vline(aes(xintercept=grid[5]),linetype='dashed',col="slategrey",lwd=1) + 
+  geom_vline(aes(xintercept=grid[7]),linetype='dashed',col="slategrey",lwd=1) +
+  geom_vline(aes(xintercept=grid[8]),linetype='dashed',col="slategrey",lwd=1) + 
+  geom_vline(aes(xintercept=grid[9]),linetype='dashed',col="slategrey",lwd=1) + 
+  geom_vline(aes(xintercept=grid[10]),linetype='dashed',col="slategrey",lwd=1) + 
+  geom_vline(aes(xintercept=grid[11]),linetype='dashed',col="slategrey",lwd=1) + 
+  geom_vline(aes(xintercept=0),linetype='dashed',lwd=1.5) +
+  geom_segment(aes(x = -700, y = 0, xend = -701, yend = 0,col="slategrey"), size=1.5)+
+  geom_segment(aes(x = -700, y = 0, xend = -701, yend = 0,col="black"), size=1.5)+
+  theme_ipsum_fsc(grid="Y", plot_title_size = 20,
+                  axis_text_size = 10,
+                  axis_title_size=12,
+                  axis_col = col_text)+
+  xlab("Running variable") + ylab("Outcome")+ggtitle("Pre-intervention")+
+#  scale_color_identity(name='Potential Outcomes',
+#                       breaks=c('dark grey','black'),
+#                       labels = c("Grid","Cutoff"),
+#                       guide = "legend")+
+  #  annotate("pointrage",x=-600,y=41,xend=-600,yend=41,shape=21,size=2,col="dark grey") +
+  #  annotate("text",x=13.05,y=8.4,label = "H*", size=5.5, colour=col_text)+
+  theme(plot.margin=unit(c(1,1,1.5,1.2),"cm"))+
+  theme(axis.title.x = element_text(size=20, colour=col_text,margin = margin(t = 10, r = 0, b = 0, l = 0)),
+        axis.text.x = element_text(size=12, colour=col_text),
+        axis.title.y = element_text(size=20, colour=col_text,margin = margin(t = 0, r = 10, b = 0, l = 0)),
+        axis.text.y = element_blank(),legend.position="none",
+        legend.title = element_blank(),
+        legend.text = element_text(size=15, colour=col_text),
+        legend.background = element_rect(fill=alpha("white",0),colour =alpha("white",0)),
+        title = element_text(size=25, colour=col_text))+
+  ylim(-60,60) + xlim(-600,600)+
+  annotate("pointrange",x=-588,y=50,ymin=50,ymax=50,shape=21,size=1,col=col2,fill=col2,alpha=1)+
+  annotate("text",x=-550,y=50,label = "Matched Obs", size=5, colour=col_text,hjust = 0,family=font_fsc)
+
+
+```
+]
+
+---
+# Step 2: Matching units in pre-intervention period
+
+.pull-left[
+.center[
+![](https://raw.githubusercontent.com/maibennett/presentations/main/content/presentations/RD/IC_20210312/images/diagram_grd3.png)
+]
+]
+
+.pull-right[
+```{r grd2d, fig.height=6, fig.width=6.5, fig.align='center', dev='svg', echo = FALSE, warning = FALSE, message = FALSE}
+
+ggplot(data2[data2[,tvar]==0,],aes(y=y,x=running_var, label=NA), fill="white")+
+  geom_point(fill="white", color="dark grey", size=2, shape=21)+
+  geom_point(data=d_match2[d_match2[,running_var]>=bandwidth[1] & bandwidth[2]>=d_match2[,running_var],],
+             aes(x=running_var,y=y),fill=col2, color=col2, size=2, shape=21,alpha=0.2)+
+  geom_point(data=d_match2[d_match2[,running_var]>=grid[4] & grid[5]>=d_match2[,running_var],],
+             aes(x=running_var,y=y),fill=col2, color=col2, size=2, shape=21,alpha=0.2)+
+  geom_point(data=d_match2[d_match2[,running_var]>=grid[3] & grid[4]>=d_match2[,running_var],],
+             aes(x=running_var,y=y),fill=col2, color='grey', size=2, shape=21,alpha=1)+
+  geom_vline(aes(xintercept=grid[1]),linetype='dashed',col="slategrey",lwd=1) + 
+  geom_vline(aes(xintercept=grid[2]),linetype='dashed',col="slategrey",lwd=1) + 
+  geom_vline(aes(xintercept=grid[3]),linetype='dashed',col="slategrey",lwd=1) + 
+  geom_vline(aes(xintercept=grid[4]),linetype='dashed',col="slategrey",lwd=1) + 
+  geom_vline(aes(xintercept=grid[5]),linetype='dashed',col="slategrey",lwd=1) + 
+  geom_vline(aes(xintercept=grid[7]),linetype='dashed',col="slategrey",lwd=1) +
+  geom_vline(aes(xintercept=grid[8]),linetype='dashed',col="slategrey",lwd=1) + 
+  geom_vline(aes(xintercept=grid[9]),linetype='dashed',col="slategrey",lwd=1) + 
+  geom_vline(aes(xintercept=grid[10]),linetype='dashed',col="slategrey",lwd=1) + 
+  geom_vline(aes(xintercept=grid[11]),linetype='dashed',col="slategrey",lwd=1) + 
+  geom_vline(aes(xintercept=0),linetype='dashed',lwd=1.5) +
+  geom_segment(aes(x = -700, y = 0, xend = -701, yend = 0,col="slategrey"), size=1.5)+
+  geom_segment(aes(x = -700, y = 0, xend = -701, yend = 0,col="black"), size=1.5)+
+  theme_ipsum_fsc(grid="Y", plot_title_size = 20,
+                  axis_text_size = 10,
+                  axis_title_size=12,
+                  axis_col = col_text)+
+  xlab("Running variable") + ylab("Outcome")+ggtitle("Pre-intervention")+
+#  scale_color_identity(name='Potential Outcomes',
+#                       breaks=c('dark grey','black'),
+#                       labels = c("Grid","Cutoff"),
+#                       guide = "legend")+
+  #  annotate("pointrage",x=-600,y=41,xend=-600,yend=41,shape=21,size=2,col="dark grey") +
+  #  annotate("text",x=13.05,y=8.4,label = "H*", size=5.5, colour=col_text)+
+  theme(plot.margin=unit(c(1,1,1.5,1.2),"cm"))+
+  theme(axis.title.x = element_text(size=20, colour=col_text,margin = margin(t = 10, r = 0, b = 0, l = 0)),
+        axis.text.x = element_text(size=12, colour=col_text),
+        axis.title.y = element_text(size=20, colour=col_text,margin = margin(t = 0, r = 10, b = 0, l = 0)),
+        axis.text.y = element_blank(),legend.position="none",
+        legend.title = element_blank(),
+        legend.text = element_text(size=15, colour=col_text),
+        legend.background = element_rect(fill=alpha("white",0),colour =alpha("white",0)),
+        title = element_text(size=25, colour=col_text))+
+  ylim(-60,60) + xlim(-600,600)+
+  annotate("pointrange",x=-588,y=50,ymin=50,ymax=50,shape=21,size=1,col=col2,fill=col2,alpha=1)+
+  annotate("text",x=-550,y=50,label = "Matched Obs", size=5, colour=col_text,hjust = 0,family=font_fsc)
+
+
+
+```
+]
+
+---
+# Step 2: Matching units in pre-intervention period
+
+.pull-left[
+.center[
+![](https://raw.githubusercontent.com/maibennett/presentations/main/content/presentations/RD/IC_20210312/images/diagram_grd3.png)
+]
+]
+
+.pull-right[
+```{r grd2e, fig.height=6, fig.width=6.5, fig.align='center', dev='svg', echo = FALSE, warning = FALSE, message = FALSE}
+
+ggplot(data2[data2[,tvar]==0,],aes(y=y,x=running_var, label=NA), fill="white")+
+  geom_point(fill="white", color="dark grey", size=2, shape=21)+
+  geom_point(data=d_match2[d_match2[,running_var]>=bandwidth[1] & bandwidth[2]>=d_match2[,running_var],],
+             aes(x=running_var,y=y),fill=col2, color=col2, size=2, shape=21,alpha=0.2)+
+  geom_point(data=d_match2[d_match2[,running_var]>=grid[4] & grid[5]>=d_match2[,running_var],],
+             aes(x=running_var,y=y),fill=col2, color=col2, size=2, shape=21,alpha=0.2)+
+  geom_point(data=d_match2[d_match2[,running_var]>=grid[3] & grid[4]>=d_match2[,running_var],],
+             aes(x=running_var,y=y),fill=col2, color=col2, size=2, shape=21,alpha=0.2)+
+  geom_point(data=d_match2[d_match2[,running_var]>=grid[2] & grid[3]>=d_match2[,running_var],],
+             aes(x=running_var,y=y),fill=col2, color='grey', size=2, shape=21,alpha=1)+
+  geom_vline(aes(xintercept=grid[1]),linetype='dashed',col="slategrey",lwd=1) + 
+  geom_vline(aes(xintercept=grid[2]),linetype='dashed',col="slategrey",lwd=1) + 
+  geom_vline(aes(xintercept=grid[3]),linetype='dashed',col="slategrey",lwd=1) + 
+  geom_vline(aes(xintercept=grid[4]),linetype='dashed',col="slategrey",lwd=1) + 
+  geom_vline(aes(xintercept=grid[5]),linetype='dashed',col="slategrey",lwd=1) + 
+  geom_vline(aes(xintercept=grid[7]),linetype='dashed',col="slategrey",lwd=1) +
+  geom_vline(aes(xintercept=grid[8]),linetype='dashed',col="slategrey",lwd=1) + 
+  geom_vline(aes(xintercept=grid[9]),linetype='dashed',col="slategrey",lwd=1) + 
+  geom_vline(aes(xintercept=grid[10]),linetype='dashed',col="slategrey",lwd=1) + 
+  geom_vline(aes(xintercept=grid[11]),linetype='dashed',col="slategrey",lwd=1) + 
+  geom_vline(aes(xintercept=0),linetype='dashed',lwd=1.5) +
+  geom_segment(aes(x = -700, y = 0, xend = -701, yend = 0,col="slategrey"), size=1.5)+
+  geom_segment(aes(x = -700, y = 0, xend = -701, yend = 0,col="black"), size=1.5)+
+  theme_ipsum_fsc(grid="Y", plot_title_size = 20,
+                  axis_text_size = 10,
+                  axis_title_size=12,
+                  axis_col = col_text)+
+  xlab("Running variable") + ylab("Outcome")+ggtitle("Pre-intervention")+
+#  scale_color_identity(name='Potential Outcomes',
+#                       breaks=c('dark grey','black'),
+#                       labels = c("Grid","Cutoff"),
+#                       guide = "legend")+
+  #  annotate("pointrage",x=-600,y=41,xend=-600,yend=41,shape=21,size=2,col="dark grey") +
+  #  annotate("text",x=13.05,y=8.4,label = "H*", size=5.5, colour=col_text)+
+  theme(plot.margin=unit(c(1,1,1.5,1.2),"cm"))+
+  theme(axis.title.x = element_text(size=20, colour=col_text,margin = margin(t = 10, r = 0, b = 0, l = 0)),
+        axis.text.x = element_text(size=12, colour=col_text),
+        axis.title.y = element_text(size=20, colour=col_text,margin = margin(t = 0, r = 10, b = 0, l = 0)),
+        axis.text.y = element_blank(),legend.position="none",
+        legend.title = element_blank(),
+        legend.text = element_text(size=15, colour=col_text),
+        legend.background = element_rect(fill=alpha("white",0),colour =alpha("white",0)),
+        title = element_text(size=25, colour=col_text))+
+  ylim(-60,60) + xlim(-600,600)+
+  annotate("pointrange",x=-588,y=50,ymin=50,ymax=50,shape=21,size=1,col=col2,fill=col2,alpha=1)+
+  annotate("text",x=-550,y=50,label = "Matched Obs", size=5, colour=col_text,hjust = 0,family=font_fsc)
+
+
+
+
+```
+]
+
+---
+# Step 2: Matching units in pre-intervention period
+
+.pull-left[
+.center[
+![](https://raw.githubusercontent.com/maibennett/presentations/main/content/presentations/RD/IC_20210312/images/diagram_grd3.png)
+]
+]
+
+.pull-right[
+```{r grd2f, fig.height=6, fig.width=6.5, fig.align='center', dev='svg', echo = FALSE, warning = FALSE, message = FALSE}
+
+ggplot(d_match2,aes(y=y,x=running_var, label=NA), fill=col2)+
+#  geom_rect(aes(xmin = grid[2], xmax = grid[9], ymin = -Inf, ymax = Inf),
+#            fill = col2, alpha = 0.03) +
+  geom_ribbon(aes(x=running_var,ymin = -60, ymax = 60),fill = col2, alpha = 0.3) +
+  geom_point(fill=col2, color='grey', size=2, shape=21)+
+  geom_point(data=data2[data2[,tvar]==0,],aes(y=y,x=running_var, label=NA), fill="white",col="dark grey",shape=21,alpha=0.5)+
+  geom_vline(aes(xintercept=grid[1]),linetype='dashed',col="slategrey",lwd=1) + 
+  geom_vline(aes(xintercept=grid[2]),linetype='dashed',col="slategrey",lwd=1) + 
+  geom_vline(aes(xintercept=grid[3]),linetype='dashed',col="slategrey",lwd=1) + 
+  geom_vline(aes(xintercept=grid[4]),linetype='dashed',col="slategrey",lwd=1) + 
+  geom_vline(aes(xintercept=grid[5]),linetype='dashed',col="slategrey",lwd=1) + 
+  geom_vline(aes(xintercept=grid[7]),linetype='dashed',col="slategrey",lwd=1) +
+  geom_vline(aes(xintercept=grid[8]),linetype='dashed',col="slategrey",lwd=1) + 
+  geom_vline(aes(xintercept=grid[9]),linetype='dashed',col="slategrey",lwd=1) + 
+  geom_vline(aes(xintercept=grid[10]),linetype='dashed',col="slategrey",lwd=1) + 
+  geom_vline(aes(xintercept=grid[11]),linetype='dashed',col="slategrey",lwd=1) + 
+  geom_vline(aes(xintercept=0),linetype='dashed',lwd=1.5) +
+  geom_segment(aes(x = -700, y = 0, xend = -701, yend = 0,col="slategrey"), size=1.5)+
+  geom_segment(aes(x = -700, y = 0, xend = -701, yend = 0,col="black"), size=1.5)+
+  theme_ipsum_fsc(grid="Y", plot_title_size = 20,
+                  axis_text_size = 10,
+                  axis_title_size=12,
+                  axis_col = col_text)+
+  xlab("Running variable") + ylab("Outcome")+ggtitle("Pre-intervention")+
+#  scale_color_identity(name='Potential Outcomes',
+#                       breaks=c('dark grey','black'),
+#                       labels = c("Grid","Cutoff"),
+#                       guide = "legend")+
+  theme(plot.margin=unit(c(1,1,1.5,1.2),"cm"))+
+  theme(axis.title.x = element_text(size=20, colour=col_text,margin = margin(t = 10, r = 0, b = 0, l = 0)),
+        axis.text.x = element_text(size=12, colour=col_text),
+        axis.title.y = element_text(size=20, colour=col_text,margin = margin(t = 0, r = 10, b = 0, l = 0)),
+        axis.text.y = element_blank(),legend.position="none",
+        legend.title = element_blank(),
+        legend.text = element_text(size=15, colour=col_text),
+        legend.background = element_rect(fill=alpha("white",0),colour =alpha("white",0)),
+        title = element_text(size=25, colour=col_text))+
+  ylim(-60,60) + xlim(-600,600)+
+  annotate("pointrange",x=-588,y=50,ymin=50,ymax=50,shape=21,size=1,col=col2,fill=col2,alpha=1)+
+  annotate("text",x=-550,y=50,label = "Matched Obs", size=5, colour=col_text,hjust = 0,family=font_fsc)+
+  annotate("rect",xmin=-600,xmax=-580,ymin=40,ymax=44,col="dark gray",fill=col2,alpha=0.3)+
+  annotate("text",x=-550,y=42,label = "Overlap region", size=5, colour=col_text,hjust = 0,family=font_fsc)
+
+```
+]
+---
+# Step 3: Fit a local polynomial 
+
+.pull-left[
+.center[
+![](https://raw.githubusercontent.com/maibennett/presentations/main/content/presentations/RD/IC_20210312/images/diagram_grd4a.png)
+]
+]
+
+.pull-right[
+```{r grd3, fig.height=6, fig.width=6.5, fig.align='center', dev='svg', echo = FALSE, warning = FALSE, message = FALSE}
+
+data_eval = as.data.frame(cbind(eval,est,cil,ciu))
+names(data_eval) = c("running_var","est","cil","ciu")
+
+data3 = data2[data2[,tvar]==0,]
+
+library(gtools)
+data3 = smartbind(data3,data_eval)
+
+ggplot(data3,aes(y=y,x=running_var, label=NA), fill="white")+
+  #geom_rect(aes(xmin = grid[5], xmax = grid[6], ymin = -Inf, ymax = Inf),
+  #          fill = "light grey", alpha = 0.03) +
+  geom_ribbon(data=data3[data3$running_var>=grid[5] & data3$running_var<=grid[6],],
+              aes(ymin=-30,ymax=30),fill="light grey",alpha=0.5) +
+  #geom_point(fill="white", color="slategrey", size=2, shape=21)+
+  geom_point(data=d_match2,
+             aes(x=running_var,y=y),fill="white", color="dark grey", size=2, shape=21,alpha=0.7)+
+  geom_vline(aes(xintercept=grid[1]),linetype='dashed',col="dark grey",lwd=0.6) + 
+  geom_vline(aes(xintercept=grid[2]),linetype='dashed',col="dark grey",lwd=0.6) + 
+  geom_vline(aes(xintercept=grid[3]),linetype='dashed',col="dark grey",lwd=0.6) + 
+  geom_vline(aes(xintercept=grid[4]),linetype='dashed',col="dark grey",lwd=0.6) + 
+  geom_vline(aes(xintercept=grid[5]),linetype='dashed',col="dark grey",lwd=0.6) + 
+  geom_vline(aes(xintercept=grid[7]),linetype='dashed',col="dark grey",lwd=0.6) +
+  geom_vline(aes(xintercept=grid[8]),linetype='dashed',col="dark grey",lwd=0.6) + 
+  geom_vline(aes(xintercept=grid[9]),linetype='dashed',col="dark grey",lwd=0.6) + 
+  geom_vline(aes(xintercept=grid[10]),linetype='dashed',col="dark grey",lwd=0.6) + 
+  geom_vline(aes(xintercept=grid[11]),linetype='dashed',col="dark grey",lwd=0.6) + 
+  geom_vline(aes(xintercept=0),linetype='dashed',lwd=1) +
+  geom_segment(aes(x = -700, y = 0, xend = -701, yend = 0,col="dark grey"), size=1)+
+  geom_segment(aes(x = -700, y = 0, xend = -701, yend = 0,col="black"), size=1)+
+  geom_line(data=data3[!is.na(data3$est),],aes(x=running_var,y=est),col=col_text,lwd=1) +
+  geom_ribbon(data=data3[!is.na(data3$est),],aes(x=running_var,ymin=cil,ymax=ciu),fill=col1,alpha=0.3) +
+  geom_line(data=data3[!is.na(data3$est),],aes(x=running_var,y=cil), col=col_text, lty=4) +
+  geom_line(data=data3[!is.na(data3$est),],aes(x=running_var,y=ciu), col=col_text, lty=4) +
+  theme_ipsum_fsc(grid="Y", plot_title_size = 20,
+                  axis_text_size = 10,
+                  axis_title_size=12,
+                  axis_col = col_text)+
+  xlab("Running variable") + ylab("Outcome")+ggtitle("Pre-intervention")+
+#  scale_color_identity(name='Potential Outcomes',
+#                       breaks=c('dark grey','black'),
+#                       labels = c("Grid","Cutoff"),
+#                       guide = "legend")+
+  theme(plot.margin=unit(c(1,1,1.5,1.2),"cm"))+
+  theme(axis.title.x = element_text(size=20, colour=col_text,margin = margin(t = 10, r = 0, b = 0, l = 0)),
+        axis.text.x = element_text(size=12, colour=col_text),
+        axis.title.y = element_text(size=20, colour=col_text,margin = margin(t = 0, r = 10, b = 0, l = 0)),
+        axis.text.y = element_blank(),legend.position="none",
+        legend.title = element_blank(),
+        legend.text = element_text(size=15, colour=col_text),
+        legend.background = element_rect(fill=alpha("white",0),colour =alpha("white",0)),
+        title = element_text(size=25, colour=col_text))+
+  ylim(-30,30) + xlim(-600,600)+
+  annotate("pointrange",x=-588,y=30,ymin=30,ymax=30,shape=21,size=1,col="dark grey",fill="white",alpha=1)+
+  annotate("text",x=-550,y=30,label = "Matched Obs", size=5, colour=col_text,hjust = 0,family=font_fsc)+
+  annotate("rect",xmin=-600,xmax=-580,ymin=22,ymax=26,col="dark gray",fill=col1,alpha=0.3)+
+  annotate("text",x=-550,y=24,label = "Loc. Poly. 95% CI", size=5, colour=col_text,hjust = 0,family=font_fsc) +
+  annotate("rect",xmin=-600,xmax=-580,ymin=16,ymax=20,col="dark gray",fill="light grey",alpha=0.5)+
+  annotate("text",x=-550,y=18,label = "Template 0 region", size=5, colour=col_text,hjust = 0,family=font_fsc)
+
+
+```
+]
+
+---
+# Step 4: Identify new generalization interval
+
+.pull-left[
+.center[
+![](https://raw.githubusercontent.com/maibennett/presentations/main/content/presentations/RD/IC_20210312/images/diagram_grd4b.png)
+]
+]
+
+.pull-right[
+```{r grd4, fig.height=6, fig.width=6.5, fig.align='center', dev='svg', echo = FALSE, warning = FALSE, message = FALSE}
+
+ggplot(data3,aes(y=y,x=running_var, label=NA), fill="white")+
+  #geom_rect(aes(xmin = grid[5], xmax = grid[6], ymin = -Inf, ymax = Inf),
+  #          fill = "light grey", alpha = 0.03) +
+  geom_ribbon(data=data3[data3$running_var>=grid[5] & data3$running_var<=grid[6],],
+              aes(ymin=-30,ymax=30),fill="light grey",alpha=0.5) +
+  #geom_point(fill="white", color="slategrey", size=2, shape=21)+
+  geom_point(data=d_match2,
+             aes(x=running_var,y=y),fill="white", color="dark grey", size=2, shape=21,alpha=0.7)+
+  geom_vline(aes(xintercept=grid[1]),linetype='dashed',col="dark grey",lwd=0.6) + 
+  geom_vline(aes(xintercept=grid[2]),linetype='dashed',col="dark grey",lwd=0.6) + 
+  geom_vline(aes(xintercept=grid[3]),linetype='dashed',col="dark grey",lwd=0.6) + 
+  geom_vline(aes(xintercept=grid[4]),linetype='dashed',col="dark grey",lwd=0.6) + 
+  geom_vline(aes(xintercept=grid[5]),linetype='dashed',col="dark grey",lwd=0.6) + 
+  geom_vline(aes(xintercept=grid[7]),linetype='dashed',col="dark grey",lwd=0.6) +
+  geom_vline(aes(xintercept=grid[8]),linetype='dashed',col="dark grey",lwd=0.6) + 
+  geom_vline(aes(xintercept=grid[9]),linetype='dashed',col="dark grey",lwd=0.6) + 
+  geom_vline(aes(xintercept=grid[10]),linetype='dashed',col="dark grey",lwd=0.6) + 
+  geom_vline(aes(xintercept=grid[11]),linetype='dashed',col="dark grey",lwd=0.6) + 
+  geom_vline(aes(xintercept=optimal_bandwidth[1]),linetype='dashed',col=col1,lwd=1.1) + 
+  geom_vline(aes(xintercept=optimal_bandwidth[2]),linetype='dashed',col=col1,lwd=1.1) + 
+  geom_vline(aes(xintercept=0),linetype='dashed',lwd=1) +
+  geom_segment(aes(x = -700, y = 0, xend = -701, yend = 0,col="dark grey"), size=1)+
+  geom_segment(aes(x = -700, y = 0, xend = -701, yend = 0,col="black"), size=1)+
+  geom_segment(aes(x = -700, y = 0, xend = -701, yend = 0,col=col1), size=1)+
+  geom_line(data=data3[!is.na(data3$est),],aes(x=running_var,y=est),col=col_text,lwd=1) +
+  geom_ribbon(data=data3[!is.na(data3$est),],aes(x=running_var,ymin=cil,ymax=ciu),fill=col1,alpha=0.3) +
+  geom_line(data=data3[!is.na(data3$est),],aes(x=running_var,y=cil), col=col_text, lty=4) +
+  geom_line(data=data3[!is.na(data3$est),],aes(x=running_var,y=ciu), col=col_text, lty=4) +
+  theme_ipsum_fsc(grid="Y", plot_title_size = 20,
+                  axis_text_size = 10,
+                  axis_title_size=12,
+                  axis_col = col_text)+
+  xlab("Running variable") + ylab("Outcome")+ggtitle("Pre-intervention")+
+#  scale_color_identity(name='Potential Outcomes',
+#                       breaks=c('dark grey','black',col1),
+#                       labels = c("Grid","Cutoff","H1"),
+#                       guide = "legend")+
+  theme(plot.margin=unit(c(1,1,1.5,1.2),"cm"))+
+  theme(axis.title.x = element_text(size=20, colour=col_text,margin = margin(t = 10, r = 0, b = 0, l = 0)),
+        axis.text.x = element_text(size=12, colour=col_text),
+        axis.title.y = element_text(size=20, colour=col_text,margin = margin(t = 0, r = 10, b = 0, l = 0)),
+        axis.text.y = element_blank(),legend.position="none",
+        legend.title = element_blank(),
+        legend.text = element_text(size=15, colour=col_text),
+        legend.background = element_rect(fill=alpha("white",0),colour =alpha("white",0)),
+        title = element_text(size=25, colour=col_text))+
+  ylim(-30,30) + xlim(-600,600)+
+  annotate("pointrange",x=-588,y=30,ymin=30,ymax=30,shape=21,size=1,col="dark grey",fill="white",alpha=1)+
+  annotate("text",x=-550,y=30,label = "Matched Obs", size=5, colour=col_text,hjust = 0,family=font_fsc)+
+  annotate("rect",xmin=-600,xmax=-580,ymin=22,ymax=26,col="dark gray",fill=col1,alpha=0.3)+
+  annotate("text",x=-550,y=24,label = "Loc. Poly. 95% CI", size=5, colour=col_text,hjust = 0,family=font_fsc) +
+  annotate("rect",xmin=-600,xmax=-580,ymin=16,ymax=20,col="dark gray",fill="light grey",alpha=0.5)+
+  annotate("text",x=-550,y=18,label = "Template 0 region", size=5, colour=col_text,hjust = 0,family=font_fsc) +
+  annotate("segment", x= -600, xend = -580, y = 12, yend = 12, col="#900DA4", lty=2, lwd = 1.3) +
+  annotate("text",x=-550,y=12,label = "H1", size=5, colour=col_text,hjust = 0,family=font_fsc)
+
+
+
+```
+]
+
+---
+# Step 5: If generalization interval > template...
+
+.pull-left[
+.center[
+![](https://raw.githubusercontent.com/maibennett/presentations/main/content/presentations/RD/IC_20210312/images/diagram_grd5.png)
+]
+]
+
+.pull-right[
+```{r grd5, fig.height=6, fig.width=6.5, fig.align='center', dev='svg', echo = FALSE, warning = FALSE, message = FALSE}
+
+ggplot(data3,aes(y=y,x=running_var, label=NA), fill="white")+
+  #geom_rect(aes(xmin = grid[5], xmax = grid[6], ymin = -Inf, ymax = Inf),
+  #          fill = "light grey", alpha = 0.03) +
+  geom_ribbon(data=data3[data3$running_var>=grid[5] & data3$running_var<=grid[6],],
+              aes(ymin=-30,ymax=30),fill="light grey",alpha=0.5) +
+  #geom_point(fill="white", color="slategrey", size=2, shape=21)+
+  geom_point(data=d_match2,
+             aes(x=running_var,y=y),fill="white", color="dark grey", size=2, shape=21,alpha=0.7)+
+  geom_vline(aes(xintercept=grid[1]),linetype='dashed',col="dark grey",lwd=0.6) + 
+  geom_vline(aes(xintercept=grid[2]),linetype='dashed',col="dark grey",lwd=0.6) + 
+  geom_vline(aes(xintercept=grid[3]),linetype='dashed',col="dark grey",lwd=0.6) + 
+  geom_vline(aes(xintercept=grid[4]),linetype='dashed',col="dark grey",lwd=0.6) + 
+  geom_vline(aes(xintercept=grid[5]),linetype='dashed',col="dark grey",lwd=0.6) + 
+  geom_vline(aes(xintercept=grid[7]),linetype='dashed',col="dark grey",lwd=0.6) +
+  geom_vline(aes(xintercept=grid[8]),linetype='dashed',col="dark grey",lwd=0.6) + 
+  geom_vline(aes(xintercept=grid[9]),linetype='dashed',col="dark grey",lwd=0.6) + 
+  geom_vline(aes(xintercept=grid[10]),linetype='dashed',col="dark grey",lwd=0.6) + 
+  geom_vline(aes(xintercept=grid[11]),linetype='dashed',col="dark grey",lwd=0.6) + 
+  geom_vline(aes(xintercept=optimal_bandwidth[1]),linetype='dashed',col=col1,lwd=1.1) + 
+  geom_vline(aes(xintercept=optimal_bandwidth[2]),linetype='dashed',col=col1,lwd=1.1) + 
+  geom_vline(aes(xintercept=0),linetype='dashed',lwd=1) +
+  geom_segment(aes(x = -700, y = 0, xend = -701, yend = 0,col="dark grey"), size=1)+
+  geom_segment(aes(x = -700, y = 0, xend = -701, yend = 0,col="black"), size=1)+
+  geom_segment(aes(x = -700, y = 0, xend = -701, yend = 0,col=col1), size=1)+
+  geom_line(data=data3[!is.na(data3$est),],aes(x=running_var,y=est),col=col_text,lwd=1) +
+  geom_ribbon(data=data3[!is.na(data3$est),],aes(x=running_var,ymin=cil,ymax=ciu),fill=col1,alpha=0.3) +
+  geom_line(data=data3[!is.na(data3$est),],aes(x=running_var,y=cil), col=col_text, lty=4) +
+  geom_line(data=data3[!is.na(data3$est),],aes(x=running_var,y=ciu), col=col_text, lty=4) +
+  theme_ipsum_fsc(grid="Y", plot_title_size = 20,
+                  axis_text_size = 10,
+                  axis_title_size=12,
+                  axis_col = col_text)+
+  xlab("Running variable") + ylab("Outcome")+ggtitle("Pre-intervention")+
+#  scale_color_identity(name='Potential Outcomes',
+#                       breaks=c('dark grey','black',col1),
+#                       labels = c("Grid","Cutoff","H1"),
+#                       guide = "legend")+
+  theme(plot.margin=unit(c(1,1,1.5,1.2),"cm"))+
+  theme(axis.title.x = element_text(size=20, colour=col_text,margin = margin(t = 10, r = 0, b = 0, l = 0)),
+        axis.text.x = element_text(size=12, colour=col_text),
+        axis.title.y = element_text(size=20, colour=col_text,margin = margin(t = 0, r = 10, b = 0, l = 0)),
+        axis.text.y = element_blank(),legend.position="none",
+        legend.title = element_blank(),
+        legend.text = element_text(size=15, colour=col_text),
+        legend.background = element_rect(fill=alpha("white",0),colour =alpha("white",0)),
+        title = element_text(size=25, colour=col_text))+
+  ylim(-30,30) + xlim(-600,600)+
+  annotate("pointrange",x=-588,y=30,ymin=30,ymax=30,shape=21,size=1,col="dark grey",fill="white",alpha=1)+
+  annotate("text",x=-550,y=30,label = "Matched Obs", size=5, colour=col_text,hjust = 0,family=font_fsc)+
+  annotate("rect",xmin=-600,xmax=-580,ymin=22,ymax=26,col="dark gray",fill=col1,alpha=0.3)+
+  annotate("text",x=-550,y=24,label = "Loc. Poly. 95% CI", size=5, colour=col_text,hjust = 0,family=font_fsc) +
+  annotate("rect",xmin=-600,xmax=-580,ymin=16,ymax=20,col="dark gray",fill="light grey",alpha=0.5)+
+  annotate("text",x=-550,y=18,label = "Template 0 region", size=5, colour=col_text,hjust = 0,family=font_fsc) +
+  annotate("segment", x= -600, xend = -580, y = 12, yend = 12, col="#900DA4", lty=2, lwd = 1.3) +
+  annotate("text",x=-550,y=12,label = "H1", size=5, colour=col_text,hjust = 0,family=font_fsc)
+
+```
+]
+
+---
+# Step 5a: ... expand template and do it again.
+
+.pull-left[
+.center[
+![](https://raw.githubusercontent.com/maibennett/presentations/main/content/presentations/RD/IC_20210312/images/diagram_grd6.png)
+]
+]
+
+.pull-right[
+```{r grd5a, fig.height=6, fig.width=6.5, fig.align='center', dev='svg', echo = FALSE, warning = FALSE, message = FALSE}
+
+### Plot 1
+set.seed(1)
+
+template_post <- dplyr::filter(data2_post, running_var>=grid[4] & running_var<=0)
+
+id <- sample(seq(1,nrow(template_post)), 100)
+  
+ggplot(data2_post,aes(y=y,x=running_var, label=NA), fill="white")+geom_point(fill="white", color="dark grey", size=2, shape=21)+
+  geom_point(data = template_post[id,],fill=alpha("#F89441",0.5), color="#F89441", size=3, shape=21)+
+  geom_vline(aes(xintercept=grid[4]),linetype='dashed',col="slategrey",lwd=1) + 
+  geom_vline(aes(xintercept=grid[5]),linetype='dashed',col="slategrey",lwd=1) + 
+  geom_vline(aes(xintercept=0),linetype='dashed',lwd=1.5) +
+  geom_segment(aes(x = -700, y = 0, xend = -701, yend = 0,col="dark grey"), size=1.5)+
+  geom_segment(aes(x = -700, y = 0, xend = -701, yend = 0,col="black"), size=1.5)+
+  theme_ipsum_fsc(grid="Y", plot_title_size = 20,
+                  axis_text_size = 10,
+                  axis_title_size=12,
+                  axis_col = col_text)+
+  xlab("Running variable") + ylab("Outcome")+ggtitle("Post-intervention")+
+ # scale_color_identity(name='Potential Outcomes',
+#                       breaks=c('slategrey','black'),
+ #                      labels = c("Grid","Cutoff"),
+#                       guide = "legend")+
+  #  annotate("pointrage",x=-600,y=41,xend=-600,yend=41,shape=21,size=2,col="dark grey") +
+  #  annotate("text",x=13.05,y=8.4,label = "H*", size=5.5, colour=col_text)+
+  theme(plot.margin=unit(c(1,1,1.5,1.2),"cm"))+
+  theme(axis.title.x = element_text(size=20, colour=col_text,margin = margin(t = 10, r = 0, b = 0, l = 0)),
+        axis.text.x = element_text(size=12, colour=col_text),
+        axis.title.y = element_text(size=20, colour=col_text,margin = margin(t = 0, r = 10, b = 0, l = 0)),
+        axis.text.y = element_blank(),legend.position="none",
+        legend.title = element_blank(),
+        legend.text = element_text(size=15, colour=col_text),
+        legend.background = element_rect(fill=alpha("white",0),colour =alpha("white",0)),
+        title = element_text(size=25, colour=col_text))+
+  ylim(-60,60) + xlim(-600,600)+
+  annotate("pointrange",x=-588,y=50,ymin=50,ymax=50,shape=21,size=1,col="#F89441",fill="#F89441",alpha=0.6)+
+  annotate("text",x=-550,y=50,label = "Template", size=5, colour=col_text,hjust = 0,family=font_fsc)
+
+```
+]
+
+---
+# Step 5b: ... until template is the same as the interval
+
+.pull-left[
+.center[
+![](https://raw.githubusercontent.com/maibennett/presentations/main/content/presentations/RD/IC_20210312/images/diagram_grd7.png)
+]
+]
+
+.pull-right[
+```{r grd5b, fig.height=6, fig.width=6.5, fig.align='center', dev='svg', echo = FALSE, warning = FALSE, message = FALSE}
+githubURL <- "https://github.com/maibennett/presentations/raw/main/content/presentations/RD/IC_20210312/data/example_grd_all.RData"
+load(url(githubURL))
+
+random_t = sample(1:nrow(d_match),600,replace=FALSE)
+d_match2 = d_match[random_t,]
+
+data_eval_1 = data_eval
+
+data_eval = as.data.frame(cbind(eval,est,cil,ciu))
+names(data_eval) = c("running_var","est","cil","ciu")
+
+data_eval_1_trim = data_eval_1[data_eval_1$running_var<max(data_eval$running_var),]
+  
+data3 = data2[data2[,tvar]==0,]
+
+library(gtools)
+#data3 = smartbind(data3,data_eval)
+data3 = smartbind(data3,data_eval_1_trim)
+
+
+
+ggplot(data3,aes(y=y,x=running_var, label=NA), fill="white")+
+  #geom_rect(aes(xmin = bandwidth_opt[1]+15, xmax = bandwidth_opt[2], ymin = -Inf, ymax = Inf),
+  #          fill = col3, alpha = 0.003) +
+  geom_ribbon(data=data3[data3$running_var>=bandwidth_opt[1]+15 & data3$running_var<=grid[6],],
+              aes(ymin=-30,ymax=30),fill="light grey",alpha=0.5) +
+ # geom_point(fill="white", color="slategrey", size=2, shape=21)+
+  geom_point(data=d_match2,
+             aes(x=running_var,y=y),fill="white", color="dark grey", size=2, shape=21,alpha=0.7)+
+  geom_vline(aes(xintercept=grid[1]),linetype='dashed',col="dark grey",lwd=0.6) + 
+  geom_vline(aes(xintercept=grid[2]),linetype='dashed',col="dark grey",lwd=0.6) + 
+  geom_vline(aes(xintercept=grid[3]),linetype='dashed',col="dark grey",lwd=0.6) + 
+  geom_vline(aes(xintercept=grid[4]),linetype='dashed',col="dark grey",lwd=0.6) + 
+  geom_vline(aes(xintercept=grid[5]),linetype='dashed',col="dark grey",lwd=0.6) + 
+  geom_vline(aes(xintercept=grid[7]),linetype='dashed',col="dark grey",lwd=0.6) +
+  geom_vline(aes(xintercept=grid[8]),linetype='dashed',col="dark grey",lwd=0.6) + 
+  geom_vline(aes(xintercept=grid[9]),linetype='dashed',col="dark grey",lwd=0.6) + 
+  geom_vline(aes(xintercept=grid[10]),linetype='dashed',col="dark grey",lwd=0.6) + 
+  geom_vline(aes(xintercept=grid[11]),linetype='dashed',col="dark grey",lwd=0.6) + 
+  geom_vline(aes(xintercept=optimal_bandwidth[1]+15),linetype='dashed',col=col3,lwd=1.1) + 
+  geom_vline(aes(xintercept=optimal_bandwidth[2]),linetype='dashed',col=col3,lwd=1.1) + 
+  geom_vline(aes(xintercept=0),linetype='dashed',lwd=1) +
+  geom_segment(aes(x = -700, y = 0, xend = -701, yend = 0,col="dark grey"), size=1)+
+  geom_segment(aes(x = -700, y = 0, xend = -701, yend = 0,col="black"), size=1)+
+  geom_segment(aes(x = -700, y = 0, xend = -701, yend = 0,col="#FCCE25"), size=1.5)+
+  geom_line(data=data3[!is.na(data3$est),],aes(x=running_var,y=est),col=col_text,lwd=1) +
+  geom_ribbon(data=data3[!is.na(data3$est),],aes(x=running_var,ymin=cil,ymax=ciu),fill=col1,alpha=0.3) +
+  geom_line(data=data3[!is.na(data3$est),],aes(x=running_var,y=cil), col=col_text, lty=4) +
+  geom_line(data=data3[!is.na(data3$est),],aes(x=running_var,y=ciu), col=col_text, lty=4) +
+  theme_ipsum_fsc(grid="Y", plot_title_size = 20,
+                  axis_text_size = 10,
+                  axis_title_size=12,
+                  axis_col = col_text)+
+  xlab("Running variable") + ylab("Outcome")+ggtitle("Pre-intervention")+
+ # scale_color_identity(name='Potential Outcomes',
+#                       breaks=c('dark grey','black',col1),
+ #                      labels = c("Grid","Cutoff","H*"),
+#                       guide = "legend")+
+    scale_color_identity(name='Potential Outcomes',
+                       breaks=c("#FCCE25"),
+                       labels = c("H*"),
+                       guide = "legend")+
+  theme(plot.margin=unit(c(1,1,1.5,1.2),"cm"))+
+  theme(axis.title.x = element_text(size=20, colour=col_text,margin = margin(t = 10, r = 0, b = 0, l = 0)),
+        axis.text.x = element_text(size=12, colour=col_text),
+        axis.title.y = element_text(size=20, colour=col_text,margin = margin(t = 0, r = 10, b = 0, l = 0)),
+        axis.text.y = element_blank(),legend.position=c(0.1, 0.9),
+        legend.title = element_blank(),
+        legend.text = element_text(size=15, colour=col_text),
+        legend.background = element_rect(fill=alpha("white",0),colour =alpha("white",0)),
+        title = element_text(size=25, colour=col_text))+
+  ylim(-30,30) + xlim(-600,600)+
+  annotate("pointrange",x=-588,y=20,ymin=20,ymax=20,shape=21,size=1,col="dark grey",fill="white",alpha=1)+
+  annotate("text",x=-550,y=20,label = "Matched Obs", size=5, colour=col_text,hjust = 0,family=font_fsc)+
+  annotate("rect",xmin=-600,xmax=-580,ymin=15,ymax=16.5,col="dark gray",fill=col1,alpha=0.3)+
+  annotate("text",x=-550,y=15.5,label = "Loc. Poly. 95% CI", size=5, colour=col_text,hjust = 0,family=font_fsc) +
+  annotate("rect",xmin=-600,xmax=-580,ymin=10.2,ymax=11.8,col="dark gray",fill="light grey",alpha=0.5)+
+  annotate("text",x=-550,y=11,label = "Template region", size=5, colour=col_text,hjust = 0,family=font_fsc)
+
+
+
+### Plot 1
+set.seed(100)
+
+data2_post_opt1 <- data2_post %>% filter(running_var>=optimal_bandwidth[1]+15 & running_var<=0)
+data2_post_opt2 <- data2_post %>% filter(running_var>=0 & running_var<=optimal_bandwidth[2])
+
+random_t1 = sample(1:nrow(data2_post_opt1),100,replace=FALSE)
+random_t2 = sample(1:nrow(data2_post_opt2),100,replace=FALSE)
+
+d_match1 = data2_post_opt1[random_t1,]
+d_match2 = data2_post_opt2[random_t2,]
+
+
+g <- ggplot(data2_post,aes(y=y,x=running_var, label=NA), fill="white")+geom_point(fill="white", color="dark grey", size=2, shape=21)+
+  geom_vline(aes(xintercept=optimal_bandwidth[1]+15),linetype='dashed',col=col3,lwd=1.1) + 
+  geom_vline(aes(xintercept=optimal_bandwidth[2]),linetype='dashed',col=col3,lwd=1.1) + 
+  geom_point(data = d_match1, fill = alpha("#F89441",0.4), color = "#F89441", pch=21, size = 3)+
+  geom_point(data = d_match2, fill = alpha("#E16462",0.4), color = "#E16462", pch=21, size = 3)+
+  geom_vline(aes(xintercept=0),linetype='dashed',lwd=1.5) +
+  geom_segment(aes(x = -700, y = 0, xend = -701, yend = 0,col="#FCCE25"), size=1.5)+
+  geom_segment(aes(x = -700, y = 0, xend = -701, yend = 0,col="slategrey"), size=1.5)+
+  theme_ipsum_fsc(grid="Y", plot_title_size = 20,
+                  axis_text_size = 10,
+                  axis_title_size=12,
+                  axis_col = col_text)+
+  xlab("Running variable") + ylab("Outcome")+ggtitle("Post-intervention")+
+  scale_color_identity(name='Potential Outcomes',
+                       breaks=c('dark grey','slategrey'),
+                       labels = c("H*","Cutoff"),
+                       guide = "legend")+
+  #  annotate("pointrage",x=-600,y=41,xend=-600,yend=41,shape=21,size=2,col="dark grey") +
+  #  annotate("text",x=13.05,y=8.4,label = "H*", size=5.5, colour=col_text)+
+  theme(plot.margin=unit(c(1,1,1.5,1.2),"cm"))+
+  theme(axis.title.x = element_text(size=20, colour=col_text,margin = margin(t = 10, r = 0, b = 0, l = 0)),
+        axis.text.x = element_text(size=12, colour=col_text),
+        axis.title.y = element_text(size=20, colour=col_text,margin = margin(t = 0, r = 10, b = 0, l = 0)),
+        axis.text.y = element_blank(),legend.position=c(0.1, 0.9),
+        legend.title = element_blank(),
+        legend.text = element_text(size=15, colour=col_text),
+        legend.background = element_rect(fill=alpha("white",0),colour =alpha("white",0)),
+        title = element_text(size=25, colour=col_text))+
+  ylim(-60,60) + xlim(-600,600)+
+  annotate("pointrange",x=-588,y=34,ymin=34,ymax=34,shape=21,size=1,col="#F89441",fill=alpha("#F89441",0.4))+
+  annotate("text",x=-550,y=34,label = "Matched Treat", size=5, colour=col_text,hjust = 0,family=font_fsc)+
+  annotate("pointrange",x=-588,y=40,ymin=40,ymax=40,shape=21,size=1,col="#E16462",fill=alpha("#E16462",0.4))+
+  annotate("text",x=-550,y=40,label = "Matched Control", size=5, colour=col_text,hjust = 0,family=font_fsc)
+
+```
+]
+
+---
+# Step 5b: ... until template is the same as the interval
+
+.pull-left[
+This can break in two ways:
+<br>
+<br>
+.box-0[1) No overlap of covariates]
+<br>
+.box-0[.center[2) Predictive covariates don't explain correlation between R and Y]]
+]
+
+.pull-right[
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+
+library(ggplot2)
+library(firasans)
+library(leaflet)
+library(hrbrthemes)
+library(plotly)
+
+githubURL <- "https://github.com/maibennett/presentations/raw/main/content/presentations/RD/IC_20210312/data/grd1.Rdata"
+load(url(githubURL))
+
+intercepts1 = c(-80,-130,-162.56369)
+intercepts2 = c(120,80,48.81405)
+
+d1 = data3
+d1$f = 1
+d1$intercepts1 = intercepts1[1]
+d1$intercepts2 = intercepts2[1]
+d1$color = "#eee473"
+
+### Adjust EST
+y0 = d1$est[d1$running_var<=(intercepts1[1]+10) &
+              !is.na(d1$est)][length(d1$est[d1$running_var<=(intercepts1[1]+10) 
+                                                                   & !is.na(d1$est)])]
+x0 = (intercepts1[1]+10)
+mp = 7/(d1$running_var[d1$running_var<=(intercepts1[1]+10) & 
+                          !is.na(d1$est)][length(d1$est[d1$running_var<=(intercepts1[1]+10) & 
+                                                          !is.na(d1$est)])] -
+           d1$running_var[d1$running_var<=(intercepts1[1]+10) & 
+                          !is.na(d1$est)][1])
+
+adjust = 0.01*(mp*(d1$running_var[d1$running_var<=(intercepts1[1]+10) & !is.na(d1$est)] - x0)^2 + y0)
+
+adjust = c(adjust[2:length(adjust)], 0)
+
+d1$est[d1$running_var<=(intercepts1[1]+10) & !is.na(d1$est)] = d1$est[d1$running_var<=(intercepts1[1]+10) &
+                                                                   !is.na(d1$est)] - adjust
+
+###### Adjust CIL
+y0 = d1$cil[d1$running_var<=(intercepts1[1]+10) &
+              !is.na(d1$est)][length(d1$est[d1$running_var<=(intercepts1[1]+10) 
+                                                                   & !is.na(d1$est)])]
+x0 = (intercepts1[1]+10)
+mp = 7.7/(d1$running_var[d1$running_var<=(intercepts1[1]+10) & 
+                          !is.na(d1$est)][length(d1$est[d1$running_var<=(intercepts1[1]+10) & 
+                                                          !is.na(d1$est)])] -
+           d1$running_var[d1$running_var<=(intercepts1[1]+10) & 
+                          !is.na(d1$est)][1])
+
+adjust = 0.01*(mp*(d1$running_var[d1$running_var<=(intercepts1[1]+10) & !is.na(d1$est)] - x0)^2 + y0)
+
+adjust = c(adjust[2:length(adjust)], 0)
+
+d1$cil[d1$running_var<=(intercepts1[1]+10) & !is.na(d1$cil)] = d1$cil[d1$running_var<=(intercepts1[1]+10) &
+                                                                   !is.na(d1$cil)] - adjust
+
+#### Adjust CIU
+y0 = d1$ciu[d1$running_var<=intercepts1[1] & !is.na(d1$est)][length(d1$est[d1$running_var<=intercepts1[1] 
+                                                                   & !is.na(d1$est)])]
+x0 = intercepts1[1]
+mp = 6.3/(d1$running_var[d1$running_var<=intercepts1[1] & 
+                          !is.na(d1$est)][length(d1$est[d1$running_var<=intercepts1[1] & 
+                                                          !is.na(d1$est)])] -
+           d1$running_var[d1$running_var<=intercepts1[1] & 
+                          !is.na(d1$est)][1])
+
+adjust = 0.01*(mp*(d1$running_var[d1$running_var<=intercepts1[1] & !is.na(d1$est)] - x0)^2 + y0)
+
+adjust = c(adjust[2:length(adjust)], 0)
+
+d1$ciu[d1$running_var<=intercepts1[1] & !is.na(d1$ciu)] = d1$ciu[d1$running_var<=intercepts1[1] &
+                                                                   !is.na(d1$ciu)] - adjust
+
+d1$title = ""
+
+githubURL <- "https://github.com/maibennett/presentations/raw/main/content/presentations/RD/IC_20210312/data/grd2.Rdata"
+load(url(githubURL))
+
+d2 = data3
+d2$f = 2
+d2$intercepts1 = intercepts1[2]
+d2$intercepts2 = intercepts2[2]
+d2$color = "#eee473"
+
+d2$title = ""
+
+githubURL <- "https://github.com/maibennett/presentations/raw/main/content/presentations/RD/IC_20210312/data/grd3.Rdata"
+load(url(githubURL))
+
+data3$running_var[!is.na(data3$est)] = data3$running_var[!is.na(data3$est)]+25
+d3 = data3
+d3$f = 3
+d3$intercepts1 = intercepts1[3]
+d3$intercepts2 = intercepts2[3]
+d3$color = "#eee473"
+
+d3$title = "Optimal interval H*"
+
+d4 = data3
+d4$f = 4
+d4$intercepts1 = intercepts1[3]
+d4$intercepts2 = intercepts2[3]
+d4$color = "#FF1654"
+
+d4$title = "Optimal interval H*"
+
+dfull = rbind(d1,d2,d3,d4)
+
+dfull$ribbon_x = NA
+dfull$ribbon_y = NA
+
+dfull$ribbon_x[dfull$f==1][1:4] = c(0,-40,-40,0)
+dfull$ribbon_y[dfull$f==1][1:4] = c(-50,-50,50,50)
+dfull$ribbon_x[dfull$f==2][1:4] = c(0,-80,-80,0)
+dfull$ribbon_y[dfull$f==2][1:4] = c(-50,-50,50,50)
+dfull$ribbon_x[dfull$f==3][1:4] = c(0,intercepts1[3],intercepts1[3],0)
+dfull$ribbon_y[dfull$f==3][1:4] = c(-50,-50,50,50)
+
+dfull$ribbon_x[dfull$f==4][1:4] = c(0,intercepts1[3],intercepts1[3],0)
+dfull$ribbon_y[dfull$f==4][1:4] = c(-50,-50,50,50)
+
+
+m <- list(
+  l = 80,
+  r = 50,
+  b = 10,
+  t = 50,
+  pad = 4
+)
+
+t <- list(
+  family = "Fira Sans Condensed",
+  size = 32,
+  color = '#6C6C6C',
+  weight = 300)
+
+t2 <- list(
+  family = "Fira Sans Condensed",
+  size = 25,
+  color = '#6C6C6C',
+  weight = 300)
+
+t3 <- list(
+  family = "Fira Sans Condensed",
+  size = 15,
+  color = '#6C6C6C')
+
+dfull$change=0
+dfull$change[dfull$f==4] = 1
+#eee473
+colors = c(rep("#900DA4",3),"#FCCE25")
+
+colNum = colorBin(colors,domain = dfull$change,bins=2)
+
+fig <- dfull %>% plot_ly(frame = ~f, colors = colors) %>%
+  layout(xaxis = list(title = "",
+                      titlefont = t2,
+                      showgrid = FALSE, zeroline = FALSE,
+                      showline = FALSE,
+                      showticklabels = TRUE,
+                      range = c(-400,400), titlefont = t2, tickfont = t3),
+         yaxis = list(title = "",
+                      showgrid = TRUE, zeroline = FALSE,
+                      showline = FALSE,
+                      showticklabels = FALSE,
+                      range = c(-30,30), titlefont = t2),
+         plot_bgcolor="rgba(0, 0, 0, 0)",
+         paper_bgcolor="rgba(0, 0, 0, 0)",
+         margin = m, showlegend = FALSE,autosize = F, width = 550, height = 528) %>%
+ # add_annotations(text = sprintf("<b>Pre-intervention</b>"),yref="paper", xref="paper", 
+#                  y=1.1, x=0, align = 'left',
+#                  showarrow=F, font = t)%>%
+  add_annotations(text = sprintf("Running variable"),yref="paper", xref="paper", 
+                  y=-0.2, x=1, align = 'right',
+                  showarrow=F, font = t2)%>%
+  add_annotations(text = sprintf("Outcome"),yref="paper", xref="paper", 
+                  y=1, x=-0.1, align = 'right', textangle = -90,
+                  showarrow=F, font = t2)%>%
+  add_annotations(text = sprintf("Cutoff"),yref="paper", xref="paper", 
+                  y=1.1, x=0.5, align = 'center',
+                  showarrow=F, font = t3)%>%
+  #add_text(x = -300, y = 25, frame=~f, text = ~title, textfont = t) %>%
+  add_trace(x=~running_var,y=~y, frame=~f,type='scatter',mode='markers',
+            marker = list(color=alpha('#c1c1c1',0),size=5, opacity = 1,
+            line = list(
+              color = alpha('#c1c1c1',0.6),
+              width = 1
+            ))) %>%
+  add_lines(data = dfull[!is.na(dfull$est),], x=~running_var,y=~est, frame=~f,
+              line = list(color = alpha('#900DA4',0.8), width = 2.5)) %>%
+  add_lines(data = dfull[!is.na(dfull$est),], x=~running_var,y=~cil, frame=~f,
+              line = list(color = alpha('#900DA4',0), width = 1.5, dash='dash')) %>%
+  add_lines(data = dfull[!is.na(dfull$est),], x=~running_var,y=~ciu, frame=~f,
+              line = list(color = alpha('#900DA4',0), width = 1.5, dash='dash')) %>%
+  add_ribbons(data = dfull[!is.na(dfull$est),], x=~running_var, ymin=~cil, ymax=~ciu, frame=~f,
+              fillcolor = alpha('#900DA4',0.3), line = list(color = alpha('#900DA4',0.3), width = 0)) %>%
+  add_trace(data = dfull[!is.na(dfull$ribbon_x),],x=~ribbon_x, y=~ribbon_y, frame=~f,
+            fill = "toself",type='scatter',mode='lines',
+              fillcolor = alpha('#D6D4D4',0.3), line = list(color = alpha('#D6D4D4',0.3), width = 0)) %>%
+  add_segments(x = ~intercepts1, y = -50, xend = ~intercepts1, yend = 50, frame = ~f,
+               color = ~f,
+               line = list(width = 3, dash = 'dash')) %>%
+  add_segments(x = ~intercepts2, y = -50, xend = ~intercepts2, yend = 50, frame = ~f,
+               color = ~f,
+               line = list(width = 3, dash = 'dash')) %>%
+  add_segments(x = 0, y = -50, xend = 0, yend = 50, frame = ~f,
+               line = list(color = alpha("#838383",0.7), width = 1.2, dash = 'dash')) %>%
+  animation_opts(frame=1200,transition=800,redraw = FALSE) %>%
+  animation_slider(hide = TRUE) %>% config(displayModeBar = FALSE) %>% 
+  animation_button(visible = TRUE) %>% hide_colorbar()
+
+fig
+
+```
+]
+
+---
+# Step 6: ATT estimation
+
+```{r grd6, fig.height=5.7, fig.width=10, fig.align='center', dev='svg', echo = FALSE, warning = FALSE, message = FALSE}
+
+g
+
+```
+
+---
+# Step 6: ATT estimation
+
+Straightforward estimation given the matched sample:
+
+- E.g. paired t-test:
+
+$$\hat{\tau}_{ATT}= \sum_{k=1}^N\frac{Y_{k(1)1} - Y_{k(0)1} - (Y_{k(1)0} - Y_{k(0)0})}{N} = \sum_{k=1}^N\frac{d_k}{N}$$
+
+$Y_{k(z)t}$: Outcome within matched group $k$ with treatment $z$ for period $t$.
+---
+
+background-position: 50% 50%
+class: left, middle, inverse, nonum
+.big[
+Application: Free Higher Education
+<br>
+]
+
+---
+# Free Higher Education (FHE) in Chile
+
+**Context of higher education in Chile:**
+
+- Centralized admission system (deferred admission mechanism)
+
+- Admission score: PSU score + GPA score + ranking score
+
+- Before 2016: Scholarships + government-backed loans
+
+**FHE policy:**
+
+- Introduced in December 2015 (unanticipated)
+
+- Eligibility: Lower 50% income distribution + admitted to eligible program
+
+---
+# Research question
+<br>
+.box-5[What was the effect of being eligible for FHE on application and enrollment to university?]
+--
+<br>
+- **Treatment:** SE eligibility for FHE
+
+- **Two outcomes:** Application to university and enrollment
+
+  - Lower-income students $\rightarrow$ financial constraints
+  - Saliency of the policy
+--
+
+- **Larger effects for students away from the cutoff?**
+
+  - Compare RD to GRD results
+
+---
+#What data do I have?
+<br>
+<br>
+- **3 cohorts:** 2014, 2015, and 2016 (~ 200,000 students)
+
+
+- **Rich baseline data:** Demographic and socioeconomic data at student level, 10th (8th) grade standardized scores, school characteristics.
+
+
+- **Application data:** Scores by subject, application, and enrollment.
+
+---
+# How does the RD look like?
+
+.center[
+![:scale 100%](https://raw.githubusercontent.com/maibennett/presentations/main/content/presentations/RD/IC_20210312/images/rd_application-1.svg)
+]
+
+<!--
+```{r rd_application, fig.height=5.8, fig.width=12, fig.align='center', dev='svg', echo = FALSE, warning = FALSE, message = FALSE}
+# library(patchwork)
+# 
+# col2 = "#EE6352"
+# col3 = "#FFCF4F"
+# 
+# load("C:/Users/mc72574/Dropbox/Hugo/Sites/presentations/content/presentations/RD/IC_20210312/data/data0_application.RData")
+# 
+# g1 <- ggplot(data2015,aes(y=y,x=x, label=NA), fill="white")+geom_point(fill="white", color="slategrey", shape=21)+
+#   geom_line(data=data2015[data2015$lx<0,],aes(x=lx, y=ly,color=col2), size=1)+
+#   geom_line(data=data2015[data2015$lx>0,],aes(x=lx, y=ly,color=col2), size=1)+
+#   geom_vline(aes(xintercept=0),linetype='dashed') + theme_bw()+
+#   xlab("Adjusted income per capita") + ylab("Enrollment")+ggtitle("Pre-FHE (2015)")+
+#   theme_ipsum_fsc(grid="Y", plot_title_size = 20,
+#                   axis_text_size = 10,
+#                   axis_title_size=12,
+#                   axis_col = col_text)+
+#   theme(plot.margin=unit(c(1,1,1.5,1.2),"cm"))+
+#   theme(axis.title.x = element_text(size=20, colour=col_text,margin = margin(t = 10, r = 0, b = 0, l = 0)),
+#         axis.text.x = element_text(size=12, colour=col_text),
+#         axis.title.y = element_text(size=20, colour=col_text,margin = margin(t = 0, r = 10, b = 0, l = 0)),
+#         axis.text.y = element_text(size=12, colour=col_text),legend.position="none",
+#         legend.title = element_blank(),
+#         legend.text = element_text(size=15, colour=col_text),
+#         legend.background = element_rect(fill="white",colour ="white"),
+#         title = element_text(size=25, colour=col_text))+
+#   ylim(0,1)+xlim(-1500,1500)
+# 
+# 
+# g2 <- ggplot(data2016,aes(y=y,x=x, label=NA), fill="white")+geom_point(fill="white", color="slategrey", shape=21)+
+#   geom_line(data=data2016[data2016$lx<0,],aes(x=lx, y=ly,color=col2), size=1)+
+#   geom_line(data=data2016[data2016$lx>0,],aes(x=lx, y=ly,color=col2), size=1)+
+#   geom_vline(aes(xintercept=0),linetype='dashed') + theme_bw()+
+#   xlab("Adjusted income per capita") + ylab("Enrollment")+ggtitle("Post-FHE (2016)")+
+#   theme_ipsum_fsc(grid="Y", plot_title_size = 20,
+#                   axis_text_size = 10,
+#                   axis_title_size=12,
+#                   axis_col = col_text)+
+#   theme(plot.margin=unit(c(1,1,1.5,1.2),"cm"))+
+#   theme(axis.title.x = element_text(size=20, colour=col_text,margin = margin(t = 10, r = 0, b = 0, l = 0)),
+#         axis.text.x = element_text(size=12, colour=col_text),
+#         axis.title.y = element_text(size=20, colour=col_text,margin = margin(t = 0, r = 10, b = 0, l = 0)),
+#         axis.text.y = element_text(size=12, colour=col_text),legend.position="none",
+#         legend.title = element_blank(),
+#         legend.text = element_text(size=15, colour=col_text),
+#         legend.background = element_rect(fill="white",colour ="white"),
+#         title = element_text(size=25, colour=col_text))+
+#   ylim(0,1)+xlim(-1500,1500)
+# 
+# g1 + g2
+
+```
+-->
+
+---
+# GRD for Free Higher Education
+
+**Steps for GRD:**
+
+- Select template size: $N = 1,000$
+
+- 20 bin for grid
+
+- MIP matching:
+  
+  - Restricted mean balance (0.05 SD) : Academic performance, school characteristics, demographic/socioeconomic variables.
+  
+  - Fine balance: Gender, mother's and father's education (8 cat.), PSU language score (deciles), PSU math score (deciles), HS GPA (quintiles).
+  
+--
+
+**Generalization interval: [-M$500.3, M$300.9]**
+
+---
+# For what population are we generalizing for?
+
+.center[
+![:scale 100%](https://raw.githubusercontent.com/maibennett/presentations/main/content/presentations/RD/IC_20210312/images/rd_grd_application-1.svg)
+]
+
+<!--
+```{r rd_grd_application, fig.height=5.8, fig.width=12, fig.align='center', dev='svg', echo = FALSE, warning = FALSE, message = FALSE}
+
+load("C:/Users/mc72574/Dropbox/Hugo/Sites/presentations/content/presentations/RD/IC_20210312/data/data0_application.RData")
+
+ggplot(data2016,aes(y=y,x=x, label=NA), fill="white")+
+  geom_ribbon(aes(y=y,xmin = -500.3, xmax = 0),fill = "grey", alpha = 0.3) +
+  geom_point(fill="white", color="slategrey", shape=21)+
+  geom_line(data=data2016[data2016$lx<0,],aes(x=lx, y=ly,color=col2), size=1)+
+  geom_line(data=data2016[data2016$lx>0,],aes(x=lx, y=ly,color=col2), size=1)+
+  geom_vline(aes(xintercept=0),linetype='dashed') + 
+  geom_vline(aes(xintercept=-500.3),linetype='dashed', lwd = 1.5, col = "#FCCE25") + 
+  geom_vline(aes(xintercept=300.9),linetype='dashed', lwd = 1.5, col = "#FCCE25") + 
+  theme_bw()+
+  xlab("Adjusted income per capita") + ylab("Enrollment")+ggtitle("Post-FHE (2016)")+
+  theme_ipsum_fsc(grid="Y", plot_title_size = 20,
+                  axis_text_size = 10,
+                  axis_title_size=12,
+                  axis_col = col_text)+
+  theme(plot.margin=unit(c(1,1,1.5,1.2),"cm"))+
+  theme(axis.title.x = element_text(size=20, colour=col_text,margin = margin(t = 10, r = 0, b = 0, l = 0)),
+        axis.text.x = element_text(size=12, colour=col_text),
+        axis.title.y = element_text(size=20, colour=col_text,margin = margin(t = 0, r = 10, b = 0, l = 0)),
+        axis.text.y = element_text(size=12, colour=col_text),legend.position="none",
+        legend.title = element_blank(),
+        legend.text = element_text(size=15, colour=col_text),
+        legend.background = element_rect(fill="white",colour ="white"),
+        title = element_text(size=25, colour=col_text))+
+  ylim(0,1)+xlim(-1000,1000)
+
+```
+-->
+---
+# For what population are we generalizing for?
+
+.center[
+![:scale 100%](https://raw.githubusercontent.com/maibennett/presentations/main/content/presentations/RD/IC_20210312/images/rd_grd_application2-1.svg)
+]
+
+<!--
+```{r rd_grd_application2, fig.height=5.8, fig.width=12, fig.align='center', dev='svg', echo = FALSE, warning = FALSE, message = FALSE}
+
+ggplot(data2016,aes(y=y,x=x, label=NA), fill="white")+
+  geom_ribbon(aes(y=y,xmin = -500.3, xmax = 0),fill = "grey", alpha = 0.3) +
+  geom_point(fill="white", color="slategrey", shape=21)+
+  geom_line(data=data2016[data2016$lx<0,],aes(x=lx, y=ly,color=col2), size=1)+
+  geom_line(data=data2016[data2016$lx>0,],aes(x=lx, y=ly,color=col2), size=1)+
+  geom_vline(aes(xintercept=0),linetype='dashed') + 
+  geom_vline(aes(xintercept=-500.3),linetype='dashed', lwd = 1.5, col = "#FCCE25") + 
+  geom_vline(aes(xintercept=300.9),linetype='dashed', lwd = 1.5, col = "#FCCE25") + 
+  theme_bw()+
+  xlab("Adjusted income per capita") + ylab("Enrollment")+ggtitle("Post-FHE (2016)")+
+  theme_ipsum_fsc(grid="Y", plot_title_size = 20,
+                  axis_text_size = 10,
+                  axis_title_size=12,
+                  axis_col = col_text)+
+  theme(plot.margin=unit(c(1,1,1.5,1.2),"cm"))+
+  theme(axis.title.x = element_text(size=20, colour=col_text,margin = margin(t = 10, r = 0, b = 0, l = 0)),
+        axis.text.x = element_text(size=12, colour=col_text),
+        axis.title.y = element_text(size=20, colour=col_text,margin = margin(t = 0, r = 10, b = 0, l = 0)),
+        axis.text.y = element_text(size=12, colour=col_text),legend.position="none",
+        legend.title = element_blank(),
+        legend.text = element_text(size=15, colour=col_text),
+        legend.background = element_rect(fill="white",colour ="white"),
+        title = element_text(size=25, colour=col_text))+
+  ylim(0,1)+xlim(-1000,1000) +
+  annotate("text", x=-250, y = 0.8, size = 10, label = "50%", colour=col_text,hjust = 0.5,family=font_fsc)
+
+```
+-->
+
+---
+# Testing time invariance on control side for t=1
+.center[
+![:scale 90%](https://raw.githubusercontent.com/maibennett/presentations/main/content/presentations/RD/IC_20210312/images/test_y1.png)]
+---
+# Balance for the entire sample
+
+.center[
+![:scale 100%](https://raw.githubusercontent.com/maibennett/presentations/main/content/presentations/RD/IC_20210312/images/balance_all-1.svg)]
+
+<!--
+```{r balance_all, fig.height=5.8, fig.width=12, fig.align='center', dev='svg', echo = FALSE, warning = FALSE, message = FALSE}
+load("C:/Users/mc72574/Dropbox/Hugo/Sites/presentations/content/presentations/RD/IC_20210312/data/data1_application.RData")
+
+d_aux = d[d$year==2016 & d$inc_pc_adj>-500 & d$inc_pc_adj<301,]
+d_aux$treat = as.numeric(d_aux$decil_se_f<=5)
+
+names_mom <- c("female_3","edm","edf","leng_score","math_score","gpa_score","rank_score",
+               "simce_stu","simce_sch","ses_sch_5","capital", "public_sch","pub_health_2")
+
+meantab1 = meantab(d_aux[,names_mom],d_aux$treat,which(d_aux$treat==1),
+                   which(d_aux$treat==0))[,-c(1,2,3,7)]
+
+row.names(meantab1) = c("Female","Mother's education (years)","Father's education (years)",
+                        "Language PSU score", "Math PSU score","GPA score", "Ranking score",
+                        "SIMCE 10th grade (student)","SIMCE 10th grade (school)",
+                        "SES group school","Lives in Metropolitan region", "Public school",
+                        "Public health insurance")
+
+meantab1_x = xtable(meantab1)
+
+
+# Love plot function for multiple groups adapted from loveplot() function from the `designmatch' package 
+
+d$treat = as.numeric(d$decil_se_f<=5)
+
+names_mom2 = c("female_3","edm_8_lessHS","edm_8_HS","edm_8_lessTec","edm_8_Tec","edm_8_lessUni","edm_8_Uni",
+               "edm_8_miss","edf_8_lessHS","edf_8_HS","edf_8_lessTec","edf_8_Tec","edf_8_lessUni","edf_8_Uni",
+               "edf_8_miss",names_mom[-c(1,2,3)])
+
+meantab_all = meantab(d[d$year==2016,names_mom2],d$treat[d$year==2016],which(d$treat[d$year==2016]==1),
+                      which(d$treat[d$year==2016]==0))
+
+meantab_af = meantab(d_af[,names_mom2],d_af$treat,which(d_af$treat==1),
+                     which(d_af$treat==0))
+
+meantab_bef = meantab(d_aux[,names_mom2],d_aux$treat,which(d_aux$treat==1),
+                   which(d_aux$treat==0))
+
+n_aux = length(names_mom2)+2
+
+abs_std_dif_all = abs(meantab_all[,6])
+abs_std_dif_before = abs(meantab_bef[,6])
+abs_std_dif_after = abs(meantab_af[,6])
+
+names_mom_format = c("Female","Mother's education","    Less HS","     HS","     Some voc","     Voc",
+                     "     Some college","     College","    Miss","Father's education",
+                     "    Less HS","     HS","     Some voc","     Voc",
+                     "     Some college","     College","    Miss",
+                     "Language PSU score", "Math PSU score","GPA score", "Ranking score",
+                     "SIMCE 10th grade (student)","SIMCE 10th grade (school)",
+                     "SES group school","Lives in Metropolitan region", "Public school",
+                     "Public health insurance")
+
+
+abs_std_dif_all = c(abs_std_dif_all[1],NA,abs_std_dif_all[2:8],NA,
+                       abs_std_dif_all[9:length(abs_std_dif_all)])
+
+
+abs_std_dif_before = c(abs_std_dif_before[1],NA,abs_std_dif_before[2:8],NA,
+                       abs_std_dif_before[9:length(abs_std_dif_before)])
+
+abs_std_dif_after = c(abs_std_dif_after[1],NA,abs_std_dif_after[2:8],NA,
+                       abs_std_dif_after[9:length(abs_std_dif_after)])
+
+
+par(family=font_fsc,mar=c(5,2,1,1.1),bty="n", adj=1)
+
+#1
+
+dotchart(abs_std_dif_all[n_aux:1], labels = names_mom_format[n_aux:1], cex = 1, cex.axis = 1.2, 
+         pch = "", color = col_text, main = "", xlim = c(0, 1), 
+         xlab = "Absolute standardized differences in means")
+points(abs_std_dif_all[n_aux:1], y = 1:n_aux, cex = 1.5, pch = 1, lwd=2)
+legend("topright", c("All T-C","H* T-C Before matching", "H* T-C After matching"), cex = 1.2, 
+       pch = c(1,0, 8), col = c("black",col2,col1),
+       lwd=c(2,2,2),lty=c(NA,NA,NA))
+abline(v = 0, lty = 2)
+abline(v = 0.05, col="dark grey",lty = 2)
+
+```
+-->
+---
+# Balance within generalization interval (before matching)
+
+.center[
+![:scale 100%](https://raw.githubusercontent.com/maibennett/presentations/main/content/presentations/RD/IC_20210312/images/balance_before-1.svg)]
+<!--
+```{r balance_before, fig.height=5.8, fig.width=12, fig.align='center', dev='svg', echo = FALSE, warning = FALSE, message = FALSE}
+par(family=font_fsc,mar=c(5,2,1,1.1),bty="n", adj=1)
+
+dotchart(abs_std_dif_all[n_aux:1], labels = names_mom_format[n_aux:1], cex = 1, cex.axis = 1.2, 
+         pch = "", color = col_text, main = "", xlim = c(0, 1), 
+         xlab = "Absolute standardized differences in means")
+points(abs_std_dif_all[n_aux:1], y = 1:n_aux, cex = 1.5, pch = 1, lwd=2)
+points(abs_std_dif_before[n_aux:1], y = 1:n_aux, cex = 1.5, pch = 0, 
+       col=col2,lwd=2)
+legend("topright", c("All T-C","H* T-C Before matching", "H* T-C After matching"), cex = 1.2, 
+       pch = c(1,0, 8), col = c("black",col2,col1),
+       lwd=c(2,2,2),lty=c(NA,NA,NA))
+abline(v = 0, lty = 2)
+abline(v = 0.05, col="dark grey",lty = 2)
+
+```
+-->
+---
+# Balance within generalization interval (after matching)
+
+.center[
+![:scale 100%](https://raw.githubusercontent.com/maibennett/presentations/main/content/presentations/RD/IC_20210312/images/balance_after-1.svg)]
+<!--
+```{r balance_after, fig.height=5.8, fig.width=12, fig.align='center', dev='svg', echo = FALSE, warning = FALSE, message = FALSE}
+par(family=font_fsc,mar=c(5,2,1,1.1),bty="n", adj=1)
+
+dotchart(abs_std_dif_before[n_aux:1], labels = names_mom_format[n_aux:1], cex = 1, cex.axis = 1.2, 
+         pch = "", color = col_text, main = "", xlim = c(0, 1), 
+         xlab = "Absolute standardized differences in means")
+points(abs_std_dif_all[n_aux:1], y = 1:n_aux, cex = 1.5, pch = 1,lwd=2)
+points(abs_std_dif_before[n_aux:1], y = 1:n_aux, cex = 1.5, pch = 0, 
+       col=col2,lwd=2)
+points(abs_std_dif_after[n_aux:1], y = 1:n_aux, cex = 1.5, pch = 8, 
+       col = col1,lwd=2)
+legend("topright", c("All T-C","H* T-C Before matching", "H* T-C After matching"), cex = 1.2, 
+       pch = c(1,0, 8), col = c("black",col2,col1),
+       lwd=c(2,2,2),lty=c(NA,NA,NA))
+abline(v = 0, lty = 2)
+abline(v = 0.05, col="dark grey",lty = 2)
+```
+-->
+---
+# Effects of introduction of FHE: RD and GRD
+
+.small[
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+library(reactable)
+library(htmltools)
+
+tab <- rbind(c("0.035","0.069**","0.052**", "0.077***"),
+             c("[-0.007, 0.077]", "[0.026, 0.112]", "[0.008, 0.096]", "[0.029, 0.125]"),
+             c("6,588", "6,458", "2,000", "2,000"),
+             c("0.606","0.515","0.568","0.472"))
+
+colnames(tab) <- c("Application_RD","Enrollment_RD","Application_GRD","Enrollment_GRD")
+rownames (tab) <- c("Effect", "", "Effective N Obs", "Control Mean")
+
+
+tbl <- tab %>%
+  reactable(
+    # ALL one page (no scrolling or page swapping)
+    pagination = TRUE,
+    rownames = TRUE,
+    # compact for an overall smaller table width wise
+    compact = FALSE,
+    # borderless - TRUE or FALSE
+    borderless = FALSE,
+    # Stripes - TRUE or FALSE
+    striped = TRUE,
+    # fullWidth - either fit to width or not
+    fullWidth = TRUE,
+    # apply defaults
+    # 100 px and align to center of column
+    defaultColDef = colDef(
+      align = "center"),
+    style = list(fontFamily = "Jost, sans-serif"),
+    
+    columns = list(
+      Application_RD = colDef(name = "Application"),
+      Enrollment_RD = colDef(name = "Enrollment",
+                  style = list(borderRight = "1px solid rgba(0, 0, 0, 0.1)")),
+      Application_GRD = colDef(name = "Application"),
+      Enrollment_GRD = colDef(name = "Enrollment")
+    ),
+    columnGroups = list(
+      colGroup(name = "Robust RD results", columns = c("Application_RD", "Enrollment_RD")),
+      colGroup(name = "GRD results", columns = c("Application_GRD", "Enrollment_GRD"))
+      
+    ),
+    highlight = TRUE
+    
+  )
+
+tbl
+
+```
+
+.source[Note: Generalization interval \[-M$500, M$301\]. 95% CI in brackets.]
+]
+
+---
+# Effects of introduction of FHE: Application
+
+.small[
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+
+tbl <- tab %>%
+  reactable(
+    # ALL one page (no scrolling or page swapping)
+    pagination = TRUE,
+    rownames = TRUE,
+    # compact for an overall smaller table width wise
+    compact = FALSE,
+    # borderless - TRUE or FALSE
+    borderless = FALSE,
+    # Stripes - TRUE or FALSE
+    striped = FALSE,
+    # fullWidth - either fit to width or not
+    fullWidth = TRUE,
+    # apply defaults
+    # 100 px and align to center of column
+    defaultColDef = colDef(
+      align = "center",
+      style = function(value) {
+      if (value=="0.035" | value=="[-0.007, 0.077]" | value=="0.052**" | value=="[0.008, 0.096]") {
+        color <- "#E16462"
+        background <- "rgba(225, 100, 98,0.3)"
+           weight <- "bold"
+      }
+        else{
+          color <- "#333f48"
+          background <- "white"
+          weight <- "normal"
+        }
+      list(color = color, background = background, fontWeight = weight)
+    }),
+    style = list(fontFamily = "Jost, sans-serif"),
+    
+    columns = list(
+      Application_RD = colDef(name = "Application"),
+      Enrollment_RD = colDef(name = "Enrollment",
+                  style = list(borderRight = "1px solid rgba(0, 0, 0, 0.1)")),
+      Application_GRD = colDef(name = "Application"),
+      Enrollment_GRD = colDef(name = "Enrollment")
+    ),
+    columnGroups = list(
+      colGroup(name = "Robust RD results", columns = c("Application_RD", "Enrollment_RD")),
+      colGroup(name = "GRD results", columns = c("Application_GRD", "Enrollment_GRD"))
+      
+    ),
+    highlight = FALSE
+    
+  )
+
+tbl
+```
+
+.source[Note: Generalization interval \[-M$500, M$301\]. 95% CI in brackets.]
+]
+
+---
+# Effects of introduction of FHE: Enrollment
+
+.small[
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+
+tbl <- tab %>%
+  reactable(
+    # ALL one page (no scrolling or page swapping)
+    pagination = TRUE,
+    rownames = TRUE,
+    # compact for an overall smaller table width wise
+    compact = FALSE,
+    # borderless - TRUE or FALSE
+    borderless = FALSE,
+    # Stripes - TRUE or FALSE
+    striped = FALSE,
+    # fullWidth - either fit to width or not
+    fullWidth = TRUE,
+    # apply defaults
+    # 100 px and align to center of column
+    defaultColDef = colDef(
+      align = "center",
+      style = function(value) {
+      if (value=="0.069**" | value=="[0.026, 0.112]" | value=="0.077***" | value=="[0.029, 0.125]") {
+        color <- "#E16462"
+        background <- "rgba(225, 100, 98,0.3)"
+        weight <- "bold"
+      }
+        else{
+          color <- "#333f48"
+          background <- "white"
+          weight <- "normal"
+        }
+      list(color = color, background = background, fontWeight = weight)
+    }),
+    style = list(fontFamily = "Jost, sans-serif"),
+    
+    columns = list(
+      Application_RD = colDef(name = "Application"),
+      Enrollment_RD = colDef(name = "Enrollment",
+                  style = function(value) {
+      if (value=="0.069**" | value=="[0.026, 0.112]" | value=="0.077***" | value=="[0.029, 0.125]") {
+        color <- "#E16462"
+        background <- "rgba(225, 100, 98,0.3)"
+        weight <- "bold"
+      }
+        else{
+          color <- "#333f48"
+          background <- "white"
+          weight <- "normal"
+        }
+                    list(color = color, background = background, fontWeight = weight, borderRight = "1px solid rgba(0, 0, 0, 0.1)")}),
+      Application_GRD = colDef(name = "Application"),
+      Enrollment_GRD = colDef(name = "Enrollment")
+    ),
+    columnGroups = list(
+      colGroup(name = "Robust RD results", columns = c("Application_RD", "Enrollment_RD")),
+      colGroup(name = "GRD results", columns = c("Application_GRD", "Enrollment_GRD"))
+      
+    ),
+    highlight = FALSE
+    
+  )
+
+tbl
+
+```
+
+.source[Note: Generalization interval \[-M$500, M$301\]. 95% CI in brackets.]
+]
+---
+# How does the effect change with interval width?
+.center[
+![:scale 90%](https://raw.githubusercontent.com/maibennett/presentations/main/content/presentations/RD/IC_20210312/images/effect_by_h.png)]
+---
+# Conclusions
+
+- GRD as a **gradual approach** (not all or nothing)
+--
+
+<br>
+<br>
+- Use data to inform interval for generalization
+--
+
+<br>
+<br>
+- Use of matching to avoid extrapolation
+--
+
+<br>
+<br>
+- Limitations:
+  - More data: two periods
+  - Conditional time invariance assumption for $t=1$
+--
+
+<br>
+<br>
+- Multiple applications for DD-RD: e.g. geographic RDs.
+
+---
+
+background-position: 50% 50%
+class: center, middle, inverse, nonum
+.big[
+How Far is too Far? Generalization of a Regression Discontinuity Design Away from the Cutoff
+]
+<br>
+<br>
+New version of the paper is coming.
+<p href="https://magdalenabennett.com">www.magdalenabennett.com</p>
+<!-- pagedown::chrome_print('C:/Users/mc72574/Dropbox/Hugo/Sites/presentations/content/presentations/RD/IC_20210312/mbennett_grd.html', wait = 5, timeout = 60) -->

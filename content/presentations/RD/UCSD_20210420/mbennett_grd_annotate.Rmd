@@ -959,6 +959,9 @@ $$
 ]
 
 .pull-right[
+.center[
+![](https://raw.githubusercontent.com/maibennett/presentations/main/content/presentations/RD/UCSD_20210420/mbennett_grd_annotate_files/figure-html/grd1-1.svg)]
+<!--
 ```{r grd1, fig.height=6, fig.width=6.5, fig.align='center', dev='svg', echo = FALSE, warning = FALSE, message = FALSE, cache=TRUE}
 ## Load libraries
 library(designmatch)
@@ -1062,6 +1065,7 @@ ggplot(data2_post,aes(y=y,x=running_var, label=NA), fill="white")+geom_point(fil
   annotate("text",x=-550,y=35,label = "Observations", size=5, colour=col_text,hjust = 0,family=font_fsc)
 
 ```
+-->
 ]
 
 ---
@@ -1074,6 +1078,8 @@ ggplot(data2_post,aes(y=y,x=running_var, label=NA), fill="white")+geom_point(fil
 ]
 
 .pull-right[
+![](https://raw.githubusercontent.com/maibennett/presentations/main/content/presentations/RD/UCSD_20210420/mbennett_grd_annotate_files/figure-html/grd2-1.svg)]
+<!--
 ```{r grd2, fig.height=6, fig.width=6.5, fig.align='center', dev='svg', echo = FALSE, warning = FALSE, message = FALSE}
 
 ### Plot 1
@@ -1109,6 +1115,7 @@ ggplot(data2_post,aes(y=y,x=running_var, label=NA), fill="white")+geom_point(fil
   annotate("text",x=-570,y=40,label = "Template", size=5, colour=col_text,hjust = 0,family=font_fsc)
 
 ```
+-->
 ]
 
 ---
@@ -1121,6 +1128,9 @@ ggplot(data2_post,aes(y=y,x=running_var, label=NA), fill="white")+geom_point(fil
 ]
 
 .pull-right[
+.center[
+![](https://raw.githubusercontent.com/maibennett/presentations/main/content/presentations/RD/UCSD_20210420/mbennett_grd_annotate_files/figure-html/grd2a-1.svg)]
+<!--
 ```{r grd2a, fig.height=6, fig.width=6.5, fig.align='center', dev='svg', echo = FALSE, warning = FALSE, message = FALSE}
 
 
@@ -1169,6 +1179,7 @@ ggplot(data2[data2[,tvar]==0,],aes(y=y,x=running_var, label=NA), fill="white")+g
   annotate("pointrange",x=-588,y=35,ymin=35,ymax=35,shape=21,size=1,col="slategrey",fill="white",alpha=1)+
   annotate("text",x=-550,y=35,label = "Observations", size=5, colour=col_text,hjust = 0,family=font_fsc)
 ```
+-->
 ]
 
 ---
@@ -1181,6 +1192,9 @@ ggplot(data2[data2[,tvar]==0,],aes(y=y,x=running_var, label=NA), fill="white")+g
 ]
 
 .pull-right[
+.center[
+![](https://raw.githubusercontent.com/maibennett/presentations/main/content/presentations/RD/UCSD_20210420/mbennett_grd_annotate_files/figure-html/grd2b-1.svg)]
+<!--
 ```{r grd2b, fig.height=6, fig.width=6.5, fig.align='center', dev='svg', echo = FALSE, warning = FALSE, message = FALSE}
 
 ### Plot 2
@@ -1234,6 +1248,7 @@ ggplot(data2[data2[,tvar]==0,],aes(y=y,x=running_var, label=NA), fill="white")+
 
 
 ```
+-->
 ]
 
 ---
@@ -1246,6 +1261,9 @@ ggplot(data2[data2[,tvar]==0,],aes(y=y,x=running_var, label=NA), fill="white")+
 ]
 
 .pull-right[
+.center[
+![](https://raw.githubusercontent.com/maibennett/presentations/main/content/presentations/RD/UCSD_20210420/mbennett_grd_annotate_files/figure-html/grd2c-1.svg)]
+<!--
 ```{r grd2c, fig.height=6, fig.width=6.5, fig.align='center', dev='svg', echo = FALSE, warning = FALSE, message = FALSE}
 
 ggplot(data2[data2[,tvar]==0,],aes(y=y,x=running_var, label=NA), fill="white")+
@@ -1293,6 +1311,7 @@ ggplot(data2[data2[,tvar]==0,],aes(y=y,x=running_var, label=NA), fill="white")+
 
 
 ```
+-->
 ]
 
 ---
@@ -1305,6 +1324,9 @@ ggplot(data2[data2[,tvar]==0,],aes(y=y,x=running_var, label=NA), fill="white")+
 ]
 
 .pull-right[
+.center[
+![](https://raw.githubusercontent.com/maibennett/presentations/main/content/presentations/RD/UCSD_20210420/mbennett_grd_annotate_files/figure-html/grd2d-1.svg)]
+<!--
 ```{r grd2d, fig.height=6, fig.width=6.5, fig.align='center', dev='svg', echo = FALSE, warning = FALSE, message = FALSE}
 
 ggplot(data2[data2[,tvar]==0,],aes(y=y,x=running_var, label=NA), fill="white")+
@@ -1355,6 +1377,7 @@ ggplot(data2[data2[,tvar]==0,],aes(y=y,x=running_var, label=NA), fill="white")+
 
 
 ```
+-->
 ]
 
 ---
@@ -1367,6 +1390,9 @@ ggplot(data2[data2[,tvar]==0,],aes(y=y,x=running_var, label=NA), fill="white")+
 ]
 
 .pull-right[
+.center[
+![](https://raw.githubusercontent.com/maibennett/presentations/main/content/presentations/RD/UCSD_20210420/mbennett_grd_annotate_files/figure-html/grd2e-1.svg)]
+<!--
 ```{r grd2e, fig.height=6, fig.width=6.5, fig.align='center', dev='svg', echo = FALSE, warning = FALSE, message = FALSE}
 
 ggplot(data2[data2[,tvar]==0,],aes(y=y,x=running_var, label=NA), fill="white")+
@@ -1420,6 +1446,7 @@ ggplot(data2[data2[,tvar]==0,],aes(y=y,x=running_var, label=NA), fill="white")+
 
 
 ```
+-->
 ]
 
 ---
@@ -1432,6 +1459,9 @@ ggplot(data2[data2[,tvar]==0,],aes(y=y,x=running_var, label=NA), fill="white")+
 ]
 
 .pull-right[
+.center[
+![](https://raw.githubusercontent.com/maibennett/presentations/main/content/presentations/RD/UCSD_20210420/mbennett_grd_annotate_files/figure-html/grd2f-1.svg)]
+<!--
 ```{r grd2f, fig.height=6, fig.width=6.5, fig.align='center', dev='svg', echo = FALSE, warning = FALSE, message = FALSE}
 
 ggplot(d_match2,aes(y=y,x=running_var, label=NA), fill=col2)+
@@ -1478,6 +1508,7 @@ ggplot(d_match2,aes(y=y,x=running_var, label=NA), fill=col2)+
   annotate("text",x=-550,y=42,label = "Overlap region", size=5, colour=col_text,hjust = 0,family=font_fsc)
 
 ```
+-->
 ]
 ---
 # Step 3: Fit a local polynomial 
@@ -1489,6 +1520,9 @@ ggplot(d_match2,aes(y=y,x=running_var, label=NA), fill=col2)+
 ]
 
 .pull-right[
+.center[
+![](https://raw.githubusercontent.com/maibennett/presentations/main/content/presentations/RD/UCSD_20210420/mbennett_grd_annotate_files/figure-html/grd3-1.svg)]
+<!--
 ```{r grd3, fig.height=6, fig.width=6.5, fig.align='center', dev='svg', echo = FALSE, warning = FALSE, message = FALSE}
 
 data_eval = as.data.frame(cbind(eval,est,cil,ciu))
@@ -1552,6 +1586,7 @@ ggplot(data3,aes(y=y,x=running_var, label=NA), fill="white")+
 
 
 ```
+-->
 ]
 
 ---
@@ -1564,6 +1599,9 @@ ggplot(data3,aes(y=y,x=running_var, label=NA), fill="white")+
 ]
 
 .pull-right[
+.center[
+![](https://raw.githubusercontent.com/maibennett/presentations/main/content/presentations/RD/UCSD_20210420/mbennett_grd_annotate_files/figure-html/grd4-1.svg)]
+<!--
 ```{r grd4, fig.height=6, fig.width=6.5, fig.align='center', dev='svg', echo = FALSE, warning = FALSE, message = FALSE}
 
 ggplot(data3,aes(y=y,x=running_var, label=NA), fill="white")+
@@ -1625,6 +1663,7 @@ ggplot(data3,aes(y=y,x=running_var, label=NA), fill="white")+
 
 
 ```
+-->
 ]
 
 ---
@@ -1637,6 +1676,9 @@ ggplot(data3,aes(y=y,x=running_var, label=NA), fill="white")+
 ]
 
 .pull-right[
+.center[
+![](https://raw.githubusercontent.com/maibennett/presentations/main/content/presentations/RD/UCSD_20210420/mbennett_grd_annotate_files/figure-html/grd1-1.svg)]
+<!--
 ```{r grd5, fig.height=6, fig.width=6.5, fig.align='center', dev='svg', echo = FALSE, warning = FALSE, message = FALSE}
 
 ggplot(data3,aes(y=y,x=running_var, label=NA), fill="white")+
@@ -1696,6 +1738,7 @@ ggplot(data3,aes(y=y,x=running_var, label=NA), fill="white")+
   annotate("text",x=-550,y=12,label = "H1", size=5, colour=col_text,hjust = 0,family=font_fsc)
 
 ```
+-->
 ]
 
 ---
@@ -1708,6 +1751,9 @@ ggplot(data3,aes(y=y,x=running_var, label=NA), fill="white")+
 ]
 
 .pull-right[
+.center[
+![](https://raw.githubusercontent.com/maibennett/presentations/main/content/presentations/RD/UCSD_20210420/mbennett_grd_annotate_files/figure-html/grd5a-1.svg)]
+<!--
 ```{r grd5a, fig.height=6, fig.width=6.5, fig.align='center', dev='svg', echo = FALSE, warning = FALSE, message = FALSE}
 
 ### Plot 1
@@ -1749,6 +1795,7 @@ ggplot(data2_post,aes(y=y,x=running_var, label=NA), fill="white")+geom_point(fil
   annotate("text",x=-550,y=50,label = "Template", size=5, colour=col_text,hjust = 0,family=font_fsc)
 
 ```
+-->
 ]
 
 ---
@@ -1761,6 +1808,9 @@ ggplot(data2_post,aes(y=y,x=running_var, label=NA), fill="white")+geom_point(fil
 ]
 
 .pull-right[
+.center[
+![](https://raw.githubusercontent.com/maibennett/presentations/main/content/presentations/RD/UCSD_20210420/mbennett_grd_annotate_files/figure-html/grd5b-1.svg)]
+<!--
 ```{r grd5b, fig.height=6, fig.width=6.5, fig.align='center', dev='svg', echo = FALSE, warning = FALSE, message = FALSE, cache=TRUE}
 githubURL <- "https://github.com/maibennett/presentations/raw/main/content/presentations/RD/IC_20210312/data/example_grd_all.RData"
 load(url(githubURL))
@@ -1891,6 +1941,7 @@ g <- ggplot(data2_post,aes(y=y,x=running_var, label=NA), fill="white")+geom_poin
   annotate("text",x=-550,y=40,label = "Matched Control", size=5, colour=col_text,hjust = 0,family=font_fsc)
 
 ```
+-->
 ]
 
 ---

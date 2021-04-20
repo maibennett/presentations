@@ -905,14 +905,14 @@ GRD in practice
 # Context: Traditional matching
 
 .center[
-![:scale 60%](https://raw.githubusercontent.com/maibennett/presentations/main/content/presentations/RD/IC_20210312/images/diagram1_v2.svg)
+![:scale 60%](https://raw.githubusercontent.com/maibennett/presentations/main/content/presentations/RD/UCSD_20210420/images/diagram1_v2.svg)
 ]
 
 ---
 # Context: Representative template matching with two samples
 
 .center[
-![:scale 60%](https://raw.githubusercontent.com/maibennett/presentations/main/content/presentations/RD/IC_20210312/images/diagram2_v3.svg)
+![:scale 60%](https://raw.githubusercontent.com/maibennett/presentations/main/content/presentations/RD/UCSD_20210420/images/diagram2_v3.svg)
 ]
 
 ---

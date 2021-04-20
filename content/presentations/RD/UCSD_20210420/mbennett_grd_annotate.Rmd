@@ -642,7 +642,7 @@ Two-part problem with pre- and post-intervention periods:
 - **Two periods**: pre- and post-intervention, $t=0$ and $t=1$.
 
 - Running variable $R$ determines assingment $Z$ in $t=1$. E.g.:
-$$Z_{it} = \mathrm{I}(R_{it}<c)$$
+$$Z_{it} = \mathcal{I}(R_{it}<c)$$
 
 - Potential outcomes under treatmet $z = 0,1$:
 $$Y^{(z)}_{it} = g_z(\mathbf{X}_{it},\mathbf{u}_{it},r_{it}) + z_{it}\cdot \underbrace{\tau(\mathbf{X}_{it},\mathbf{u}_{it},r_{it})}_{\color{#E16462}{\style{font-family:inherit}{\text{Treat. Effect}}}} + \underbrace{\alpha_t}_{\color{#E16462}{\style{font-family:inherit}{\text{Period FE}}}}$$
@@ -900,11 +900,48 @@ GRD in practice
 ]
 
 ---
+# Context: Traditional matching
+
+.center[
+![:scale 60%](https://raw.githubusercontent.com/maibennett/presentations/main/content/presentations/RD/IC_20210312/images/diagram1_v2.svg)
+]
+
+---
+# Context: Representative template matching with two samples
+
+.center[
+![:scale 60%](https://raw.githubusercontent.com/maibennett/presentations/main/content/presentations/RD/IC_20210312/images/diagram2_v3.svg)
+]
+
+---
 # Context: Representative template matching
 
 .center[
 ![:scale 60%](https://raw.githubusercontent.com/maibennett/presentations/main/content/presentations/RD/IC_20210312/images/diagram3v2.svg)
 ]
+
+---
+# Cardinality matching: Original formulation
+
+$$
+\begin{align}
+\max_{\mathbf{m}} \ \ & \sum_{t\in \mathcal{T}} \sum_{c\in \mathcal{C}} m_{t,c} \\
+\text{subject to} \ \ & \sum_{t\in\mathcal{T}} m_{t,c} \leq 1, \ \forall c \in \mathcal{C} \\
+& \sum_{c\in\mathcal{C}} m_{t,c} \leq 1, \ \forall t \in \mathcal{T} \\
+& \sum_{t\in\mathcal{T}_{p,k}}\sum_{c\not\in\mathcal{C}_{p,k}} m_{t,c}  = \sum_{t\not\in\mathcal{T}_{p,k}}\sum_{c\in\mathcal{C}_{p,k}} m_{t,c}, \ \forall p \in \mathcal{P}, k \in \mathcal{K}(p) \\
+& m_{t,c} \in \{0,1\}, t\in \mathcal{T}, c \in \mathcal{C}
+\end{align}$$
+
+---
+# Cardinality matching: Projected formulation
+
+$$
+\begin{align}
+\max_{\mathbf{x,y}} \ \ & \sum_{t\in \mathcal{T}} x_{t} \\
+\text{subject to} \ \ & \sum_{t\in\mathcal{T}_{p,k}} x_{t} = \sum_{c\in\mathcal{C}_{p,k}} y_{t}, \ \forall \ p \in \mathcal{P}, k \in \mathcal{K}(p) \\
+& x_t \in \{0,1\}, \ \forall t \in \mathcal{T} \\
+& y_c \in \{0,1\}, \ \forall c \in \mathcal{C}
+\end{align}$$
 
 ---
 # Diagram for GRD
@@ -2688,5 +2725,5 @@ How Far is too Far? Generalization of a Regression Discontinuity Design Away fro
 ]
 <br>
 <br>
-New version of the paper is coming.
+New version of the paper is coming soon.
 <p href="https://magdalenabennett.com">www.magdalenabennett.com</p>

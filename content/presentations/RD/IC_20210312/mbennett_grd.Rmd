@@ -922,7 +922,7 @@ GRD in practice
 ]
 
 .pull-right[
-```{r grd1, fig.height=6, fig.width=6.5, fig.align='center', dev='svg', echo = FALSE, warning = FALSE, message = FALSE}
+```{r grd1, fig.height=6, fig.width=6.5, fig.align='center', dev='svg', echo = FALSE, warning = FALSE, message = FALSE, cache=TRUE}
 ## Load libraries
 library(designmatch)
 library(Rglpk)
@@ -1724,7 +1724,7 @@ ggplot(data2_post,aes(y=y,x=running_var, label=NA), fill="white")+geom_point(fil
 ]
 
 .pull-right[
-```{r grd5b, fig.height=6, fig.width=6.5, fig.align='center', dev='svg', echo = FALSE, warning = FALSE, message = FALSE}
+```{r grd5b, fig.height=6, fig.width=6.5, fig.align='center', dev='svg', echo = FALSE, warning = FALSE, message = FALSE, cache=TRUE}
 githubURL <- "https://github.com/maibennett/presentations/raw/main/content/presentations/RD/IC_20210312/data/example_grd_all.RData"
 load(url(githubURL))
 
@@ -1869,7 +1869,7 @@ This can break in two ways:
 ]
 
 .pull-right[
-```{r, echo=FALSE, warning=FALSE, message=FALSE}
+```{r, echo=FALSE, warning=FALSE, message=FALSE, cache=TRUE}
 
 library(ggplot2)
 library(firasans)

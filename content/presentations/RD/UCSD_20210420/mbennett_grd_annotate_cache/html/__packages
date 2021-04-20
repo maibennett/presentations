@@ -51,3 +51,5 @@ Smisc
 gtools
 leaflet
 plotly
+reactable
+htmltools

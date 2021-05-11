@@ -51,9 +51,10 @@ class: center, middle, inverse, title-slide
 
 &lt;img src="mbennett_grd_annotate_files/figure-html/rd_intro1-1.svg" style="display: block; margin: auto;" /&gt;
 
-&lt;!--
+---
+# Very popular design for causal inference
+
 &lt;img src="mbennett_grd_annotate_files/figure-html/rd_publications-1.svg" style="display: block; margin: auto;" /&gt;
---&gt;
 
 ---
 # Strong internal validity
@@ -164,10 +165,10 @@ Two-part problem with pre- and post-intervention periods:
 
 - **Two periods**: pre- and post-intervention, `\(t=0\)` and `\(t=1\)`.
 
-- Running variable `\(R\)` determines assingment `\(Z\)` in `\(t=1\)`. E.g.:
+- Running variable `\(R\)` determines assignment `\(Z\)` in `\(t=1\)`. E.g.:
 `$$Z_{it} = \mathrm{I}(R_{it}&lt;c)$$`
 
-- Potential outcomes under treatmet `\(z = 0,1\)`:
+- Potential outcomes under treatment `\(z = 0,1\)`:
 `$$Y^{(z)}_{it} = g_z(\mathbf{X}_{it},\mathbf{u}_{it},r_{it}) + z_{it}\cdot \underbrace{\tau(\mathbf{X}_{it},\mathbf{u}_{it},r_{it})}_{\color{#E16462}{\style{font-family:inherit}{\text{Treat. Effect}}}} + \underbrace{\alpha_t}_{\color{#E16462}{\style{font-family:inherit}{\text{Period FE}}}}$$`
   - `\(\mathbf{X}_{it}\)`: Predictive covariates
   
@@ -623,6 +624,20 @@ Application: Free Higher Education
 # How does the effect change with interval width?
 .center[
 ![:scale 90%](https://raw.githubusercontent.com/maibennett/presentations/main/content/presentations/RD/IC_20210312/images/effect_by_h.png)]
+
+---
+# Sensitivity analysis to hidden bias
+
+- How should an unmeasured confounder shift the probabilities of assignment in order to change the qualitative results of the study?  
+
+  - Follow DD adaptation of Rosenbaum bounds (Keele, Small, Hsu, &amp; Fogarty, 2019).
+
+.center[
+.small[
+<div id="htmlwidget-c7594b640fa1aa7381b2" class="reactable html-widget" style="width:auto;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-c7594b640fa1aa7381b2">{"x":{"tag":{"name":"Reactable","attribs":{"data":{".rownames":["$$\\Gamma_c$$","$$Pr(Z_{i1}=1)$$","$$Pr(Z_{i1}=0)$$"],"Application":["1.640","0.622","0.378"],"Enrollment":["1.616","0.618","0.382"]},"columns":[{"accessor":".rownames","name":"","type":"character","minWidth":180,"align":"center","sortable":false,"filterable":false},{"accessor":"Application","name":"Application to University","type":"character","minWidth":250,"align":"center"},{"accessor":"Enrollment","name":"Enrollment to University","type":"character","minWidth":250,"align":"center"}],"defaultPageSize":10,"paginationType":"numbers","showPageInfo":true,"minRows":1,"highlight":true,"striped":true,"style":{"fontFamily":"Jost, sans-serif"},"inline":true,"dataKey":"539dd1f8c825e9f8bc2cb423d29482a2","key":"539dd1f8c825e9f8bc2cb423d29482a2"},"children":[]},"class":"reactR_markup"},"evals":[],"jsHooks":[]}</script>
+]]
+
 ---
 # Conclusions
 

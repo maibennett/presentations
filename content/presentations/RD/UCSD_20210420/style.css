@@ -42,10 +42,17 @@ ul li ul {
 	display: none;
 } 
 
-.MathJax {
-	font-size: 1em;
-	font-family: 'Jost';
+.MathJax{
+  font-size: 110% !important;
+  font-family: 'Jost' !important;
 }
+
+/*.mjx-chtml.MJXc-display {
+	font-size: 110 !important;
+	font-family: 'Jost' !important;
+}*/
+
+/*<span class="mjx-chtml MJXc-display">*/
 
 
 /*.Large { font-size: 144% }

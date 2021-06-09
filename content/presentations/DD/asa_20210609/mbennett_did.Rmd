@@ -961,13 +961,13 @@ ggplot(d[d$var=="Varying" & d$type!="S5: Evolution diff.\nby group",],
 ---
 # Results: Time-varying covariates
 
-- For time-varying covariates:
+- In these simulations. for time-varying covariates:
   
-  - Matching on pre-treatment covariates returns a biased ATT estimate **.darkorange[if covariates evolve differently over time and treatment does not affect them]**.
+  - Matching on treatment covariates returns a unbiased ATT estimate **.darkorange[if covariates evolve differently over time and treatment does not affect them]**.
 
 --
 
-  - Matching on all covariates returns a biasded ATT estimate **.darkorange[if covariates evolve differently over time and are correlated to treatment]**.
+  - Matching on treatment covariates returns a biased ATT estimate **.darkorange[if covariates evolve differently over time and are affected by treatment]**.
   
 --
 
@@ -975,9 +975,9 @@ ggplot(d[d$var=="Varying" & d$type!="S5: Evolution diff.\nby group",],
 
 --
 
-Depending on the context, if we know the expected sign of the effect of $z$ on $x$, and the direction of the relationship of $x$ on $y$, then, e.g.:
+- Matching on pre- and post-intervention covariates returns the **.darkorange[direct effect of the treatment on the outcome]**
 
-$$\widehat{ATT} = [\hat{\tau}_{pre},\hat{\tau}_{all}]$$
+- Depending on the context, this could be an **.darkorange[upper or lower bound]** for the true effect.
 
 ---
 # Other simulations
@@ -1126,6 +1126,12 @@ Application
   
   - Non-SEP schools increased their average family income.
 
+--
+
+- There is a need to **.darkorange[evaluate the policy as a whole]**.
+
+  - Unintended consequences also matter.
+
 ---
 background-position: 50% 50%
 class: left, bottom, inverse
@@ -1140,9 +1146,8 @@ Let's wrap it up
 
 - Relevant to think whether groups come from the **.darkorange[same]** or **.darkorange[different]** populations.
 
-- **.darkorange[Serial correlation]** also plays an important role: Don't match on random noise.
+- **.darkorange[Serial correlation]** also plays an important role: Don't match on random noise.]
 
-- Adopt **.darkorange[flexibility]** when estimating effects (event study)]
 .pull-right[
 ![](https://media.giphy.com/media/drwxYI2fxqQGqRZ9Pe/giphy.gif)
 ]
@@ -1157,7 +1162,6 @@ Let's wrap it up
 
 - **.darkorange[Serial correlation]** also plays an important role: Don't match on random noise.
 
-- Adopt **.darkorange[flexibility]** when estimating effects (event study)
   
 .box-7.medium.sp-after-half[Match well and match smart!
 ]]

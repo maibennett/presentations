@@ -363,7 +363,7 @@ Simulations
 ---
 # Time-varying covariates
 
-`$$X_{it} = x_{(t-1)i} + h(z_i,t)\cdot z + m(z_i,t)$$`
+`$$X_{it} = x_{(t-1)i} + h(z_i,t)\cdot r_i + m(z_i,t)$$`
 `$$Y_i(t) \stackrel{ind}{\sim} N(1+z_i+treat_{it}+u_i+x_i+f(t)+g(x_i,t),1)$$`
 
 --
@@ -374,7 +374,7 @@ Simulations
 
 .box-6b[S5) Evolution differs by group: m(z&lt;sub&gt;i&lt;/sub&gt;,t) = 0]
 
-.box-7b[S6) Evolution differs in post: h(z&lt;sub&gt;i&lt;/sub&gt;,t) = h(t) and m(z&lt;sub&gt;i&lt;/sub&gt;,t) &amp;#8800; 0]
+.box-7b[S6) Evolution differs in post: h(z&lt;sub&gt;i&lt;/sub&gt;,t) = h(t) and m(z&lt;sub&gt;i&lt;/sub&gt;,t) = Post*m(z&lt;sub&gt;i&lt;/sub&gt;,t)]
 
 ---
 
@@ -454,6 +454,27 @@ Number of simulations | 1,000
 # Results: Time-varying covariates
 
 &lt;img src="mbennett_did_files/figure-html/res2-1.svg" style="display: block; margin: auto;" /&gt;
+---
+# Results: Time-varying covariates
+
+- For time-varying covariates:
+  
+  - Matching on pre-treatment covariates returns a biased ATT estimate **.darkorange[if covariates evolve differently over time and treatment does not affect them]**.
+
+--
+
+  - Matching on all covariates returns a biasded ATT estimate **.darkorange[if covariates evolve differently over time and are correlated to treatment]**.
+  
+--
+
+.box-5[We don't know in which scenario we are]
+
+--
+
+Depending on the context, if we know the expected sign of the effect of `\(z\)` on `\(x\)`, and the direction of the relationship of `\(x\)` on `\(y\)`, then, e.g.:
+
+`$$\widehat{ATT} = [\hat{\tau}_{pre},\hat{\tau}_{all}]$$`
+
 ---
 # Other simulations
 

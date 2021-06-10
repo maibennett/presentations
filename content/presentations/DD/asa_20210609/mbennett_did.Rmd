@@ -1,7 +1,7 @@
 ---
 title: "A Difference-in-Differences Approach<br/>using Mixed-Integer Programming Matching"
 subtitle: "Magdalena Bennett<br/> McCombs School of Business, UT Austin"
-author: "ASA Seminar<br/>June 09, 2021"
+author: "ASA Austin Chapter Meeting<br/>June 09, 2021"
 output:
   xaringan::moon_reader:
     css: ["xaringan-themer.css", "custom.css"]

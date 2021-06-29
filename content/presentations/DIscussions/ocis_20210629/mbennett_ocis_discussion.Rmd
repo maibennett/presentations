@@ -410,12 +410,17 @@ font.add.google("Fira Sans", "Fira Sans")
 ---
 # Comments and Questions
 
+.pull-left[
 **.darkorange[3) Running time:]**
 
   - In cases where we are optimizing a tradeoff between balance and sample size, it could be that a projection of a MIP matching optimization problem could provide faster computational times. 
 
   $$\min_{\mathbf{x}} f_1(\mathbf{x}) + \rho f_2(\mathbf{x}) \ \ \rightarrow \ \ \min_{\mathbf{m}} g_1(\mathbf{m}) + \rho g_2(\mathbf{m})$$
-  
+]
+
+.pull-right[
+![:scale 100%](https://raw.githubusercontent.com/maibennett/presentations/main/content/presentations/DIscussions/ocis_20210629/images/runtime.png)
+]
 ---
 # Comments and Questions
 

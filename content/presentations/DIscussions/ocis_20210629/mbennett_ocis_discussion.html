@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>Discussion: “Optimal tradeoffs in matched designs comparing US-trained and internationally-trained surgeons”</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="Online Causal Inference Seminar June 29, 2021" />
+    <script src="libs/header-attrs/header-attrs.js"></script>
+    <script src="libs/fabric/fabric.min.js"></script>
+    <link href="libs/xaringanExtra-scribble/scribble.css" rel="stylesheet" />
+    <script src="libs/xaringanExtra-scribble/scribble.js"></script>
+    <script>document.addEventListener('DOMContentLoaded', function() { window.xeScribble = new Scribble({"pen_color":["#FF0000"],"pen_size":3,"eraser_size":30}) })</script>
+    <script src="libs/clipboard/clipboard.min.js"></script>
+    <link href="libs/xaringanExtra-clipboard/xaringanExtra-clipboard.css" rel="stylesheet" />
+    <script src="libs/xaringanExtra-clipboard/xaringanExtra-clipboard.js"></script>
+    <script>window.xaringanExtraClipboard(null, {"button":"<i class=\"fa fa-clipboard\"><\/i>","success":"<i class=\"fa fa-check\" style=\"color: #90BE6D\"><\/i>","error":"<i class=\"fa fa-times-circle\" style=\"color: #F94144\"><\/i>"})</script>
+    <link href="libs/font-awesome/css/all.css" rel="stylesheet" />
+    <link href="libs/font-awesome/css/v4-shims.css" rel="stylesheet" />
+    <script src="https://use.fontawesome.com/5235085b15.js"></script>
+    <link rel="stylesheet" href="xaringan-themer.css" type="text/css" />
+    <link rel="stylesheet" href="custom.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# Discussion: “Optimal tradeoffs in matched designs comparing<br/>US-trained and internationally-trained surgeons”
+## Magdalena Bennett<br/> McCombs School of Business, UT Austin
+### Online Causal Inference Seminar<br/>June 29, 2021
+
+---
+
+
+
+
+
+&lt;style type="text/css"&gt;
+
+.small .remark-code { /*Change made here*/
+  font-size: 80% !important;
+}
+
+.tiny .remark-code { /*Change made here*/
+  font-size: 90% !important;
+}
+&lt;/style&gt;
+
+
+
+
+
+# How do we match?
+
+.pull-left[
+- **.darkorange[Several goals are in play]**. E.g.:
+
+  1) Balance covariate distributions.
+  
+  2) Minimizing distance within pairs.
+  
+  3) Maximizing sample size.
+
+&lt;br&gt;
+&lt;br&gt;
+.box-6[How can we optimize two* of these goals at the same time?]
+
+]
+
+.pull-right[
+
+]
+
+---
+# Optimal tradeoffs in matching 
+
+- Use of **.darkorange[Pareto efficiency]** in matching:
+
+  - Incorporate two goals in the objective function.
+  
+  - "Can't improve on one goal without making the other one worse".
+  
+  - Find a "boundary" of matched sets that vary the tradeoff between objectives.
+  
+--
+
+- **.darkorange[Iterative search]** for Pareto optimal solutions:
+
+  - Use structure of optimal sets to place informative bounds.
+  
+  - Depending on the multi-objective function, computing times can be high, but feasible.
+  
+---
+# Optimal tradeoffs in matching (cont.)
+  
+---
+# Contributions to the literature
+
+- Maximizing sample size s.t. balancing constraints:
+
+  - E.g. cardinality matching (Zubizarreta, Paredes, &amp; Rosenbaum, 2014)
+
+- Optimizing pairwise distance vs. sample size:
+  
+  - E.g. optimal subset matching (Rosenbaum, 2012)
+
+--
+
+&lt;br&gt;
+
+.box-6[Combine different tradeoffs in a more general framework]
+
+---
+# Comments and Questions
+
+--
+**.darkorange[1) Importance of covariates:]**
+
+  - Depending on the context, matching closely on a set of covariates might be more important than matching closely on others.
+  
+---
+# Comments and Questions
+
+**.darkorange[1) Importance of covariates:]**
+
+  - Depending on the context, matching closely on a set of covariates might be more important than matching closely on others.
+  
+  - Refined covariate balance can achieve this for nominal covariates (Pimentel et al. 2015).
+  
+  
+---
+# Comments and Questions
+
+**.darkorange[1) Importance of covariates:]**
+
+  - Depending on the context, matching closely on a set of covariates might be more important than matching closely on others.
+  
+  - Refined covariate balance can achieve this for nominal covariates (Pimentel et al. 2015).
+  
+  - Could there be an extension for other types of covariates that need to be matched on closely?
+  
+---
+# Comments and Questions
+
+**.darkorange[2) External validity:]**
+
+  - Paper proposes a way to maximize sample size `\(\rightarrow\)` external validity
+
+    
+---
+# Comments and Questions
+
+**.darkorange[2) External validity:]**
+
+  - Paper proposes a way to maximize sample size `\(\rightarrow\)` external validity
+  
+  - Could this method incorporate a target population/penalization for loss of representation of treated units?
+  
+    - E.g.: Instead of maximizing sample size in `\(f_2\)`, minimize distance to a target population? 
+    
+  
+---
+# Comments and Questions
+
+**.darkorange[3) Running time:]**
+
+  - In cases where we are optimizing a tradeoff between balance and sample size, it could be that a projection of a MIP matching optimization problem could provide faster computational times. 
+
+  `$$\min_{\mathbf{x}} f_1(\mathbf{x}) + \rho f_2(\mathbf{x}) \ \ \rightarrow \ \ \min_{\mathbf{m}} g_1(\mathbf{m}) + \rho g_2(\mathbf{m})$$`
+  
+---
+# Comments and Questions
+
+**.darkorange[4) Differences in estimated effects:]**
+
+  - Matching separates the adjustment procedure and the estimation process.
+  
+  - Ultimately, researches chooses solution based on information of the Pareto optimal set.
+
+  
+---
+# Comments and Questions
+
+**.darkorange[4) Differences in estimated effects:]**
+
+  - Matching separates the adjustment procedure and the estimation process.
+  
+  - Ultimately, researches chooses solution based on information of the Pareto optimal set.
+  
+  - How do results vary along the Pareto optimal set? (sensitivity to researcher's discretion)
+  
+---
+# Final remarks
+
+- Very interesting paper with a particularly useful result.
+
+--
+
+- Intuitive way of thinking about tradeoffs (that we sometimes try to solve sub-optimally).
+
+--
+
+- Helps make decisions in matching more transparent.
+
+---
+
+background-position: 50% 50%
+class: center,middle
+
+#Discussion: "Optimal tradeoffs in matched designs comparing&lt;br/&gt;US-trained and internationally-trained surgeons"
+
+##Magdalena Bennett
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script src="macros.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "github",
+"highlightLines": true,
+"countIncrementalSlides": false,
+"ratio": "16:9"
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>

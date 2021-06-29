@@ -11,7 +11,7 @@ output:
       highlightLines: true
       countIncrementalSlides: false
       ratio: "16:9"
-      beforeInit: "macros.js"
+      beforeInit: ["macros.js","cols_macro.js"]
     includes:
       in_header: header.html
 ---
@@ -395,16 +395,24 @@ font.add.google("Fira Sans", "Fira Sans")
 ---
 # Comments and Questions
 
+.pull-left[
 **.darkorange[4) Differences in estimated effects:]**
 
   - Matching separates the adjustment procedure and the estimation process.
   
   - Ultimately, researches chooses solution based on information of the Pareto optimal set.
+  
+]
+.pull-right[
+![:scale 100%](https://raw.githubusercontent.com/maibennett/presentations/main/content/presentations/DIscussions/ocis_20210629/images/Pareto-optimal-solutions.png)
+]
+
 
   
 ---
 # Comments and Questions
 
+.pull-left[
 **.darkorange[4) Differences in estimated effects:]**
 
   - Matching separates the adjustment procedure and the estimation process.
@@ -412,7 +420,11 @@ font.add.google("Fira Sans", "Fira Sans")
   - Ultimately, researches chooses solution based on information of the Pareto optimal set.
   
   - How do results vary along the Pareto optimal set? (sensitivity to researcher's discretion)
-  
+]
+.pull-right[
+![:scale 100%](https://raw.githubusercontent.com/maibennett/presentations/main/content/presentations/DIscussions/ocis_20210629/images/Pareto-optimal-solutions.png)
+]
+
 ---
 # Final remarks
 

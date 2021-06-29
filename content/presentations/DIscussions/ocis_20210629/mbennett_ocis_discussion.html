@@ -169,7 +169,7 @@ class: center, middle, inverse, title-slide
 
   - Paper proposes a way to maximize sample size `\(\rightarrow\)` external validity
   
-  - Could this method incorporate a target population/penalization for loss of representation of treated units?
+  - Could this method incorporate a target population/penalization for loss of representativeness of treated units?
   
     - E.g.: Instead of maximizing sample size in `\(f_2\)`, minimize distance to a target population? 
 ]
@@ -185,7 +185,7 @@ class: center, middle, inverse, title-slide
 .pull-left[
 **.darkorange[3) Running time:]**
 
-  - In cases where we are optimizing a tradeoff between balance and sample size, it could be that a projection of a MIP matching optimization problem could provide faster computational times. 
+  - Projection of a MIP matching optimization problem could provide faster computational times. 
 
   `$$\min_{\mathbf{x}} f_1(\mathbf{x}) + \rho f_2(\mathbf{x})$$`
   
@@ -195,7 +195,7 @@ class: center, middle, inverse, title-slide
 ]
 
 .pull-right[
-![:scale 70%](https://raw.githubusercontent.com/maibennett/presentations/main/content/presentations/DIscussions/ocis_20210629/images/runtime.png)
+![:scale 100%](https://raw.githubusercontent.com/maibennett/presentations/main/content/presentations/DIscussions/ocis_20210629/images/runtime.png)
 ]
 ---
 # Comments and Questions
@@ -235,9 +235,13 @@ class: center, middle, inverse, title-slide
 
 - Very interesting paper with a particularly useful result.
 
+  - Advantages of matching as adjustment + allows for changes in priority in objetives.
+
 --
 
-- Intuitive way of thinking about tradeoffs (that we sometimes try to solve sub-optimally).
+- Intuitive way of thinking about tradeoffs
+
+  - Sometimes try to solve sub-optimally!
 
 --
 

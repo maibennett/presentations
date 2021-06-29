@@ -304,7 +304,7 @@ font.add.google("Fira Sans", "Fira Sans")
   
   - "Can't improve on one goal without making the other one worse".
   
-  - Find a "boundary" of matched sets that vary the tradeoff between objectives.
+  - Find a class of matches that vary the tradeoff between objectives.
   
 --
 
@@ -313,9 +313,6 @@ font.add.google("Fira Sans", "Fira Sans")
   - Use structure of optimal sets to place informative bounds.
   
   - Depending on the multi-objective function, computing times can be high, but feasible.
-  
----
-# Optimal tradeoffs in matching (cont.)
   
 ---
 # Contributions to the literature
@@ -338,23 +335,34 @@ font.add.google("Fira Sans", "Fira Sans")
 # Comments and Questions
 
 --
+.pull-left[
 **.darkorange[1) Importance of covariates:]**
 
   - Depending on the context, matching closely on a set of covariates might be more important than matching closely on others.
-  
+]
+.pull-right[
+![](https://raw.githubusercontent.com/maibennett/presentations/main/content/presentations/DIscussions/ocis_20210629/images/diagram1_v2.svg)
+]
+
 ---
 # Comments and Questions
 
+.pull-left[
 **.darkorange[1) Importance of covariates:]**
 
   - Depending on the context, matching closely on a set of covariates might be more important than matching closely on others.
   
   - Refined covariate balance can achieve this for nominal covariates (Pimentel et al. 2015).
-  
+]
+
+.pull-right[
+![](https://raw.githubusercontent.com/maibennett/presentations/main/content/presentations/DIscussions/ocis_20210629/images/diagram1_v2.svg)
+]  
   
 ---
 # Comments and Questions
 
+.pull-left[
 **.darkorange[1) Importance of covariates:]**
 
   - Depending on the context, matching closely on a set of covariates might be more important than matching closely on others.
@@ -362,18 +370,29 @@ font.add.google("Fira Sans", "Fira Sans")
   - Refined covariate balance can achieve this for nominal covariates (Pimentel et al. 2015).
   
   - Could there be an extension for other types of covariates that need to be matched on closely?
-  
+]
+
+.pull-right[
+![](https://raw.githubusercontent.com/maibennett/presentations/main/content/presentations/DIscussions/ocis_20210629/images/diagram1_v2.svg)
+]  
+
 ---
 # Comments and Questions
 
+.pull-left[
 **.darkorange[2) External validity:]**
 
   - Paper proposes a way to maximize sample size $\rightarrow$ external validity
+]
 
+.pull-right[
+![](https://raw.githubusercontent.com/maibennett/presentations/main/content/presentations/DIscussions/ocis_20210629/images/target_population.svg)
+]  
     
 ---
 # Comments and Questions
 
+.pull-left[
 **.darkorange[2) External validity:]**
 
   - Paper proposes a way to maximize sample size $\rightarrow$ external validity
@@ -381,7 +400,12 @@ font.add.google("Fira Sans", "Fira Sans")
   - Could this method incorporate a target population/penalization for loss of representation of treated units?
   
     - E.g.: Instead of maximizing sample size in $f_2$, minimize distance to a target population? 
-    
+]
+
+.pull-right[
+![](https://raw.githubusercontent.com/maibennett/presentations/main/content/presentations/DIscussions/ocis_20210629/images/target_population.svg)
+]  
+
   
 ---
 # Comments and Questions

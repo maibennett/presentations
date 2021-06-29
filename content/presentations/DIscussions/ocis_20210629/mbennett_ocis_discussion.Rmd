@@ -292,7 +292,7 @@ font.add.google("Fira Sans", "Fira Sans")
 ]
 
 .pull-right[
-
+![](https://raw.githubusercontent.com/maibennett/presentations/main/content/presentations/DIscussions/ocis_20210629/images/figure1.png)
 ]
 
 ---

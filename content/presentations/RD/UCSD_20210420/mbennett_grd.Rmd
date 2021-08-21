@@ -1,7 +1,7 @@
 ---
 title: "How far is too far? <br/>Generalization of a regression discontinuity design away from the cutoff"
-subtitle: "Magdalena Bennett"
-author: "International Methods Colloquium<br/>Mar 12, 2021"
+subtitle: "Magdalena Bennett<br/>The University of Texas at Austin"
+author: "UC San Diego Econometrics Seminar<br/>Apr 20, 2021"
 output:
   xaringan::moon_reader:
     css: ["xaringan-themer.css", "style.css"]
@@ -23,6 +23,7 @@ output:
 ```{r setup, include=FALSE}
 options(htmltools.dir.version = FALSE)
 knitr::opts_chunk$set(fig.showtext = TRUE)
+knitr::opts_chunk$set(cache=TRUE)
 ```
 
 ```{r xaringan-themer, include=FALSE, warning=FALSE}
@@ -78,9 +79,10 @@ style_mono_accent(
    # ".remark-slide table thead th" = list(),
     ".title-slide h1" = list("font-weight" = "500"),
     ".title-slide h2" = list("font-weight" = "400",
-                             "font-size" =  "170%"),
+                             "font-size" =  "100%",
+                             "font-family" = "Jost"),
     ".title-slide h3" = list("font-family" = "Jost",
-                             "font-size" = "100%",
+                             "font-size" = "80%",
                              "font-weight" = "200"),
     ".center2" = list("margin" = "0",
                       "position" = "absolute",
@@ -355,7 +357,9 @@ ggplot(data = d, aes(x=r, y=y)) +
 
 ```
 
-<!--
+---
+# Very popular design for causal inference
+
 ```{r rd_publications, fig.height=5.25, fig.width=12, fig.align='center', dev='svg', echo = FALSE, warning = FALSE, message = FALSE}
 pub <- read.csv("https://raw.githubusercontent.com/maibennett/presentations/main/content/presentations/RD/IC_20210312/data/regression_discontinuityv2.csv")
 
@@ -383,7 +387,6 @@ ggplot(data = pub, aes(x=year, y=results)) +
         legend.background = element_rect(fill="white",colour ="white"),
         title = element_text(size=28, color = "#333f48"))
 ```
--->
 
 ---
 # Strong internal validity
@@ -641,10 +644,10 @@ Two-part problem with pre- and post-intervention periods:
 
 - **Two periods**: pre- and post-intervention, $t=0$ and $t=1$.
 
-- Running variable $R$ determines assingment $Z$ in $t=1$. E.g.:
+- Running variable $R$ determines assignment $Z$ in $t=1$. E.g.:
 $$Z_{it} = \mathrm{I}(R_{it}<c)$$
 
-- Potential outcomes under treatmet $z = 0,1$:
+- Potential outcomes under treatment $z = 0,1$:
 $$Y^{(z)}_{it} = g_z(\mathbf{X}_{it},\mathbf{u}_{it},r_{it}) + z_{it}\cdot \underbrace{\tau(\mathbf{X}_{it},\mathbf{u}_{it},r_{it})}_{\color{#E16462}{\style{font-family:inherit}{\text{Treat. Effect}}}} + \underbrace{\alpha_t}_{\color{#E16462}{\style{font-family:inherit}{\text{Period FE}}}}$$
   - $\mathbf{X}_{it}$: Predictive covariates
   
@@ -900,11 +903,26 @@ GRD in practice
 ]
 
 ---
+# Context: Traditional matching
+
+.center[
+![:scale 60%](https://raw.githubusercontent.com/maibennett/presentations/main/content/presentations/RD/UCSD_20210420/images/diagram1_v2.svg)
+]
+
+---
+# Context: Representative template matching with two samples
+
+.center[
+![:scale 60%](https://raw.githubusercontent.com/maibennett/presentations/main/content/presentations/RD/UCSD_20210420/images/diagram2_v3.svg)
+]
+
+---
 # Context: Representative template matching
 
 .center[
 ![:scale 60%](https://raw.githubusercontent.com/maibennett/presentations/main/content/presentations/RD/IC_20210312/images/diagram3v2.svg)
 ]
+
 
 ---
 # Diagram for GRD
@@ -922,7 +940,7 @@ GRD in practice
 ]
 
 .pull-right[
-```{r grd1, fig.height=6, fig.width=6.5, fig.align='center', dev='svg', echo = FALSE, warning = FALSE, message = FALSE, cache=TRUE}
+```{r grd1, fig.height=6, fig.width=6.5, fig.align='center', dev='svg', echo = FALSE, warning = FALSE, message = FALSE}
 ## Load libraries
 library(designmatch)
 library(Rglpk)
@@ -1724,7 +1742,7 @@ ggplot(data2_post,aes(y=y,x=running_var, label=NA), fill="white")+geom_point(fil
 ]
 
 .pull-right[
-```{r grd5b, fig.height=6, fig.width=6.5, fig.align='center', dev='svg', echo = FALSE, warning = FALSE, message = FALSE, cache=TRUE}
+```{r grd5b, fig.height=6, fig.width=6.5, fig.align='center', dev='svg', echo = FALSE, warning = FALSE, message = FALSE}
 githubURL <- "https://github.com/maibennett/presentations/raw/main/content/presentations/RD/IC_20210312/data/example_grd_all.RData"
 load(url(githubURL))
 
@@ -1869,7 +1887,7 @@ This can break in two ways:
 ]
 
 .pull-right[
-```{r, echo=FALSE, warning=FALSE, message=FALSE, cache=TRUE}
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
 
 library(ggplot2)
 library(firasans)
@@ -2652,6 +2670,60 @@ tbl
 # How does the effect change with interval width?
 .center[
 ![:scale 90%](https://raw.githubusercontent.com/maibennett/presentations/main/content/presentations/RD/IC_20210312/images/effect_by_h.png)]
+
+---
+# Sensitivity analysis to hidden bias
+
+- How should an unmeasured confounder shift the probabilities of assignment in order to change the qualitative results of the study?  
+
+  - Follow DD adaptation of Rosenbaum bounds (Keele, Small, Hsu, & Fogarty, 2019).
+
+.center[
+.small[
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+
+tab <- rbind(c("1.640","1.616"),
+             c("0.622", "0.618"),
+             c("0.378", "0.382"))
+
+colnames(tab) <- c("Application","Enrollment")
+rownames (tab) <- c("$$\\Gamma_c$$", "$$Pr(Z_{i1}=1)$$", "$$Pr(Z_{i1}=0)$$")
+
+
+tbl <- tab %>%
+  reactable(
+    # ALL one page (no scrolling or page swapping)
+    pagination = TRUE,
+    rownames = TRUE,
+    # compact for an overall smaller table width wise
+    compact = FALSE,
+    # borderless - TRUE or FALSE
+    borderless = FALSE,
+    # Stripes - TRUE or FALSE
+    striped = TRUE,
+    # fullWidth - either fit to width or not
+    fullWidth = FALSE,
+    # apply defaults
+    # 100 px and align to center of column
+    defaultColDef = colDef(
+      align = "center",
+      minWidth = 180),
+    style = list(fontFamily = "Jost, sans-serif"),
+    highlight = TRUE,
+    
+    columns = list(
+      Application = colDef(name = "Application to University",
+                           minWidth = 250),
+    Enrollment = colDef(name = "Enrollment to University",
+                           minWidth = 250))
+    
+  )
+
+tbl
+
+```
+]]
+
 ---
 # Conclusions
 
@@ -2688,6 +2760,5 @@ How Far is too Far? Generalization of a Regression Discontinuity Design Away fro
 ]
 <br>
 <br>
-New version of the paper is coming.
+New version of the paper is coming soon.
 <p href="https://magdalenabennett.com">www.magdalenabennett.com</p>
-<!-- pagedown::chrome_print('C:/Users/mc72574/Dropbox/Hugo/Sites/presentations/content/presentations/RD/IC_20210312/mbennett_grd.html', wait = 5, timeout = 60) -->

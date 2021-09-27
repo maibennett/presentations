@@ -498,17 +498,6 @@ ggplot(d, aes(x = Year, y = Pub), fill="white") +
 
 .pull-right[]
 
----
-
-# What about parallel trends?
-
-.pull-left[
-.center[
-![:scale 80%](https://raw.githubusercontent.com/maibennett/website_github/master/exampleSite/content/images/data_comic.jpg)]
-]
-
-.pull-right[
-- Bounds on treatment effects (Rambachan & Roth, 2020)]
 
 ---
 
@@ -520,8 +509,6 @@ ggplot(d, aes(x = Year, y = Pub), fill="white") +
 ]
 
 .pull-right[
-- Bounds on treatment effects (Rambachan & Roth, 2020)
-
 - Find sub-groups that potentially follow PTA (e.g. similar units in treatment and control)
 
   - Similar to synthetic control intuition.]
@@ -536,36 +523,13 @@ ggplot(d, aes(x = Year, y = Pub), fill="white") +
 
 .pull-right[
 
-- Bounds on treatment effects (Rambachan & Roth, 2020)
-
 - Find sub-groups that potentially follow PTA (e.g. similar units in treatment and control)
 
   - Similar to synthetic control intuition.
 
 - Can matching help? 
 
-  - It's complicated (?) .small[(Zeldow & Hatfield, 2021; Lindner & McConnell, 2018; Daw & Hatfield, 2018 (x2); Ryan, 2018; Ryan et al., 2018)]
-]
-
----
-# What about parallel trends?
-
-.pull-left[
-.center[
-![:scale 80%](https://raw.githubusercontent.com/maibennett/website_github/master/exampleSite/content/images/data_comic.jpg)]
-]
-
-.pull-right[
-
-- Bounds on treatment effects (Rambachan & Roth, 2020)
-
-- Find sub-groups that potentially follow PTA (e.g. similar units in treatment and control)
-
-  - Similar to synthetic control intuition.
-
-- Can matching help? 
-
-  - It's complicated (?) .small[(Zeldow & Hatfield, 2021; Lindner & McConnell, 2018; Daw & Hatfield, 2018 (x2); Ryan, 2018; Ryan et al., 2018)]
+  - It's complicated (?) .small[(Zeldow & Hatfield, 2021; Basu & Small, 2020; Lindner & McConnell, 2018; Daw & Hatfield, 2018 (x2); Ryan, 2018; Ryan et al., 2018)]
 ]
 
 ---
@@ -707,12 +671,6 @@ $$
 ---
 # How do we match?
 
-- Match covariates or outcomes? Levels or trends?
-
-- Propensity score matching? Optimal matching? etc.
-
---
-
 This paper:
 
 - **.darkorange[Match on covariates]** that could make groups behave differently.
@@ -765,37 +723,12 @@ Simulations
 .source[Following Zeldow & Hatfield (2021)]
 
 ---
-# Time-invariant covariates
 
-$$X_i \stackrel{ind}{\sim} N(m(z_i),v(z_i))$$
-$$Y_i(t) \stackrel{ind}{\sim} N(1+z_i+treat_{it}+u_i+x_i+f(t)+g(x_i,t),1)$$
+.center[
+![:scale 90%](https://raw.githubusercontent.com/maibennett/presentations/main/content/presentations/DD/sree_20210927/images/zeldow_hatfield_table.png)
+]
 
---
-<br>
-<br>
-
-.box-1b[S1) Time-invariant covariate effect: g(x<sub>i</sub>,t) = 0]
-
-.box-2b[S2) Time-varying covariate effect: g(x<sub>i</sub>,t) &#8800; 0]
-
-.box-3b[S3) Time-varying covariate effect: m(z<sub>i</sub>) = &mu; and v(z<sub>i</sub>) = &sigma;]
-
----
-# Time-varying covariates
-
-$$X_{it} = x_{(t-1)i} + h(z_i,t)\cdot r_i + m(z_i,t)$$
-$$Y_i(t) \stackrel{ind}{\sim} N(1+z_i+treat_{it}+u_i+x_i+f(t)+g(x_i,t),1)$$
-
---
-<br>
-<br>
-
-.box-4b[S4) Parallel evolution: h(z<sub>i</sub>,t) = h(t) and m(z<sub>i</sub>,t) = 0]
-
-.box-6b[S5) Evolution differs by group: m(z<sub>i</sub>,t) = 0]
-
-.box-7b[S6) Evolution differs in post: h(z<sub>i</sub>,t) = h(t) and m(z<sub>i</sub>,t) = Post*m(z<sub>i</sub>,t)]
-
+.source[Table 1 from Zeldow & Hatfield (2021)]
 ---
 
 # Different ways to control
@@ -1176,6 +1109,38 @@ class: center,middle, inverse
 #A Difference-in-Differences Approach<br/>using Mixed-Integer Programming Matching
 
 ##Magdalena Bennett
+
+---
+# Time-invariant covariates
+
+$$X_i \stackrel{ind}{\sim} N(m(z_i),v(z_i))$$
+$$Y_i(t) \stackrel{ind}{\sim} N(1+z_i+treat_{it}+u_i+x_i+f(t)+g(x_i,t),1)$$
+
+--
+<br>
+<br>
+
+.box-1b[S1) Time-invariant covariate effect: g(x<sub>i</sub>,t) = 0]
+
+.box-2b[S2) Time-varying covariate effect: g(x<sub>i</sub>,t) &#8800; 0]
+
+.box-3b[S3) Time-varying covariate effect: m(z<sub>i</sub>) = &mu; and v(z<sub>i</sub>) = &sigma;]
+
+---
+# Time-varying covariates
+
+$$X_{it} = x_{(t-1)i} + h(z_i,t)\cdot r_i + m(z_i,t)$$
+$$Y_i(t) \stackrel{ind}{\sim} N(1+z_i+treat_{it}+u_i+x_i+f(t)+g(x_i,t),1)$$
+
+--
+<br>
+<br>
+
+.box-4b[S4) Parallel evolution: h(z<sub>i</sub>,t) = h(t) and m(z<sub>i</sub>,t) = 0]
+
+.box-6b[S5) Evolution differs by group: m(z<sub>i</sub>,t) = 0]
+
+.box-7b[S6) Evolution differs in post: h(z<sub>i</sub>,t) = h(t) and m(z<sub>i</sub>,t) = Post*m(z<sub>i</sub>,t)]
 
 ---
 # Time-invariant Covariates

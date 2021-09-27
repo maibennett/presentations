@@ -78,17 +78,6 @@ class: center, middle, inverse, title-slide
 
 .pull-right[]
 
----
-
-# What about parallel trends?
-
-.pull-left[
-.center[
-![:scale 80%](https://raw.githubusercontent.com/maibennett/website_github/master/exampleSite/content/images/data_comic.jpg)]
-]
-
-.pull-right[
-- Bounds on treatment effects (Rambachan &amp; Roth, 2020)]
 
 ---
 
@@ -100,8 +89,6 @@ class: center, middle, inverse, title-slide
 ]
 
 .pull-right[
-- Bounds on treatment effects (Rambachan &amp; Roth, 2020)
-
 - Find sub-groups that potentially follow PTA (e.g. similar units in treatment and control)
 
   - Similar to synthetic control intuition.]
@@ -116,36 +103,13 @@ class: center, middle, inverse, title-slide
 
 .pull-right[
 
-- Bounds on treatment effects (Rambachan &amp; Roth, 2020)
-
 - Find sub-groups that potentially follow PTA (e.g. similar units in treatment and control)
 
   - Similar to synthetic control intuition.
 
 - Can matching help? 
 
-  - It's complicated (?) .small[(Zeldow &amp; Hatfield, 2021; Lindner &amp; McConnell, 2018; Daw &amp; Hatfield, 2018 (x2); Ryan, 2018; Ryan et al., 2018)]
-]
-
----
-# What about parallel trends?
-
-.pull-left[
-.center[
-![:scale 80%](https://raw.githubusercontent.com/maibennett/website_github/master/exampleSite/content/images/data_comic.jpg)]
-]
-
-.pull-right[
-
-- Bounds on treatment effects (Rambachan &amp; Roth, 2020)
-
-- Find sub-groups that potentially follow PTA (e.g. similar units in treatment and control)
-
-  - Similar to synthetic control intuition.
-
-- Can matching help? 
-
-  - It's complicated (?) .small[(Zeldow &amp; Hatfield, 2021; Lindner &amp; McConnell, 2018; Daw &amp; Hatfield, 2018 (x2); Ryan, 2018; Ryan et al., 2018)]
+  - It's complicated (?) .small[(Zeldow &amp; Hatfield, 2021; Basu &amp; Small, 2020; Lindner &amp; McConnell, 2018; Daw &amp; Hatfield, 2018 (x2); Ryan, 2018; Ryan et al., 2018)]
 ]
 
 ---
@@ -216,7 +180,7 @@ $$
 # Violations to the PTA
 
 .pull-left[
-- Under PTA, `\(g_1(t) = g_0(t) + h(t)\)`, where:
+- Under PTA, `\(g_1(t) = g_0(t) + h(t) + \tau(t)\mathrm{I}(t&gt;T_0)\)`, where:
 
   - `\(g_z(t) = E[Y_{it}(0) | Z=z, T=t]\)`
   - `\(h(t) = \alpha\)`
@@ -230,7 +194,7 @@ $$
 # Violations to the PTA
 
 .pull-left[
-- Under PTA, `\(g_1(t) = g_0(t) + h(t)\)`, where:
+- Under PTA, `\(g_1(t) = g_0(t) + h(t) + \tau(t)\mathrm{I}(t&gt;T_0)\)`, where:
 
   - `\(g_z(t) = E[Y_{it}(0) | Z=z, T=t]\)`
   - `\(h(t) = \alpha\)`
@@ -249,7 +213,7 @@ $$
 # Violations to the PTA
 
 .pull-left[
-- Under PTA, `\(g_1(t) = g_0(t) + h(t)\)`, where:
+- Under PTA, `\(g_1(t) = g_0(t) + h(t) + \tau(t)\mathrm{I}(t&gt;T_0)\)`, where:
 
   - `\(g_z(t) = E[Y_{it}(0) | Z=z, T=t]\)`
   - `\(h(t) = \alpha\)`
@@ -286,12 +250,6 @@ $$
 
 ---
 # How do we match?
-
-- Match covariates or outcomes? Levels or trends?
-
-- Propensity score matching? Optimal matching? etc.
-
---
 
 This paper:
 
@@ -345,37 +303,12 @@ Simulations
 .source[Following Zeldow &amp; Hatfield (2021)]
 
 ---
-# Time-invariant covariates
 
-`$$X_i \stackrel{ind}{\sim} N(m(z_i),v(z_i))$$`
-`$$Y_i(t) \stackrel{ind}{\sim} N(1+z_i+treat_{it}+u_i+x_i+f(t)+g(x_i,t),1)$$`
+.center[
+![:scale 90%](https://raw.githubusercontent.com/maibennett/presentations/main/content/presentations/DD/sree_20210927/images/zeldow_hatfield_table.png)
+]
 
---
-&lt;br&gt;
-&lt;br&gt;
-
-.box-1b[S1) Time-invariant covariate effect: g(x&lt;sub&gt;i&lt;/sub&gt;,t) = 0]
-
-.box-2b[S2) Time-varying covariate effect: g(x&lt;sub&gt;i&lt;/sub&gt;,t) &amp;#8800; 0]
-
-.box-3b[S3) Time-varying covariate effect: m(z&lt;sub&gt;i&lt;/sub&gt;) = &amp;mu; and v(z&lt;sub&gt;i&lt;/sub&gt;) = &amp;sigma;]
-
----
-# Time-varying covariates
-
-`$$X_{it} = x_{(t-1)i} + h(z_i,t)\cdot r_i + m(z_i,t)$$`
-`$$Y_i(t) \stackrel{ind}{\sim} N(1+z_i+treat_{it}+u_i+x_i+f(t)+g(x_i,t),1)$$`
-
---
-&lt;br&gt;
-&lt;br&gt;
-
-.box-4b[S4) Parallel evolution: h(z&lt;sub&gt;i&lt;/sub&gt;,t) = h(t) and m(z&lt;sub&gt;i&lt;/sub&gt;,t) = 0]
-
-.box-6b[S5) Evolution differs by group: m(z&lt;sub&gt;i&lt;/sub&gt;,t) = 0]
-
-.box-7b[S6) Evolution differs in post: h(z&lt;sub&gt;i&lt;/sub&gt;,t) = h(t) and m(z&lt;sub&gt;i&lt;/sub&gt;,t) = Post*m(z&lt;sub&gt;i&lt;/sub&gt;,t)]
-
+.source[Table 1 from Zeldow &amp; Hatfield (2021)]
 ---
 
 # Different ways to control
@@ -632,6 +565,38 @@ class: center,middle, inverse
 #A Difference-in-Differences Approach&lt;br/&gt;using Mixed-Integer Programming Matching
 
 ##Magdalena Bennett
+
+---
+# Time-invariant covariates
+
+`$$X_i \stackrel{ind}{\sim} N(m(z_i),v(z_i))$$`
+`$$Y_i(t) \stackrel{ind}{\sim} N(1+z_i+treat_{it}+u_i+x_i+f(t)+g(x_i,t),1)$$`
+
+--
+&lt;br&gt;
+&lt;br&gt;
+
+.box-1b[S1) Time-invariant covariate effect: g(x&lt;sub&gt;i&lt;/sub&gt;,t) = 0]
+
+.box-2b[S2) Time-varying covariate effect: g(x&lt;sub&gt;i&lt;/sub&gt;,t) &amp;#8800; 0]
+
+.box-3b[S3) Time-varying covariate effect: m(z&lt;sub&gt;i&lt;/sub&gt;) = &amp;mu; and v(z&lt;sub&gt;i&lt;/sub&gt;) = &amp;sigma;]
+
+---
+# Time-varying covariates
+
+`$$X_{it} = x_{(t-1)i} + h(z_i,t)\cdot r_i + m(z_i,t)$$`
+`$$Y_i(t) \stackrel{ind}{\sim} N(1+z_i+treat_{it}+u_i+x_i+f(t)+g(x_i,t),1)$$`
+
+--
+&lt;br&gt;
+&lt;br&gt;
+
+.box-4b[S4) Parallel evolution: h(z&lt;sub&gt;i&lt;/sub&gt;,t) = h(t) and m(z&lt;sub&gt;i&lt;/sub&gt;,t) = 0]
+
+.box-6b[S5) Evolution differs by group: m(z&lt;sub&gt;i&lt;/sub&gt;,t) = 0]
+
+.box-7b[S6) Evolution differs in post: h(z&lt;sub&gt;i&lt;/sub&gt;,t) = h(t) and m(z&lt;sub&gt;i&lt;/sub&gt;,t) = Post*m(z&lt;sub&gt;i&lt;/sub&gt;,t)]
 
 ---
 # Time-invariant Covariates

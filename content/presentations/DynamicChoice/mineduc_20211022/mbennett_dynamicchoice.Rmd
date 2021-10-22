@@ -395,7 +395,7 @@ font.add.google("Fira Sans", "Fira Sans")
 # Puntaje Obtenido
 
 .center[
-![:scale 65%](https://raw.githubusercontent.com/maibennett/presentations/main/content/presentations/DynamicChoice/mineduc_20211022/images/BrechaPuntajeApp_01Razon.png)
+![:scale 90%](https://raw.githubusercontent.com/maibennett/presentations/main/content/presentations/DynamicChoice/mineduc_20211022/images/BrechaPuntajeApp_01Razon.png)
 ]
 
 ---
@@ -429,12 +429,14 @@ font.add.google("Fira Sans", "Fira Sans")
 # Financiamiento y Beneficios: Planes
 
 .pull-left-s[
+.medium[
 - **.darkorange[69% financiaria estudios con gratuidad]**
   - 33% no tiene certeza si es elegible.
   
 - **.darkorange[32% utilizaría recursos propios]**
   - Solo 5% considera únicamente esa opción
   - 30% considera becas o CAE + recursos propios.
+]
 ]
 
 .pull-right-s[

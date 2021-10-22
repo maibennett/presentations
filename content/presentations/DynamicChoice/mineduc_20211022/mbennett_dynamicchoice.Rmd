@@ -319,7 +319,7 @@ font.add.google("Fira Sans", "Fira Sans")
 
 - **.darkorange[Población]**: 80,419 estudiantes
 
-- **.darkorange[Tasa de respuesta]**: 11,178 encuestas iniciadas ($\approx$ 14%) y 5,312 completas.
+- **.darkorange[Tasa de respuesta]**: 11,178 encuestas iniciadas (&tilde; 14%) y 5,312 completas.
 
 - **.darkorange[Módulos]**:
 
@@ -353,27 +353,40 @@ font.add.google("Fira Sans", "Fira Sans")
 # Puntaje Obtenido
 
 .center[
-![](https://raw.githubusercontent.com/maibennett/presentations/main/content/presentations/DynamicChoice/mineduc_20211022/images/BrechaPuntajeApp_01Razon.png)
+![:scale 65%](https://raw.githubusercontent.com/maibennett/presentations/main/content/presentations/DynamicChoice/mineduc_20211022/images/BrechaPuntajeApp_01Razon.png)
 ]
 
 ---
 # Financiamiento y Beneficios: Creencias
 
+.pull-left[
 .center[
-![](https://raw.githubusercontent.com/maibennett/presentations/main/content/presentations/DynamicChoice/mineduc_20211022/images/EsElegible.png)
+![](https://raw.githubusercontent.com/maibennett/presentations/main/content/presentations/DynamicChoice/mineduc_20211022/images/EsElegible.png)]
+]
+
+.pull-right[
+.center[
+![](https://raw.githubusercontent.com/maibennett/presentations/main/content/presentations/DynamicChoice/mineduc_20211022/images/ElegibilidadBeneficios.png)]
 ]
 
 ---
 # Financiamiento y Beneficios: FUAS
 
+.pull-left[
 .center[
-![](https://raw.githubusercontent.com/maibennett/presentations/main/content/presentations/DynamicChoice/mineduc_20211022/images/ElegibilidadBeneficios.png)
+![](https://raw.githubusercontent.com/maibennett/presentations/main/content/presentations/DynamicChoice/mineduc_20211022/images/PostuloFUAS.png)]
+]
+
+
+.pull-right[
+.center[
+![](https://raw.githubusercontent.com/maibennett/presentations/main/content/presentations/DynamicChoice/mineduc_20211022/images/RazonesFUAS.png)]
 ]
 
 ---
 # Financiamiento y Beneficios: Planes
 
-.pull-left[
+.pull-left-s[
 - **.darkorange[65% financiaria estudios con gratuidad]**
   - 33% no tiene certeza si es elegible.
   
@@ -382,7 +395,7 @@ font.add.google("Fira Sans", "Fira Sans")
   - 30% considera becas o CAE + recursos propios.
 ]
 
-.pull-right[
+.pull-right-s[
 .center[
 ![](https://raw.githubusercontent.com/maibennett/presentations/main/content/presentations/DynamicChoice/mineduc_20211022/images/Financiamiento.png)
 ]
@@ -412,7 +425,7 @@ font.add.google("Fira Sans", "Fira Sans")
 ]
 ]
 
-.pull-left[
+.pull-right[
 .center[
 ![](https://raw.githubusercontent.com/maibennett/presentations/main/content/presentations/DynamicChoice/mineduc_20211022/images/PostulariaMitad.png)
 ]

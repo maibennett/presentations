@@ -388,7 +388,7 @@ table.dataTable.hover tbody tr:hover, table.dataTable.display tbody tr:hover {
   line-height: 1.3;
 }
 .medium {
-  font-size: 1.4em;
+  font-size: 90%;
 }
 .sp-after-half {
   margin-bottom: 0.7em !important;

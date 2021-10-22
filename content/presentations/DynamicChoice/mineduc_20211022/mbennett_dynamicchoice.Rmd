@@ -217,7 +217,11 @@ style_mono_accent(
    ".pull-left-little_r" = list("float" = "left",
                                 "width" = "27%"),
    ".pull-right-little_r" = list("float" = "right",
-                                "width" = "67%")
+                                "width" = "67%"),
+      ".pull-left-s" = list("float" = "left",
+                                "width" = "40%"),
+   ".pull-right-s" = list("float" = "right",
+                                "width" = "54%")
 
 
   )
@@ -284,15 +288,15 @@ font.add.google("Fira Sans", "Fira Sans")
 ---
 # Datos: Matriculados vs No Matriculados
 
-**.darkorange[Población Objetivo]**: 80,419 estudiantes que rindieron la PDT 2021 pero no se matricularon (35.44%)
+**.darkorange[Población Objetivo]**: 80,419 estudiantes que rindieron la PDT 2021 pero no se matricularon (36%)
 
   [Tabla con diferencias: puntaje, año egreso, madre con estudios de ed superior, tecnico profesional]
   
 ---
 # Datos: Postulaciones
 
-.left[
-![:scale 60%](https://raw.githubusercontent.com/maibennett/presentations/main/content/presentations/DynamicChoice/mineduc_20211022/images/AreasPostulacion.png)
+.center[
+![:scale 65%](https://raw.githubusercontent.com/maibennett/presentations/main/content/presentations/DynamicChoice/mineduc_20211022/images/AreasPostulacionDatos.png)
 ]
 
 ---
@@ -329,7 +333,7 @@ font.add.google("Fira Sans", "Fira Sans")
 ---
 # Por qué no se matricularon?
 
-.pull-left[
+.pull-left-s[
 - **.darkorange[Principales razones]**: Puntaje, recursos financieros, y modalidad estudios en pandemia.
 
 - **.darkorange[Alta heterogeneidad]**:
@@ -340,7 +344,7 @@ font.add.google("Fira Sans", "Fira Sans")
 - **.darkorange[Estudiantes prioritarios]** $\rightarrow$ puntaje y recursos
 ]
 
-.pull-right[
+.pull-right-s[
 .center[
 ![](https://raw.githubusercontent.com/maibennett/presentations/main/content/presentations/DynamicChoice/mineduc_20211022/images/Razones.png)
 ]

@@ -567,3 +567,11 @@ table.dataTable.hover tbody tr:hover, table.dataTable.display tbody tr:hover {
   float: right;
   width: 67%;
 }
+.pull-left-s {
+  float: left;
+  width: 40%;
+}
+.pull-right-s {
+  float: right;
+  width: 54%;
+}

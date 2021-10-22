@@ -52,3 +52,12 @@
   font-weight: 200;
   font-size: 120%;
 }
+
+.pull-left-g {
+  float: left;
+  width: 40%;
+}
+.pull-right-g {
+  float: right;
+  width: 54%;
+}

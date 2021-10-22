@@ -430,7 +430,7 @@ font.add.google("Fira Sans", "Fira Sans")
 # Financiamiento y Beneficios: Planes
 
 .pull-left-s[
-- **.darkorange[65% financiaria estudios con gratuidad]**
+- **.darkorange[69% financiaria estudios con gratuidad]**
   - 33% no tiene certeza si es elegible.
   
 - **.darkorange[32% utilizaría recursos propios]**

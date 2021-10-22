@@ -336,9 +336,8 @@ font.add.google("Fira Sans", "Fira Sans")
 ---
 # Datos: Postulaciones
 
-.center[
-![:scale 65%](https://raw.githubusercontent.com/maibennett/presentations/main/content/presentations/DynamicChoice/mineduc_20211022/images/AreasPostulacionDatos.png)
-]
+
+![:scale 90%](https://raw.githubusercontent.com/maibennett/presentations/main/content/presentations/DynamicChoice/mineduc_20211022/images/AreasPostulacionDatos.png)
 
 ---
 # Datos: Postulaciones

@@ -1,7 +1,7 @@
 ---
 title: "El Rol Dinámico de la Información:<br/>Siguiendo a Estudiantes No Matriculados"
-subtitle: "Consilium Bots<br/><br/>Magdalena Bennett - Claudia Allende<br/>Antonia Dahuabe"
-author: "22 de Octubre, 2021"
+subtitle: "Consilium Bots<br/><br/>Magdalena Bennett<sup>1</sup> - Claudia Allende<sup>2</sup><br/>Antonia Dahuabe<sup>3</sup>"
+author: "<sup>1</sup> The University of Texas at Austin  -  <sup>2</sup> Stanford University<br/><sup>3</sup> J-PAL<br/><br/>22 de Octubre, 2021"
 output:
   xaringan::moon_reader:
     css: ["xaringan-themer.css", "custom.css"]
@@ -75,7 +75,7 @@ style_mono_accent(
     ".title-slide h2" = list("font-weight" = "400",
                              "font-size" =  "170%"),
     ".title-slide h3" = list("font-family" = "Jost",
-                             "font-size" = "100%",
+                             "font-size" = "90%",
                              "font-weight" = "200"),
     ".center2" = list("margin" = "0",
                       "position" = "absolute",
@@ -474,6 +474,17 @@ font.add.google("Fira Sans", "Fira Sans")
 ![](https://raw.githubusercontent.com/maibennett/presentations/main/content/presentations/DynamicChoice/mineduc_20211022/images/PostulariaMitad.png)
 ]
 ]
+
+---
+# Conclusiones
+
+- Estudiantes que **.darkorange[quieren volver a postular]** y para los que **.darkorange[tenemos más información]**
+
+  - Oportunidad de **.darkorange[apoyo contextualizada]**
+  
+- Dar motiviación objetiva a estudiantes para **.darkorange[preparación de prueba de admisión]**
+
+- Importancia de información de **.darkorange[opciones de carreras]** y también **.darkorange[financiamiento]**
 
 ---
 

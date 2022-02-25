@@ -391,9 +391,7 @@ font.add.google("Fira Sans", "Fira Sans")
 # Intervention: Dynamic Group
 
 .pull-left[
-.center[
 ![scale: 50%](https://raw.githubusercontent.com/maibennett/presentations/main/content/presentations/DynamicChoice/aefpeddev_20220225/images/cartilla_1.png)
-]
 ]
 
 .pull-right[

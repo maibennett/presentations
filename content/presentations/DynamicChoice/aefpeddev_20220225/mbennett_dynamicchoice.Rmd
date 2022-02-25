@@ -385,12 +385,56 @@ font.add.google("Fira Sans", "Fira Sans")
 
 - **.darkorange[Follow-up surveys]** to capture test prepration throughout the year.
 
-- **.darkorange[Administrative data]** from the Ministry of Education + Info on admission test enrollment.
+- **.darkorange[Administrative data]** from the Ministry of Education.
   
 ---
-# Intervention
+# Intervention: Dynamic Group
 
+.pull-left[
+.center[
+![](https://raw.githubusercontent.com/maibennett/presentations/main/content/presentations/DynamicChoice/aefpeddev_20220225/images/cartilla_1.png)
+]
+]
 
+.pull-right[
+**.darkorange[Personalized information]** including:
+
+- Previous scores
+- Preferences (if applied + survey)
+- Preparation material
+- Financial Aid information
+- Relevant dates
+]
+
+---
+# Intervention: Dynamic Group
+
+.pull-left[
+.center[
+![](https://raw.githubusercontent.com/maibennett/presentations/main/content/presentations/DynamicChoice/aefpeddev_20220225/images/cartilla_2.png)
+]
+]
+
+.pull-right[
+.center[
+![](https://raw.githubusercontent.com/maibennett/presentations/main/content/presentations/DynamicChoice/aefpeddev_20220225/images/cartilla_3.png)
+]
+]
+
+---
+# Intervention: Dynamic Group
+
+.pull-left[
+.center[
+![](https://raw.githubusercontent.com/maibennett/presentations/main/content/presentations/DynamicChoice/aefpeddev_20220225/images/cartilla_5.png)
+]
+]
+
+.pull-right[
+.center[
+![](https://raw.githubusercontent.com/maibennett/presentations/main/content/presentations/DynamicChoice/aefpeddev_20220225/images/cartilla_7.png)
+]
+]
 
 ---
 # Study Population

@@ -395,7 +395,7 @@ font.add.google("Fira Sans", "Fira Sans")
 # Intervention: Dynamic Group
 
 .pull-left[
-.center
+.center[
 ![:scale 65%](https://raw.githubusercontent.com/maibennett/presentations/main/content/presentations/DynamicChoice/aefpeddev_20220225/images/cartilla_1.png)]
 ]
 
@@ -413,7 +413,8 @@ font.add.google("Fira Sans", "Fira Sans")
 # Intervention: Dynamic Group
 
 .pull-left[
-![:scale 65%](https://raw.githubusercontent.com/maibennett/presentations/main/content/presentations/DynamicChoice/aefpeddev_20220225/images/cartilla_6.png)
+.center[
+![:scale 65%](https://raw.githubusercontent.com/maibennett/presentations/main/content/presentations/DynamicChoice/aefpeddev_20220225/images/cartilla_6.png)]
 ]
 
 .pull-right[
@@ -431,7 +432,8 @@ font.add.google("Fira Sans", "Fira Sans")
 # Intervention: Dynamic Group
 
 .pull-left[
-![:scale 65%](https://raw.githubusercontent.com/maibennett/presentations/main/content/presentations/DynamicChoice/aefpeddev_20220225/images/cartilla_3.png)
+.center[
+![:scale 65%](https://raw.githubusercontent.com/maibennett/presentations/main/content/presentations/DynamicChoice/aefpeddev_20220225/images/cartilla_3.png)]
 ]
 
 .pull-right[
@@ -449,18 +451,21 @@ font.add.google("Fira Sans", "Fira Sans")
 # Intervention: Dynamic Group
 
 .pull-left[
-![:scale 65%](https://raw.githubusercontent.com/maibennett/presentations/main/content/presentations/DynamicChoice/aefpeddev_20220225/images/cartilla_5.png)
+.center[
+![:scale 65%](https://raw.githubusercontent.com/maibennett/presentations/main/content/presentations/DynamicChoice/aefpeddev_20220225/images/cartilla_5.png)]
 ]
 
 .pull-right[
-![:scale 75%](https://raw.githubusercontent.com/maibennett/presentations/main/content/presentations/DynamicChoice/aefpeddev_20220225/images/cartilla_7.png)
+.center[
+![:scale 75%](https://raw.githubusercontent.com/maibennett/presentations/main/content/presentations/DynamicChoice/aefpeddev_20220225/images/cartilla_7.png)]
 ]
 
 ---
 # Intervention: Dynamic Group
 
 .pull-left[
-![:scale 65%](https://raw.githubusercontent.com/maibennett/presentations/main/content/presentations/DynamicChoice/aefpeddev_20220225/images/cartilla_8.png)
+.center[
+![:scale 65%](https://raw.githubusercontent.com/maibennett/presentations/main/content/presentations/DynamicChoice/aefpeddev_20220225/images/cartilla_8.png)]
 ]
 
 .pull-right[
@@ -472,7 +477,8 @@ font.add.google("Fira Sans", "Fira Sans")
 # Intervention: Static Group and Control
 
 .pull-left[
-![:scale 65%](https://raw.githubusercontent.com/maibennett/presentations/main/content/presentations/DynamicChoice/aefpeddev_20220225/images/cartilla_3.png)
+.center[
+![:scale 65%](https://raw.githubusercontent.com/maibennett/presentations/main/content/presentations/DynamicChoice/aefpeddev_20220225/images/cartilla_3.png)]
 ]
 
 .pull-right[
@@ -510,7 +516,7 @@ font.add.google("Fira Sans", "Fira Sans")
 # Reasons for Not Enrolling?
 
 .center[
-![:scale 70%](https://raw.githubusercontent.com/maibennett/presentations/main/content/presentations/DynamicChoice/aefpeddev_20220225/images/Reasons.png)]
+![:scale 65%](https://raw.githubusercontent.com/maibennett/presentations/main/content/presentations/DynamicChoice/aefpeddev_20220225/images/Reasons.png)]
 
 
 ---

@@ -22,6 +22,10 @@
   }
 }
 
+sup {
+  font-size: 80%;
+}
+
 .reportTable {
     width: 99mm; /* was 97mm */
     height: 74mm; /* was 72mm */

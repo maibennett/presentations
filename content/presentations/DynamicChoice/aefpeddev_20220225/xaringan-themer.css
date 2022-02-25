@@ -15,7 +15,7 @@
  *    - xaringan wiki: https://github.com/yihui/xaringan/wiki
  *    - remarkjs wiki: https://github.com/gnab/remark/wiki
  *
- *  Version: 0.4.0
+ *  Version: 0.3.0
  *
  * ------------------------------------------------------- */
 @import url(https://fonts.googleapis.com/css?family=Jost&display=swap);
@@ -32,7 +32,6 @@
   --text-font-base: sans-serif;
   --header-font-family: 'Yanone Kaffeesatz';
   --header-font-is-google: 1;
-  --header-font-family-fallback: Georgia, serif;
   --code-font-family: 'Fira Mono';
   --code-font-is-google: 1;
   --base-font-size: 20px;
@@ -53,7 +52,6 @@
   --inverse-text-color: #FFFFFF;
   --inverse-background-color: #333f48;
   --inverse-header-color: #FFFFFF;
-  --inverse-link-color: #333f48;
   --title-slide-background-color: #333f48;
   --title-slide-text-color: #FFFFFF;
   --header-background-color: #333f48;
@@ -81,7 +79,7 @@ body {
   color: var(--text-color);
 }
 h1, h2, h3 {
-  font-family: var(--header-font-family), var(--header-font-family-fallback);
+  font-family: var(--header-font-family);
   font-weight: 600;
   color: var(--header-color);
 }
@@ -114,12 +112,9 @@ h1, h2, h3 {
 .remark-slide-number {
   color: #333f48;
   opacity: 1;
-  font-size: 0.9rem;
+  font-size: 0.9em;
 }
-strong {
-  font-weight: bold;
-  color: var(--text-bold-color);
-}
+strong { color: var(--text-bold-color); }
 a, a > code {
   color: var(--link-color);
   text-decoration: none;
@@ -140,9 +135,6 @@ a, a > code {
 }
 .inverse h1, .inverse h2, .inverse h3 {
   color: var(--inverse-header-color);
-}
-.inverse a, .inverse a > code {
-  color: var(--inverse-link-color);
 }
 .title-slide, .title-slide h1, .title-slide h2, .title-slide h3 {
   color: var(--title-slide-text-color);
@@ -178,7 +170,7 @@ a, a > code {
   float: right;
   width: 47%;
 }
-.pull-right + * {
+.pull-right ~ * {
   clear: both;
 }
 img, video, iframe {
@@ -413,6 +405,69 @@ table.dataTable.hover tbody tr:hover, table.dataTable.display tbody tr:hover {
 }
 .box-7,.box-7a,.box-7s,.box-7b,.box-7l,.box-7LA,.section-title-7 {
   background-color: #FCCE25;
+}
+.box-1trans,.box-2trans,.box-3trans,.box-4trans,.box-5trans,.box-6trans,.box-7trans {
+  background-color: #FFFFFF;
+  font-family: Yanone Kaffeesatz;
+  border-radius: 15px;
+  margin: 0em auto;
+  overflow: hidden;
+  padding: 0.4em 0.4em;
+  font-weight: 600;
+  font-size: 31px;
+  display: table;
+  text-align: center;
+  border-width: thick;
+  color: #333f48;
+}
+.box-1Trans,.box-2Trans,.box-3Trans,.box-4Trans,.box-5Trans,.box-6Trans,.box-7Trans {
+  background-color: #FFFFFF;
+  font-family: Yanone Kaffeesatz;
+  border-radius: 15px;
+  margin: 0em auto;
+  overflow: hidden;
+  padding: 0.4em 0.4em;
+  font-weight: 600;
+  font-size: 51px;
+  display: table;
+  text-align: center;
+  border-width: thick;
+  color: #333f48;
+}
+.box-1transl,.box-2transl,.box-3transl,.box-4transl,.box-5transl,.box-6transl,.box-7transl {
+  background-color: #FFFFFF;
+  font-family: Yanone Kaffeesatz;
+  border-radius: 15px;
+  left: 0px;
+  overflow: hidden;
+  padding: 0.4em 0.4em;
+  font-weight: 600;
+  font-size: 31px;
+  display: table;
+  text-align: left;
+  border-width: thick;
+  color: #333f48;
+}
+.box-1trans,.box-1transl,.box-1Trans {
+  border: 5px solid rgba(13, 8, 135,1);
+}
+.box-2trans,.box-2transl,.box-2Trans {
+  border: 5px solid rgba(86, 1, 164,1);
+}
+.box-3trans,.box-3transl,.box-3Trans {
+  border: 5px solid rgba(144, 13, 164,1);
+}
+.box-4trans,.box-4transl,.box-4Trans {
+  border: 5px solid rgba(191, 57, 132,1);
+}
+.box-5trans,.box-5transl,.box-5Trans {
+  border: 5px solid rgba(225, 100, 98,1);
+}
+.box-6trans,.box-6transl,.box-6Trans {
+  border: 5px solid rgba(248, 148, 65,1);
+}
+.box-7trans,.box-7transl,.box-7Trans {
+  border: 5px solid rgba(252, 206, 37,1);
 }
 .box-1t,.box-1tL,.section-title-1t {
   background-color: rgba(13, 8, 135,0.3);

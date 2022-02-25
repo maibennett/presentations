@@ -1,29 +1,29 @@
 ---
-title: "American Statistical Association, Austin Chapter"
+title: "AEFP Development Group Meeting"
 date: 2020-12-02T09:19:42+01:00
 lastmod: 2020-12-02T09:19:42+01:00
 draft: false
 images: []
 menu: 
   docs:
-    parent: "1) Difference-in-Differences"
+    parent: "3) Dynamic Role of Information Frictions"
 weight: 120
 toc: true
 ---
 
-<h4> Date: 06/09/2021</h4>
+<h4> Date: 02/25/2022</h4>
 
 <h3> Abstract </h3>
 
-Difference-in-differences (DD) is a commonly used approach in policy evaluation for identifying the impact of an intervention or treatment. Under a parallel trend assumption, we can recover a causal effect by comparing the difference in outcomes between a treatment and a control group, both before and after an intervention was set in place. However, time-varying confounders often break the identifying assumption, biasing our estimates. In this paper, I identify the different contexts in which matching can help reduce such biases, and show how balancing covariates directly can yield better results for solving these issues and bound causal estimates. I also show how this method can be applied both for panel and repeated cross-sectional data. I illustrate these results with simulations and a case study of the impact of a new voucher scheme on socioeconomic segregation in Chile
+Even though information frictions have been widely studied regarding decisions involving higher education, most research has studied these frictions as static, overlooking the dynamic component that might be embedded in the process. In this study, we will focus on both components, static and dynamic, analyzing not only the potential frictions in the discrete decision of college-degree choice but also the dynamic decision in investment on college admission preparation itself. We will test this by conducting a randomized controlled trial (RCT) for students in Chile that took the college admission test the previous year but for different reasons did not enroll in college, and providing them with information about institution-degree characteristics at (i) the beginning of the academic year (dynamic treatment), or (ii) shortly before the college application window (static treatment). The difference between the two treatment groups will allow us to distinguish between the static and dynamic roles of information. By leveraging the results of the RCT, we will be able to recover the key parameters of the decision model and their interaction. To better understand the mechanisms through which information may alleviate frictions, we propose to use a model. We plan to exploit the rich information contained in the rank-ordered lists students submit and rich student-level background information to recover preferences for program characteristics. Finally, we can use the parameters of our model and the estimated treatment effects to understand the implications of scaling up an intervention to the whole population. Congestion for programs with more attractive characteristics may also increase the cutoff scores for admission, so results may be hindered once the program is expanded.
 
 
 <head>
 <meta charset="UTF-8">
 </head>
 
-<a class="btn btn-link btn-sm px-4 mb-2" href="https://github.com/maibennett/presentations/blob/main/content/presentations/DD/asa_20210609/mbennett_did.Rmd" role="button"> Download code &#128187;</a>
-<a class="btn btn-link btn-sm px-4 mb-2" href="https://raw.githack.com/maibennett/presentations/main/content/presentations/DD/asa_20210609/mbennett_did.html" role="button"> Open slides &#128194;</a>
+<a class="btn btn-link btn-sm px-4 mb-2" href="https://github.com/maibennett/presentations/blob/main/content/presentations/dynamicchoice/aefpeddev_20220225/mbennett_dynamicchoice.Rmd" role="button"> Download code &#128187;</a>
+<a class="btn btn-link btn-sm px-4 mb-2" href="https://raw.githack.com/maibennett/presentations/main/content/presentations/dynamicchoice/aefpeddev_20220225/mbennett_dynamicchoice.html" role="button"> Open slides &#128194;</a>
 
 <style>
 .resp-container {
@@ -43,7 +43,7 @@ Difference-in-differences (DD) is a commonly used approach in policy evaluation 
 </style>
 
 <div class="resp-container">
-    <iframe class="testiframe" src="https://slides.magdalenabennett.com/presentations/DD/asa_20210609/mbennett_did">
+    <iframe class="testiframe" src="https://slides.magdalenabennett.com/presentations/dynamicchoice/aefpeddev_20220225/mbennett_dynamicchoice">
       Oops! Your browser doesn't support this.
     </iframe>
 </div>

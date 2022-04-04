@@ -16,6 +16,8 @@ output:
     includes:
       in_header: header.html
     seal: false
+always_allow_html: true
+tables: true
 ---
 
 ```{r setup, include=FALSE}
@@ -327,6 +329,8 @@ style_mono_accent(
 library(knitr)
 library(showtext)
 library(xaringanExtra)
+
+options(knitr.table.format = "html") 
 
 #xaringanExtra::use_scribble()
 
@@ -779,11 +783,9 @@ shift_legend2(gr)
 - Schools directly **.coolblue[(des)incentivize attendance of (lower)higher performers]**
 
 <br>
-
 - Students are **.coolblue[excluded due to other reasons]** (justified).
 
 <br>
-
 - Students experience a **.coolblue[disutility from testing]**
 
 ---
@@ -793,60 +795,17 @@ shift_legend2(gr)
 
   - 2017 survey for students in test-taking grades.
 
-**Results for 4th Grade**
-<table>
-<thead>
-<tr class="header">
-        <td>GPA Decile</td>
-        <td>Told</td>
-        <td>Notification</td>
-        <td>Preparation</td>
-        <td>Grades</td>
-    </tr>
-</thead>
-    <tr>
-        <td>D1</td>
-        <td>-0.06***</td>
-        <td>-0.11***</td>
-        <td>-0.08***</td>
-        <td>0.14***</td>
-    </tr>
-    <tr>
-        <td></td>
-        <td>(0.00)</td>
-        <td>(0.00)</td>
-        <td>(0.00)</td>
-        <td>(0.00)</td>
-    </tr>
-    <tr>
-        <td>D10</td>
-        <td>0.06***</td>
-        <td>0.05***</td>
-        <td>0.05***</td>
-        <td>-0.2***</td>
-    </tr>
-    <tr>
-        <td></td>
-        <td>(0.00)</td>
-        <td>(0.00)</td>
-        <td>(0.00)</td>
-        <td>(0.00)</td>
-    </tr>
-    <tr>
-        <td>Baseline</td>
-        <td>0.89***</td>
-        <td>0.87***</td>
-        <td>0.89***</td>
-        <td>0.39***</td>
-    </tr>
-    <tr>
-        <td></td>
-        <td>(0.00)</td>
-        <td>(0.00)</td>
-        <td>(0.00)</td>
-        <td>(0.00)</td>
-    </tr>
-</table>
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+library(kableExtra)
+
+tab4th <- read.csv("https://raw.githubusercontent.com/maibennett/presentations/main/content/presentations/Attendance/Salem_20220405/images/survey_4th.csv")
+
+tab10th <- read.csv("https://raw.githubusercontent.com/maibennett/presentations/main/content/presentations/Attendance/Salem_20220405/images/survey_10th.csv")
+
+kableExtra::kable(tab4th, align = "lcccc", caption = "Results for 4th Grade",
+             col.names = c('GPA Decile', 'Told', 'Notification', 'Preparation', 'Grades'), format = "html") %>% 
+  kable_paper(bootstrap_options = c("hover","condensed"), full_width = FALSE, stripe_color="ltgray")
+```
 
 
 ---
@@ -856,24 +815,32 @@ shift_legend2(gr)
 
   - 2017 survey for students in test-taking grades.
 
-```{r, echo=FALSE, warning=FALSE, message=FALSE}
-library(xtable)
-library(kableExtra)
-library(texPreview)
-
-tab1 <- "\\begin{table}[]
-\\begin{tabular}{lcccc} 
-\\textbf{GPA Decile} & \\textbf{Told} & \\textbf{Notification} & \\textbf{Preparation} & \\textbf{Grades} \\\\
-D1                  & -0.06***      & -0.11***              & -0.08***             & 0.14***         \\\\
-                    & (0.00)        & (0.00)                & (0.00)               & (0.00)          \\\\
-D10                 & 0.06***       & 0.05***               & 0.05***              & -0.2***         \\\\
-                    & (0.00)        & (0.00)                & (0.00)               & (0.00)          \\\\
-Baseline            & 0.89***       & 0.87***               & 0.89***              & 0.39***         \\\\
-                    & (0.00)        & (0.00)                & (0.00)               & (0.00)         
-\\end{tabular}
-\\end{table}"
-
-ktab1 <- as.kable(tab1)
-
-ktab1 %>% kable_styling()
+```{r, echo=FALSE, results='asis'}
+kableExtra::kable(tab10th, align = "lcccc", caption = "Results for 10th Grade",
+             col.names = c('GPA Decile', 'Told', 'Notification', 'Preparation', 'Grades'), format = "html") %>% 
+  kable_paper(bootstrap_options = c("hover","condensed"), full_width = FALSE, stripe_color="ltgray")
 ```
+
+---
+# Potential mechanisms that explain these patterns
+
+- Students are **.coolblue[excluded due to other reasons]** (justified).
+
+  - Analysis of 2012 change in exclusion policy $\rightarrow$ Similar results
+  
+---
+# Potential mechanisms that explain these patterns
+
+- Students experience a **.coolblue[disutility from testing]**
+
+  - Use of **.coolblue[no-stake test]** applied to schools $\rightarrow$ No effect on attendance
+  
+---
+# How do these results compare to predicted counterfactual?
+
+- Use **.coolblue[XGBoost]** with panel data for **.coolblue[attendance prediction]** 
+
+  - Model includes fixed effects by day of the week, school, grade, and student. 
+  
+  - Also includes sibling attendance and attendance lag.
+  

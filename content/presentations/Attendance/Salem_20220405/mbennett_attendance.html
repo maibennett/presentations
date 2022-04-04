@@ -4,6 +4,17 @@
     <title>mbennett_attendance.knit</title>
     <meta charset="utf-8" />
     <script src="libs/header-attrs/header-attrs.js"></script>
+    <script src="libs/htmlwidgets/htmlwidgets.js"></script>
+    <link href="libs/datatables-css/datatables-crosstalk.css" rel="stylesheet" />
+    <script src="libs/datatables-binding/datatables.js"></script>
+    <script src="libs/jquery/jquery-3.6.0.min.js"></script>
+    <link href="libs/dt-core/css/jquery.dataTables.min.css" rel="stylesheet" />
+    <link href="libs/dt-core/css/jquery.dataTables.extra.css" rel="stylesheet" />
+    <script src="libs/dt-core/js/jquery.dataTables.min.js"></script>
+    <link href="libs/crosstalk/css/crosstalk.min.css" rel="stylesheet" />
+    <script src="libs/crosstalk/js/crosstalk.min.js"></script>
+    <script src="libs/kePrint/kePrint.js"></script>
+    <link href="libs/lightable/lightable.css" rel="stylesheet" />
     <script src="https://use.fontawesome.com/5235085b15.js"></script>
     <link rel="stylesheet" href="xaringan-themer.css" type="text/css" />
     <link rel="stylesheet" href="style.css" type="text/css" />
@@ -291,60 +302,8 @@ Where
 
   - 2017 survey for students in test-taking grades.
 
-**Results for 4th Grade**
-&lt;table&gt;
-&lt;thead&gt;
-&lt;tr class="header"&gt;
-        &lt;td&gt;GPA Decile&lt;/td&gt;
-        &lt;td&gt;Told&lt;/td&gt;
-        &lt;td&gt;Notification&lt;/td&gt;
-        &lt;td&gt;Preparation&lt;/td&gt;
-        &lt;td&gt;Grades&lt;/td&gt;
-    &lt;/tr&gt;
-&lt;/thead&gt;
-    &lt;tr&gt;
-        &lt;td&gt;D1&lt;/td&gt;
-        &lt;td&gt;-0.06***&lt;/td&gt;
-        &lt;td&gt;-0.11***&lt;/td&gt;
-        &lt;td&gt;-0.08***&lt;/td&gt;
-        &lt;td&gt;0.14***&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-        &lt;td&gt;&lt;/td&gt;
-        &lt;td&gt;(0.00)&lt;/td&gt;
-        &lt;td&gt;(0.00)&lt;/td&gt;
-        &lt;td&gt;(0.00)&lt;/td&gt;
-        &lt;td&gt;(0.00)&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-        &lt;td&gt;D10&lt;/td&gt;
-        &lt;td&gt;0.06***&lt;/td&gt;
-        &lt;td&gt;0.05***&lt;/td&gt;
-        &lt;td&gt;0.05***&lt;/td&gt;
-        &lt;td&gt;-0.2***&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-        &lt;td&gt;&lt;/td&gt;
-        &lt;td&gt;(0.00)&lt;/td&gt;
-        &lt;td&gt;(0.00)&lt;/td&gt;
-        &lt;td&gt;(0.00)&lt;/td&gt;
-        &lt;td&gt;(0.00)&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-        &lt;td&gt;Baseline&lt;/td&gt;
-        &lt;td&gt;0.89***&lt;/td&gt;
-        &lt;td&gt;0.87***&lt;/td&gt;
-        &lt;td&gt;0.89***&lt;/td&gt;
-        &lt;td&gt;0.39***&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-        &lt;td&gt;&lt;/td&gt;
-        &lt;td&gt;(0.00)&lt;/td&gt;
-        &lt;td&gt;(0.00)&lt;/td&gt;
-        &lt;td&gt;(0.00)&lt;/td&gt;
-        &lt;td&gt;(0.00)&lt;/td&gt;
-    &lt;/tr&gt;
-&lt;/table&gt;
+<div id="htmlwidget-863c0ae751fa0503d5c6" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-863c0ae751fa0503d5c6">{"x":{"filter":"none","vertical":false,"fillContainer":false,"data":[["1","2","3","4","5","6"],["D1","","D10","","Baseline",""],["-0.06***","(0.00)","0.06***","(0.00)","0.89***","(0.00)"],["-0.11***","(0.00)","0.05***","(0.00)","0.87***","(0.00)"],["-0.08***","(0.00)","0.05***","(0.00)","0.89***","(0.00)"],["0.14***","(0.00)","-0.2***","(0.00)","0.39***","(0.00)"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>GPA.Decile<\/th>\n      <th>Told<\/th>\n      <th>Notification<\/th>\n      <th>Preparation<\/th>\n      <th>Grades<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":8,"columnDefs":[{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false,"lengthMenu":[8,10,25,50,100]}},"evals":[],"jsHooks":[]}</script>
 
 
 ---
@@ -354,17 +313,62 @@ Where
 
   - 2017 survey for students in test-taking grades.
 
-\begin{table}[]
-\begin{tabular}{lcccc} 
-\textbf{GPA Decile} &amp; \textbf{Told} &amp; \textbf{Notification} &amp; \textbf{Preparation} &amp; \textbf{Grades} \\
-D1                  &amp; -0.06***      &amp; -0.11***              &amp; -0.08***             &amp; 0.14***         \\
-                    &amp; (0.00)        &amp; (0.00)                &amp; (0.00)               &amp; (0.00)          \\
-D10                 &amp; 0.06***       &amp; 0.05***               &amp; 0.05***              &amp; -0.2***         \\
-                    &amp; (0.00)        &amp; (0.00)                &amp; (0.00)               &amp; (0.00)          \\
-Baseline            &amp; 0.89***       &amp; 0.87***               &amp; 0.89***              &amp; 0.39***         \\
-                    &amp; (0.00)        &amp; (0.00)                &amp; (0.00)               &amp; (0.00)         
-\end{tabular}
-\end{table}
+&lt;table class=" lightable-paper" style='font-family: "Arial Narrow", arial, helvetica, sans-serif; width: auto !important; margin-left: auto; margin-right: auto;'&gt;
+&lt;caption&gt;Results for 10th Grade&lt;/caption&gt;
+ &lt;thead&gt;
+  &lt;tr&gt;
+   &lt;th style="text-align:left;"&gt; GPA Decile &lt;/th&gt;
+   &lt;th style="text-align:center;"&gt; Told &lt;/th&gt;
+   &lt;th style="text-align:center;"&gt; Notification &lt;/th&gt;
+   &lt;th style="text-align:center;"&gt; Preparation &lt;/th&gt;
+   &lt;th style="text-align:center;"&gt; Grades &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; D1 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; -0.02*** &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; -0.01*** &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; -0.02*** &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0.05*** &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt;  &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; (0.00) &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; (0.00) &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; (0.00) &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; (0.00) &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; D10 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0.01*** &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0.00 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0.00 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; -0.03*** &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt;  &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; (0.00) &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; (0.00) &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; (0.00) &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; (0.00) &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Baseline &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0.95*** &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0.78*** &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0.82*** &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0.33*** &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt;  &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; (0.00) &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; (0.00) &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; (0.00) &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; (0.00) &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
     </textarea>
 <style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
 <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>

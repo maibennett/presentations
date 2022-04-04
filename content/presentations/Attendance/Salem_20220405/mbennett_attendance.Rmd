@@ -881,3 +881,104 @@ ggplot(data = df_plot, aes(x = GPA_pos, y = outcome*100, fill = factor(type), co
 
 
 ```
+
+
+---
+# Comparisons between schools?
+
+```{r prediction_example, fig.height=6, fig.width=10, fig.align='center', dev='svg', echo=FALSE, warning=FALSE, message=FALSE}
+df_plot <- read.csv("https://raw.githubusercontent.com/maibennett/presentations/main/content/presentations/Attendance/Salem_20220405/data/plot_data_xgb2017_updated_1_100_lag_example.csv")
+
+df_plot$GPA_pos = factor(df_plot$GPA_pos, levels = c("D1","D2","D3D8","D9","D10"))
+
+ggplot(data = df_plot, aes(x = GPA_pos, y = outcome*100, fill = factor(type), color = factor(type))) + 
+  geom_bar(stat="identity",position = "dodge2", alpha=.6, lwd=1.5) +
+  #geom_errorbar(aes(x=GPA_pos, ymin=ci_l*100, ymax=ci_h*100), width=0.4, colour="dark grey", alpha=0.9, size=1.3,
+  #              position = position_dodge(width = 1))+
+  scale_y_continuous(limits=c(0,100),oob = rescale_none) +
+  theme_bw()+
+  xlab("GPA deciles") + ylab("% Attendance") +
+  scale_color_manual(values = c(cols[3],cols[5])) +
+  scale_fill_manual(values = c(alpha(cols[3],0.8),alpha(cols[5],0.8))) +
+  #ggplot2::annotate("text", x = 10, y = 6, label = "Adj. R2 = 0.48", size = 6, colour = "dark grey", hjust=0,family="Fira Sans Condensed") +
+  theme_ipsum_fsc(plot_title_face = "bold",plot_title_size = 24) + #plain
+  theme(plot.margin=unit(c(1,1,1.5,1.2),"cm"),
+        panel.grid.major.x = element_blank(),
+        panel.grid.minor.x = element_blank(),
+        panel.grid.major.y = element_blank(),
+        panel.grid.minor.y = element_blank(),
+        axis.line = element_line(colour = "dark grey"))+
+  theme(axis.title.x = element_text(size=18),#margin = margin(t = 10, r = 0, b = 0, l = 0)),
+        axis.text.x = element_text(size=14),
+        axis.title.y = element_text(size=18),#margin = margin(t = 0, r = 10, b = 0, l = 0)),
+        axis.text.y = element_text(size=14),legend.position=c(0.1,0.1),
+        legend.title = element_blank(),
+        legend.text = element_text(size=15),
+        legend.background = element_rect(fill="white",colour ="white"),
+        title = element_text(size=14)) +
+  facet_grid(grade_treat ~ factor(rbd, levels = c(10658,25002), labels = c("School 1", "School 2")))
+```
+
+---
+# Comparisons between schools?
+
+```{r prediction_example2, fig.height=6, fig.width=10, fig.align='center', dev='svg', echo=FALSE, warning=FALSE, message=FALSE}
+library(ggforce)
+
+ann_plot <- data.frame(rbd = 25002, GPA_pos = factor("D1", levels = c("D1","D2","D3D8","D9","D10")),
+                       grade_treat = "Tested")
+
+ggplot(data = df_plot, aes(x = GPA_pos, y = outcome*100, fill = factor(type), color = factor(type))) + 
+  geom_bar(stat="identity",position = "dodge2", alpha=.6, lwd=1.5) +
+  #geom_errorbar(aes(x=GPA_pos, ymin=ci_l*100, ymax=ci_h*100), width=0.4, colour="dark grey", alpha=0.9, size=1.3,
+  #              position = position_dodge(width = 1))+
+  scale_y_continuous(limits=c(0,100),oob = rescale_none) +
+  theme_bw()+
+  xlab("GPA deciles") + ylab("% Attendance") +
+  scale_color_manual(values = c(cols[3],cols[5])) +
+  scale_fill_manual(values = c(alpha(cols[3],0.8),alpha(cols[5],0.8))) +
+  #ggplot2::annotate("text", x = 10, y = 6, label = "Adj. R2 = 0.48", size = 6, colour = "dark grey", hjust=0,family="Fira Sans Condensed") +
+  theme_ipsum_fsc(plot_title_face = "bold",plot_title_size = 24) + #plain
+  theme(plot.margin=unit(c(1,1,1.5,1.2),"cm"),
+        panel.grid.major.x = element_blank(),
+        panel.grid.minor.x = element_blank(),
+        panel.grid.major.y = element_blank(),
+        panel.grid.minor.y = element_blank(),
+        axis.line = element_line(colour = "dark grey"))+
+  theme(axis.title.x = element_text(size=18),#margin = margin(t = 10, r = 0, b = 0, l = 0)),
+        axis.text.x = element_text(size=14),
+        axis.title.y = element_text(size=18),#margin = margin(t = 0, r = 10, b = 0, l = 0)),
+        axis.text.y = element_text(size=14),legend.position=c(0.1,0.1),
+        legend.title = element_blank(),
+        legend.text = element_text(size=15),
+        legend.background = element_rect(fill="white",colour ="white"),
+        title = element_text(size=14)) +
+  facet_grid(grade_treat ~ factor(rbd, levels = c(10658,25002), labels = c("School 1", "School 2"))) +
+  geom_ellipse(data = ann_plot, aes(x0 = 1, y0 = 60 , a = 0.5, b = 40, angle = 0),
+              inherit.aes = FALSE, color = cols[2], lwd=1.2)
+```
+
+---
+# Can we characterize these schools?
+
+```{r}
+df_wide_test <- read.csv("https://raw.githubusercontent.com/maibennett/presentations/main/content/presentations/Attendance/Salem_20220405/data/df_wide_test.csv")
+
+PCA_clus <- kmeans(scale(df_wide_test[,-1]), 2, nstart=25)
+fviz_cluster(PCA_clus, data = scale(df_wide_test[,-1]), frame.type = "convex",
+             geom = c("point"))+ 
+  scale_color_manual(values = c(cols[3], cols[2])) +
+  scale_fill_manual(values = c(alpha(cols[3],0.3), alpha(cols[2],0.3))) +
+  theme_ipsum_fsc() + ggtitle("") + 
+  theme(axis.title.x = element_text(size=18),#margin = margin(t = 10, r = 0, b = 0, l = 0)),
+        axis.text.x = element_text(size=14),
+        axis.title.y = element_text(size=18),#margin = margin(t = 0, r = 10, b = 0, l = 0)),
+        axis.text.y = element_text(size=14),legend.position=c(0.1,0.9),
+        legend.title = element_blank(),
+        legend.text = element_text(size=15),
+        legend.background = element_rect(fill="white",colour ="white"),
+        title = element_text(size=14))
+
+```
+
+

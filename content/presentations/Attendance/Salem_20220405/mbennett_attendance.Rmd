@@ -961,7 +961,11 @@ ggplot(data = df_plot, aes(x = GPA_pos, y = outcome*100, fill = factor(type), co
 ---
 # Can we characterize these schools?
 
-```{r}
+```{r cluster_plot, fig.height=5.5, fig.width=8, fig.align='center', dev='svg', echo=FALSE, warning=FALSE, message=FALSE}
+library(factoextra)
+library(NbClust)
+library(FactoMineR)
+
 df_wide_test <- read.csv("https://raw.githubusercontent.com/maibennett/presentations/main/content/presentations/Attendance/Salem_20220405/data/df_wide_test.csv")
 
 PCA_clus <- kmeans(scale(df_wide_test[,-1]), 2, nstart=25)
@@ -981,4 +985,16 @@ fviz_cluster(PCA_clus, data = scale(df_wide_test[,-1]), frame.type = "convex",
 
 ```
 
+---
+# Schools that appear to exclude lower-perfoming students are also more vulnerable
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
+library(modelsummary)
+
+df_wide_test <- read.csv("https://raw.githubusercontent.com/maibennett/presentations/main/content/presentations/Attendance/Salem_20220405/data/d_tab.csv")
+
+datasummary_balance(~ cluster, data = d_tab, dinm_statistic = "p.value", fmt = "%.2f", stars = TRUE,
+                    notes = "Note: `Diff DX GPA` represents the difference between obs. attendance and predicted attendance for decile X")
+
+```
 

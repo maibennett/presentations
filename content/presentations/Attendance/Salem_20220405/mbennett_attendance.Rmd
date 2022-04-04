@@ -354,7 +354,7 @@ library(gridExtra)
 library(pBrackets)
 library(patchwork)
 
-loadfonts(device = "win")
+#loadfonts(device = "win")
 
 options(scipen = 0)
 ```
@@ -399,15 +399,18 @@ Causal Inference Seminar, Salem Center<br>April 5th, 2022
 ---
 # Motivation
 
+.pull-right[
 .center[
 ![:scale 65%](https://raw.githubusercontent.com/maibennett/presentations/main/content/presentations/Attendance/Salem_20220405/images/test_scandal1.png)
 ]
+]
 
----
-# Motivation
+--
 
+pull-left[
 .center[
 ![:scale 70%](https://raw.githubusercontent.com/maibennett/presentations/main/content/presentations/Attendance/Salem_20220405/images/test_discrimination.png)
+]
 ]
 
 ---

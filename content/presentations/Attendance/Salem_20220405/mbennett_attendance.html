@@ -26,19 +26,34 @@ class: inverse, center, middle
 
 &lt;br&gt;
 
-&lt;h1 class="title-own"&gt;Beyond Exclusion:&lt;br/&gt;The Role of High-Stake Testing on Attendance&lt;br/&gt;on the Day of the Test&lt;/h1&gt;
+.left[
+&lt;h1 class="title-own"&gt;Beyond Exclusion:&lt;br/&gt;The Role of High-Stake Testing on Attendance the Day of the Test&lt;/h1&gt;]
 
-
-.small[.center[Magdalena Bennett&lt;br&gt;The University of Texas at Austin]]
-
-.pull-left[.small[.center[Christopher Neilson&lt;br&gt;Princeton University]]]
-
-.pull-right[.small[.center[Nicolás Rojas&lt;br&gt;Columbia University]]]
-
+.pull-left-little_l[
 &lt;br&gt;
 &lt;br&gt;
 &lt;br&gt;
-Causal Inference Seminar, Salem Center&lt;br&gt;April 5th, 2022
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+
+.left[.small[Causal Inference Seminar, Salem Center&lt;br&gt;April 5th, 2022]]]
+
+.pull-right-little_l[
+&lt;br&gt;
+.small[.right[Magdalena Bennett&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;br&gt;*The University of Texas at Austin*&amp;nbsp;&amp;nbsp;&amp;nbsp;]]
+
+&lt;br&gt;
+.small[.right[Christopher Neilson&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;br&gt;*Princeton University*&amp;nbsp;&amp;nbsp;&amp;nbsp;]]
+
+&lt;br&gt;
+.small[.right[Nicolás Rojas&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;br&gt;*Columbia University*&amp;nbsp;&amp;nbsp;&amp;nbsp;]]
+
+]
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+
 
 ---
 # Motivation
@@ -51,7 +66,7 @@ Causal Inference Seminar, Salem Center&lt;br&gt;April 5th, 2022
 &lt;br&gt;
 &lt;br&gt;
 
-- **.coolblue[Assumption]**: Standardize tests measure used as a proxy of school quality
+- **.coolblue[Assumption]**: Standardize tests used as a proxy of school quality
 
 
 --
@@ -64,7 +79,7 @@ Causal Inference Seminar, Salem Center&lt;br&gt;April 5th, 2022
 
 .pull-left[
 .center[
-![:scale 70%](https://raw.githubusercontent.com/maibennett/presentations/main/content/presentations/Attendance/Salem_20220405/images/test_scandal1.png)
+![:scale 75%](https://raw.githubusercontent.com/maibennett/presentations/main/content/presentations/Attendance/Salem_20220405/images/test_scandal1.png)
 ]
 ]
 
@@ -72,7 +87,7 @@ Causal Inference Seminar, Salem Center&lt;br&gt;April 5th, 2022
 
 .pull-right[
 .center[
-![:scale 70%](https://raw.githubusercontent.com/maibennett/presentations/main/content/presentations/Attendance/Salem_20220405/images/test_discrimination.png)
+![:scale 75%](https://raw.githubusercontent.com/maibennett/presentations/main/content/presentations/Attendance/Salem_20220405/images/test_discrimination.png)
 ]
 ]
 
@@ -84,17 +99,15 @@ Causal Inference Seminar, Salem Center&lt;br&gt;April 5th, 2022
   - E.g.: Reclassification of students with disabilities .small[(Cullen &amp; Reback, 2006; Figlio &amp; Getzler, 2002; Jacob, 2005)]
 
 --
-
 &lt;br&gt;
-
+&lt;br&gt;
 - Less attention on **.coolblue[non-representative attendance patterns]**
   
   - Differences between scores before and after imputation .small[(Cuesta et al., 2020)]
 
 --
-
 &lt;br&gt;
-
+&lt;br&gt;
 - Schools have **.coolblue[incentives]** to game the system
 
 ---
@@ -104,9 +117,11 @@ Causal Inference Seminar, Salem Center&lt;br&gt;April 5th, 2022
 
 - Event study approach:
 
-  - *How do these exclusions patterns look like?*
-
-  - *Are these the same for every (type of) school and every grade?*
+  - *How do these exclusions patterns look like? Are these the same for every (type of) school and every grade?*
+  
+  - Focus beyond bottom performers
+  
+  - Robustness checks for alternative mechanisms
 
 --
 
@@ -114,35 +129,132 @@ Causal Inference Seminar, Salem Center&lt;br&gt;April 5th, 2022
 
 - Machine learning prediction:
 
-  - *Consequences of blanket policies in imputation of scores*
+  - Consequences of blanket policies in imputation of scores
 
-  - *Identification of schools that are most likely gaming the system*
+  - Identification of schools that are most likely gaming the system
 
 ---
 # Outline
 
 1. Motivation
 
-
 2. Chilean educational context
-
 
 3. Attendance patterns:
 
-  - Event study for different years, grades, and performance
-
+  - .small[Event study for different years, grades, and performance]
+  - .small[Potential mechanisms]
 
 4. Prediction approach:
 
-  - Difference between predicted and observed distributions
-  - Potential consecuences of imputation
-
+  - .small[Difference between predicted and observed distributions]
+  - .small[Potential consecuences of imputation]
 
 5. Conclusions and next steps
 
 ---
-# The Chilean context
+# The Chilean context: Standardized testing
 
+- Universal standardized testing since 1980's (SIMCE)
+
+--
+&lt;br&gt;
+&lt;br&gt;
+
+- SIMCE as **.coolblue[high-stake]** testing:
+
+  - Results widely available in a universal voucher system
+  
+  - Tied to teachers' bonuses
+  
+  - Tied to budget restrictions and school closures
+  
+---
+# SIMCE and absenteeism
+
+- Use of **.coolblue[pre-filled communication]** for parents to be sent out by schools
+
+  - Informal evidence that parents from lower-income students are less likely to receive information
+  
+--
+&lt;br&gt;
+&lt;br&gt;
+
+- **.coolblue[No real consequences for low attendance]**:
+  
+  - Between 2005-2007, non-representative results where marked with symbols
+  
+  - No imputation strategy so far
+  
+--
+&lt;br&gt;
+&lt;br&gt;
+
+- Improvement of regulation for **.coolblue[justifying students exclusion]**
+
+  - E.g. specific disabilities (blindness) or non-Spanish speakers.
+  
+---
+# How to evaluate the effect of "day of the test" on abstenteeism?
+
+- Some studies assessing the **.coolblue[effect of attendance manipulation]**:
+
+  - Focus on distortions (difference between imputed and observed scores) .small[(Cuesta et al., 2020)]
+  
+  - Manipulation for specific vulnerable schools (SEP) to raise scores .small[(Feigenberg et al., 2019; Quezada &amp; Hippel, 2017)]
+
+--
+&lt;br&gt;
+&lt;br&gt;
+- **.coolblue[This paper]**: Event study between 2011 and 2018 for all tested grades.
+
+  - Focus on attendance by within-school performance
+  
+  - Use of alternative non-high-stake test to analyze potential mechanisms
+  
+---
+# Data Available
+
+- **.coolblue[Standardized tests 2011-2018 (SIMCE)]**
+
+  - Scores at student and school level for different subjects (Math, Language, History, and Science)
+  
+  - Student's socioeconomic characterization (parental questionnaire)
+
+--
+&lt;br&gt;
+&lt;br&gt;
+
+- **.coolblue[Daily attendance data 2011-2018 (SIGE)]**
+
+  - Use for voucher payments (each day has &amp;#126; 2.5 million records)
+  
+--
+&lt;br&gt;
+&lt;br&gt;
+
+- **.coolblue[GPA Performance 2011-2018 (Rendimiento)]**
+
+  - Use GPA performance deciles within school-grade
+  
+---
+# Data description
+
+INCLUDE TABLE TO CHARACTERIZE OUR SAMPLE
+
+---
+# Empirical approach for difference in attendance
+
+- Event study centered around the day of the test:
+
+`$$Y_{ipsgt} = \sum_{p=1}^5\sum_{t=-4}^5 \tau_{pt}\mathrm{I}(g=G^{*}) + \gamma_{pt} + \alpha_i + \epsilon_{ipsgt}$$`
+
+Where
+- `\(Y_{ipsgt}\)`: Binary attendance fo student `\(i\)`, from GPA group `\(p\)`, in school `\(s\)` and grade `\(g\)`, for day `\(t\)` (centered around the day of the test).
+
+- `\(G^*\)`: Indicates a grade that was tested during the time period of analysis. 
+
+- `\(\tau_{pt}\)`: Effect on attendance for GPA group `\(p\)` on day `\(t\)` since the test. `\(\tau_{p0}\)` is the coefficient of interest.
 
 ---
 # Clear difference in attendance by performance for 2nd grade
@@ -155,9 +267,104 @@ Causal Inference Seminar, Salem Center&lt;br&gt;April 5th, 2022
 &lt;img src="mbennett_attendance_files/figure-html/event_study_plot10th-1.svg" style="display: block; margin: auto;" /&gt;
 
 ---
-# Differences depending by grade
+# Attendance patterns differ by grade
 
 &lt;img src="mbennett_attendance_files/figure-html/event_study_plot-1.svg" style="display: block; margin: auto;" /&gt;
+
+---
+# Potential mechanisms that explain these patterns
+
+- Schools directly **.coolblue[(des)incentivize attendance of (lower)higher performers]**
+
+&lt;br&gt;
+
+- Students are **.coolblue[excluded due to other reasons]** (justified).
+
+&lt;br&gt;
+
+- Students experience a **.coolblue[disutility from testing]**
+
+---
+# Potential mechanisms that explain these patterns
+
+- Schools directly **.coolblue[(des)incentivize attendance of (lower)higher performers]**
+
+  - 2017 survey for students in test-taking grades.
+
+**Results for 4th Grade**
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr class="header"&gt;
+        &lt;td&gt;GPA Decile&lt;/td&gt;
+        &lt;td&gt;Told&lt;/td&gt;
+        &lt;td&gt;Notification&lt;/td&gt;
+        &lt;td&gt;Preparation&lt;/td&gt;
+        &lt;td&gt;Grades&lt;/td&gt;
+    &lt;/tr&gt;
+&lt;/thead&gt;
+    &lt;tr&gt;
+        &lt;td&gt;D1&lt;/td&gt;
+        &lt;td&gt;-0.06***&lt;/td&gt;
+        &lt;td&gt;-0.11***&lt;/td&gt;
+        &lt;td&gt;-0.08***&lt;/td&gt;
+        &lt;td&gt;0.14***&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+        &lt;td&gt;&lt;/td&gt;
+        &lt;td&gt;(0.00)&lt;/td&gt;
+        &lt;td&gt;(0.00)&lt;/td&gt;
+        &lt;td&gt;(0.00)&lt;/td&gt;
+        &lt;td&gt;(0.00)&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+        &lt;td&gt;D10&lt;/td&gt;
+        &lt;td&gt;0.06***&lt;/td&gt;
+        &lt;td&gt;0.05***&lt;/td&gt;
+        &lt;td&gt;0.05***&lt;/td&gt;
+        &lt;td&gt;-0.2***&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+        &lt;td&gt;&lt;/td&gt;
+        &lt;td&gt;(0.00)&lt;/td&gt;
+        &lt;td&gt;(0.00)&lt;/td&gt;
+        &lt;td&gt;(0.00)&lt;/td&gt;
+        &lt;td&gt;(0.00)&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+        &lt;td&gt;Baseline&lt;/td&gt;
+        &lt;td&gt;0.89***&lt;/td&gt;
+        &lt;td&gt;0.87***&lt;/td&gt;
+        &lt;td&gt;0.89***&lt;/td&gt;
+        &lt;td&gt;0.39***&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+        &lt;td&gt;&lt;/td&gt;
+        &lt;td&gt;(0.00)&lt;/td&gt;
+        &lt;td&gt;(0.00)&lt;/td&gt;
+        &lt;td&gt;(0.00)&lt;/td&gt;
+        &lt;td&gt;(0.00)&lt;/td&gt;
+    &lt;/tr&gt;
+&lt;/table&gt;
+
+
+---
+# Potential mechanisms that explain these patterns
+
+- Schools directly **.coolblue[(des)incentivize attendance of (lower)higher performers]**
+
+  - 2017 survey for students in test-taking grades.
+
+\begin{table}[]
+\begin{tabular}{lcccc} 
+\textbf{GPA Decile} &amp; \textbf{Told} &amp; \textbf{Notification} &amp; \textbf{Preparation} &amp; \textbf{Grades} \\
+D1                  &amp; -0.06***      &amp; -0.11***              &amp; -0.08***             &amp; 0.14***         \\
+                    &amp; (0.00)        &amp; (0.00)                &amp; (0.00)               &amp; (0.00)          \\
+D10                 &amp; 0.06***       &amp; 0.05***               &amp; 0.05***              &amp; -0.2***         \\
+                    &amp; (0.00)        &amp; (0.00)                &amp; (0.00)               &amp; (0.00)          \\
+Baseline            &amp; 0.89***       &amp; 0.87***               &amp; 0.89***              &amp; 0.39***         \\
+                    &amp; (0.00)        &amp; (0.00)                &amp; (0.00)               &amp; (0.00)         
+\end{tabular}
+\end{table}
     </textarea>
 <style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
 <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>

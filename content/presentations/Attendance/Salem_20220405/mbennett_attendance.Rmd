@@ -302,9 +302,9 @@ style_mono_accent(
    
    ".image-80 img" = list("scale" = "80%"),
    ".pull-left-little_l" = list("float" = "left",
-                                "width" = "67%"),
+                                "width" = "57%"),
    ".pull-right-little_l" = list("float" = "right",
-                                "width" = "27%"),
+                                "width" = "37%"),
    ".pull-left-little_r" = list("float" = "left",
                                 "width" = "27%"),
    ".pull-right-little_r" = list("float" = "right",
@@ -363,19 +363,34 @@ class: inverse, center, middle
 
 <br>
 
-<h1 class="title-own">Beyond Exclusion:<br/>The Role of High-Stake Testing on Attendance<br/>on the Day of the Test</h1>
+.left[
+<h1 class="title-own">Beyond Exclusion:<br/>The Role of High-Stake Testing on Attendance the Day of the Test</h1>]
 
-
-.small[.center[Magdalena Bennett<br>The University of Texas at Austin]]
-
-.pull-left[.small[.center[Christopher Neilson<br>Princeton University]]]
-
-.pull-right[.small[.center[Nicolás Rojas<br>Columbia University]]]
-
+.pull-left-little_l[
 <br>
 <br>
 <br>
-Causal Inference Seminar, Salem Center<br>April 5th, 2022
+<br>
+<br>
+<br>
+
+.left[.small[Causal Inference Seminar, Salem Center<br>April 5th, 2022]]]
+
+.pull-right-little_l[
+<br>
+.small[.right[Magdalena Bennett&nbsp;&nbsp;&nbsp;<br>*The University of Texas at Austin*&nbsp;&nbsp;&nbsp;]]
+
+<br>
+.small[.right[Christopher Neilson&nbsp;&nbsp;&nbsp;<br>*Princeton University*&nbsp;&nbsp;&nbsp;]]
+
+<br>
+.small[.right[Nicolás Rojas&nbsp;&nbsp;&nbsp;<br>*Columbia University*&nbsp;&nbsp;&nbsp;]]
+
+]
+<br>
+<br>
+<br>
+
 
 ---
 # Motivation
@@ -388,7 +403,7 @@ Causal Inference Seminar, Salem Center<br>April 5th, 2022
 <br>
 <br>
 
-- **.coolblue[Assumption]**: Standardize tests measure used as a proxy of school quality
+- **.coolblue[Assumption]**: Standardize tests used as a proxy of school quality
 
 
 --
@@ -401,7 +416,7 @@ Causal Inference Seminar, Salem Center<br>April 5th, 2022
 
 .pull-left[
 .center[
-![:scale 70%](https://raw.githubusercontent.com/maibennett/presentations/main/content/presentations/Attendance/Salem_20220405/images/test_scandal1.png)
+![:scale 75%](https://raw.githubusercontent.com/maibennett/presentations/main/content/presentations/Attendance/Salem_20220405/images/test_scandal1.png)
 ]
 ]
 
@@ -409,7 +424,7 @@ Causal Inference Seminar, Salem Center<br>April 5th, 2022
 
 .pull-right[
 .center[
-![:scale 70%](https://raw.githubusercontent.com/maibennett/presentations/main/content/presentations/Attendance/Salem_20220405/images/test_discrimination.png)
+![:scale 75%](https://raw.githubusercontent.com/maibennett/presentations/main/content/presentations/Attendance/Salem_20220405/images/test_discrimination.png)
 ]
 ]
 
@@ -421,17 +436,15 @@ Causal Inference Seminar, Salem Center<br>April 5th, 2022
   - E.g.: Reclassification of students with disabilities .small[(Cullen & Reback, 2006; Figlio & Getzler, 2002; Jacob, 2005)]
 
 --
-
 <br>
-
+<br>
 - Less attention on **.coolblue[non-representative attendance patterns]**
   
   - Differences between scores before and after imputation .small[(Cuesta et al., 2020)]
 
 --
-
 <br>
-
+<br>
 - Schools have **.coolblue[incentives]** to game the system
 
 ---
@@ -441,9 +454,11 @@ Causal Inference Seminar, Salem Center<br>April 5th, 2022
 
 - Event study approach:
 
-  - *How do these exclusions patterns look like?*
-
-  - *Are these the same for every (type of) school and every grade?*
+  - *How do these exclusions patterns look like? Are these the same for every (type of) school and every grade?*
+  
+  - Focus beyond bottom performers
+  
+  - Robustness checks for alternative mechanisms
 
 --
 
@@ -451,35 +466,132 @@ Causal Inference Seminar, Salem Center<br>April 5th, 2022
 
 - Machine learning prediction:
 
-  - *Consequences of blanket policies in imputation of scores*
+  - Consequences of blanket policies in imputation of scores
 
-  - *Identification of schools that are most likely gaming the system*
+  - Identification of schools that are most likely gaming the system
 
 ---
 # Outline
 
 1. Motivation
 
-
 2. Chilean educational context
-
 
 3. Attendance patterns:
 
-  - Event study for different years, grades, and performance
-
+  - .small[Event study for different years, grades, and performance]
+  - .small[Potential mechanisms]
 
 4. Prediction approach:
 
-  - Difference between predicted and observed distributions
-  - Potential consecuences of imputation
-
+  - .small[Difference between predicted and observed distributions]
+  - .small[Potential consecuences of imputation]
 
 5. Conclusions and next steps
 
 ---
-# The Chilean context
+# The Chilean context: Standardized testing
 
+- Universal standardized testing since 1980's (SIMCE)
+
+--
+<br>
+<br>
+
+- SIMCE as **.coolblue[high-stake]** testing:
+
+  - Results widely available in a universal voucher system
+  
+  - Tied to teachers' bonuses
+  
+  - Tied to budget restrictions and school closures
+  
+---
+# SIMCE and absenteeism
+
+- Use of **.coolblue[pre-filled communication]** for parents to be sent out by schools
+
+  - Informal evidence that parents from lower-income students are less likely to receive information
+  
+--
+<br>
+<br>
+
+- **.coolblue[No real consequences for low attendance]**:
+  
+  - Between 2005-2007, non-representative results where marked with symbols
+  
+  - No imputation strategy so far
+  
+--
+<br>
+<br>
+
+- Improvement of regulation for **.coolblue[justifying students exclusion]**
+
+  - E.g. specific disabilities (blindness) or non-Spanish speakers.
+  
+---
+# How to evaluate the effect of "day of the test" on abstenteeism?
+
+- Some studies assessing the **.coolblue[effect of attendance manipulation]**:
+
+  - Focus on distortions (difference between imputed and observed scores) .small[(Cuesta et al., 2020)]
+  
+  - Manipulation for specific vulnerable schools (SEP) to raise scores .small[(Feigenberg et al., 2019; Quezada & Hippel, 2017)]
+
+--
+<br>
+<br>
+- **.coolblue[This paper]**: Event study between 2011 and 2018 for all tested grades.
+
+  - Focus on attendance by within-school performance
+  
+  - Use of alternative non-high-stake test to analyze potential mechanisms
+  
+---
+# Data Available
+
+- **.coolblue[Standardized tests 2011-2018 (SIMCE)]**
+
+  - Scores at student and school level for different subjects (Math, Language, History, and Science)
+  
+  - Student's socioeconomic characterization (parental questionnaire)
+
+--
+<br>
+<br>
+
+- **.coolblue[Daily attendance data 2011-2018 (SIGE)]**
+
+  - Use for voucher payments (each day has &#126; 2.5 million records)
+  
+--
+<br>
+<br>
+
+- **.coolblue[GPA Performance 2011-2018 (Rendimiento)]**
+
+  - Use GPA performance deciles within school-grade
+  
+---
+# Data description
+
+INCLUDE TABLE TO CHARACTERIZE OUR SAMPLE
+
+---
+# Empirical approach for difference in attendance
+
+- Event study centered around the day of the test:
+
+$$Y_{ipsgt} = \sum_{p=1}^5\sum_{t=-4}^5 \tau_{pt}\mathrm{I}(g=G^{*}) + \gamma_{pt} + \alpha_i + \epsilon_{ipsgt}$$
+
+Where
+- $Y_{ipsgt}$: Binary attendance fo student $i$, from GPA group $p$, in school $s$ and grade $g$, for day $t$ (centered around the day of the test).
+
+- $G^*$: Indicates a grade that was tested during the time period of analysis. 
+
+- $\tau_{pt}$: Effect on attendance for GPA group $p$ on day $t$ since the test. $\tau_{p0}$ is the coefficient of interest.
 
 ---
 # Clear difference in attendance by performance for 2nd grade
@@ -573,7 +685,7 @@ g10
 ```
 
 ---
-# Differences depending by grade
+# Attendance patterns differ by grade
 
 ```{r event_study_plot, fig.height=5.5, fig.width=10, fig.align='center', dev='svg', echo=FALSE, warning=FALSE, message=FALSE}
 library(lemon)
@@ -659,4 +771,109 @@ shift_legend2 <- function(p) {
 }
 
 shift_legend2(gr)
+```
+
+---
+# Potential mechanisms that explain these patterns
+
+- Schools directly **.coolblue[(des)incentivize attendance of (lower)higher performers]**
+
+<br>
+
+- Students are **.coolblue[excluded due to other reasons]** (justified).
+
+<br>
+
+- Students experience a **.coolblue[disutility from testing]**
+
+---
+# Potential mechanisms that explain these patterns
+
+- Schools directly **.coolblue[(des)incentivize attendance of (lower)higher performers]**
+
+  - 2017 survey for students in test-taking grades.
+
+**Results for 4th Grade**
+<table>
+<thead>
+<tr class="header">
+        <td>GPA Decile</td>
+        <td>Told</td>
+        <td>Notification</td>
+        <td>Preparation</td>
+        <td>Grades</td>
+    </tr>
+</thead>
+    <tr>
+        <td>D1</td>
+        <td>-0.06***</td>
+        <td>-0.11***</td>
+        <td>-0.08***</td>
+        <td>0.14***</td>
+    </tr>
+    <tr>
+        <td></td>
+        <td>(0.00)</td>
+        <td>(0.00)</td>
+        <td>(0.00)</td>
+        <td>(0.00)</td>
+    </tr>
+    <tr>
+        <td>D10</td>
+        <td>0.06***</td>
+        <td>0.05***</td>
+        <td>0.05***</td>
+        <td>-0.2***</td>
+    </tr>
+    <tr>
+        <td></td>
+        <td>(0.00)</td>
+        <td>(0.00)</td>
+        <td>(0.00)</td>
+        <td>(0.00)</td>
+    </tr>
+    <tr>
+        <td>Baseline</td>
+        <td>0.89***</td>
+        <td>0.87***</td>
+        <td>0.89***</td>
+        <td>0.39***</td>
+    </tr>
+    <tr>
+        <td></td>
+        <td>(0.00)</td>
+        <td>(0.00)</td>
+        <td>(0.00)</td>
+        <td>(0.00)</td>
+    </tr>
+</table>
+
+
+---
+# Potential mechanisms that explain these patterns
+
+- Schools directly **.coolblue[(des)incentivize attendance of (lower)higher performers]**
+
+  - 2017 survey for students in test-taking grades.
+
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+library(xtable)
+library(kableExtra)
+library(texPreview)
+
+tab1 <- "\\begin{table}[]
+\\begin{tabular}{lcccc} 
+\\textbf{GPA Decile} & \\textbf{Told} & \\textbf{Notification} & \\textbf{Preparation} & \\textbf{Grades} \\\\
+D1                  & -0.06***      & -0.11***              & -0.08***             & 0.14***         \\\\
+                    & (0.00)        & (0.00)                & (0.00)               & (0.00)          \\\\
+D10                 & 0.06***       & 0.05***               & 0.05***              & -0.2***         \\\\
+                    & (0.00)        & (0.00)                & (0.00)               & (0.00)          \\\\
+Baseline            & 0.89***       & 0.87***               & 0.89***              & 0.39***         \\\\
+                    & (0.00)        & (0.00)                & (0.00)               & (0.00)         
+\\end{tabular}
+\\end{table}"
+
+ktab1 <- as.kable(tab1)
+
+ktab1 %>% kable_styling()
 ```

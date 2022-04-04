@@ -249,7 +249,7 @@ INCLUDE TABLE TO CHARACTERIZE OUR SAMPLE
 
 - Event study centered around the day of the test:
 
-`$$Y_{ipsgt} = \sum_{p=1}^5\sum_{t=-4}^5 \tau_{pt}\mathrm{I}(g=G^{*}) + \gamma_{pt} + \alpha_i + \epsilon_{ipsgt}$$`
+`$$Y_{ipsgt} = \sum_{p=1}^5\sum_{t=-5}^5 \tau_{ptg}\mathrm{I}(g=G^{*}) + \gamma_{pt} + \alpha_i + \epsilon_{ipsgt}$$`
 
 Where
 - `\(Y_{ipsgt}\)`: Binary attendance fo student `\(i\)`, from GPA group `\(p\)`, in school `\(s\)` and grade `\(g\)`, for day `\(t\)` (centered around the day of the test).
@@ -435,6 +435,8 @@ Where
   - Model includes fixed effects by day of the week, school, grade, and student. 
   
   - Also includes sibling attendance and attendance lag.
+  
+- Use data for 4th grade (2017): Data **.coolblue[before]** the test to **.coolblue[predict attendance on the day of the test]**.
 
 ---
 # Overall predictions over performance distribution

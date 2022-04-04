@@ -95,7 +95,7 @@ style_mono_accent(
     ".medium" = list("font-size" = "1.4em"),
     ".sp-after-half" = list("margin-bottom" = "0.7em !important"),
     ".box-1,.box-1a,.box-1b,.section-title-1" = list("background-color" = "#5A3D66"),
-    ".box-2,.box-2a,.box-2b,.section-title-2" = list("background-color" = "#9A57B4"),
+    ".box-2,.box-2a,.box-2b,.section-title-2" = list("background-color" = "#974DB5"),
     ".box-3,.box-3a,.box-3b,.section-title-3" = list("background-color" = "#4493AE"),
     ".box-4,.box-4a,.box-4b,.section-title-4" = list("background-color" = "#A5AC20"),
     ".box-5,.box-5a,.box-5b,.section-title-5" = list("background-color" = "#DAE058"),
@@ -140,7 +140,7 @@ style_mono_accent(
                     "display" = "table"),
     ".box-1,.box-1a,.box-1s,.box-1b,.box-1l,.box-1LA,.section-title-1" = list("background-color" = "#5A3D66",
                                                                               "border-radius" = "15px"),
-    ".box-2,.box-2a,.box-2s,.box-2b,.box-2l,.box-2LA,.section-title-2" = list("background-color" = "#9A57B4",
+    ".box-2,.box-2a,.box-2s,.box-2b,.box-2l,.box-2LA,.section-title-2" = list("background-color" = "#974DB5",
                                                                               "border-radius" = "15px"),
     ".box-3,.box-3a,.box-3s,.box-3b,.box-3l,.box-3LA,.section-title-3" = list("background-color" = "#4493AE",
                                                                               "border-radius" = "15px"),
@@ -293,7 +293,7 @@ style_mono_accent(
    
    
     ".box-1trans,.box-1transl,.box-1Trans" = list("border"="5px solid #5A3D66"),
-    ".box-2trans,.box-2transl,.box-2Trans" = list("border"="5px solid #9A57B4"),
+    ".box-2trans,.box-2transl,.box-2Trans" = list("border"="5px solid #974DB5"),
     ".box-3trans,.box-3transl,.box-3Trans" = list("border"="5px solid #4493AE"),
     ".box-4trans,.box-4transl,.box-4Trans" = list("border"="5px solid #A5AC20"),
     ".box-5trans,.box-5transl,.box-5Trans" = list("border"="5px solid #DAE058"),
@@ -386,11 +386,13 @@ class: inverse, center, middle
 
 --
 <br>
+<br>
 
 - **.coolblue[Assumption]**: Standardize tests measure used as a proxy of school quality
 
 
 --
+<br>
 <br>
 
 .box-2Trans[Is it so?]
@@ -398,9 +400,16 @@ class: inverse, center, middle
 ---
 # Motivation
 
-Is it so? 
+.center[
+![:scale 80%](https://raw.githubusercontent.com/maibennett/presentations/main/content/presentations/Attendance/Salem_20220405/images/test_scandal1.png)
+]
 
-[Image of testing scandals]
+---
+# Motivation
+
+.center[
+![:scale 80%](https://raw.githubusercontent.com/maibennett/presentations/main/content/presentations/Attendance/Salem_20220405/images/test_discrimination.png)
+]
 
 ---
 # Motivation
@@ -452,7 +461,7 @@ dir_output <- "C:/Users/mc72574/Dropbox/Hugo/Sites/presentations/content/present
 text_color <- "#333f48"
 #cols <- c("#0D0887","#5601A4","#900DA4","#BF3984","#E16462","#F89441","#FCCE25")
 #cols <- c("#003f5c","#58508d","#bc5090","#ff6361","#ffa600")
-cols <- c("#5A3D66","#9A57B4","#4493AE","#A5AC20","#DAE058")
+cols <- c("#5A3D66","#974DB5","#4493AE","#A5AC20","#DAE058")
 
 results <- haven::read_dta(paste0(dir_data, "results.dta"))
 

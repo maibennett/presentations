@@ -804,7 +804,7 @@ tab10th <- read.csv("https://raw.githubusercontent.com/maibennett/presentations/
 
 kableExtra::kable(tab4th, align = "lcccc", caption = "Results for 4th Grade",
              col.names = c('GPA Decile', 'Told', 'Notification', 'Preparation', 'Grades'), format = "html") %>% 
-  kable_paper(bootstrap_options = c("hover","condensed"), full_width = FALSE, stripe_color="ltgray")
+  kable_paper(bootstrap_options = c("hover","condensed"), full_width = FALSE)
 ```
 
 
@@ -818,7 +818,7 @@ kableExtra::kable(tab4th, align = "lcccc", caption = "Results for 4th Grade",
 ```{r, echo=FALSE, results='asis'}
 tab10th %>% kbl(align = "lcccc", caption = "Results for 10th Grade",
              col.names = c('GPA Decile', 'Told', 'Notification', 'Preparation', 'Grades'), format = "html") %>% 
-  kable_paper(bootstrap_options = c("hover","condensed"), full_width = FALSE, stripe_color="ltgray")
+  kable_paper(bootstrap_options = c("hover","condensed"), full_width = FALSE)
 ```
 
 ---
@@ -968,6 +968,8 @@ library(FactoMineR)
 
 df_wide_test <- read.csv("https://raw.githubusercontent.com/maibennett/presentations/main/content/presentations/Attendance/Salem_20220405/data/df_wide_test.csv")
 
+set.seed(123)
+
 PCA_clus <- kmeans(scale(df_wide_test[,-1]), 2, nstart=25)
 fviz_cluster(PCA_clus, data = scale(df_wide_test[,-1]), frame.type = "convex",
              geom = c("point"))+ 
@@ -991,10 +993,23 @@ fviz_cluster(PCA_clus, data = scale(df_wide_test[,-1]), frame.type = "convex",
 ```{r, echo=FALSE, message=FALSE, warning=FALSE}
 library(modelsummary)
 
-df_wide_test <- read.csv("https://raw.githubusercontent.com/maibennett/presentations/main/content/presentations/Attendance/Salem_20220405/data/d_tab.csv")
+d_tab <- read.csv("https://raw.githubusercontent.com/maibennett/presentations/main/content/presentations/Attendance/Salem_20220405/data/d_tab.csv")
 
-datasummary_balance(~ cluster, data = d_tab, dinm_statistic = "p.value", fmt = "%.2f", stars = TRUE,
-                    notes = "Note: `Diff DX GPA` represents the difference between obs. attendance and predicted attendance for decile X")
+d_tab <- d_tab %>% dplyr::select(-c(X, rbd))
+
+d_tab <- d_tab %>% rename(`Avg. SIMCE Lang` = Avg..SIMCE.Lang,
+                          `Avg. SIMCE Math` = Avg..SIMCE.Math,
+                          `% Priority Students` = X..Priority.Students,
+                          `Diff D1 GPA` = Diff.D1.GPA,
+                          `Diff D2 GPA` = Diff.D2.GPA,
+                          `Diff D9 GPA` = Diff.D9.GPA,
+                          `Diff D10 GPA` = Diff.D10.GPA)
+
+d_tab$cluster = factor(d_tab$cluster, levels = c(1,2), labels = c("Cluster 1", "Cluster 2"))
+
+datasummary_balance(~ cluster, data = d_tab, dinm_statistic = "p.value", fmt = "%.2f", stars = TRUE, align = c("lcccccc"),
+                    output = "html",
+                    notes = "Note: `Diff DX GPA` represents the difference between obs. attendance and predicted attendance for decile X") %>% kable_paper(bootstrap_options = c("hover","condensed"), full_width = FALSE)
 
 ```
 

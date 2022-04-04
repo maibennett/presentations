@@ -95,7 +95,7 @@ style_mono_accent(
     ".medium" = list("font-size" = "1.4em"),
     ".sp-after-half" = list("margin-bottom" = "0.7em !important"),
     ".box-1,.box-1a,.box-1b,.section-title-1" = list("background-color" = "#5A3D66"),
-    ".box-2,.box-2a,.box-2b,.section-title-2" = list("background-color" = "#974DB5"),
+    ".box-2,.box-2a,.box-2b,.section-title-2" = list("background-color" = "#9442B5"),
     ".box-3,.box-3a,.box-3b,.section-title-3" = list("background-color" = "#4493AE"),
     ".box-4,.box-4a,.box-4b,.section-title-4" = list("background-color" = "#A5AC20"),
     ".box-5,.box-5a,.box-5b,.section-title-5" = list("background-color" = "#DAE058"),
@@ -140,7 +140,7 @@ style_mono_accent(
                     "display" = "table"),
     ".box-1,.box-1a,.box-1s,.box-1b,.box-1l,.box-1LA,.section-title-1" = list("background-color" = "#5A3D66",
                                                                               "border-radius" = "15px"),
-    ".box-2,.box-2a,.box-2s,.box-2b,.box-2l,.box-2LA,.section-title-2" = list("background-color" = "#974DB5",
+    ".box-2,.box-2a,.box-2s,.box-2b,.box-2l,.box-2LA,.section-title-2" = list("background-color" = "#9442B5",
                                                                               "border-radius" = "15px"),
     ".box-3,.box-3a,.box-3s,.box-3b,.box-3l,.box-3LA,.section-title-3" = list("background-color" = "#4493AE",
                                                                               "border-radius" = "15px"),
@@ -293,7 +293,7 @@ style_mono_accent(
    
    
     ".box-1trans,.box-1transl,.box-1Trans" = list("border"="5px solid #5A3D66"),
-    ".box-2trans,.box-2transl,.box-2Trans" = list("border"="5px solid #974DB5"),
+    ".box-2trans,.box-2transl,.box-2Trans" = list("border"="5px solid #9442B5"),
     ".box-3trans,.box-3transl,.box-3Trans" = list("border"="5px solid #4493AE"),
     ".box-4trans,.box-4transl,.box-4Trans" = list("border"="5px solid #A5AC20"),
     ".box-5trans,.box-5transl,.box-5Trans" = list("border"="5px solid #DAE058"),
@@ -365,7 +365,6 @@ class: inverse, center, middle
 
 <h1 class="title-own">Beyond Exclusion:<br/>The Role of High-Stake Testing on Attendance<br/>on the Day of the Test</h1>
 
-<br>
 
 .small[.center[Magdalena Bennett<br>The University of Texas at Austin]]
 
@@ -375,7 +374,8 @@ class: inverse, center, middle
 
 <br>
 <br>
-.white[**.small[.small[Causal Inference Seminar, Salem Center<br>April 5th, 2022]]**]
+<br>
+Causal Inference Seminar, Salem Center<br>April 5th, 2022
 
 ---
 # Motivation
@@ -393,53 +393,90 @@ class: inverse, center, middle
 
 --
 <br>
+
+.box-3Trans[Is it so?]
+
+---
+# Motivation
+
+.center[
+![:scale 65%](https://raw.githubusercontent.com/maibennett/presentations/main/content/presentations/Attendance/Salem_20220405/images/test_scandal1.png)
+]
+
+---
+# Motivation
+
+.center[
+![:scale 70%](https://raw.githubusercontent.com/maibennett/presentations/main/content/presentations/Attendance/Salem_20220405/images/test_discrimination.png)
+]
+
+---
+# Motivation
+
+- Beyond explicit cheating and socioeconomic sorting: **.coolblue[Students' exclusion]**
+
+  - E.g.: Reclassification of students with disabilities .small[(Cullen & Reback, 2006; Figlio & Getzler, 2002; Jacob, 2005)]
+
+--
+
 <br>
 
-.box-2Trans[Is it so?]
+- Less attention on **.coolblue[non-representative attendance patterns]**
+  
+  - Differences between scores before and after imputation .small[(Cuesta et al., 2020)]
 
----
-# Motivation
+--
 
-.center[
-![:scale 80%](https://raw.githubusercontent.com/maibennett/presentations/main/content/presentations/Attendance/Salem_20220405/images/test_scandal1.png)
-]
+<br>
 
----
-# Motivation
-
-.center[
-![:scale 80%](https://raw.githubusercontent.com/maibennett/presentations/main/content/presentations/Attendance/Salem_20220405/images/test_discrimination.png)
-]
-
----
-# Motivation
-
-- Beyond explicit cheating --> Students' exclusion
-
-  - Cite literature
-
-- Schools have incentives to try to game the system
+- Schools have **.coolblue[incentives]** to game the system
 
 ---
 # This paper
 
-Attendance Patterns
+**.coolblue[Attendance Patterns]**
 
 - Event study approach:
 
-  - How do these exclusions patterns look like?
+  - *How do these exclusions patterns look like?*
 
-  - Are these the same for every (type of) school and every grade?
+  - *Are these the same for every (type of) school and every grade?*
 
-Imputation Policies
+--
+
+**.coolblue[Imputation Policies]**
 
 - Machine learning prediction:
 
-  - Consequences of blanket policies in imputation of scores
+  - *Consequences of blanket policies in imputation of scores*
 
-  - Identification of gaming schools
+  - *Identification of schools that are most likely gaming the system*
 
 ---
+# Outline
+
+1. Motivation
+
+
+2. Chilean educational context
+
+
+3. Attendance patterns:
+
+  - Event study for different years, grades, and performance
+
+
+4. Prediction approach:
+
+  - Difference between predicted and observed distributions
+  - Potential consecuences of imputation
+
+
+5. Conclusions and next steps
+
+---
+# The Chilean context
+
 
 ---
 # Clear difference in attendance by performance for 2nd grade
@@ -461,7 +498,7 @@ dir_output <- "C:/Users/mc72574/Dropbox/Hugo/Sites/presentations/content/present
 text_color <- "#333f48"
 #cols <- c("#0D0887","#5601A4","#900DA4","#BF3984","#E16462","#F89441","#FCCE25")
 #cols <- c("#003f5c","#58508d","#bc5090","#ff6361","#ffa600")
-cols <- c("#5A3D66","#974DB5","#4493AE","#A5AC20","#DAE058")
+cols <- c("#5A3D66","#9442B5","#4493AE","#A5AC20","#DAE058")
 
 results <- haven::read_dta(paste0(dir_data, "results.dta"))
 

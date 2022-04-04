@@ -595,7 +595,7 @@ Where
 
 - $G^*$: Indicates a grade that was tested during the time period of analysis. 
 
-- $\tau_{pt}$: Effect on attendance for GPA group $p$ on day $t$ since the test. $\tau_{p0}$ is the coefficient of interest.
+- $\tau_{ptg}$: Effect on attendance for GPA group $p$ on day $t$ since the test in grade $g$. $\tau_{p0g}$ is the coefficient of interest.
 
 ---
 # Clear difference in attendance by performance for 2nd grade

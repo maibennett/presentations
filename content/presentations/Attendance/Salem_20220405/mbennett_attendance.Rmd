@@ -884,7 +884,7 @@ ggplot(data = df_plot, aes(x = GPA_pos, y = outcome*100, fill = factor(type), co
 
 
 ---
-# Comparisons between schools?
+# Example: Comparisons between schools?
 
 ```{r prediction_example, fig.height=6, fig.width=10, fig.align='center', dev='svg', echo=FALSE, warning=FALSE, message=FALSE}
 df_plot <- read.csv("https://raw.githubusercontent.com/maibennett/presentations/main/content/presentations/Attendance/Salem_20220405/data/plot_data_xgb2017_updated_1_100_lag_example.csv")
@@ -920,7 +920,7 @@ ggplot(data = df_plot, aes(x = GPA_pos, y = outcome*100, fill = factor(type), co
 ```
 
 ---
-# Comparisons between schools?
+# Example: Comparisons between schools?
 
 ```{r prediction_example2, fig.height=6, fig.width=10, fig.align='center', dev='svg', echo=FALSE, warning=FALSE, message=FALSE}
 library(ggforce)
@@ -1014,3 +1014,9 @@ datasummary_balance(~ cluster, data = d_tab, dinm_statistic = "p.value", fmt = "
 
 ```
 ]
+
+---
+# Implications for imputation policies
+
+---
+# Conclusions and next steps

@@ -816,7 +816,7 @@ kableExtra::kable(tab4th, align = "lcccc", caption = "Results for 4th Grade",
   - 2017 survey for students in test-taking grades.
 
 ```{r, echo=FALSE, results='asis'}
-kableExtra::kable(tab10th, align = "lcccc", caption = "Results for 10th Grade",
+tab10th %>% kbl(align = "lcccc", caption = "Results for 10th Grade",
              col.names = c('GPA Decile', 'Told', 'Notification', 'Preparation', 'Grades'), format = "html") %>% 
   kable_paper(bootstrap_options = c("hover","condensed"), full_width = FALSE, stripe_color="ltgray")
 ```

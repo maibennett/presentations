@@ -263,6 +263,7 @@ h2.title-own {
   margin: auto;
   border-top: 1px solid #666;
   border-bottom: 1px solid #666;
+  font-family: Jost; 
 }
 .remark-slide table thead th {
   border-bottom: 1px solid #ddd;
@@ -283,7 +284,7 @@ table.dataTable.display tbody tr.even {
   background-color: var(--background-color);
 }
 table.dataTable.display tbody tr.odd {
-  background-color: #e6e8eb;
+  background-color: #e8eaed;
 }
 table.dataTable.hover tbody tr:hover, table.dataTable.display tbody tr:hover {
   background-color: rgba(255, 255, 255, 0.5);

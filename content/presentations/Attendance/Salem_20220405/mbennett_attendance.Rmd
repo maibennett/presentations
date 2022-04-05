@@ -585,9 +585,16 @@ class: inverse, center, middle
   - Use GPA performance deciles within school-grade
   
 ---
-# Data description
+# Observations from our data
 
-INCLUDE TABLE TO CHARACTERIZE OUR SAMPLE
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+obs <- read.csv("https://raw.githubusercontent.com/maibennett/presentations/main/content/presentations/Attendance/Salem_20220405/data/obs_tested.csv")
+
+kableExtra::kable(obs, align = "lccc", caption = "Data description",
+             col.names = c('Grade', 'Years tested', 'Num Schools', 'Num Students'), format = "html",
+             format.args = list(big.mark = ',')) %>% 
+  kable_paper(bootstrap_options = c("hover","condensed"), full_width = FALSE)
+```
 
 ---
 # Empirical approach for difference in attendance

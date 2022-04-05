@@ -437,7 +437,9 @@ class: inverse, center, middle
 
 - Beyond explicit cheating and socioeconomic sorting: **.coolblue[Students' exclusion]**
 
-  - E.g.: Reclassification of students with disabilities .small[(Cullen & Reback, 2006; Figlio & Getzler, 2002; Jacob, 2005)]
+  - E.g.: Reclassification of low-performers as students with disabilities .small[(Figlio & Loeb, 2011)]
+  - Manipulating student nutrition .small[(Figlio & Winicki, 2005)]
+  - Use of disciplinary measures to exclude low-performers .small[(Figlio, 2006)]
 
 --
 <br>
@@ -450,6 +452,8 @@ class: inverse, center, middle
 <br>
 <br>
 - Schools have **.coolblue[incentives]** to game the system
+
+  - Especially in **.coolblue[high-accountability settings]**
 
 ---
 # This paper
@@ -553,6 +557,8 @@ class: inverse, center, middle
   
   - Use of alternative non-high-stake test to analyze potential mechanisms
   
+  - Use of unpublished survey for communication and incentives around SIMCE
+  
 ---
 # Data Available
 
@@ -595,7 +601,7 @@ Where
 
 - $G^*$: Indicates a grade that was tested during the time period of analysis. 
 
-- $\tau_{ptg}$: Effect on attendance for GPA group $p$ on day $t$ since the test in grade $g$. $\tau_{p0g}$ is the coefficient of interest.
+- $\tau_{ptg}$: Effect on attendance for GPA group $p$ on day $t$ since the test in grade $g$. $\tau_{p0G^*}$ is the coefficient of interest.
 
 ---
 # Clear difference in attendance by performance for 2nd grade
@@ -789,7 +795,7 @@ shift_legend2(gr)
 - Students experience a **.coolblue[disutility from testing]**
 
 ---
-# Potential mechanisms that explain these patterns
+# Differences in communication and incentives between high and low performers
 
 - Schools directly **.coolblue[(des)incentivize attendance of (lower)higher performers]**
 
@@ -809,7 +815,7 @@ kableExtra::kable(tab4th, align = "lcccc", caption = "Results for 4th Grade",
 
 
 ---
-# Potential mechanisms that explain these patterns
+# Differences in communication and incentives between high and low performers
 
 - Schools directly **.coolblue[(des)incentivize attendance of (lower)higher performers]**
 
@@ -822,29 +828,59 @@ tab10th %>% kbl(align = "lcccc", caption = "Results for 10th Grade",
 ```
 
 ---
-# Potential mechanisms that explain these patterns
+# Use of exemptions to exclude students don't tell the whole story
 
 - Students are **.coolblue[excluded due to other reasons]** (justified).
 
-  - Analysis of 2012 change in exclusion policy $\rightarrow$ Similar results
+  - Change in exemption policy in 2012 $\rightarrow$ reduction in exempted students (flattened)
+  
+  - Results remain similar after 2012
+
   
 ---
-# Potential mechanisms that explain these patterns
+# No self-selection from students because of testing
 
+.pull-left[
 - Students experience a **.coolblue[disutility from testing]**
 
   - Use of **.coolblue[no-stake test]** applied to schools $\rightarrow$ No effect on attendance
-  
+
+]
+
+.pull-right[
+.small[
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+tab_no_stakes <- read.csv("https://raw.githubusercontent.com/maibennett/presentations/main/content/presentations/Attendance/Salem_20220405/data/no_stake_results.csv")
+
+kableExtra::kable(tab_no_stakes, align = "lccccc", caption = "Results for No-Stakes Test",
+             col.names = c('Grade - Year', 'D1', 'D2', 'D3D8', 'D9', 'D10'), format = "html") %>% 
+  kable_paper(bootstrap_options = c("hover","condensed"), full_width = FALSE)
+```
+]
+]
+
 ---
 # How do these results compare to predicted counterfactual?
+
+- Can we use **.coolblue[this existing rich panel data]** to predict attendance on the day of the test *as if it was a regular day*?
+
+--
+<br>
+<br>
 
 - Use **.coolblue[XGBoost]** with panel data for **.coolblue[attendance prediction]** 
 
   - Model includes fixed effects by day of the week, school, grade, and student. 
   
   - Also includes sibling attendance and attendance lag.
-  
-- Use data for 4th grade (2017): Data **.coolblue[before]** the test to **.coolblue[predict attendance on the day of the test]**.
+
+--
+<br>
+<br>
+
+- Use data for 4th grade (2017): 
+
+  - Data **.coolblue[before]** the test to **.coolblue[predict attendance on the day of the test]**.
 
 ---
 # Overall predictions over performance distribution
@@ -1020,5 +1056,72 @@ datasummary_balance(~ cluster, data = d_tab, dinm_statistic = "p.value", fmt = "
 ---
 # Implications for imputation policies
 
+- **.coolblue[How to handle this absenteeism problem?]**
+
+  - Scenario 1: Observed attendance (no imputation)
+  
+  - Scenario 2: Attendance as if the test hadn't happened (impute "typical day")
+  
+  - Scenario 3: Everybody is present
+  
+--
+<br>
+<br>
+
+- Proposals to impute **.coolblue[lowest scores for absent students]** to desincentivize arbitrary exclusion
+
+  - Most vulnerable schools have higher absenteeism rates $\rightarrow$ Increase inequality and non-representativeness
+
 ---
 # Conclusions and next steps
+
+- Non-representative patterns of absenteeism **.coolblue[beyond exclusion of low-performers]**
+  
+  - High heterogeneity between schools
+ 
+--
+<br>
+<br>
+
+- **.coolblue[Communication strategies]** play important role for **.coolblue[lower-performing students]**
+
+--
+<br>
+<br>
+
+- Impact of **.coolblue[imputation policies]**?
+
+  - Work in progress: How does non-representativeness and different imputation strategies impact policies and information provision?
+  
+---
+class: inverse, center, middle
+
+<br>
+
+.left[
+<h1 class="title-own">Beyond Exclusion:<br/>The Role of High-Stake Testing on Attendance the Day of the Test</h1>]
+
+.pull-left-little_l[
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+
+.left[.small[Causal Inference Seminar, Salem Center<br>April 5th, 2022]]]
+
+.pull-right-little_l[
+<br>
+.small[.right[Magdalena Bennett&nbsp;&nbsp;&nbsp;<br>*The University of Texas at Austin*&nbsp;&nbsp;&nbsp;]]
+
+<br>
+.small[.right[Christopher Neilson&nbsp;&nbsp;&nbsp;<br>*Princeton University*&nbsp;&nbsp;&nbsp;]]
+
+<br>
+.small[.right[Nicolás Rojas&nbsp;&nbsp;&nbsp;<br>*Columbia University*&nbsp;&nbsp;&nbsp;]]
+
+]
+<br>
+<br>
+<br>

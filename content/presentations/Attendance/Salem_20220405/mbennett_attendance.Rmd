@@ -439,7 +439,6 @@ class: inverse, center, middle
 - Beyond explicit cheating and socioeconomic sorting: **.coolblue[Students' exclusion]**
 
   - E.g.: Reclassification of low-performers as students with disabilities .small[(Figlio & Loeb, 2011)]
-  - Manipulating student nutrition .small[(Figlio & Winicki, 2005)]
   - Use of disciplinary measures to exclude low-performers .small[(Figlio, 2006)]
 
 --

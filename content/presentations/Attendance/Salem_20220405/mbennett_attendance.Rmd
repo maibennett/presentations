@@ -498,6 +498,20 @@ class: inverse, center, middle
 5. Conclusions and next steps
 
 ---
+background-position: 50% 50%
+class: left, middle, inverse
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+.big[
+The Chilean Educational Context
+]
+
+---
 # The Chilean context: Standardized testing
 
 - Universal standardized testing since 1980's (SIMCE)
@@ -538,7 +552,22 @@ class: inverse, center, middle
 - Improvement of regulation for **.coolblue[justifying students exclusion]**
 
   - E.g. specific disabilities (blindness) or non-Spanish speakers.
-  
+
+
+---
+background-position: 50% 50%
+class: left, middle, inverse
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+.big[
+Attendance Patterns for the Day of the Test
+]
+
 ---
 # How to evaluate the effect of "day of the test" on abstenteeism?
 
@@ -867,6 +896,20 @@ kableExtra::kable(tab_no_stakes, align = "lccccc", caption = "Results for No-Sta
 ]
 
 ---
+background-position: 50% 50%
+class: left, middle, inverse
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+.big[
+Predicting the Counterfactual
+]
+
+---
 # How do these results compare to predicted counterfactual?
 
 - Can we use **.coolblue[this existing rich panel data]** to predict attendance on the day of the test *as if it was a regular day*?
@@ -1079,6 +1122,20 @@ datasummary_balance(~ cluster, data = d_tab, dinm_statistic = "p.value", fmt = "
 - Proposals to impute **.coolblue[lowest scores for absent students]** to desincentivize arbitrary exclusion
 
   - Most vulnerable schools have higher absenteeism rates $\rightarrow$ Increase inequality and non-representativeness
+
+---
+background-position: 50% 50%
+class: left, middle, inverse
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+.big[
+Let's Wrap Up...
+]
 
 ---
 # Conclusions and next steps

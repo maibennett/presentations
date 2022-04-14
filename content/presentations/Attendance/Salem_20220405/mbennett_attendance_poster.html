@@ -8,7 +8,7 @@
 
 
 
-<title>Beyond Exclusion: The Role of High-Stake Testing on Attendance the Day of the Test</title>
+<title>Beyond Exclusion: The Role of High-Stake Testing on Attendance</title>
 
 
 
@@ -61,17 +61,23 @@ margin-bottom: 2cm;
 position: sticky;
 width: 100%;
 }
-pre.sourceCode.r {
-background-color: #dddddd40;
-border-radius: 4mm;
+pre.sourceCode.r, pre.sourceCode.python {
+background-color: #ffffff20;
+border: solid #6C5B7B 1mm;
+border-radius: 0.5em;
 padding: 4mm;
-width: 75%;
 margin: auto;
 margin-top: 1em;
 margin-bottom: 1em;
 /* align-items: center; */
 }
-code.sourceCode.r{
+div.sourceCode {
+background-color: transparent;
+width: 85%;
+margin-left: auto;
+margin-right: auto;
+}
+code.sourceCode.r, code.sourceCode.python {
 background-color: transparent;
 font-size: 20pt;
 border-radius: 2mm;
@@ -80,7 +86,7 @@ code {
 font-size: 25pt;
 font-family: monospace;
 background-color: #6C5B7B24;
-color: #35567D;
+color: #6C5B7B;
 padding: 1.2mm;
 line-height: 1;
 border-radius: 2mm;
@@ -134,16 +140,16 @@ column-count: 2;
 -webkit-column-fill: auto;
 -moz-column-fill: auto;
 column-fill: auto;
--webkit-column-rule-width: 50%;
--moz-column-rule-width: 50%;
-column-rule-width: 50%;
+-webkit-column-rule-width: 0.4;
+-moz-column-rule-width: 0.4;
+column-rule-width: 0.4;
 -webkit-column-rule-style: solid;
 -moz-column-rule-style: solid;
 column-rule-style: solid;
 -webkit-column-rule-color: black;
 -moz-column-rule-color: black;
 column-rule-color: black;
--webkit-column-gap: 50%;
+-webkit-column-gap: calc(0.4 * 100%);
 background-color: #ffffff;
 font-family: Rasa;
 color: #000000;
@@ -166,7 +172,8 @@ border-bottom: 0;
 #author {
 color: #35567D;
 margin: 0;
-line-height: 90%;
+text-align: left;
+line-height: 65%;
 font-size: 1.17em;
 }
 #affiliation {
@@ -206,10 +213,10 @@ color: #000000;
 text-align: left;
 }
 .main {
-width: calc(46in / 2);
+width: calc(46in * 0.4);
 height: 32in;
 position: absolute;
-margin-left: calc(46in / 4);
+margin-left: calc(46in * ((1 - 0.4) / 2));
 background-color: #35567D;
 color: #FFFFFF90;
 font-family: Special Elite;
@@ -232,7 +239,7 @@ position: absolute;
 }
 .main p {
 padding-top: 20%;
-font-size: 170px;
+font-size: 115pt;
 text-align: left;
 }
 .fab {
@@ -254,6 +261,21 @@ color: #00000060;
 font-size: 5px;
 text-decoration: none;
 }
+.globe {
+color: #00000060;
+font-size: 5px;
+text-decoration: none;
+}
+.github > .fab {
+color: #00000060;
+font-size: 40px;
+text-decoration: none;
+}
+.globetext {
+color: #00000060;
+font-size: 35px;
+text-decoration: none;
+}
 .poster_wrap {
 width: 46in;
 height: 32in;
@@ -272,7 +294,7 @@ span > #tab:mytable {
   padding-right: 30mm;
 }
 .main_pic {
-  width: 50%;
+  width: 100%;
   display: block;
   margin-left: auto;
   margin-right: auto;
@@ -289,12 +311,12 @@ span > #tab:mytable {
 <div class="column outer">
 <br>
 <div class="title section">
-<h1 id="title">Beyond Exclusion:<br/>The Role of High-Stake Testing on Attendance the Day of the Test</h1>
+<h1 id="title">Beyond Exclusion:<br/>The Role of High-Stake Testing on Attendance</h1>
 <br>
 <h3 id="author" class="author">
 
 Magdalena Bennett<sup> 1</sup><br>
-<a class="twitter" href="https://mobile.twitter.com/maibennett"><i class="fab fa-twitter"></i>&nbsp;&nbsp;@maibennett</a><br>
+<a class="twitter" href="https://mobile.twitter.com/maibennett"><i class="fab fa-twitter"></i>&nbsp;@maibennett</a> <br>
 
 <a class='envelope'><i class="fas fa-envelope"></i></a> <a href="mailto:m.bennett@austin.utexas.edu" class="email">m.bennett@austin.utexas.edu</a> <br>
   </h3>
@@ -309,51 +331,56 @@ Magdalena Bennett<sup> 1</sup><br>
 </p>
 
 </div>
-<div id="introduction" class="section level1">
-<h1>Introduction</h1>
-<p><strong>Non-representative patterns of attendance</strong> can skew how useful test scores measures are for accomplishing their main objective. <em>Are we really measuring the quality or performance of a school if a non-representative sample of their students is taking the test?</em></p>
+<div id="introduction" class="section level2">
+<h2>Introduction</h2>
+<p><strong>Non-representative patterns of attendance</strong> can skew how useful test scores measures are for accomplishing their main objective.</p>
 <p>In this paper, we study the <strong>effect of high-stakes testing on student composition of attendance on the day of the test</strong> using rich administrative data from Chile and daily attendance. By combining an event-study framework and a machine learning prediction approach, we <strong>bring together traditional causal inference methods with prediction algorithms</strong> to better inform policy.</p>
-<div id="objectives" class="section level2">
-<h2>Objectives</h2>
+<div id="objectives" class="section level3">
+<h3>Objectives</h3>
 <ol style="list-style-type: decimal">
 <li><p>Understand the <strong>average effect of testing on school attendance</strong> across grades and performance</p></li>
 <li><p>Help improve current <strong>imputation methods</strong></p></li>
-<li><p><strong>Identify schools</strong> that could potentially be <strong>incentivizing non-representative patterns</strong> of attendance.</p></li>
+<li><p><strong>Identify schools</strong> that <strong>incentivize non-representative patterns</strong> of attendance.</p></li>
 </ol>
-<p><br></p>
 </div>
 </div>
-<div id="methods" class="section level1">
-<h1>Methods</h1>
-<p>I will show here how to include poster elements that may be useful, such as an equation using mathjax:</p>
-<p><span class="math display">\[
-E = mc^2
-\]</span></p>
-<p>To reference a citation you can add your <code>.bib</code> file to the working directory and name it in the YAML metadata or generate an automated one as done here, then you only need to reference the label value in the <code>.bib</code> file. For example this package is built on top of the wonderful {pagedown} package and I will cite it at the end of this sentance using this in the rmd <code>[@R-pagedown]</code> <span class="citation">(<a href="#ref-R-pagedown" role="doc-biblioref">Xie et al. 2022</a>)</span>.</p>
-<p>To get a better understanding of how to include features like these please refer to the {posterdown} <a href="https://github.com/posterdown/wiki">wiki</a>.</p>
-<p><strong><em>Now on to the results!</em></strong></p>
+<div id="methods" class="section level2">
+<h2>Methods</h2>
+<div id="event-study" class="section level3">
+<h3>Event Study</h3>
+<p><span class="math display">\[Y_{ipsgt} = \sum_{P=1}^5\sum_{T=-4}^5 \tau^{PT}D^{PTG^*}_{ipsgt} + \gamma_{pt} +\alpha_i + \epsilon_{ipsgt}\]</span></p>
+<ul>
+<li><p><span class="math inline">\(Y_{ipsgt}\)</span>: Binary attendance for student <span class="math inline">\(i\)</span>, from GPA group <span class="math inline">\(p\)</span>, in school <span class="math inline">\(s\)</span> and grade <span class="math inline">\(g\)</span>, for day <span class="math inline">\(t\)</span>.</p></li>
+<li><p><span class="math inline">\(D^{PTG^*}_{ipsgt}\)</span>: Indicator variable <span class="math inline">\(\mathrm{I(p = P, t = T, g = G^*)}\)</span>, where <span class="math inline">\(G^*\)</span> is the tested grade.</p></li>
+</ul>
+<p><br>
+<br></p>
 </div>
-<div id="results" class="section level1">
-<h1>Results</h1>
+<div id="prediction-of-counterfactual-attendance" class="section level3">
+<h3>Prediction of counterfactual attendance</h3>
+<ul>
+<li><strong>XGBoost</strong> for student panel of daily attendance
+<ul>
+<li>Model includes fixed effects by day of the week, school, grade, and student.</li>
+<li>Also includes sibling attendance and attendance lag.</li>
+</ul></li>
+</ul>
+</div>
+</div>
+<div id="results" class="section level2">
+<h2>Results</h2>
 <p>Students skip school on the day of the test. In lower grades, <strong>lower-performers</strong> attend less and <strong>higher-performers</strong> attend more, compared to a regular day. In higher grades, we <strong>only observe action at the top of the distribution</strong></p>
-<p><img src="https://raw.githubusercontent.com/maibennett/presentations/main/content/presentations/Attendance/Salem_20220405/mbennett_attendance_files/figure-html/event_study_plot-1.svg" /></p>
+<p><img src="mbennett_attendance_poster_files/figure-html/event_study_plot2nd-1.svg" width="100%" style="display: block; margin: auto;" /></p>
 <p>There is <strong>important heterogeneity betweeen schools</strong>. Ex: Two schools which perform similarly, but with different predicted distributions:</p>
-<p><img src="https://raw.githubusercontent.com/maibennett/presentations/main/content/presentations/Attendance/Salem_20220405/mbennett_attendance_files/figure-html/prediction_example2-1.svg" /></p>
-</div>
-<div id="references" class="section level1 unnumbered">
-<h1>References</h1>
-<div id="refs" class="references csl-bib-body hanging-indent">
-<div id="ref-R-pagedown" class="csl-entry">
-Xie, Yihui, Romain Lesur, Brent Thorne, and Xianying Tan. 2022. <em>Pagedown: Paginate the HTML Output of r Markdown with CSS for Print</em>. <a href="https://github.com/rstudio/pagedown">https://github.com/rstudio/pagedown</a>.
-</div>
-</div>
+<p><img src="mbennett_attendance_poster_files/figure-html/prediction_example-1.svg" width="100%" style="display: block; margin: auto;" /></p>
+<p>We conduct an additional <strong>K-means</strong> analysis to identify <strong>clusters of schools according to their difference in predicted and observed attendance distribution</strong>. We find <strong>two main clusters</strong>, where one of them incentivize the <strong>exclusion of lower-performers</strong>. Those schools are more vulnerable and have overall lower perfomance.</p>
 </div>
 
 </div>
 <div class="main">
-<p>Not only <strong>lower-performers attend less</strong> on the day of the test, but <strong>high-performers attend more</strong><br><br> <img src="https://raw.githubusercontent.com/maibennett/presentations/main/content/presentations/Attendance/Salem_20220405/mbennett_attendance_files/figure-html/event_study_plot2nd-1.svg" class="main_pic" /></p>
+<p>Not only <strong>lower-performers attend less</strong> on the day of the test, but <strong>high-performers attend more</strong><br><br> <img src="https://raw.githubusercontent.com/maibennett/presentations/main/content/presentations/Attendance/Salem_20220405/images/event_study_plot2nd-1.svg" class="main_pic" /></p>
 <img src="https://raw.githubusercontent.com/brentthorne/posterdown/master/images/qr-code-black.png" class="main-img-left" />
-<img src="https://raw.githubusercontent.com/maibennett/presentations/main/content/presentations/Attendance/Salem_20220405/images/logo_white.png" class="main-img-right" />
+
 </div>
 </div>
 

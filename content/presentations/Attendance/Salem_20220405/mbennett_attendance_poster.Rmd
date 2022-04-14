@@ -21,7 +21,7 @@ main_findings:
   - "Not only **lower-performers attend less** on the day of the test, but **high-performers attend more**"
   - '![](https://raw.githubusercontent.com/maibennett/presentations/main/content/presentations/Attendance/Salem_20220405/mbennett_attendance_files/figure-html/event_study_plot2nd-1.svg){.main_pic}'
 logoleft_name: '![](https://raw.githubusercontent.com/brentthorne/posterdown/master/images/qr-code-black.png){.main-img-left}'
-logoright_name: '![](https://https://raw.githubusercontent.com/maibennett/presentations/main/content/presentations/Attendance/Salem_20220405/images/logo_white.svg){.main-img-right}'
+logoright_name: '![](https://raw.githubusercontent.com/maibennett/presentations/main/content/presentations/Attendance/Salem_20220405/images/logo_white.png){.main-img-right}'
 primary_colour: "#35567D"
 secondary_colour: "#6C5B7B"
 accent_colour: "#F67280"
@@ -65,7 +65,7 @@ knitr::write_bib(c('posterdown', 'rmarkdown','pagedown'), 'packages.bib')
 
 ## Objectives
 
-1. Understand the **average effect of high-stakes tests on school attendance** across grades and performance, 
+1. Understand the **average effect of testing on school attendance** across grades and performance 
 
 2. Help improve current **imputation methods**
 

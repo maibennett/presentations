@@ -1,0 +1,102 @@
+---
+title: "Beyond Exclusion:<br/>The Role of High-Stake Testing on Attendance the Day of the Test"
+author:
+  - name: Magdalena Bennett
+    affil: 1
+    twitter: maibennett
+    email: m.bennett@austin.utexas.edu
+    main: true
+  - name: Christopher Neilson
+    affil: 2
+  - name: Nicolás Rojas
+    affil: 3
+affiliation:
+  - num: 1
+    address: McCombs School of Business, The University of Texas at Austin
+  - num: 2
+    address: Economics Department, Princeton University 
+  - num: 3
+    address: Teachers College, Columbia University
+main_findings:
+  - "Not only **lower-performers attend less** on the day of the test, but **high-performers attend more**"
+  - '![](https://raw.githubusercontent.com/maibennett/presentations/main/content/presentations/Attendance/Salem_20220405/mbennett_attendance_files/figure-html/event_study_plot2nd-1.svg){.main_pic}'
+logoleft_name: '![](https://raw.githubusercontent.com/brentthorne/posterdown/master/images/qr-code-black.png){.main-img-left}'
+logoright_name: '![](https://raw.githubusercontent.com/brentthorne/posterdown/master/images/betterhexlogo.png){.main-img-right}'
+primary_colour: "#35567D"
+secondary_colour: "#6C5B7B"
+accent_colour: "#F67280"
+output: 
+  posterdown::posterdown_betterland:
+    self_contained: false
+    pandoc_args: --mathjax
+    highlight: haddock
+    number_sections: false
+link-citations: true
+bibliography: packages.bib
+---
+
+```{r, include=FALSE}
+knitr::opts_chunk$set(results = 'asis',
+                      echo = FALSE,
+                      warning = FALSE,
+                      tidy = FALSE,
+                      message = FALSE,
+                      fig.align = 'center',
+                      out.width = "100%")
+options(knitr.table.format = "html") 
+```
+
+```{r myplot, include=FALSE}
+svg('myplot.svg')
+plot(iris$Sepal.Length, iris$Sepal.Width)
+dev.off()
+```
+
+# Introduction
+
+**Non-representative patterns of attendance** can skew how useful test scores measures are for accomplishing their main objective. *Are we really measuring the quality or performance of a school if a non-representative sample of their students is taking the test?*
+
+In this paper, we study the **effect of high-stakes testing on student composition of attendance on the day of the test** using rich administrative data from Chile and daily attendance. By combining an event-study framework and a machine learning prediction approach, we **bring together traditional causal inference methods with prediction algorithms** to better inform policy.
+
+
+```{r, include=FALSE}
+knitr::write_bib(c('posterdown', 'rmarkdown','pagedown'), 'packages.bib')
+```
+
+## Objectives
+
+1. Understand the **average effect of high-stakes tests on school attendance** across grades and performance, 
+
+2. Help improve current **imputation methods**
+
+3. **Identify schools** that could potentially be **incentivizing non-representative patterns** of attendance.
+
+<br>
+
+# Methods
+
+I will show here how to include poster elements that may be useful, such as an equation using mathjax:
+
+$$
+E = mc^2
+$$
+
+To reference a citation you can add your `.bib` file to the working directory and name it in the YAML metadata or generate an automated one as done here, then you only need to reference the label value in the `.bib` file. For example this package is built on top of the wonderful {pagedown} package and I will cite it at the end of this sentance using this in the rmd `[@R-pagedown]` [@R-pagedown].
+
+To get a better understanding of how to include features like these please refer to the {posterdown} [wiki](https://github.com/posterdown/wiki).
+
+**_Now on to the results!_**
+
+
+
+# Results
+
+Students skip school on the day of the test. In lower grades, **lower-performers** attend less and **higher-performers** attend more, compared to a regular day. In higher grades, we **only observe action at the top of the distribution**
+
+![](https://raw.githubusercontent.com/maibennett/presentations/main/content/presentations/Attendance/Salem_20220405/mbennett_attendance_files/figure-html/event_study_plot-1.svg)
+
+There is **important heterogeneity betweeen schools**. Ex: Two schools which perform similarly, but with different predicted distributions:
+
+![](https://raw.githubusercontent.com/maibennett/presentations/main/content/presentations/Attendance/Salem_20220405/mbennett_attendance_files/figure-html/prediction_example2-1.svg)
+
+# References

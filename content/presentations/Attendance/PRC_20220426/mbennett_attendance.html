@@ -1,0 +1,988 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>mbennett_attendance.knit</title>
+    <meta charset="utf-8" />
+    <script src="libs/header-attrs/header-attrs.js"></script>
+    <script src="libs/kePrint/kePrint.js"></script>
+    <link href="libs/lightable/lightable.css" rel="stylesheet" />
+    <script src="https://use.fontawesome.com/5235085b15.js"></script>
+    <link rel="stylesheet" href="xaringan-themer.css" type="text/css" />
+    <link rel="stylesheet" href="style.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+
+
+
+
+
+
+
+
+
+
+
+
+class: inverse, center, middle
+
+&lt;br&gt;
+
+.left[
+&lt;h1 class="title-own"&gt;Beyond Exclusion:&lt;br/&gt;The Role of High-Stake Testing on Attendance the Day of the Test&lt;/h1&gt;]
+
+.pull-left-little_l[
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+
+.left[.small[Causal Inference Seminar, Salem Center&lt;br&gt;April 5th, 2022]]]
+
+.pull-right-little_l[
+&lt;br&gt;
+.small[.right[Magdalena Bennett&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;br&gt;*The University of Texas at Austin*&amp;nbsp;&amp;nbsp;&amp;nbsp;]]
+
+&lt;br&gt;
+.small[.right[Christopher Neilson&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;br&gt;*Princeton University*&amp;nbsp;&amp;nbsp;&amp;nbsp;]]
+
+&lt;br&gt;
+.small[.right[Nicolás Rojas&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;br&gt;*Columbia University*&amp;nbsp;&amp;nbsp;&amp;nbsp;]]
+
+]
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+
+
+---
+# Motivation
+
+- Results from **.coolblue[high-stakes tests]** widely used in education policy
+   
+   - E.g. funding, promotions, school closures, school choice, etc.
+
+--
+&lt;br&gt;
+&lt;br&gt;
+
+- **.coolblue[Assumption]**: Standardize tests used as a proxy of school quality
+
+
+--
+&lt;br&gt;
+
+.box-3Trans[Is it so?]
+
+---
+# Motivation
+
+.pull-left[
+.center[
+![:scale 75%](https://raw.githubusercontent.com/maibennett/presentations/main/content/presentations/Attendance/Salem_20220405/images/test_scandal1.png)
+]
+]
+
+--
+
+.pull-right[
+.center[
+![:scale 75%](https://raw.githubusercontent.com/maibennett/presentations/main/content/presentations/Attendance/Salem_20220405/images/test_discrimination.png)
+]
+]
+
+---
+# Motivation
+
+- Beyond explicit cheating and socioeconomic sorting: **.coolblue[Students' exclusion]**
+
+  - E.g.: Reclassification of low-performers as students with disabilities .small[(Figlio &amp; Loeb, 2011)]
+  - Use of disciplinary measures to exclude low-performers .small[(Figlio, 2006)]
+
+--
+&lt;br&gt;
+&lt;br&gt;
+- Less attention on **.coolblue[non-representative attendance patterns]**
+  
+  - Differences between scores before and after imputation .small[(Cuesta et al., 2020)]
+
+--
+&lt;br&gt;
+&lt;br&gt;
+- Schools have **.coolblue[incentives]** to game the system
+
+  - Especially in **.coolblue[high-accountability settings]**
+
+---
+# This paper
+
+**.coolblue[Attendance Patterns]**
+
+- Event study approach:
+
+  - *How do these exclusions patterns look like? Are these the same for every (type of) school and every grade?*
+  
+  - Focus beyond bottom performers
+  
+  - Robustness checks for alternative mechanisms
+
+--
+
+**.coolblue[Imputation Policies]**
+
+- Machine learning prediction:
+
+  - Consequences of blanket policies in imputation of scores
+
+  - Identification of schools that are most likely gaming the system
+
+---
+# Outline
+
+1. Motivation
+
+2. Chilean educational context
+
+3. Attendance patterns:
+
+  - .small[Event study for different years, grades, and performance]
+  - .small[Potential mechanisms]
+
+4. Prediction approach:
+
+  - .small[Difference between predicted and observed distributions]
+  - .small[Potential consecuences of imputation]
+
+5. Conclusions and next steps
+
+---
+background-position: 50% 50%
+class: left, middle, inverse
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+.big[
+The Chilean Educational Context
+]
+
+---
+# The Chilean context: Standardized testing
+
+- Universal standardized testing since 1980's (SIMCE)
+
+--
+&lt;br&gt;
+&lt;br&gt;
+
+- SIMCE as **.coolblue[high-stake]** testing:
+
+  - Results widely available in a universal voucher system
+  
+  - Tied to teachers' bonuses
+  
+  - Tied to budget restrictions and school closures
+  
+---
+# SIMCE and absenteeism
+
+- Use of **.coolblue[pre-filled communication]** for parents to be sent out by schools
+
+  - Evidence that parents from lower-income students are less likely to receive information
+  
+--
+&lt;br&gt;
+&lt;br&gt;
+
+- **.coolblue[No real consequences for low attendance]**:
+  
+  - Between 2005-2007, non-representative results where marked with symbols
+  
+  - No imputation strategy so far
+  
+--
+&lt;br&gt;
+&lt;br&gt;
+
+- Improvement of regulation for **.coolblue[justifying students exclusion]**
+
+  - E.g. specific disabilities (blindness) or non-Spanish speakers.
+
+
+---
+background-position: 50% 50%
+class: left, middle, inverse
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+.big[
+Attendance Patterns for the Day of the Test
+]
+
+---
+# How to evaluate the effect of "day of the test" on abstenteeism?
+
+- Some studies assessing the **.coolblue[effect of attendance manipulation]**:
+
+  - Focus on distortions (difference between imputed and observed scores) .small[(Cuesta et al., 2020)]
+  
+  - Manipulation for specific vulnerable schools (SEP) to raise scores .small[(Feigenberg et al., 2019; Quezada &amp; Hippel, 2017)]
+
+--
+&lt;br&gt;
+&lt;br&gt;
+- **.coolblue[This paper]**: Event study between 2011 and 2018 for all tested grades.
+
+  - Focus on attendance by within-school performance
+  
+  - Use of alternative non-high-stake test to analyze potential mechanisms
+  
+  - Use of unpublished survey for communication and incentives around SIMCE
+  
+---
+# Data Available
+
+- **.coolblue[Standardized tests 2011-2018 (SIMCE)]**
+
+  - Scores at student and school level for different subjects (Math, Language, History, and Science)
+  
+  - Student's socioeconomic characterization (parental questionnaire)
+
+--
+&lt;br&gt;
+&lt;br&gt;
+
+- **.coolblue[Daily attendance data 2011-2018 (SIGE)]**
+
+  - Use for voucher payments (each day has &amp;#126; 2.5 million records)
+  
+--
+&lt;br&gt;
+&lt;br&gt;
+
+- **.coolblue[GPA Performance 2011-2018 (Rendimiento)]**
+
+  - Use GPA performance deciles within school-grade
+  
+---
+# Observations from our data
+
+&lt;table class=" lightable-paper" style='font-family: "Arial Narrow", arial, helvetica, sans-serif; width: auto !important; margin-left: auto; margin-right: auto;'&gt;
+&lt;caption&gt;Data description&lt;/caption&gt;
+ &lt;thead&gt;
+  &lt;tr&gt;
+   &lt;th style="text-align:left;"&gt; Grade &lt;/th&gt;
+   &lt;th style="text-align:center;"&gt; Years tested &lt;/th&gt;
+   &lt;th style="text-align:center;"&gt; Num Schools &lt;/th&gt;
+   &lt;th style="text-align:center;"&gt; Num Students &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 2 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 2013, 2014, 2015 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 5,266 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 628,073 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 4 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 2011, 2013-2018 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 5,673 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 1,461,289 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 6 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 2013-2016, 2018 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 5,516 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 1,056,243 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 8 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 2011, 2013-2015, 2017 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 5,545 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 1,078,140 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 10 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 2013-2018 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 2,623 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 1,213,067 &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+---
+# Empirical approach for difference in attendance
+
+- Event study centered around the day of the test:
+
+`$$Y_{ipsgt} = \sum_{P=1}^5\sum_{T=-4}^5 \tau^{PT}D^{PTG^*}_{ipsgt} + \gamma_{pt} +\alpha_i + \epsilon_{ipsgt}$$`
+
+Where
+- `\(Y_{ipsgt}\)`: Binary attendance for student `\(i\)`, from GPA group `\(p\)`, in school `\(s\)` and grade `\(g\)`, for day `\(t\)` (centered around the day of the test).
+
+- `\(D^{PTG^*}_{ipsgt}\)`: Indicator variable `\(\mathrm{I(p = P, t = T, g = G^*)}\)`, where `\(G^*\)` is the tested grade. Coefficient of interest is `\(D^{P0G^*}\)`.
+
+---
+# Clear difference in attendance by performance for 2nd grade
+
+&lt;img src="mbennett_attendance_files/figure-html/event_study_plot2nd-1.svg" style="display: block; margin: auto;" /&gt;
+
+---
+# No effect on lower performers for 10th grade
+
+&lt;img src="mbennett_attendance_files/figure-html/event_study_plot10th-1.svg" style="display: block; margin: auto;" /&gt;
+
+---
+# Attendance patterns differ by grade
+
+&lt;img src="mbennett_attendance_files/figure-html/event_study_plot-1.svg" style="display: block; margin: auto;" /&gt;
+
+---
+# Potential mechanisms that explain these patterns
+
+- Schools directly **.coolblue[(des)incentivize attendance of (lower)higher performers]**
+
+&lt;br&gt;
+- Students are **.coolblue[excluded due to other reasons]** (justified).
+
+&lt;br&gt;
+- Students experience a **.coolblue[disutility from testing]**
+
+---
+# Differences in communication and incentives between high and low performers
+
+- Schools directly **.coolblue[(des)incentivize attendance of (lower)higher performers]**
+
+  - 2017 survey for students in test-taking grades.
+
+&lt;table class=" lightable-paper" style='font-family: "Arial Narrow", arial, helvetica, sans-serif; width: auto !important; margin-left: auto; margin-right: auto;'&gt;
+&lt;caption&gt;Results for 4th Grade&lt;/caption&gt;
+ &lt;thead&gt;
+  &lt;tr&gt;
+   &lt;th style="text-align:left;"&gt; GPA Decile &lt;/th&gt;
+   &lt;th style="text-align:center;"&gt; Told &lt;/th&gt;
+   &lt;th style="text-align:center;"&gt; Notification &lt;/th&gt;
+   &lt;th style="text-align:center;"&gt; Preparation &lt;/th&gt;
+   &lt;th style="text-align:center;"&gt; Grades &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; D1 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; -0.06*** &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; -0.11*** &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; -0.08*** &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0.14*** &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt;  &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; (0.00) &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; (0.00) &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; (0.00) &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; (0.00) &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; D10 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0.06*** &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0.05*** &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0.05*** &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; -0.2*** &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt;  &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; (0.00) &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; (0.00) &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; (0.00) &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; (0.00) &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Baseline &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0.89*** &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0.87*** &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0.89*** &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0.39*** &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt;  &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; (0.00) &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; (0.00) &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; (0.00) &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; (0.00) &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+
+---
+# Differences in communication and incentives between high and low performers
+
+- Schools directly **.coolblue[(des)incentivize attendance of (lower)higher performers]**
+
+  - 2017 survey for students in test-taking grades.
+
+&lt;table class=" lightable-paper" style='font-family: "Arial Narrow", arial, helvetica, sans-serif; width: auto !important; margin-left: auto; margin-right: auto;'&gt;
+&lt;caption&gt;Results for 10th Grade&lt;/caption&gt;
+ &lt;thead&gt;
+  &lt;tr&gt;
+   &lt;th style="text-align:left;"&gt; GPA Decile &lt;/th&gt;
+   &lt;th style="text-align:center;"&gt; Told &lt;/th&gt;
+   &lt;th style="text-align:center;"&gt; Notification &lt;/th&gt;
+   &lt;th style="text-align:center;"&gt; Preparation &lt;/th&gt;
+   &lt;th style="text-align:center;"&gt; Grades &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; D1 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; -0.02*** &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; -0.01*** &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; -0.02*** &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0.05*** &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt;  &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; (0.00) &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; (0.00) &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; (0.00) &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; (0.00) &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; D10 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0.01*** &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0.00 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0.00 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; -0.03*** &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt;  &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; (0.00) &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; (0.00) &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; (0.00) &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; (0.00) &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Baseline &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0.95*** &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0.78*** &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0.82*** &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0.33*** &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt;  &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; (0.00) &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; (0.00) &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; (0.00) &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; (0.00) &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+---
+# Use of exemptions to exclude students don't tell the whole story
+
+- Students are **.coolblue[excluded due to other reasons]** (justified).
+
+  - Change in exemption policy in 2012 `\(\rightarrow\)` reduction in exempted students (flattened)
+  
+  - Results remain similar after 2012
+
+  
+---
+# No self-selection from students because of testing
+
+.pull-left[
+- Students experience a **.coolblue[disutility from testing]**
+
+  - Use of **.coolblue[no-stake test]** applied to schools `\(\rightarrow\)` No effect on attendance
+
+]
+
+.pull-right[
+.small[
+&lt;table class=" lightable-paper" style='font-family: "Arial Narrow", arial, helvetica, sans-serif; width: auto !important; margin-left: auto; margin-right: auto;'&gt;
+&lt;caption&gt;Results for No-Stakes Test&lt;/caption&gt;
+ &lt;thead&gt;
+  &lt;tr&gt;
+   &lt;th style="text-align:left;"&gt; Grade - Year &lt;/th&gt;
+   &lt;th style="text-align:center;"&gt; D1 &lt;/th&gt;
+   &lt;th style="text-align:center;"&gt; D2 &lt;/th&gt;
+   &lt;th style="text-align:center;"&gt; D3D8 &lt;/th&gt;
+   &lt;th style="text-align:center;"&gt; D9 &lt;/th&gt;
+   &lt;th style="text-align:center;"&gt; D10 &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 2nd 2011 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; -0.01 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0.01 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0.01* &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0.02 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0.00 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt;  &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; (0.01) &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; (0.01) &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; (0.01) &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; (0.01) &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; (0.01) &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 5th 2012 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0.00 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; -0.01 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0.00 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0.01 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0.01 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt;  &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; (0.01) &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; (0.01) &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; (0.01) &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; (0.01) &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; (0.01) &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 6th 2011 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0.02* &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0.01 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0.01** &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0.01 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0.00 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt;  &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; (0.01) &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; (0.01) &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; (0.00) &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; (0.01) &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; (0.01) &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 6th 2017 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0.00 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0.03 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0.01 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0.01 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0.00 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt;  &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; (0.02) &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; (0.02) &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; (0.01) &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; (0.02) &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; (0.01) &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 11th 2012 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0.00 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0.00 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0.00 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; -0.02** &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0.00 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt;  &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; (0.01) &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; (0.01) &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; (0.00) &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; (0.01) &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; (0.01) &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+]
+]
+
+---
+background-position: 50% 50%
+class: left, middle, inverse
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+.big[
+Predicting the Counterfactual
+]
+
+---
+# How do these results compare to predicted counterfactual?
+
+- Can we use **.coolblue[this existing rich panel data]** to predict attendance on the day of the test *as if it was a regular day*?
+
+--
+&lt;br&gt;
+&lt;br&gt;
+
+- Use **.coolblue[XGBoost]** with panel data for **.coolblue[attendance prediction]** 
+
+  - Model includes fixed effects by day of the week, school, grade, and student. 
+  
+  - Also includes sibling attendance and attendance lag.
+
+--
+&lt;br&gt;
+&lt;br&gt;
+
+- Use data for 4th grade (2017): 
+
+  - Data **.coolblue[before]** the test to **.coolblue[predict attendance on the day of the test]**.
+
+---
+# Overall predictions over performance distribution
+
+&lt;img src="mbennett_attendance_files/figure-html/prediction_all-1.svg" style="display: block; margin: auto;" /&gt;
+
+
+---
+# Example: Comparisons between schools?
+
+&lt;img src="mbennett_attendance_files/figure-html/prediction_example-1.svg" style="display: block; margin: auto;" /&gt;
+
+---
+# Example: Comparisons between schools?
+
+&lt;img src="mbennett_attendance_files/figure-html/prediction_example2-1.svg" style="display: block; margin: auto;" /&gt;
+
+---
+# Can we characterize these schools?
+
+&lt;img src="mbennett_attendance_files/figure-html/cluster_plot-1.svg" style="display: block; margin: auto;" /&gt;
+
+---
+# Schools that appear to exclude lower-perfoming students are also more vulnerable
+
+.smaller[
+&lt;table style='NAborder-bottom: 0; width: auto !important; margin-left: auto; margin-right: auto; font-family: "Arial Narrow", arial, helvetica, sans-serif; width: auto !important; margin-left: auto; margin-right: auto;' class="table lightable-paper"&gt;
+ &lt;thead&gt;
+&lt;tr&gt;
+&lt;th style="empty-cells: hide;border-bottom:hidden;" colspan="1"&gt;&lt;/th&gt;
+&lt;th style="border-bottom:hidden;padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="2"&gt;&lt;div style="border-bottom: 1px solid #ddd; padding-bottom: 5px; "&gt;Cluster 1 (N=1092)&lt;/div&gt;&lt;/th&gt;
+&lt;th style="border-bottom:hidden;padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="2"&gt;&lt;div style="border-bottom: 1px solid #ddd; padding-bottom: 5px; "&gt;Cluster 2 (N=266)&lt;/div&gt;&lt;/th&gt;
+&lt;th style="empty-cells: hide;border-bottom:hidden;" colspan="2"&gt;&lt;/th&gt;
+&lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;th style="text-align:left;"&gt;   &lt;/th&gt;
+   &lt;th style="text-align:center;"&gt; Mean &lt;/th&gt;
+   &lt;th style="text-align:center;"&gt; Std. Dev. &lt;/th&gt;
+   &lt;th style="text-align:center;"&gt; Mean  &lt;/th&gt;
+   &lt;th style="text-align:center;"&gt; Std. Dev.  &lt;/th&gt;
+   &lt;th style="text-align:center;"&gt; Diff. in Means &lt;/th&gt;
+   &lt;th style="text-align:center;"&gt; p &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Avg. SIMCE Lang &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 258.72 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 22.67 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 251.76 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 22.00 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; -6.96 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0.00 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Avg. SIMCE Math &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 254.69 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 25.79 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 245.80 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 24.39 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; -8.89 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0.00 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Public &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0.34 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0.47 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0.42 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0.50 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0.09 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0.01 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; SEP status &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0.84 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0.37 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0.88 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0.32 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0.04 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0.06 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; % Priority Students &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0.48 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0.19 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0.55 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0.19 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0.06 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0.00 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Diff D1 GPA &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0.02 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0.14 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; -0.29 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0.32 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; -0.31 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0.00 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Diff D2 GPA &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0.04 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0.10 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; -0.20 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0.24 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; -0.24 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0.00 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Diff D9 GPA &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0.04 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0.07 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; -0.01 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0.14 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; -0.05 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0.00 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Diff D10 GPA &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0.04 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0.06 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; -0.01 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0.13 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; -0.05 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0.00 &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;tfoot&gt;&lt;tr&gt;&lt;td style="padding: 0; " colspan="100%"&gt;
+&lt;sup&gt;&lt;/sup&gt; Note: Diff DX GPA represents the difference between obs. attendance and predicted attendance for decile X&lt;/td&gt;&lt;/tr&gt;&lt;/tfoot&gt;
+&lt;/table&gt;
+]
+
+---
+# Implications for imputation policies
+
+- **.coolblue[How to handle this absenteeism problem?]**
+
+  - Scenario 1: Observed attendance (no imputation)
+  
+  - Scenario 2: Attendance as if the test hadn't happened (impute "typical day")
+  
+  - Scenario 3: Everybody is present
+  
+--
+&lt;br&gt;
+&lt;br&gt;
+
+- Proposals to impute **.coolblue[lowest scores for absent students]** to desincentivize arbitrary exclusion
+
+  - Most vulnerable schools have higher absenteeism rates `\(\rightarrow\)` Increase inequality and non-representativeness
+
+---
+background-position: 50% 50%
+class: left, middle, inverse
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+.big[
+Let's Wrap Up...
+]
+
+---
+# Conclusions and next steps
+
+- Non-representative patterns of absenteeism **.coolblue[beyond exclusion of low-performers]**
+  
+  - High heterogeneity between schools
+ 
+--
+&lt;br&gt;
+&lt;br&gt;
+
+- **.coolblue[Communication strategies]** play important role for **.coolblue[lower-performing students]**
+
+--
+&lt;br&gt;
+&lt;br&gt;
+
+- Impact of **.coolblue[imputation policies]**?
+
+  - Work in progress: How does non-representativeness and different imputation strategies impact policies and information provision?
+  
+---
+class: inverse, center, middle
+
+&lt;br&gt;
+
+.left[
+&lt;h1 class="title-own"&gt;Beyond Exclusion:&lt;br/&gt;The Role of High-Stake Testing on Attendance the Day of the Test&lt;/h1&gt;]
+
+.pull-left-little_l[
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+
+.left[.small[Causal Inference Seminar, Salem Center&lt;br&gt;April 5th, 2022]]]
+
+.pull-right-little_l[
+&lt;br&gt;
+.small[.right[Magdalena Bennett&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;br&gt;*The University of Texas at Austin*&amp;nbsp;&amp;nbsp;&amp;nbsp;]]
+
+&lt;br&gt;
+.small[.right[Christopher Neilson&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;br&gt;*Princeton University*&amp;nbsp;&amp;nbsp;&amp;nbsp;]]
+
+&lt;br&gt;
+.small[.right[Nicolás Rojas&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;br&gt;*Columbia University*&amp;nbsp;&amp;nbsp;&amp;nbsp;]]
+
+]
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script src="macros.js"></script>
+<script>var slideshow = remark.create({
+"slideNumberFormat": "<div class=\"progress-bar-container\">\n  <div class=\"progress-bar\" style=\"width: calc(%current% / %total% * 100%);\">\n  </div>\n</div>\n",
+"highlightStyle": "github",
+"highlightLines": true,
+"ratio": "16:9"
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>

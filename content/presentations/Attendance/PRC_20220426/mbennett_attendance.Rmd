@@ -398,6 +398,33 @@ class: inverse, center, middle
 
 
 ---
+# The big picture
+
+.pull-left[
+<br>
+<br>
+.center[.box-2Trans[Causal Inference]]
+<br>
+<br>
+]
+
+
+--
+
+.pull-right[
+<br>
+<br>
+.center[.box-3Trans[Prediction (ML)]]
+<br>
+<br>
+]
+--
+
+<br>
+<br>
+.box-5Trans[Evidence-Based Policy]
+
+---
 # Motivation
 
 - Results from **.coolblue[high-stakes tests]** widely used in education policy
@@ -871,7 +898,75 @@ tab10th %>% kbl(align = "lcccc", caption = "Results for 10th Grade",
   - Change in exemption policy in 2012 $\rightarrow$ reduction in exempted students (flattened)
   
   - Results remain similar after 2012
+--
+```{r event_study_nee_plot, fig.height=5, fig.width=8, fig.align='center', dev='svg', echo=FALSE, warning=FALSE, message=FALSE}
 
+results_nee <- haven::read_dta(paste0(dir_data, "results_nee.dta"))
+results_nee <- results_nee %>% mutate(est = est * 100, cil = cil *100, ciu = ciu * 100)
+
+graph <- function(ngrado, nyear){
+  # Base graph
+  base_nee <- ggplot(data = results_nee %>% 
+                        filter(agno == nyear & grado == ngrado & mod == 3 & gpa == 1)) + 
+     geom_line(aes( y = est, x = t,  color = "LP (D1)")) + 
+     geom_point(aes( y = est, x = t, color = "LP (D1)", fill = "LP (D1)"), pch=21, size = 2, stroke=1.1) + 
+     geom_line(data = results_nee %>% 
+                 filter(agno == nyear & grado == ngrado & mod == 3 & gpa == 2), aes( y = est, x = t, color = "LP (D2)"))  + 
+     geom_point(data = results_nee %>% 
+                  filter(agno == nyear & grado == ngrado & mod == 3 & gpa == 2), aes( y = est, x = t, color = "LP (D2)", fill = "LP (D2)"), pch=21, size = 2, stroke=1.1) + theme_classic() + 
+     geom_hline(yintercept = 0) + 
+     geom_hline(yintercept = -4, color = "gray" ) + 
+     geom_hline(yintercept = 4, color = "gray") + 
+     geom_vline(xintercept = 0, color = text_color, linetype = "dashed") +
+     scale_x_continuous( labels = scales::number_format(accuracy = 1), breaks = -5:5 ) +
+     scale_y_continuous( breaks = seq(from = -8, to = 8, by = 4), lim = c(-8, 8), labels = dollar_format(suffix = "%", prefix = "")) #+ 
+     #xlab("Days since test") + ylab("Event study estimate")+
+     #theme(legend.title=element_blank()) #+ 
+    #scale_color_manual(values=c(cols[2], cols[3])) +
+    #scale_color_manual(values = c(alpha(cols[2],0.3),alpha(cols[3],0.3)))
+  
+  
+  # Graph With and without  NEE 
+  CI_nee <- base_nee + 
+    geom_line(data = results_nee %>% 
+                filter(agno == nyear & grado == ngrado & mod == 30 & gpa == 1), aes( y = est, x = t, color = "LP (D1) (w/o) exempted"), linetype = "dashed") + 
+    geom_point(data = results_nee %>% 
+                 filter(agno == nyear & grado == ngrado & mod == 30 & gpa == 1), aes( y = est, x = t, color = "LP (D1) (w/o) exempted", fill = "LP (D1) (w/o) exempted"), pch=22, size = 2, stroke=1.1) + 
+    geom_line(data = results_nee %>% 
+                filter(agno == nyear & grado == ngrado & mod == 30 & gpa == 2), aes( y = est, x = t, color = "LP (D2) (w/o) exempted"), linetype = "dashed") + 
+    geom_point(data = results_nee %>% 
+                 filter(agno == nyear & grado == ngrado & mod == 30 & gpa == 2), aes( y = est, x = t, color = "LP (D2) (w/o) exempted", fill = "LP (D2) (w/o) exempted"), pch=22, size = 2, stroke=1.1) + 
+    scale_color_manual(name = "Estimate", values = c(cols[2],cols[3], cols[4], cols[5])) +
+    scale_fill_manual(name = "Estimate", values = c(alpha(cols[2],0.3),alpha(cols[3],0.3), alpha(cols[4],0.3),
+                                                    alpha(cols[5],0.3))) +
+    scale_linetype_manual(name = "Estimate", values = c("dashed", "dashed", "twodash", "twodash")) 
+  
+  if (ngrado == 4) {
+    CI_nee <- CI_nee + geom_vline(xintercept = 1, color = text_color, linetype = "dashed") 
+  }
+  return(CI_nee)
+}  
+
+g2 <- graph(4,2014) + xlab("Days since test") + ylab("Event study estimate")+
+    theme_ipsum_fsc() +
+    theme(plot.margin=unit(c(0.5,0,1.5,0),"cm"),
+          panel.grid.major.x = element_blank(),
+          panel.grid.minor.x = element_blank(),
+          #panel.grid.major.y = element_blank(),
+          panel.grid.minor.y = element_blank(),
+          axis.line = element_line(colour = "dark grey")) +
+  theme(legend.position = c(0.9,0.85)) +
+    theme(axis.title.x = element_text(size=18),#margin = margin(t = 10, r = 0, b = 0, l = 0)),
+          axis.text.x = element_text(size=14),
+          axis.title.y = element_text(size=18),#margin = margin(t = 0, r = 10, b = 0, l = 0)),
+          axis.text.y = element_text(size=14),
+          plot.title = element_text(size=30),
+          legend.title = element_blank())
+  
+
+g2
+
+```
   
 ---
 # No self-selection from students because of testing

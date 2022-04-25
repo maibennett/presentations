@@ -400,12 +400,12 @@ class: inverse, center, middle
 ---
 # The big picture
 
+--
 .pull-left[
 <br>
 <br>
 .center[.box-2Trans[Causal Inference]]
-<br>
-<br>
+
 ]
 
 
@@ -415,13 +415,12 @@ class: inverse, center, middle
 <br>
 <br>
 .center[.box-3Trans[Prediction (ML)]]
-<br>
-<br>
+
 ]
 --
 
-<br>
-<br>
+.center[
+![:scale 30%](https://raw.githubusercontent.com/maibennett/presentations/main/content/presentations/Attendance/PRC_20220426/images/arrows.png)]
 .box-5Trans[Evidence-Based Policy]
 
 ---
@@ -893,13 +892,16 @@ tab10th %>% kbl(align = "lcccc", caption = "Results for 10th Grade",
 ---
 # Use of exemptions to exclude students don't tell the whole story
 
-- Students are **.coolblue[excluded due to other reasons]** (justified).
+
+- Students are **.coolblue[excluded due to other reasons]** (justified):
 
   - Change in exemption policy in 2012 $\rightarrow$ reduction in exempted students (flattened)
   
   - Results remain similar after 2012
+
 --
-```{r event_study_nee_plot, fig.height=5, fig.width=8, fig.align='center', dev='svg', echo=FALSE, warning=FALSE, message=FALSE}
+
+```{r event_study_nee_plot, fig.height=4.6, fig.width=8, fig.align='center', dev='svg', echo=FALSE, warning=FALSE, message=FALSE}
 
 results_nee <- haven::read_dta(paste0(dir_data, "results_nee.dta"))
 results_nee <- results_nee %>% mutate(est = est * 100, cil = cil *100, ciu = ciu * 100)
@@ -955,7 +957,7 @@ g2 <- graph(4,2014) + xlab("Days since test") + ylab("Event study estimate")+
           #panel.grid.major.y = element_blank(),
           panel.grid.minor.y = element_blank(),
           axis.line = element_line(colour = "dark grey")) +
-  theme(legend.position = c(0.9,0.85)) +
+  theme(legend.position = c(0.8,0.85)) +
     theme(axis.title.x = element_text(size=18),#margin = margin(t = 10, r = 0, b = 0, l = 0)),
           axis.text.x = element_text(size=14),
           axis.title.y = element_text(size=18),#margin = margin(t = 0, r = 10, b = 0, l = 0)),

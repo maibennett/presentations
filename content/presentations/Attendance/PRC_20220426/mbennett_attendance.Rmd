@@ -1271,7 +1271,7 @@ class: inverse, center, middle
 <br>
 <br>
 
-.left[.small[Causal Inference Seminar, Salem Center<br>April 5th, 2022]]]
+.left[.small[Methods Talk, Population Research Center<br>April 26th, 2022]]]
 
 .pull-right-little_l[
 <br>

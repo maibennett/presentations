@@ -1,5 +1,5 @@
 ---
-title: "Methods Seminar - Population Research Center"
+title: "Methods Talk - Population Research Center"
 date: 2020-12-02T09:19:42+01:00
 lastmod: 2020-12-02T09:19:42+01:00
 draft: false

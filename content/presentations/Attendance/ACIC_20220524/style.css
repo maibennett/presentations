@@ -1,0 +1,11 @@
+@import url(https://fonts.googleapis.com/css?family=Jost&display=swap);
+
+.main p {
+    padding-top: 10% !important;
+    font-size: 90pt;
+    text-align: left;
+}
+
+h1#title {
+    font-family: "Yanone Kaffeesatz" !important;
+}

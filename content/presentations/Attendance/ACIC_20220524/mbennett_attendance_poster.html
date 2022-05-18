@@ -16,6 +16,7 @@
 
 
 
+<link rel="stylesheet" href="style.css" type="text/css" />
 
 <!--
 Font-awesome icons ie github or twitter
@@ -26,7 +27,7 @@ Font-awesome icons ie github or twitter
 <!--
 Google fonts api stuff
 -->
-<link href='https://fonts.googleapis.com/css?family=Fira Sans' rel='stylesheet'>
+<link href='https://fonts.googleapis.com/css?family=Yanone Kaffeesatz' rel='stylesheet'>
 <link href='https://fonts.googleapis.com/css?family=Jost' rel='stylesheet'>
 
 <!--
@@ -45,7 +46,7 @@ padding: 0px;
 width: 40in;
 height: 30in;
 text-align: justify;
-font-size: 45px;
+font-size: 32pt;
 background-color: #FFFFFF;
 color: #000000;
 }
@@ -158,7 +159,7 @@ text-decoration: none;
 color: #6C5B7B;
 }
 #title {
-font-size: 125pt;
+font-size: 100pt;
 text-align: left;
 margin: 0;
 line-height: 90%;
@@ -213,7 +214,7 @@ position: absolute;
 margin-left: calc(40in / 4);
 background-color: #35567D;
 color: #FFFFFF90;
-font-family: Fira Sans;
+font-family: Yanone Kaffeesatz;
 background-image: linear-gradient(#35567D 50%, #6C5B7B);
 }
 .main strong {
@@ -233,7 +234,7 @@ position: absolute;
 }
 .main p {
 padding-top: 20%;
-font-size: 115pt;
+font-size: 70pt;
 text-align: left;
 }
 .fab {
@@ -273,7 +274,7 @@ span > #tab:mytable {
   padding-right: 30mm;
 }
 .main_pic {
-  width: 100%;
+  width: 80%;
   display: block;
   margin-left: auto;
   margin-right: auto;
@@ -312,16 +313,12 @@ Magdalena Bennett<sup> 1</sup><br>
 </div>
 <div id="introduction" class="section level2">
 <h2>Introduction</h2>
-<p><strong>Non-representative patterns of attendance</strong> can skew how useful test scores measures are for accomplishing their main objective.</p>
-<p>In this paper, we study the <strong>effect of high-stakes testing on student composition of attendance on the day of the test</strong> using rich administrative data from Chile and daily attendance. By combining an event-study framework and a machine learning prediction approach, we <strong>bring together traditional causal inference methods with prediction algorithms</strong> to better inform policy.</p>
-<div id="objectives" class="section level3">
-<h3>Objectives</h3>
+<p><strong>Non-representative patterns of attendance</strong> can skew how useful test scores measures are for accomplishing their goal. The <strong>main objectives</strong> of this paper are the following:</p>
 <ol style="list-style-type: decimal">
 <li><p>Understand the <strong>average effect of testing on school attendance</strong> across grades and performance</p></li>
+<li><p><strong>Identify schools</strong> that <strong>incentivize non-representative patterns</strong> of attendance by <strong>combining causal inference methods and machine learning</strong></p></li>
 <li><p>Help improve current <strong>imputation methods</strong></p></li>
-<li><p><strong>Identify schools</strong> that <strong>incentivize non-representative patterns</strong> of attendance.</p></li>
 </ol>
-</div>
 </div>
 <div id="methods" class="section level2">
 <h2>Methods</h2>
@@ -329,20 +326,19 @@ Magdalena Bennett<sup> 1</sup><br>
 <h3>Event Study</h3>
 <p><span class="math display">\[Y_{ipsgt} = \sum_{P=1}^5\sum_{T=-4}^5 \tau^{PT}D^{PTG^*}_{ipsgt} + \gamma_{pt} +\alpha_i + \epsilon_{ipsgt}\]</span></p>
 <ul>
-<li><p><span class="math inline">\(Y_{ipsgt}\)</span>: Binary attendance for student <span class="math inline">\(i\)</span>, from GPA group <span class="math inline">\(p\)</span>, in school <span class="math inline">\(s\)</span> and grade <span class="math inline">\(g\)</span>, for day <span class="math inline">\(t\)</span>.</p></li>
-<li><p><span class="math inline">\(D^{PTG^*}_{ipsgt}\)</span>: Indicator variable <span class="math inline">\(\mathrm{I(p = P, t = T, g = G^*)}\)</span>, where <span class="math inline">\(G^*\)</span> is the tested grade.</p></li>
+<li><p><span class="math inline">\(Y_{ipsgt}\)</span>: Attendance (1,0) for student <span class="math inline">\(i\)</span>, from GPA group <span class="math inline">\(p\)</span>, in school <span class="math inline">\(s\)</span> and grade <span class="math inline">\(g\)</span> for day <span class="math inline">\(t\)</span>.</p></li>
+<li><p><span class="math inline">\(D^{PTG^*}_{ipsgt}\)</span>: Indicator variable where <span class="math inline">\(G^*\)</span> is the tested grade.</p></li>
 </ul>
-<p><br>
-<br></p>
 </div>
 <div id="prediction-of-counterfactual-attendance" class="section level3">
 <h3>Prediction of counterfactual attendance</h3>
 <ul>
-<li><strong>XGBoost</strong> for student panel of daily attendance
+<li><p><strong>XGBoost</strong> for large student panel of daily attendance</p>
 <ul>
-<li>Model includes fixed effects by day of the week, school, grade, and student.</li>
-<li>Also includes sibling attendance and attendance lag.</li>
+<li>Includes FE by day of the week, school, grade, and student. Also includes sybling’s attendance (if any) and attendance lag.</li>
 </ul></li>
+<li><p>Identify types of schools by clustering on <span class="math inline">\(Obs\ Att - Predicted\  Att\)</span> using <strong>K-means</strong>.</p></li>
+<li><p>Test different <strong>imputation policies</strong> and its consequences.</p></li>
 </ul>
 </div>
 </div>
@@ -350,15 +346,14 @@ Magdalena Bennett<sup> 1</sup><br>
 <h2>Results</h2>
 <p>Students skip school on the day of the test. In lower grades, <strong>lower-performers</strong> attend less and <strong>higher-performers</strong> attend more, compared to a regular day. In higher grades, we <strong>only observe action at the top of the distribution</strong></p>
 <p><img src="mbennett_attendance_poster_files/figure-html/event_study_plot2nd-1.svg" width="100%" style="display: block; margin: auto;" /></p>
-<p>There is <strong>important heterogeneity betweeen schools</strong>. Ex: Two schools which perform similarly, but with different predicted distributions:</p>
-<p><img src="mbennett_attendance_poster_files/figure-html/prediction_example-1.svg" width="100%" style="display: block; margin: auto;" /></p>
-<p>We conduct an additional <strong>K-means</strong> analysis to identify <strong>clusters of schools according to their difference between predicted and observed attendance distribution</strong>. We find <strong>two main clusters</strong>, where one of them incentivize the <strong>exclusion of lower-performers</strong>. Those schools are more vulnerable and have overall lower perfomance.</p>
+<p>There is <strong>important heterogeneity betweeen schools</strong>.</p>
+<p>Using <strong>K-means</strong> analysis to identify <strong>clusters of schools according to their difference between predicted and observed attendance distribution</strong>. We find <strong>two main clusters</strong>, where one of them incentivizes the <strong>exclusion of lower-performers</strong>. Those schools are more vulnerable and have overall lower performance.</p>
 </div>
 
 </div>
 <div class="main">
-<p>Not only <strong>low-performers attend less</strong> on the day of the test, but <strong>high-performers attend more</strong><br><br> <img src="https://raw.githubusercontent.com/maibennett/presentations/main/content/presentations/Attendance/Salem_20220405/images/event_study_plot2nd-1.svg" class="main_pic" /><br><br> Using machine learning methods (XGBoost) we can also <strong>identify those schools more likely to incentivize low-attendance on bottom performers</strong><br><br> <img src="https://raw.githubusercontent.com/maibennett/presentations/main/content/presentations/Attendance/Salem_20220405/mbennett_attendance_files/figure-html/prediction_example2-1.svg" class="main_pic" /></p>
-<img src="https://raw.githubusercontent.com/maibennett/presentations/main/content/presentations/Attendance/Salem_20220405/images/qr_code.svg" class="main-img-left" />
+<p>Not only <strong>low-performers attend less</strong> on the day of the test, but <strong>high-performers attend more</strong><br><br> <img src="https://raw.githubusercontent.com/maibennett/presentations/main/content/presentations/Attendance/Salem_20220405/images/event_study_plot2nd-1.svg" class="main_pic" /><br><br> Using machine learning methods we can also <strong>identify those schools more likely to incentivize low-attendance on bottom performers</strong><br><br> <img src="https://raw.githubusercontent.com/maibennett/presentations/main/content/presentations/Attendance/Salem_20220405/mbennett_attendance_files/figure-html/prediction_example2-1.svg" class="main_pic" /></p>
+<img src="https://raw.githubusercontent.com/maibennett/presentations/main/content/presentations/Attendance/Salem_20220405/images/qr_code.svg" title="fig:" class="main-img-left" alt=":scale 50%" />
 
 </div>
 </div>

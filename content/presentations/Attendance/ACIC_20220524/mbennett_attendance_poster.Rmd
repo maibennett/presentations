@@ -33,7 +33,7 @@ poster_height: "30in"
 poster_width: "40in"
 main_width: 0.4
 title_textsize: "120pt"
-main_textsize: "70pt"
+main_textsize: "71pt"
 body_textsize: "32pt"
 output: 
   posterdown::posterdown_betterland:
@@ -206,7 +206,7 @@ shift_legend2(gr)
 
 There is **important heterogeneity betweeen schools**.
 
-Using **K-means** analysis to identify **clusters of schools according to their difference between predicted and observed attendance distribution**. We find **two main clusters**, where one of them incentivizes the **exclusion of lower-performers**. Those schools are more vulnerable and have overall lower performance.
+We use **K-means** analysis to identify **clusters of schools according to their difference between predicted and observed attendance distribution**. We find **two main clusters**, where one of them incentivizes the **exclusion of lower-performers**. Those schools are more vulnerable and have overall lower performance.
 
 In terms of **imputation**:
 

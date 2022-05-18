@@ -10,7 +10,6 @@
 
 <title>Beyond Exclusion: The Role of High-Stake Testing on Attendance</title>
 
-<script src="mbennett_attendance_poster_files/header-attrs-2.11/header-attrs.js"></script>
 
 
 
@@ -63,17 +62,23 @@ margin-bottom: 2cm;
 position: sticky;
 width: 100%;
 }
-pre.sourceCode.r {
-background-color: #dddddd40;
-border-radius: 4mm;
+pre.sourceCode.r, pre.sourceCode.python {
+background-color: #ffffff20;
+border: solid #6C5B7B 1mm;
+border-radius: 0.5em;
 padding: 4mm;
-width: 75%;
 margin: auto;
 margin-top: 1em;
 margin-bottom: 1em;
 /* align-items: center; */
 }
-code.sourceCode.r{
+div.sourceCode {
+background-color: transparent;
+width: 85%;
+margin-left: auto;
+margin-right: auto;
+}
+code.sourceCode.r, code.sourceCode.python {
 background-color: transparent;
 font-size: 20pt;
 border-radius: 2mm;
@@ -82,7 +87,7 @@ code {
 font-size: 25pt;
 font-family: monospace;
 background-color: #6C5B7B24;
-color: #35567D;
+color: #6C5B7B;
 padding: 1.2mm;
 line-height: 1;
 border-radius: 2mm;
@@ -136,16 +141,16 @@ column-count: 2;
 -webkit-column-fill: auto;
 -moz-column-fill: auto;
 column-fill: auto;
--webkit-column-rule-width: 50%;
--moz-column-rule-width: 50%;
-column-rule-width: 50%;
+-webkit-column-rule-width: 0.4;
+-moz-column-rule-width: 0.4;
+column-rule-width: 0.4;
 -webkit-column-rule-style: solid;
 -moz-column-rule-style: solid;
 column-rule-style: solid;
 -webkit-column-rule-color: black;
 -moz-column-rule-color: black;
 column-rule-color: black;
--webkit-column-gap: 50%;
+-webkit-column-gap: calc(0.4 * 100%);
 background-color: #ffffff;
 font-family: Jost;
 color: #000000;
@@ -159,7 +164,7 @@ text-decoration: none;
 color: #6C5B7B;
 }
 #title {
-font-size: 100pt;
+font-size: 120pt;
 text-align: left;
 margin: 0;
 line-height: 90%;
@@ -168,7 +173,8 @@ border-bottom: 0;
 #author {
 color: #35567D;
 margin: 0;
-line-height: 90%;
+text-align: left;
+line-height: 65%;
 font-size: 1.17em;
 }
 #affiliation {
@@ -208,10 +214,10 @@ color: #000000;
 text-align: left;
 }
 .main {
-width: calc(40in / 2);
+width: calc(40in * 0.4);
 height: 30in;
 position: absolute;
-margin-left: calc(40in / 4);
+margin-left: calc(40in * ((1 - 0.4) / 2));
 background-color: #35567D;
 color: #FFFFFF90;
 font-family: Yanone Kaffeesatz;
@@ -256,6 +262,21 @@ color: #00000060;
 font-size: 5px;
 text-decoration: none;
 }
+.globe {
+color: #00000060;
+font-size: 5px;
+text-decoration: none;
+}
+.github > .fab {
+color: #00000060;
+font-size: 40px;
+text-decoration: none;
+}
+.globetext {
+color: #00000060;
+font-size: 35px;
+text-decoration: none;
+}
 .poster_wrap {
 width: 40in;
 height: 30in;
@@ -274,7 +295,7 @@ span > #tab:mytable {
   padding-right: 30mm;
 }
 .main_pic {
-  width: 80%;
+  width: 90%;
   display: block;
   margin-left: auto;
   margin-right: auto;
@@ -295,8 +316,8 @@ span > #tab:mytable {
 <br>
 <h3 id="author" class="author">
 
-Magdalena Bennett<sup> 1</sup><br>
-<a class="twitter" href="https://mobile.twitter.com/maibennett"><i class="fab fa-twitter"></i>&nbsp;&nbsp;@maibennett</a><br>
+Magdalena Bennett<sup> 1<br></sup><br>
+<a class="twitter" href="https://mobile.twitter.com/maibennett"><i class="fab fa-twitter"></i>&nbsp;@maibennett</a> <br>
 
 <a class='envelope'><i class="fas fa-envelope"></i></a> <a href="mailto:m.bennett@austin.utexas.edu" class="email">m.bennett@austin.utexas.edu</a> <br>
   </h3>
@@ -329,6 +350,7 @@ Magdalena Bennett<sup> 1</sup><br>
 <li><p><span class="math inline">\(Y_{ipsgt}\)</span>: Attendance (1,0) for student <span class="math inline">\(i\)</span>, from GPA group <span class="math inline">\(p\)</span>, in school <span class="math inline">\(s\)</span> and grade <span class="math inline">\(g\)</span> for day <span class="math inline">\(t\)</span>.</p></li>
 <li><p><span class="math inline">\(D^{PTG^*}_{ipsgt}\)</span>: Indicator variable where <span class="math inline">\(G^*\)</span> is the tested grade.</p></li>
 </ul>
+<p><br></p>
 </div>
 <div id="prediction-of-counterfactual-attendance" class="section level3">
 <h3>Prediction of counterfactual attendance</h3>
@@ -348,15 +370,20 @@ Magdalena Bennett<sup> 1</sup><br>
 <p><img src="mbennett_attendance_poster_files/figure-html/event_study_plot_all-1.svg" width="100%" style="display: block; margin: auto;" /></p>
 <p>There is <strong>important heterogeneity betweeen schools</strong>.</p>
 <p>Using <strong>K-means</strong> analysis to identify <strong>clusters of schools according to their difference between predicted and observed attendance distribution</strong>. We find <strong>two main clusters</strong>, where one of them incentivizes the <strong>exclusion of lower-performers</strong>. Those schools are more vulnerable and have overall lower performance.</p>
+<p>In terms of <strong>imputation</strong>:</p>
+<ul>
+<li><strong>Overall imputation</strong> to match school population <strong>increases</strong> disparities</li>
+<li><strong>Imputation to match predicted distribution</strong> is <strong>inbetween</strong> no imputation and imputation for all.</li>
+</ul>
 <!--
 dir_poster <- "C:/Users/mc72574/Dropbox/Hugo/Sites/presentations/content/presentations/Attendance/ACIC_20220524/"
-pagedown::chrome_print(paste0(dir_poster,"mbennett_attendance_poster.Rmd"))
+pagedown::chrome_print(paste0(dir_poster,"mbennett_attendance_poster.html"))
 -->
 </div>
 
 </div>
 <div class="main">
-<p>Not only <strong>low-performers attend less</strong> on the day of the test, but <strong>high-performers attend more</strong><br><br> <img src="https://raw.githubusercontent.com/maibennett/presentations/main/content/presentations/Attendance/Salem_20220405/images/event_study_plot2nd-1.svg" class="main_pic" /><br><br> Using machine learning methods we can also <strong>identify those schools more likely to incentivize low-attendance on bottom performers</strong><br><br> <img src="https://raw.githubusercontent.com/maibennett/presentations/main/content/presentations/Attendance/Salem_20220405/mbennett_attendance_files/figure-html/prediction_example2-1.svg" class="main_pic" /></p>
+<p>Not only <strong>low-performers attend less</strong> on the day of the test, but <strong>high-performers attend more</strong><br><br> <img src="https://raw.githubusercontent.com/maibennett/presentations/main/content/presentations/Attendance/Salem_20220405/images/event_study_plot2nd-1.svg" class="main_pic" /><br><br> Using machine learning methods we can also <strong>identify schools</strong> more likely to <strong>incentivize low-attendance</strong> on bottom performers<br><br> <img src="https://raw.githubusercontent.com/maibennett/presentations/main/content/presentations/Attendance/Salem_20220405/mbennett_attendance_files/figure-html/prediction_example2-1.svg" class="main_pic" /></p>
 <img src="https://raw.githubusercontent.com/maibennett/presentations/main/content/presentations/Attendance/Salem_20220405/images/qr_code_small.svg" class="main-img-left" />
 
 </div>

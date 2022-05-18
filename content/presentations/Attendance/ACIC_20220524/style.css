@@ -13,3 +13,7 @@ h1#title {
 img.main-img-left {
     width: 10% !important;
 }
+
+#author {
+    margin-bottom: 5px !important;
+}

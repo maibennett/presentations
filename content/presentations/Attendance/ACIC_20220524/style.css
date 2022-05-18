@@ -9,3 +9,7 @@
 h1#title {
     font-family: "Yanone Kaffeesatz" !important;
 }
+
+img.main-img-left {
+    width: 10% !important;
+}

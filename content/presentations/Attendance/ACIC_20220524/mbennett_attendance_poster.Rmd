@@ -31,7 +31,7 @@ secondary_colour: "#6C5B7B"
 accent_colour: "#F67280"
 poster_height: "30in"
 poster_width: "40in"
-main_width: 0.30
+main_width: 0.3
 title_textsize: "100pt"
 main_textsize: "70pt"
 body_textsize: "32pt"

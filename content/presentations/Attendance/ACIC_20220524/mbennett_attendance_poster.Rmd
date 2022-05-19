@@ -89,7 +89,7 @@ $$Y_{ipsgt} = \sum_{P=1}^5\sum_{T=-4}^5 \tau^{PT}D^{PTG^*}_{ipsgt} + \gamma_{pt}
 ### Prediction of counterfactual attendance
 
 - **XGBoost** for large student panel of daily attendance
-  - Includes FE by day of the week, school, grade, and student. Also includes sybling's attendance (if any) and attendance lag.
+  - Includes FE by day of the week, school, grade, and student. Also includes sibling's attendance (if any) and attendance lag.
 
 - Identify types of schools by clustering on $Obs\ Att - Predicted\  Att$ using **K-means**.
 

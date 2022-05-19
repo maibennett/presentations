@@ -1254,7 +1254,7 @@ ggplot(aes(x = Avg..SIMCE.Math, color = factor(cluster), fill = factor(cluster))
 ```
 
 ---
-# Some imputation exercises
+# Differences in scores and attendance
 
 - The previous differences between types of schools **.coolblue[does not capture the true difference]** given non-representative attedance patterns.
   

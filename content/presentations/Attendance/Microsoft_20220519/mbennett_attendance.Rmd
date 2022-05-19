@@ -846,46 +846,14 @@ shift_legend2(gr)
 ---
 # Potential mechanisms that explain these patterns
 
-- Schools directly **.coolblue[(des)incentivize attendance of (lower)higher performers]**
-
-<br>
 - Students are **.coolblue[excluded due to other reasons]** (justified).
 
 <br>
 - Students experience a **.coolblue[disutility from testing]**
 
----
-# Differences in communication and incentives between high and low performers
+<br>
 
 - Schools directly **.coolblue[(des)incentivize attendance of (lower)higher performers]**
-
-  - 2017 survey for students in test-taking grades.
-
-```{r, echo=FALSE, warning=FALSE, message=FALSE}
-library(kableExtra)
-
-tab4th <- read.csv("https://raw.githubusercontent.com/maibennett/presentations/main/content/presentations/Attendance/Salem_20220405/images/survey_4th.csv")
-
-tab10th <- read.csv("https://raw.githubusercontent.com/maibennett/presentations/main/content/presentations/Attendance/Salem_20220405/images/survey_10th.csv")
-
-kableExtra::kable(tab4th, align = "lcccc", caption = "Results for 4th Grade",
-             col.names = c('GPA Decile', 'Told', 'Notification', 'Preparation', 'Grades'), format = "html") %>% 
-  kable_paper(bootstrap_options = c("hover","condensed"), full_width = FALSE)
-```
-
-
----
-# Differences in communication and incentives between high and low performers
-
-- Schools directly **.coolblue[(des)incentivize attendance of (lower)higher performers]**
-
-  - 2017 survey for students in test-taking grades.
-
-```{r, echo=FALSE, results='asis'}
-tab10th %>% kbl(align = "lcccc", caption = "Results for 10th Grade",
-             col.names = c('GPA Decile', 'Told', 'Notification', 'Preparation', 'Grades'), format = "html") %>% 
-  kable_paper(bootstrap_options = c("hover","condensed"), full_width = FALSE)
-```
 
 ---
 # Use of exemptions to exclude students don't tell the whole story
@@ -900,6 +868,7 @@ tab10th %>% kbl(align = "lcccc", caption = "Results for 10th Grade",
 --
 
 ```{r event_study_nee_plot, fig.height=4.6, fig.width=8, fig.align='center', dev='svg', echo=FALSE, warning=FALSE, message=FALSE}
+library(kableExtra)
 
 results_nee <- haven::read_dta(paste0(dir_data, "results_nee.dta"))
 results_nee <- results_nee %>% mutate(est = est * 100, cil = cil *100, ciu = ciu * 100)
@@ -989,6 +958,37 @@ kableExtra::kable(tab_no_stakes, align = "lccccc", caption = "Results for No-Sta
 ```
 ]
 ]
+
+---
+# Differences in communication and incentives between high and low performers
+
+- Schools directly **.coolblue[(des)incentivize attendance of (lower)higher performers]**
+
+  - 2017 survey for students in test-taking grades.
+
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+tab4th <- read.csv("https://raw.githubusercontent.com/maibennett/presentations/main/content/presentations/Attendance/Salem_20220405/images/survey_4th.csv")
+
+tab10th <- read.csv("https://raw.githubusercontent.com/maibennett/presentations/main/content/presentations/Attendance/Salem_20220405/images/survey_10th.csv")
+
+kableExtra::kable(tab4th, align = "lcccc", caption = "Results for 4th Grade",
+             col.names = c('GPA Decile', 'Told', 'Notification', 'Preparation', 'Grades'), format = "html") %>% 
+  kable_paper(bootstrap_options = c("hover","condensed"), full_width = FALSE)
+```
+
+
+---
+# Differences in communication and incentives between high and low performers
+
+- Schools directly **.coolblue[(des)incentivize attendance of (lower)higher performers]**
+
+  - 2017 survey for students in test-taking grades.
+
+```{r, echo=FALSE, results='asis'}
+tab10th %>% kbl(align = "lcccc", caption = "Results for 10th Grade",
+             col.names = c('GPA Decile', 'Told', 'Notification', 'Preparation', 'Grades'), format = "html") %>% 
+  kable_paper(bootstrap_options = c("hover","condensed"), full_width = FALSE)
+```
 
 ---
 background-position: 50% 50%
@@ -1190,7 +1190,7 @@ d_tab <- d_tab %>% rename(`Avg. SIMCE Lang` = Avg..SIMCE.Lang,
                           `Diff D9 GPA` = Diff.D9.GPA,
                           `Diff D10 GPA` = Diff.D10.GPA)
 
-d_tab$cluster = factor(d_tab$cluster, levels = c(1,2), labels = c("Cluster 1", "Cluster 2"))
+d_tab$cluster = factor(d_tab$cluster, levels = c(1,2), labels = c("Cluster 1\nSimilar", "Cluster 2\nLower att"))
 
 datasummary_balance(~ cluster, data = d_tab, dinm_statistic = "p.value", fmt = "%.2f", dinm = TRUE, align = c("lcccccc"),
                     output = "html",
@@ -1204,11 +1204,7 @@ datasummary_balance(~ cluster, data = d_tab, dinm_statistic = "p.value", fmt = "
 
 - **.coolblue[How to handle this absenteeism problem?]**
 
-  - Scenario 1: Observed attendance (no imputation)
-  
-  - Scenario 2: Attendance as if the test hadn't happened (impute "typical day")
-  
-  - Scenario 3: Everybody is present
+  - E.g.: Observed attendance (no imputation), attendance as if the test hadn't happened (impute "typical day"), everybody is present.
   
 --
 <br>
@@ -1217,6 +1213,168 @@ datasummary_balance(~ cluster, data = d_tab, dinm_statistic = "p.value", fmt = "
 - Proposals to impute **.coolblue[lowest scores for absent students]** to desincentivize arbitrary exclusion
 
   - Most vulnerable schools have higher absenteeism rates $\rightarrow$ Increase inequality and non-representativeness
+
+---
+# There are differences in score distributions between clusters
+
+```{r dist_score_cluster, fig.height=5.5, fig.width=8, fig.align='center', dev='svg', echo=FALSE, warning=FALSE, message=FALSE}
+dir_data2 = "C:/Users/mc72574/Dropbox/UT/UT Research/Asistencia/"
+
+d_tab <- read.csv(paste0(dir_data2,"data/working/d_tab.csv"))
+
+d_tab %>% filter(!is.na(cluster)) %>%
+ggplot(aes(x = Avg..SIMCE.Math, color = factor(cluster), fill = factor(cluster))) +
+  geom_density() +
+  scale_color_manual(name = "Cluster", labels = c("Similar","Lower att"),values = c(cols[2],cols[3])) +
+  scale_fill_manual(name = "Cluster", labels = c("Similar","Lower att"),values = c(alpha(cols[2],0.2),alpha(cols[3],0.2))) +
+  xlab("SIMCE Math") + ylab("Density") +
+  theme_ipsum_fsc() + #plain
+  theme(plot.margin=unit(c(1,1,1,1),"cm"),
+        panel.grid.major.x = element_blank(),
+        panel.grid.minor.x = element_blank(),
+        panel.grid.major.y = element_blank(),
+        panel.grid.minor.y = element_blank(),
+        axis.line = element_line(colour = "dark grey"))+
+  theme(axis.title.x = element_text(size=18),#margin = margin(t = 10, r = 0, b = 0, l = 0)),
+        axis.text.x = element_text(size=14),
+        axis.title.y = element_text(size=18),#margin = margin(t = 0, r = 10, b = 0, l = 0)),
+        axis.text.y = element_text(size=14),legend.position=c(0.9,0.9),
+        legend.title = element_text(size = 12),
+        legend.text = element_text(size=10),
+        legend.background = element_rect(fill="white",colour ="white"),
+        title = element_text(size=14))
+```
+
+---
+# Some imputation exercises
+
+- The previous differences between types of schools **.coolblue[does not capture the true difference]** given non-representative attedance patterns.
+  
+--
+<br>
+<br>
+- Two incentives working simultaneously:
+
+  - Incentive for **.coolblue[lower-performing students not to attend]** the day of the test
+  
+  - Incentive for **.coolblue[higher-performing students to attend]** the day of the test
+  
+--
+<br>
+<br>
+- We will focus on solving the **.coolblue[first one]**.
+
+---
+# Some imputation exercises
+
+How can we **.coolblue[impute missing scores]**?
+
+  - **.coolblue[Scenario 1]**: Not impute at all. Show observed distributions.
+  
+  - **.coolblue[Scenario 2]**: Impute by decile only for the difference between predicted and observed attendance.
+    - Imputed score: (a) overall min, (b) decile min
+  
+  - **.coolblue[Scenario 3]**: Impute every missing student.
+    - Imputed score: overall min
+  
+--
+
+**.coolblue[Some caveats]**:
+
+  - Difference between predicted and obs. captures total incentives/desincentives in attendance.
+  
+  - Imputed score might be too optimistic (e.g. real score would be lower than observed distribution)
+  
+---
+# Scenario 1 vs Scenario 3: No imputation and Impute all
+
+```{r imputation_diff1, fig.height=5.5, fig.width=8, fig.align='center', dev='svg', echo=FALSE, warning=FALSE, message=FALSE}
+impute <- read.csv(paste0(dir_data2,"data/working/impute.csv"))
+
+impute2 <- impute
+
+impute2$mean[impute2$imputation %in% c("Impute Pred-Obs (All)", "Impute Pred-Obs (Decile)")] <- NA
+
+ggplot(data = impute2, aes(x = factor(imputation, levels = c("Impute All",
+                                                            "Impute Pred-Obs (All)",
+                                                            "Impute Pred-Obs (Decile)",
+                                                            "No Imputation")), 
+                          y = mean, color = factor(cluster), fill = factor(cluster))) +
+  geom_segment(aes(x = "Impute All", xend = "Impute All", y = impute$mean[impute$cluster==1 & impute$imputation=="Impute All"],
+                   yend = impute$mean[impute$cluster==2 & impute$imputation=="Impute All"]), color = "grey") +
+  #geom_segment(aes(x = "Impute Pred-Obs (All)", xend = "Impute Pred-Obs (All)", y = impute$mean[impute$cluster==1 & impute$imputation=="Impute Pred-Obs (All)"],
+#                   yend = impute$mean[impute$cluster==2 & impute$imputation=="Impute Pred-Obs (All)"]), color = "grey") +
+#  geom_segment(aes(x = "Impute Pred-Obs (Decile)", xend = "Impute Pred-Obs (Decile)", y = impute$mean[impute$cluster==1 & impute$imputation=="Impute Pred-Obs (Decile)"],
+#                   yend = impute$mean[impute$cluster==2 & impute$imputation=="Impute Pred-Obs (Decile)"]), color = "grey") +
+  geom_segment(aes(x = "No Imputation", xend = "No Imputation", y = impute$mean[impute$cluster==1 & impute$imputation=="No Imputation"],
+                   yend = impute$mean[impute$cluster==2 & impute$imputation=="No Imputation"]), color = "grey") +
+  
+  geom_point(pch = 21, size = 4, stroke = 1.2) +
+
+
+  scale_color_manual(name = "Cluster", labels = c("Similar","Lower att"),values = c(cols[2],cols[3])) +
+  scale_fill_manual(name = "Cluster", labels = c("Similar","Lower att"),values = c(alpha(cols[2],0.8),alpha(cols[3],0.8))) +
+  ylab("SIMCE Math") + xlab("") +
+  ylim(180,280) +
+  coord_flip()+
+  theme_ipsum_fsc() + #plain
+  theme(plot.margin=unit(c(0.5,0.5,0.5,0.5),"cm"),
+        panel.grid.major.x = element_blank(),
+        panel.grid.minor.x = element_blank(),
+        panel.grid.major.y = element_blank(),
+        panel.grid.minor.y = element_blank(),
+        axis.line = element_line(colour = "dark grey"))+
+  theme(axis.title.x = element_text(size=14),#margin = margin(t = 10, r = 0, b = 0, l = 0)),
+        axis.text.x = element_text(size=12),
+        axis.title.y = element_text(size=14),#margin = margin(t = 0, r = 10, b = 0, l = 0)),
+        axis.text.y = element_text(size=12),legend.position=c(0.25,0.9),
+        legend.title = element_text(size = 12),
+        legend.text = element_text(size=10),
+        legend.background = element_rect(fill="white",colour ="grey"),
+        title = element_text(size=14))
+```
+
+---
+# Imputing Predicted - Observed is less extreme
+
+```{r imputation_diff2, fig.height=5.5, fig.width=8, fig.align='center', dev='svg', echo=FALSE, warning=FALSE, message=FALSE}
+ggplot(data = impute, aes(x = factor(imputation, levels = c("Impute All",
+                                                            "Impute Pred-Obs (All)",
+                                                            "Impute Pred-Obs (Decile)",
+                                                            "No Imputation")), 
+                          y = mean, color = factor(cluster), fill = factor(cluster))) +
+  geom_segment(aes(x = "Impute All", xend = "Impute All", y = impute$mean[impute$cluster==1 & impute$imputation=="Impute All"],
+                   yend = impute$mean[impute$cluster==2 & impute$imputation=="Impute All"]), color = "grey") +
+  geom_segment(aes(x = "Impute Pred-Obs (All)", xend = "Impute Pred-Obs (All)", y = impute$mean[impute$cluster==1 & impute$imputation=="Impute Pred-Obs (All)"],
+                   yend = impute$mean[impute$cluster==2 & impute$imputation=="Impute Pred-Obs (All)"]), color = "grey") +
+  geom_segment(aes(x = "Impute Pred-Obs (Decile)", xend = "Impute Pred-Obs (Decile)", y = impute$mean[impute$cluster==1 & impute$imputation=="Impute Pred-Obs (Decile)"],
+                   yend = impute$mean[impute$cluster==2 & impute$imputation=="Impute Pred-Obs (Decile)"]), color = "grey") +
+  geom_segment(aes(x = "No Imputation", xend = "No Imputation", y = impute$mean[impute$cluster==1 & impute$imputation=="No Imputation"],
+                   yend = impute$mean[impute$cluster==2 & impute$imputation=="No Imputation"]), color = "grey") +
+  
+  geom_point(pch = 21, size = 4, stroke = 1.2) +
+
+  scale_color_manual(name = "Cluster", labels = c("Similar","Lower att"),values = c(cols[2],cols[3])) +
+  scale_fill_manual(name = "Cluster", labels = c("Similar","Lower att"),values = c(alpha(cols[2],0.8),alpha(cols[3],0.8))) +
+  ylab("SIMCE Math") + xlab("") +
+  ylim(180,280) +
+  coord_flip()+
+  theme_ipsum_fsc() + #plain
+  theme(plot.margin=unit(c(0.5,0.5,0.5,0.5),"cm"),
+        panel.grid.major.x = element_blank(),
+        panel.grid.minor.x = element_blank(),
+        panel.grid.major.y = element_blank(),
+        panel.grid.minor.y = element_blank(),
+        axis.line = element_line(colour = "dark grey"))+
+  theme(axis.title.x = element_text(size=14),#margin = margin(t = 10, r = 0, b = 0, l = 0)),
+        axis.text.x = element_text(size=12),
+        axis.title.y = element_text(size=14),#margin = margin(t = 0, r = 10, b = 0, l = 0)),
+        axis.text.y = element_text(size=12),legend.position=c(0.25,0.9),
+        legend.title = element_text(size = 12),
+        legend.text = element_text(size=10),
+        legend.background = element_rect(fill="white",colour ="grey"),
+        title = element_text(size=14))
+```
 
 ---
 background-position: 50% 50%
@@ -1269,7 +1427,7 @@ class: inverse, center, middle
 <br>
 <br>
 
-.left[.small[Methods Talk, Population Research Center<br>April 26th, 2022]]]
+.left[.small[Microsoft Research Seminar<br>May 19th, 2022]]]
 
 .pull-right-little_l[
 <br>

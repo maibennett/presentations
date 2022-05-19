@@ -4,7 +4,7 @@ font_family: 'Jost'
 main_fontfamily: 'Yanone Kaffeesatz' 
 author:
   - name: Magdalena Bennett
-    affil: 1
+    affil: "1<br>"
     twitter: maibennett
     email: m.bennett@austin.utexas.edu
     main: true
@@ -22,18 +22,18 @@ affiliation:
 main_findings: 
   - "Not only **low-performers attend less** on the day of the test, but **high-performers attend more**"
   - '![](https://raw.githubusercontent.com/maibennett/presentations/main/content/presentations/Attendance/Salem_20220405/images/event_study_plot2nd-1.svg){.main_pic}'
-  - "Using machine learning methods we can also **identify those schools more likely to incentivize low-attendance on bottom performers**"
+  - "Using machine learning methods we can also **identify schools** more likely to **incentivize low-attendance** on bottom performers"
   - '![](https://raw.githubusercontent.com/maibennett/presentations/main/content/presentations/Attendance/Salem_20220405/mbennett_attendance_files/figure-html/prediction_example2-1.svg){.main_pic}'
-main_picwidth: "80%"
+main_picwidth: "90%"
 logoleft_name: '![](https://raw.githubusercontent.com/maibennett/presentations/main/content/presentations/Attendance/Salem_20220405/images/qr_code_small.svg){.main-img-left}'
 primary_colour: "#35567D"
 secondary_colour: "#6C5B7B"
 accent_colour: "#F67280"
 poster_height: "30in"
 poster_width: "40in"
-main_width: 0.3
-title_textsize: "100pt"
-main_textsize: "70pt"
+main_width: 0.4
+title_textsize: "120pt"
+main_textsize: "71pt"
 body_textsize: "32pt"
 output: 
   posterdown::posterdown_betterland:
@@ -84,10 +84,12 @@ $$Y_{ipsgt} = \sum_{P=1}^5\sum_{T=-4}^5 \tau^{PT}D^{PTG^*}_{ipsgt} + \gamma_{pt}
 
 - $D^{PTG^*}_{ipsgt}$: Indicator variable where $G^*$ is the tested grade.
 
+<br>
+
 ### Prediction of counterfactual attendance
 
 - **XGBoost** for large student panel of daily attendance
-  - Includes FE by day of the week, school, grade, and student. Also includes sybling's attendance (if any) and attendance lag.
+  - Includes FE by day of the week, school, grade, and student. Also includes sibling's attendance (if any) and attendance lag.
 
 - Identify types of schools by clustering on $Obs\ Att - Predicted\  Att$ using **K-means**.
 
@@ -204,8 +206,13 @@ shift_legend2(gr)
 
 There is **important heterogeneity betweeen schools**.
 
-Using **K-means** analysis to identify **clusters of schools according to their difference between predicted and observed attendance distribution**. We find **two main clusters**, where one of them incentivizes the **exclusion of lower-performers**. Those schools are more vulnerable and have overall lower performance.
+We use **K-means** analysis to identify **clusters of schools according to their difference between predicted and observed attendance distribution**. We find **two main clusters**, where one of them incentivizes the **exclusion of lower-performers**. Those schools are more vulnerable and have overall lower performance.
 
+In terms of **imputation**:
+
+- **Overall imputation** to match school population **increases** disparities
+- **Imputation to match predicted distribution** is **inbetween** no imputation and imputation for all.
+  
 <!--
 dir_poster <- "C:/Users/mc72574/Dropbox/Hugo/Sites/presentations/content/presentations/Attendance/ACIC_20220524/"
 pagedown::chrome_print(paste0(dir_poster,"mbennett_attendance_poster.html"))

@@ -1409,7 +1409,13 @@ Let's Wrap Up...
 
 - Impact of **.coolblue[imputation policies]**?
 
-  - Work in progress: How does non-representativeness and different imputation strategies impact policies and information provision?
+  - Work in progress: How does non-representativeness and different imputation strategies impact policies and information provision? What score do we impute and for whom?
+  
+--
+<br>
+<br>
+
+- Importance of **.coolblue[data availability]**
   
 ---
 class: inverse, center, middle

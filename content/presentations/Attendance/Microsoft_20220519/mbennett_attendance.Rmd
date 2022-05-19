@@ -538,7 +538,15 @@ The Chilean Educational Context
 ---
 # The Chilean context: Standardized testing
 
+- Chile has a **.coolblue[universal voucher system]** (school choice)
+
+--
+<br>
+<br>
+
 - Universal standardized testing since 1980's (SIMCE)
+  
+  - For all 4th graders; then extended to other grades.
 
 --
 <br>
@@ -846,7 +854,7 @@ shift_legend2(gr)
 ---
 # Potential mechanisms that explain these patterns
 
-- Students are **.coolblue[excluded due to other reasons]** (justified).
+- Students are **.coolblue[excluded due to other reasons]** (justified)
 
 <br>
 - Students experience a **.coolblue[disutility from testing]**

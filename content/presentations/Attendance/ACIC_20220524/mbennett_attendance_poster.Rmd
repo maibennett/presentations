@@ -34,7 +34,7 @@ poster_width: "40in"
 main_width: 0.4
 title_textsize: "120pt"
 main_textsize: "71pt"
-body_textsize: "32pt"
+body_textsize: "29pt"
 output: 
   posterdown::posterdown_betterland:
     css: ["style.css"]
@@ -83,8 +83,6 @@ $$Y_{ipsgt} = \sum_{P=1}^5\sum_{T=-4}^5 \tau^{PT}D^{PTG^*}_{ipsgt} + \gamma_{pt}
 
 
 - $D^{PTG^*}_{ipsgt}$: Indicator variable where $G^*$ is the tested grade.
-
-<br>
 
 ### Prediction of counterfactual attendance
 
@@ -212,7 +210,51 @@ In terms of **imputation**:
 
 - **Overall imputation** to match school population **increases** disparities
 - **Imputation to match predicted distribution** is **inbetween** no imputation and imputation for all.
+
+```{r imputation, fig.height=5, fig.width=9, fig.align='center', dev='svg', echo=FALSE, warning=FALSE, message=FALSE}
+dir_data2 = "C:/Users/mc72574/Dropbox/UT/UT Research/Asistencia/"
+
+impute <- read.csv(paste0(dir_data2,"data/working/impute.csv"))
+
+ggplot(data = impute, aes(x = factor(imputation, levels = c("Impute All",
+                                                            "Impute Pred-Obs (All)",
+                                                            "Impute Pred-Obs (Decile)",
+                                                            "No Imputation")), 
+                          y = mean, color = factor(cluster), fill = factor(cluster))) +
+  geom_segment(aes(x = "Impute All", xend = "Impute All", y = impute$mean[impute$cluster==1 & impute$imputation=="Impute All"],
+                   yend = impute$mean[impute$cluster==2 & impute$imputation=="Impute All"]), color = "grey") +
+  geom_segment(aes(x = "Impute Pred-Obs (All)", xend = "Impute Pred-Obs (All)", y = impute$mean[impute$cluster==1 & impute$imputation=="Impute Pred-Obs (All)"],
+                   yend = impute$mean[impute$cluster==2 & impute$imputation=="Impute Pred-Obs (All)"]), color = "grey") +
+  geom_segment(aes(x = "Impute Pred-Obs (Decile)", xend = "Impute Pred-Obs (Decile)", y = impute$mean[impute$cluster==1 & impute$imputation=="Impute Pred-Obs (Decile)"],
+                   yend = impute$mean[impute$cluster==2 & impute$imputation=="Impute Pred-Obs (Decile)"]), color = "grey") +
+  geom_segment(aes(x = "No Imputation", xend = "No Imputation", y = impute$mean[impute$cluster==1 & impute$imputation=="No Imputation"],
+                   yend = impute$mean[impute$cluster==2 & impute$imputation=="No Imputation"]), color = "grey") +
   
+  geom_point(pch = 21, size = 4, stroke = 1.2) +
+
+  scale_color_manual(name = "Cluster", labels = c("Similar","Lower att"),values = c(cols[2],cols[3])) +
+  scale_fill_manual(name = "Cluster", labels = c("Similar","Lower att"),values = c(alpha(cols[2],0.8),alpha(cols[3],0.8))) +
+  ylab("SIMCE Math") + xlab("") +
+  ylim(180,280) +
+  coord_flip()+
+  theme_ipsum_fsc() + #plain
+  theme(plot.margin=unit(c(0.5,0.5,0.5,0.5),"cm"),
+        panel.grid.major.x = element_blank(),
+        panel.grid.minor.x = element_blank(),
+        panel.grid.major.y = element_blank(),
+        panel.grid.minor.y = element_blank(),
+        axis.line = element_line(colour = "dark grey"))+
+  theme(axis.title.x = element_text(size=14),#margin = margin(t = 10, r = 0, b = 0, l = 0)),
+        axis.text.x = element_text(size=12),
+        axis.title.y = element_text(size=14),#margin = margin(t = 0, r = 10, b = 0, l = 0)),
+        axis.text.y = element_text(size=12),legend.position=c(0.25,0.9),
+        legend.title = element_text(size = 12),
+        legend.text = element_text(size=10),
+        legend.background = element_rect(fill="white",colour ="grey"),
+        title = element_text(size=14))
+
+
+```
 <!--
 dir_poster <- "C:/Users/mc72574/Dropbox/Hugo/Sites/presentations/content/presentations/Attendance/ACIC_20220524/"
 pagedown::chrome_print(paste0(dir_poster,"mbennett_attendance_poster.html"))

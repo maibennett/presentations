@@ -42,13 +42,28 @@ Some preliminary results also show high levels of heterogeneity between schools 
     padding-top: calc(2880/3840 * 100%);
 }
 
-.testiframe {
+/*.testiframe {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
     border: 0;
+}*/
+
+.testiframe {
+  /* Set the width of the iframe the size you want to transform it FROM */
+  width: 3840px;
+  height: 2880px;
+  /* apply the transform */
+  -webkit-transform:scale(0.25);
+  -moz-transform:scale(0.25);
+  -o-transform:scale(0.25);
+  transform:scale(0.25);
+  /* position it, as if it was the original size */
+  position: absolute;
+  left: -400px;
+  top: -200px;
 }
 </style>
 

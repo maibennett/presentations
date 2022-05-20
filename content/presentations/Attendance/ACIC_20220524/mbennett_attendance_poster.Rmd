@@ -21,9 +21,9 @@ affiliation:
     address: Teachers College, Columbia University
 main_findings: 
   - "Not only **low-performers attend less** on the day of the test in lower grades, but **high-performers attend more**"
-  - '![](https://raw.githubusercontent.com/maibennett/presentations/main/content/presentations/Attendance/Salem_20220405/images/event_study_plot2nd-1.svg){.main_pic}'
+  - '![](https://raw.githubusercontent.com/maibennett/presentations/main/content/presentations/Attendance/Salem_20220405/images/event_study_plot2nd-v2.svg){.main_pic}'
   - "Using machine learning methods we can also **identify schools** more likely to **incentivize low-attendance** on bottom performers"
-  - '![](https://raw.githubusercontent.com/maibennett/presentations/main/content/presentations/Attendance/Salem_20220405/mbennett_attendance_files/figure-html/prediction_example2-1.svg){.main_pic}'
+  - '![](https://raw.githubusercontent.com/maibennett/presentations/main/content/presentations/Attendance/Salem_20220405/images/prediction_example2-1.svg){.main_pic}'
 main_picwidth: "90%"
 logoleft_name: '![](https://raw.githubusercontent.com/maibennett/presentations/main/content/presentations/Attendance/Salem_20220405/images/qr_code_smallv2.svg){.main-img-left}'
 primary_colour: "#35567D"
@@ -106,6 +106,7 @@ library(firasans)
 library(haven)
 library(scales)
 library(patchwork)
+library(elementalist)
 
 # Directories
 dir_data <- "C:/Users/mc72574/Dropbox/UT/UT Research/Asistencia/archivos_mai_18032022/"
@@ -180,7 +181,8 @@ gr <- data_graph  %>%
   theme(legend.title = element_text(size = 16, face = "bold"), 
         legend.text = element_text( size = 14),
         strip.text = element_text(size = 16, family = "Fira Sans Condensed"), 
-        plot.caption = element_text(size = 14))
+        plot.caption = element_text(size = 14),
+        plot.background  = element_rect_round(color = "dark grey"))
 
 shift_legend2 <- function(p) {
   # ...
@@ -239,7 +241,7 @@ ggplot(data = impute, aes(x = factor(imputation, levels = c("Impute All",
   ylim(180,280) +
   coord_flip()+
   theme_ipsum_fsc() + #plain
-  theme(plot.margin=unit(c(0.5,0.5,0.5,0.5),"cm"),
+  theme(plot.margin=unit(c(1,1,1,1),"cm"),
         panel.grid.major.x = element_blank(),
         panel.grid.minor.x = element_blank(),
         panel.grid.major.y = element_blank(),
@@ -252,7 +254,8 @@ ggplot(data = impute, aes(x = factor(imputation, levels = c("Impute All",
         legend.title = element_text(size = 16),
         legend.text = element_text(size=14),
         legend.background = element_rect(fill="white",colour ="grey"),
-        title = element_text(size=16))
+        title = element_text(size=16),
+        plot.background  = element_rect_round(color = "dark grey"))
 
 
 ```

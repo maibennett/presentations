@@ -21,7 +21,7 @@ affiliation:
     address: Teachers College, Columbia University
 main_findings: 
   - "Not only **low-performers attend less** on the day of the test in lower grades, but **high-performers attend more**"
-  - '![](https://raw.githubusercontent.com/maibennett/presentations/main/content/presentations/Attendance/Salem_20220405/images/event_study_plot2nd-v2.svg){.main_pic}'
+  - '![](https://raw.githubusercontent.com/maibennett/presentations/main/content/presentations/Attendance/Salem_20220405/images/event_study_plot2nd-v3.svg){.main_pic}'
   - "Using machine learning methods we can also **identify schools** more likely to **incentivize low-attendance** on bottom performers"
   - '![](https://raw.githubusercontent.com/maibennett/presentations/main/content/presentations/Attendance/Salem_20220405/images/prediction_example2v2.svg){.main_pic}'
 main_picwidth: "90%"

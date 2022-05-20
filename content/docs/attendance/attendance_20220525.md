@@ -53,17 +53,17 @@ Some preliminary results also show high levels of heterogeneity between schools 
 
 .testiframe {
   /* Set the width of the iframe the size you want to transform it FROM */
-  width: 3840px;
-  height: 2880px;
+    width: 100%;
+    height: 100%;
   /* apply the transform */
-  -webkit-transform:scale(0.25);
-  -moz-transform:scale(0.25);
-  -o-transform:scale(0.25);
-  transform:scale(0.25);
+    -webkit-transform:scale(0.25);
+    -moz-transform:scale(0.25);
+    -o-transform:scale(0.25);
+    transform:scale(0.25);
   /* position it, as if it was the original size */
-  position: absolute;
-  left: -400px;
-  top: -200px;
+    position: absolute;
+    left: -400px;
+    top: -200px;
 }
 </style>
 

@@ -354,12 +354,17 @@ Magdalena Bennett<sup> 1<br></sup><br>
 <div id="prediction-of-counterfactual-attendance" class="section level3">
 <h3>Prediction of counterfactual attendance</h3>
 <ul>
-<li><p><strong>XGBoost</strong> for large student panel of daily attendance</p>
+<li><strong>XGBoost</strong> for large student panel of daily attendance
 <ul>
-<li>Includes FE by day of the week, school, grade, and student. Also includes sibling’s attendance (if any) and attendance lag.</li>
+<li>Includes FE by day of the week, school, grade, and student. Also includes sibling’s attendance (if any) and attendance lag.
+<br></li>
 </ul></li>
-<li><p>Identify types of schools by clustering on <span class="math inline">\(Obs\ Att - Predicted\  Att\)</span> using <strong>K-means</strong>.</p></li>
-<li><p>Test different <strong>imputation policies</strong> and its consequences.</p></li>
+</ul>
+<li class="large-padding">
+Identify types of schools by clustering on <em>(Obs Attendance - Predicted Attendance)</em> using <strong>K-means</strong>.
+</li>
+<ul>
+<li>Test different <strong>imputation policies</strong> and its consequences.</li>
 </ul>
 </div>
 </div>
@@ -374,16 +379,16 @@ Magdalena Bennett<sup> 1<br></sup><br>
 <li><strong>Overall imputation</strong> to match school population <strong>increases</strong> disparities</li>
 <li><strong>Imputation to match predicted distribution</strong> is <strong>inbetween</strong> no imputation and imputation for all.</li>
 </ul>
-<p><img src="mbennett_attendance_poster_files/figure-html/imputation-1.svg" width="100%" style="display: block; margin: auto;" />
+<p><img src="mbennett_attendance_poster_files/figure-html/imputation-1.svg" width="100%" style="display: block; margin: auto;" /></p>
 <!--
 dir_poster <- "C:/Users/mc72574/Dropbox/Hugo/Sites/presentations/content/presentations/Attendance/ACIC_20220524/"
 pagedown::chrome_print(paste0(dir_poster,"mbennett_attendance_poster.html"))
---></p>
+-->
 </div>
 
 </div>
 <div class="main">
-<p>Not only <strong>low-performers attend less</strong> on the day of the test, but <strong>high-performers attend more</strong><br><br> <img src="https://raw.githubusercontent.com/maibennett/presentations/main/content/presentations/Attendance/Salem_20220405/images/event_study_plot2nd-1.svg" class="main_pic" /><br><br> Using machine learning methods we can also <strong>identify schools</strong> more likely to <strong>incentivize low-attendance</strong> on bottom performers<br><br> <img src="https://raw.githubusercontent.com/maibennett/presentations/main/content/presentations/Attendance/Salem_20220405/mbennett_attendance_files/figure-html/prediction_example2-1.svg" class="main_pic" /></p>
+<p>Not only <strong>low-performers attend less</strong> on the day of the test in lower grades, but <strong>high-performers attend more</strong><br><br> <img src="https://raw.githubusercontent.com/maibennett/presentations/main/content/presentations/Attendance/Salem_20220405/images/event_study_plot2nd-1.svg" class="main_pic" /><br><br> Using machine learning methods we can also <strong>identify schools</strong> more likely to <strong>incentivize low-attendance</strong> on bottom performers<br><br> <img src="https://raw.githubusercontent.com/maibennett/presentations/main/content/presentations/Attendance/Salem_20220405/mbennett_attendance_files/figure-html/prediction_example2-1.svg" class="main_pic" /></p>
 <img src="https://raw.githubusercontent.com/maibennett/presentations/main/content/presentations/Attendance/Salem_20220405/images/qr_code_smallv2.svg" class="main-img-left" />
 
 </div>

@@ -20,7 +20,7 @@ affiliation:
   - num: 3
     address: Teachers College, Columbia University
 main_findings: 
-  - "Not only **low-performers attend less** on the day of the test, but **high-performers attend more**"
+  - "Not only **low-performers attend less** on the day of the test in lower grades, but **high-performers attend more**"
   - '![](https://raw.githubusercontent.com/maibennett/presentations/main/content/presentations/Attendance/Salem_20220405/images/event_study_plot2nd-1.svg){.main_pic}'
   - "Using machine learning methods we can also **identify schools** more likely to **incentivize low-attendance** on bottom performers"
   - '![](https://raw.githubusercontent.com/maibennett/presentations/main/content/presentations/Attendance/Salem_20220405/mbennett_attendance_files/figure-html/prediction_example2-1.svg){.main_pic}'
@@ -68,9 +68,9 @@ knitr::write_bib(c('posterdown', 'rmarkdown','pagedown'), 'packages.bib')
 
 1. Understand the **average effect of testing on school attendance** across grades and performance 
 
-3. **Identify schools** that **incentivize non-representative patterns** of attendance by **combining causal inference methods and machine learning**
+2. **Identify schools** that **incentivize non-representative patterns** of attendance by **combining causal inference methods and machine learning**
 
-2. Help improve current **imputation methods**
+3. Help improve current **imputation methods**
 
 
 ## Methods
@@ -88,8 +88,9 @@ $$Y_{ipsgt} = \sum_{P=1}^5\sum_{T=-4}^5 \tau^{PT}D^{PTG^*}_{ipsgt} + \gamma_{pt}
 
 - **XGBoost** for large student panel of daily attendance
   - Includes FE by day of the week, school, grade, and student. Also includes sibling's attendance (if any) and attendance lag.
+<br>
 
-- Identify types of schools by clustering on $Obs\ Att - Predicted\  Att$ using **K-means**.
+<li class="large-padding">Identify types of schools by clustering on *(Obs Attendance - Predicted Attendance)* using **K-means**.</li>
 
 - Test different **imputation policies** and its consequences.
 
@@ -97,7 +98,7 @@ $$Y_{ipsgt} = \sum_{P=1}^5\sum_{T=-4}^5 \tau^{PT}D^{PTG^*}_{ipsgt} + \gamma_{pt}
 
 Students skip school on the day of the test. In lower grades, **lower-performers** attend less and **higher-performers** attend more, compared to a regular day. In higher grades, we **only observe action at the top of the distribution**
 
-```{r event_study_plot_all, fig.height=5.5, fig.width=9, fig.align='center', dev='svg', echo=FALSE, warning=FALSE, message=FALSE}
+```{r event_study_plot_all, fig.height=6, fig.width=9, fig.align='center', dev='svg', echo=FALSE, warning=FALSE, message=FALSE}
 library(ggplot2)
 library(tidyverse)
 library(hrbrthemes)
@@ -175,11 +176,11 @@ gr <- data_graph  %>%
           panel.grid.major.y = element_blank(),
           panel.grid.minor.y = element_blank(),
           axis.line = element_line(colour = "dark grey")) +
-  theme(axis.text=element_text(size = 14), axis.title = element_text(size = 16,face="bold")) + 
-  theme(legend.title = element_text(size = 14, face = "bold"), 
-        legend.text = element_text( size = 12),
-        strip.text = element_text(size = 14, family = "Fira Sans Condensed"), 
-        plot.caption = element_text(size = 12))
+  theme(axis.text=element_text(size = 16), axis.title = element_text(size = 16,face="bold")) + 
+  theme(legend.title = element_text(size = 16, face = "bold"), 
+        legend.text = element_text( size = 14),
+        strip.text = element_text(size = 16, family = "Fira Sans Condensed"), 
+        plot.caption = element_text(size = 14))
 
 shift_legend2 <- function(p) {
   # ...
@@ -244,17 +245,18 @@ ggplot(data = impute, aes(x = factor(imputation, levels = c("Impute All",
         panel.grid.major.y = element_blank(),
         panel.grid.minor.y = element_blank(),
         axis.line = element_line(colour = "dark grey"))+
-  theme(axis.title.x = element_text(size=14),#margin = margin(t = 10, r = 0, b = 0, l = 0)),
-        axis.text.x = element_text(size=12),
-        axis.title.y = element_text(size=14),#margin = margin(t = 0, r = 10, b = 0, l = 0)),
-        axis.text.y = element_text(size=12),legend.position=c(0.25,0.9),
-        legend.title = element_text(size = 12),
-        legend.text = element_text(size=10),
+  theme(axis.title.x = element_text(size=16),#margin = margin(t = 10, r = 0, b = 0, l = 0)),
+        axis.text.x = element_text(size=14),
+        axis.title.y = element_text(size=16),#margin = margin(t = 0, r = 10, b = 0, l = 0)),
+        axis.text.y = element_text(size=14),legend.position=c(0.25,0.9),
+        legend.title = element_text(size = 16),
+        legend.text = element_text(size=14),
         legend.background = element_rect(fill="white",colour ="grey"),
-        title = element_text(size=14))
+        title = element_text(size=16))
 
 
 ```
+
 <!--
 dir_poster <- "C:/Users/mc72574/Dropbox/Hugo/Sites/presentations/content/presentations/Attendance/ACIC_20220524/"
 pagedown::chrome_print(paste0(dir_poster,"mbennett_attendance_poster.html"))

@@ -43,7 +43,8 @@ Some preliminary results also show high levels of heterogeneity between schools 
 }
 
 .testiframe {
-    transform: scale(0.25, 0.25); 
+    -webkit-transform: scale(0.25, 0.25);
+    -webkit-transform-origin: top left; 
     position: absolute;
     top: 0;
     left: 0;

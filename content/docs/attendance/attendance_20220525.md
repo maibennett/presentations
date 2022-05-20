@@ -7,7 +7,7 @@ images: []
 menu: 
   docs:
     parent: "1) Attendance the Day of the Test"
-weight: 200
+weight: 400
 toc: true
 ---
 
@@ -46,8 +46,8 @@ Some preliminary results also show high levels of heterogeneity between schools 
     position: absolute;
     top: 0;
     left: 0;
-    width: 100%;
-    height: 100%;
+    width: 20%;
+    height: 20%;
     border: 0;
 }
 </style>

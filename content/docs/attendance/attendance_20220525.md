@@ -45,11 +45,11 @@ Some preliminary results also show high levels of heterogeneity between schools 
 .testiframe {
     width: 3840px;
     height: 2880px;
-    -webkit-transform: scale(0.2, 0.2);
+    -webkit-transform: scale(0.15, 0.15);
     -webkit-transform-origin: top left;
-    -o-transform:scale(0.2);
+    -o-transform:scale(0.15);
     -o-transform-origin: top left;
-    transform:scale(0.2);
+    transform:scale(0.15);
     transform-origin: top left;
     position: absolute;
     top: 0;

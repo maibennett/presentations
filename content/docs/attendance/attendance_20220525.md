@@ -42,26 +42,14 @@ Some preliminary results also show high levels of heterogeneity between schools 
     padding-top: calc(2880/3840 * 100%);
 }
 
-/*.testiframe {
+.testiframe {
+    transform: scale(0.25, 0.25); 
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
     border: 0;
-}*/
-
-.testiframe {
-  -moz-transform: scale(0.25, 0.25); 
-  -webkit-transform: scale(0.25, 0.25); 
-  -o-transform: scale(0.25, 0.25);
-  -ms-transform: scale(0.25, 0.25);
-  transform: scale(0.25, 0.25); 
-  -moz-transform-origin: top left;
-  -webkit-transform-origin: top left;
-  -o-transform-origin: top left;
-  -ms-transform-origin: top left;
-  transform-origin: top left;
 }
 </style>
 

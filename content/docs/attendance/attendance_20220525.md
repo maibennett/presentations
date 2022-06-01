@@ -1,5 +1,5 @@
 ---
-title: "Research Seminar - Microsoft"
+title: "American Causal Inference Conference"
 date: 2020-12-02T09:19:42+01:00
 lastmod: 2020-12-02T09:19:42+01:00
 draft: false
@@ -7,11 +7,11 @@ images: []
 menu: 
   docs:
     parent: "1) Attendance the Day of the Test"
-weight: 300
+weight: 400
 toc: true
 ---
 
-<h4> Date: 05/19/2022</h4>
+<h4> Date: 05/24/2022</h4>
 
 <h3> Abstract </h3>
 
@@ -32,28 +32,34 @@ Some preliminary results also show high levels of heterogeneity between schools 
 <meta charset="UTF-8">
 </head>
 
-<a class="btn btn-link btn-sm px-4 mb-2" href="https://github.com/maibennett/presentations/blob/main/presentations/Attendance/Microsoft_20220519/mbennett_attendance.Rmd" role="button"> Download code &#128187;</a>
-<a class="btn btn-link btn-sm px-4 mb-2" href="https://raw.githack.com/maibennett/presentations/main/content/presentations/Attendance/Microsoft_20220519/mbennett_attendance.html" role="button"> Open slides &#128194;</a>
+<a class="btn btn-link btn-sm px-4 mb-2" href="https://github.com/maibennett/presentations/blob/main/presentations/Attendance/ACIC_20220524/mbennett_attendance_poster.Rmd" role="button"> Download code &#128187;</a>
+<a class="btn btn-link btn-sm px-4 mb-2" href="https://raw.githack.com/maibennett/presentations/main/content/presentations/Attendance/ACIC_20220524/mbennett_attendance_poster.html" role="button"> Open poster &#128194;</a>
 
 <style>
 .resp-container {
     position: relative;
     overflow: hidden;
-    padding-top: 56.25%;
+    padding-top: calc(2880/3840 * 100%);
 }
 
 .testiframe {
+    width: 3840px;
+    height: 2880px;
+    -webkit-transform: scale(0.15, 0.15);
+    -webkit-transform-origin: top left;
+    -o-transform:scale(0.15);
+    -o-transform-origin: top left;
+    transform:scale(0.15);
+    transform-origin: top left;
     position: absolute;
     top: 0;
     left: 0;
-    width: 100%;
-    height: 100%;
     border: 0;
 }
 </style>
 
 <div class="resp-container">
-    <iframe class="testiframe" src="https://slides.magdalenabennett.com/presentations/Attendance/Microsoft_20220519/mbennett_attendance.html">
+    <iframe class="testiframe" src="https://slides.magdalenabennett.com/presentations/Attendance/ACIC_20220524/mbennett_attendance_poster.html">
       Oops! Your browser doesn't support this.
     </iframe>
 </div>

@@ -6,7 +6,7 @@ draft: false
 images: []
 menu: 
   docs:
-    parent: "3) Dynamic Role of Information Frictions"
+    parent: "4) Dynamic Role of Information Frictions"
 weight: 120
 toc: true
 ---

@@ -1356,13 +1356,13 @@ Application
 <br/>
 .pull-left[
 .center[
-.box-6trans[Students:<br/>- Verify SEP status<br/>- Attend a SEP school]
+.box-6trans[**Students:**<br/>- Verify SEP status<br/>- Attend a SEP school]
 ]
 ]
 
 .pull-right[
 .center[
-.box-6trans[Schools:<br/>- Opt-into the policy<br/>- No selection, no fees<br/>- Resources ~ performance]
+.box-6trans[**Schools:**<br/>- Opt-into the policy<br/>- No selection, no fees<br/>- Resources ~ performance]
 ]
 ]
 

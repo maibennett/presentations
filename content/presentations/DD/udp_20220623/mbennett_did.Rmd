@@ -1,0 +1,1524 @@
+---
+output:
+  xaringan::moon_reader:
+    css: ["xaringan-themer.css", "style.css"]
+    lib_dir: libs
+    nature:
+      slideNumberFormat: |
+        <div class="progress-bar-container">
+          <div class="progress-bar" style="width: calc(%current% / %total% * 100%);">
+          </div>
+        </div>
+      highlightStyle: github
+      highlightLines: true
+      ratio: "16:9"
+      beforeInit: "macros.js"
+    includes:
+      in_header: header.html
+    seal: false
+always_allow_html: true
+tables: true
+---
+
+```{r setup, include=FALSE}
+options(htmltools.dir.version = FALSE)
+knitr::opts_chunk$set(fig.showtext = TRUE)
+#knitr::opts_chunk$set(cache=TRUE)
+```
+
+```{r xaringan-themer, include=FALSE, warning=FALSE}
+library(xaringanthemer)
+
+theme_xaringan(
+  text_color = "#333f48",
+  background_color = "#FFFFFF",
+  accent_color = "#820a94",
+  text_font = "Fira Mono",
+  text_font_use_google = TRUE,
+  title_font = "Fira Sans Condensed",
+  title_font_use_google = TRUE
+)
+
+style_mono_accent(
+  #base_color = "#bf5700",
+  extra_fonts = list(google_font("Fira Sans","200","300","400","500","600"),
+                     google_font("Fira Sans Condensed"),
+                     google_font("Jost")),
+  base_color = "#333f48",
+  header_font_google = google_font("Yanone Kaffeesatz","200","300","400","500","600","700"),
+  text_font_google   = google_font("Jost"),
+  code_font_google   = google_font("Fira Mono"),
+  text_bold_color = "#333f48",
+  text_font_size = "130%",
+  colors = c(
+    red = "#f34213",
+    purple = "#820a94",
+    orange = "#ff8811",
+    green = "#136f63",
+    white = "#FFFFFF",
+    darkorange = "#db5f12",
+    coolblue = "#4493AE"),
+  extra_css = list(
+    ".body" = list("font-family" = "Jost"),
+    ".remark-slide table" = list("display" = "table",
+                   "width" = "80%",
+                   "text-align" = "left"),
+    
+    #".remark-slide-number" = list("display" = "none"),
+    
+    ".strong" = list("font-weight" = "400"),
+    ".big" = list("font-size" = "250%",
+                     "font-family" = "Yanone Kaffeesatz",
+                     "font-weight"="400"),
+    ".small" = list("font-size" = "80%"),
+    ".smaller" = list("font-size" = "70%"),
+    ".tiny" = list("font-size" = "50%"),
+    ".tinylist" = list("font-size" = "62.5%"),
+    ".source" = list("color" = "#8c8c8c",
+                     "font-size" = "80%"),
+    ".remark-slide table td#highlight" = list("background-color" = "#eee1f0",
+                                  "color" = "#820a94",
+                                  "font-weight" = "500"),
+   # ".remark-slide table thead th" = list(),
+    ".title-slide h1" = list("font-weight" = "500"),
+    ".title-slide h2" = list("font-weight" = "400",
+                             "font-size" =  "100%",
+                             "font-family" = "Jost"),
+    ".title-slide h3" = list("font-family" = "Jost",
+                             "font-size" = "80%",
+                             "font-weight" = "200"),
+    ".center2" = list("margin" = "0",
+                      "position" = "absolute",
+                      "top" = "50%",
+                      "left" = "50%",
+                      "-ms-transform" = "translate(-50%, -50%)",
+                      "transform" = "translate(-50%, -50%)"),
+    ".section-title h1" = list("color" = "#FFFFFF",
+                               "font-size" = "2.3em",
+                               "line-height" = "1.3"),
+    ".medium" = list("font-size" = "1.4em"),
+    ".sp-after-half" = list("margin-bottom" = "0.7em !important"),
+    ".box-1,.box-1a,.box-1s,.box-1b,.box-1l,.box-1LA,.section-title-1" = list("background-color" = "#0D0887"),
+    ".box-2,.box-2a,.box-2s,.box-2b,.box-2l,.box-2LA,.section-title-2" = list("background-color" = "#5601A4"),
+    ".box-3,.box-3a,.box-3s,.box-3b,.box-3l,.box-3LA,.section-title-3" = list("background-color" = "#820a94"),
+    ".box-4,.box-4a,.box-4s,.box-4b,.box-4l,.box-4LA,.section-title-4" = list("background-color" = "#BF3984"),
+    ".box-5,.box-5a,.box-5s,.box-5b,.box-5l,.box-5LA,.section-title-5" = list("background-color" = "#E16462"),
+    ".box-6,.box-6a,.box-6s,.box-6b,.box-6l,.box-6LA,.section-title-6" = list("background-color" = "#F89441"),
+    ".box-7,.box-7a,.box-7s,.box-7b,.box-7l,.box-7LA,.section-title-7" = list("background-color" = "#FCCE25"),
+   
+    ".box-7, .box-6, .box-5, .box-4, .box-3, .box-2, .box-1" = list("color" = "#FFFFFF",
+                                                                    "margin" = "0em auto",
+                                                                    "overflow" = "hidden",
+                                                                    "padding" = "0.4em 0.4em",
+                                                                    "font-weight" = "600",
+                                                                    "font-size" = "31px",
+                                                                    "display" = "table",
+                                                                    "text-align" = "center",
+                                                                    "font-family" = "Jost"),
+    ".box-7a, .box-6a, .box-5a, .box-4a, .box-3a, .box-2a, .box-1a" = list("color" = "#FFFFFF",
+                                                                          "left" = "0px",
+                                                                          "overflow" = "hidden",
+                                                                      "padding" = "0.4em 0.4em",
+                                                                      "font-weight" = "600",
+                                                                      "font-size" = "25px",
+                                                                      "display" = "table",
+                                                                      "text-align" = "center",
+                                                                      "font-family" = "Fira Sans"),
+       ".box-7b, .box-6b, .box-5b, .box-4b, .box-3b, .box-2b, .box-1b" = list("color" = "#FFFFFF",
+                                                                          "left" = "0px",
+                                                                          "overflow" = "hidden",
+                                                                      "padding" = "0.4em 0.4em",
+                                                                      "font-weight" = "600",
+                                                                      "font-size" = "25px",
+                                                                      "display" = "table",
+                                                                      "text-align" = "left",
+                                                                      "font-family" = "Fira Sans"),
+       ".medium" = list("font-size" = "1.4em"),
+    ".sp-after-half" = list("margin-bottom" = "0.7em !important"),
+    ".box-0" = list("background-color" = "#DAE058",
+                    "border-radius" = "15px",
+                    "font-size" = "110%",
+                    "color" = "#FFFFFF",
+                    "margin" = "0em auto",
+                    "overflow" = "hidden",
+                    "padding" = "0.4em 0.4em",
+                    "display" = "table"),
+    ".box-1,.box-1a,.box-1s,.box-1b,.box-1l,.box-1LA,.section-title-1" = list("background-color" = "#5A3D66",
+                                                                              "border-radius" = "15px"),
+    ".box-2,.box-2a,.box-2s,.box-2b,.box-2l,.box-2LA,.section-title-2" = list("background-color" = "#9442B5",
+                                                                              "border-radius" = "15px"),
+    ".box-3,.box-3a,.box-3s,.box-3b,.box-3l,.box-3LA,.section-title-3" = list("background-color" = "#820a94",
+                                                                              "border-radius" = "15px"),
+    ".box-4,.box-4a,.box-4s,.box-4b,.box-4l,.box-4LA,.section-title-4" = list("background-color" = "#A5AC20",
+                                                                              "border-radius" = "15px"),
+    ".box-5,.box-5a,.box-5s,.box-5b,.box-5l,.box-5LA,.section-title-5" = list("background-color" = "#DAE058",
+                                                                              "border-radius" = "15px"),
+    ".box-6,.box-6a,.box-6s,.box-6b,.box-6l,.box-6LA,.section-title-6" = list("background-color" = "#F89441",
+                                                                              "border-radius" = "15px"),
+    ".box-7,.box-7a,.box-7s,.box-7b,.box-7l,.box-7LA,.section-title-7" = list("background-color" = "#FCCE25",
+                                                                              "border-radius" = "15px"),
+   
+   ".box-1t,.box-1tL,.section-title-1t" = list("background-color" = "rgba(13, 8, 135,0.3)",
+                                      "color"="rgba(13, 8, 135,1)",
+                                      "font-family" = "Yanone Kaffeesatz",
+                                      "border-radius" = "15px"),
+    ".box-2t,.box-2tL,.section-title-2t" = list("background-color" = "rgba(86, 1, 164,0.3)",
+                                       "color" = "rgba(86, 1, 164,1)",
+                                       "font-family" = "Yanone Kaffeesatz",
+                                       "border-radius" = "15px"),
+    ".box-3t,.box-3tL,.section-title-3t" = list("background-color" = "rgba(144, 13, 164,0.3)",
+                                       "color" = "rgba(144, 13, 164,1)",
+                                       "font-family" = "Yanone Kaffeesatz",
+                                       "border-radius" = "15px"),
+    ".box-4t,.box-4tL,.section-title-4t" = list("background-color" = "rgba(191, 57, 132,0.3)",
+                                       "color" = "rgba(191, 57, 132,1)",
+                                       "font-family" = "Yanone Kaffeesatz",
+                                       "border-radius" = "15px"),
+    ".box-5t,.box-5tL,.section-title-5t" = list("background-color" = "rgba(225, 100, 98,0.3)",
+                                       "color" = "rgba(225, 100, 98,1)",
+                                       "font-family" = "Jost",
+                                       "border-radius" = "15px"),
+    ".box-6t,.box-6tL,.section-title-6t" = list("background-color" = "rgba(248, 148, 65,0.3)",
+                                       "color" = "rgba(248, 148, 65,1)",
+                                       "font-family" = "Yanone Kaffeesatz",
+                                       "border-radius" = "15px"),
+    ".box-7t,.box-7tL,.section-title-7t" = list("background-color" = "rgba(252, 206, 37,0.3)",
+                                       "color" = "rgba(252, 206, 37,1)",
+                                       "font-family" = "Yanone Kaffeesatz",
+                                       "border-radius" = "15px"),
+   
+   ".box-7t, .box-6t, .box-5t, .box-4t, .box-3t, .box-2t, .box-1t" = list("margin" = "0em auto",
+                                                                    "overflow" = "hidden",
+                                                                    "padding" = "0.4em 0.4em",
+                                                                    "font-weight" = "600",
+                                                                    "font-size" = "25px",
+                                                                    "display" = "table",
+                                                                    "text-align" = "center"),
+   
+   ".box-7tL, .box-6tL, .box-5tL, .box-4tL, .box-3tL, .box-2tL, .box-1tL" = list("margin" = "0em auto",
+                                                                    "overflow" = "hidden",
+                                                                    "padding" = "0.4em 0.4em",
+                                                                    "font-weight" = "600",
+                                                                    "font-size" = "50px",
+                                                                    "display" = "table",
+                                                                    "text-align" = "center"),
+   
+    ".box-7, .box-6, .box-5, .box-4, .box-3, .box-2, .box-1" = list("color" = "#FFFFFF",
+                                                                    "margin" = "0em auto",
+                                                                    "overflow" = "hidden",
+                                                                    "padding" = "0.4em 0.4em",
+                                                                    "font-weight" = "600",
+                                                                    "font-size" = "31px",
+                                                                    "display" = "table",
+                                                                    "text-align" = "center",
+                                                                    "font-family" = "Jost"),
+    ".box-7a, .box-6a, .box-5a, .box-4a, .box-3a, .box-2a, .box-1a" = list("color" = "#FFFFFF",
+                                                                          "left" = "0px",
+                                                                          "overflow" = "hidden",
+                                                                      "padding" = "0.4em 0.4em",
+                                                                      "font-weight" = "600",
+                                                                      "font-size" = "25px",
+                                                                      "display" = "table",
+                                                                      "text-align" = "center",
+                                                                      "font-family" = "Yanone Kaffeesatz"),
+   ".box-7s, .box-6s, .box-5s, .box-4s, .box-3s, .box-2s, .box-1s" = list("color" = "#FFFFFF",
+                                                                          "left" = "0px",
+                                                                          "overflow" = "hidden",
+                                                                      "padding" = "0.2em 0.2em",
+                                                                      "font-weight" = "400",
+                                                                      "font-size" = "100%",
+                                                                      "display" = "inline",
+                                                                      "text-align" = "center",
+                                                                      "font-family" = "Yanone Kaffeesatz"),
+       ".box-7b, .box-6b, .box-5b, .box-4b, .box-3b, .box-2b, .box-1b" = list("color" = "#FFFFFF",
+                                                                          "left" = "0px",
+                                                                          "overflow" = "hidden",
+                                                                      "padding" = "0.4em 0.4em",
+                                                                      "font-weight" = "600",
+                                                                      "font-size" = "25px",
+                                                                      "display" = "table",
+                                                                      "text-align" = "left",
+                                                                      "font-family" = "Yanone Kaffeesatz"),
+   ".box-7l, .box-6l, .box-5l, .box-4l, .box-3l, .box-2l, .box-1l" = list("color" = "#FFFFFF",
+                                                                    "margin" = "0em auto",
+                                                                    "overflow" = "hidden",
+                                                                    "padding" = "0.4em 0.4em",
+                                                                    "font-weight" = "600",
+                                                                    "font-size" = "45px",
+                                                                    "display" = "table",
+                                                                    "text-align" = "center",
+                                                                      "font-family" = "Yanone Kaffeesatz"),
+   ".box-7LA, .box-6LA, .box-5LA, .box-4LA, .box-3LA, .box-2LA, .box-1LA" = list("color" = "#FFFFFF",
+                                                                    "margin" = "0em auto",
+                                                                    "overflow" = "hidden",
+                                                                    "padding" = "0.4em 0.4em",
+                                                                    "font-weight" = "600",
+                                                                    "font-size" = "55px",
+                                                                    "display" = "table",
+                                                                    "text-align" = "center",
+                                                                      "font-family" = "Yanone Kaffeesatz"),
+       ".box-1trans,.box-2trans,.box-3trans,.box-4trans,.box-5trans,.box-6trans,.box-7trans" = list("background-color" = "#FFFFFF",
+                                                                                                 "font-family" = "Jost",
+                                                                                                 "border-radius" = "15px",
+                                                                                                 "margin" = "0em auto",
+                                                                                                 "overflow" = "hidden",
+                                                                                                 "padding" = "0.4em 0.4em",
+                                                                                                 "font-weight" = "400",
+                                                                                                 "font-size" = "25px",
+                                                                                                 "display" = "table",
+                                                                                                 "text-align" = "center",
+                                                                                                 "border-width" = "thick",
+                                                                                                 "color" = "#333f48"),
+   
+       ".box-1Trans,.box-2Trans,.box-3Trans,.box-4Trans,.box-5Trans,.box-6Trans,.box-7Trans" = list("background-color" = "#FFFFFF",
+                                                                                                 "font-family" = "Yanone Kaffeesatz",
+                                                                                                 "border-radius" = "15px",
+                                                                                                 "margin" = "0em auto",
+                                                                                                 "overflow" = "hidden",
+                                                                                                 "padding" = "0.4em 0.4em",
+                                                                                                 "font-weight" = "600",
+                                                                                                 "font-size" = "51px",
+                                                                                                 "display" = "table",
+                                                                                                 "text-align" = "center",
+                                                                                                 "border-width" = "thick",
+                                                                                                 "color" = "#333f48"),
+   
+       ".box-1transl,.box-2transl,.box-3transl,.box-4transl,.box-5transl,.box-6transl,.box-7transl" = list("background-color" = "#FFFFFF",
+                                                                                                           "font-family" = "Yanone Kaffeesatz",
+                                                                                                           "border-radius" = "15px",
+                                                                                                           "left" = "0px",
+                                                                                                           "overflow" = "hidden",
+                                                                                                           "padding" = "0.4em 0.4em",
+                                                                                                           "font-weight" = "400",
+                                                                                                           "font-size" = "31px",
+                                                                                                           "display" = "table",
+                                                                                                           "text-align" = "left",
+                                                                                                           "border-width" = "thick",
+                                                                                                           "color" = "#333f48"),
+   
+   
+    ".box-1trans,.box-1transl,.box-1Trans" = list("border"="5px solid #5A3D66"),
+    ".box-2trans,.box-2transl,.box-2Trans" = list("border"="5px solid #9442B5"),
+    ".box-3trans,.box-3transl,.box-3Trans" = list("border"="5px solid #820a94"),
+    ".box-4trans,.box-4transl,.box-4Trans" = list("border"="5px solid #A5AC20"),
+    ".box-5trans,.box-5transl,.box-5Trans" = list("border"="5px solid #DAE058"),
+    ".box-6trans,.box-6transl,.box-6Trans" = list("border"="5px solid rgba(248, 148, 65,1)"),
+    ".box-7trans,.box-7transl,.box-7Trans" = list("border"="5px solid rgba(252, 206, 37,1)"),
+   
+   ".image-80 img" = list("scale" = "80%"),
+   ".pull-left-little_l" = list("float" = "left",
+                                "width" = "57%"),
+   ".pull-right-little_l" = list("float" = "right",
+                                "width" = "37%"),
+   ".pull-left-little_r" = list("float" = "left",
+                                "width" = "27%"),
+   ".pull-right-little_r" = list("float" = "right",
+                                "width" = "67%")
+
+  )
+)
+
+#,"li" = list("font-size" = "150%")
+#    "li" = list("font-size" = "110%"),
+#    "ul" = list("font-size" = "110%"),
+#color palette
+#5601A4
+#820a94
+#F89441
+#FCCE25
+```
+
+```{r setup2, echo=FALSE, message=FALSE, warning = FALSE}
+library(knitr)
+library(showtext)
+library(xaringanExtra)
+
+options(knitr.table.format = "html") 
+
+#xaringanExtra::use_scribble()
+
+```
+
+```{r fonts, message=FALSE, echo=FALSE, warning = FALSE}
+font_add_google("Fira Sans Condensed", "Fira Sans Condensed")
+font_add_google("Fira Sans", "Fira Sans")
+font_add_google("Jost", "Jost")
+```
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
+library(tidyverse)
+library(ggthemes)
+library(ggplot2)
+library(firasans)
+library(hrbrthemes)
+library(extrafont)
+library(RColorBrewer)
+library(firasans)
+library(hrbrthemes)
+library(extrafont)
+library(gridExtra)
+library(pBrackets)
+library(patchwork)
+
+#loadfonts(device = "win")
+
+options(scipen = 0)
+```
+
+class: inverse, center, middle
+
+<br>
+<br>
+<br>
+
+<h1 class="title-own">A Difference-in-Differences Approach<br/>using Mixed-Integer Programming Matching</h1>
+
+<br>
+<br>
+.small[Magdalena Bennett&nbsp;&nbsp;&nbsp;<br>*McCombs School of Business, The University of Texas at Austin*&nbsp;&nbsp;&nbsp;]
+
+<br>
+
+.small[Universidad Diego Portales<br>June 23rd, 2022]
+
+
+---
+# Diff-in-Diff as an identification strategy
+
+```{r dd, fig.height=5, fig.align='center', dev='svg', echo=FALSE, warning=FALSE, message=FALSE}
+library(ggplot2)
+library(ggpubr)
+library(hrbrthemes)
+library(firasans)
+#hrbrthemes::update_geom_font_defaults(family=font_rc)
+
+
+#Traditional diff in diff:
+
+Y1 = c(2,4)
+Y0 = c(1,2)
+Y1c = c(2,3)
+
+d = data.frame(cbind(c(0,1,0,1),c(Y0,Y1),c(0,0,1,1)))
+names(d) = c("t","Y","Z")
+
+ggplot(d, aes(x = t, y = Y, group=factor(Z), color=factor(Z)), fill="white") +
+  geom_line(lwd=1.1) +
+  geom_point(size=3)+
+  geom_vline(xintercept = 0.5,lty=2,col="dark grey",lwd=1)+
+  scale_color_manual(values=c("#F89441","#820a94")) +
+  
+  annotate("text",x=0.4,y=4.7,label = "Pre-Intervention", size=6, colour="dark grey",hjust=1, family="Fira Sans Condensed")+
+  annotate("text",x=0.6,y=4.7,label = "Post-Intervention", size=6, colour="dark grey",hjust=0, family="Fira Sans Condensed")+
+  
+    annotate("rect",xmin=-1, xmax=-0.4,ymin=0,ymax=1,alpha=1, color="dark grey", fill="white")+
+    annotate("segment",x=-0.95,y=0.3,xend=-0.8,yend=0.3,lty=1,col="#F89441",lwd=1) +
+    annotate("text",x=-0.77,y=0.3,label = "Control", size=4, colour="black",hjust=0, 
+             family="Fira Sans Condensed")+
+    annotate("segment",x=-0.95,y=0.7,xend=-0.8,yend=0.7,lty=1,col="#820a94",lwd=1) +
+    annotate("text",x=-0.77,y=0.7,label = "Treat", size=4, colour="black",hjust=0, 
+             family="Fira Sans Condensed")+
+  
+  theme_bw()+
+  theme_ipsum_fsc(plot_title_face = "bold") + #plain 
+  xlab("Time") + ylab("Outcome")+
+  xlim(-1,2) + ylim(0,5)+
+  theme(plot.margin=unit(c(1,1,1.5,1.2),"cm"),
+        panel.grid.major.x = element_blank(),
+        panel.grid.minor.x = element_blank(),
+        panel.grid.major.y = element_blank(),
+        panel.grid.minor.y = element_blank(),
+        axis.line = element_line(colour = "dark grey"))+
+  theme(axis.title.x = element_text(size=16),#margin = margin(t = 10, r = 0, b = 0, l = 0)),
+        axis.text.x = element_text(size=10),
+        axis.title.y = element_text(size=16),#margin = margin(t = 0, r = 10, b = 0, l = 0)),
+        axis.text.y = element_text(size=10),legend.position="none",
+        legend.title = element_blank(),
+        legend.text = element_text(size=15),
+        legend.background = element_rect(fill="white",colour ="white"),
+        title = element_text(size=14))
+
+```
+---
+# Diff-in-Diff as an identification strategy
+
+```{r dd2, fig.height=5, fig.align='center', dev='svg', echo=FALSE, warning=FALSE}
+#Traditional diff in diff:
+
+Y1 = c(2,4)
+Y0 = c(1,2)
+Y1c = c(2,3)
+
+d = data.frame(cbind(c(0,1,0,1),c(Y0,Y1),c(0,0,1,1)))
+names(d) = c("t","Y","Z")
+
+ggplot(d, aes(x = t, y = Y, group=factor(Z), color=factor(Z)), fill="white") +
+  geom_line(lwd=1.1) +
+  geom_point(size=3)+
+  geom_vline(xintercept = 0.5,lty=2,col="dark grey",lwd=1)+
+  geom_segment(aes(x = 0, y = Y1[1], xend = 1, yend = Y1c[2]), lty=3,lwd=1,col="#820a94") +
+  geom_point(aes(x=1,y=Y1c[2]),pch=1,col="#820a94", size=3) +
+  scale_color_manual(values=c("#F89441","#820a94")) +
+  
+  annotate("text",x=0.4,y=4.7,label = "Pre-Intervention", size=6, colour="dark grey",hjust=1, family="Fira Sans Condensed")+
+  annotate("text",x=0.6,y=4.7,label = "Post-Intervention", size=6, colour="dark grey",hjust=0, family="Fira Sans Condensed")+
+  
+    annotate("rect",xmin=-1, xmax=-0.4,ymin=0,ymax=1,alpha=1, color="dark grey", fill="white")+
+    annotate("segment",x=-0.95,y=0.3,xend=-0.8,yend=0.3,lty=1,col="#F89441",lwd=1) +
+    annotate("text",x=-0.77,y=0.3,label = "Control", size=4, colour="black",hjust=0, 
+             family="Fira Sans Condensed")+
+    annotate("segment",x=-0.95,y=0.7,xend=-0.8,yend=0.7,lty=1,col="#820a94",lwd=1) +
+    annotate("text",x=-0.77,y=0.7,label = "Treat", size=4, colour="black",hjust=0, 
+             family="Fira Sans Condensed")+
+  
+  theme_bw()+
+  theme_ipsum_fsc(plot_title_face = "bold") + #plain 
+  xlab("Time") + ylab("Outcome")+
+  xlim(-1,2) + ylim(0,5)+
+  theme(plot.margin=unit(c(1,1,1.5,1.2),"cm"),
+        panel.grid.major.x = element_blank(),
+        panel.grid.minor.x = element_blank(),
+        panel.grid.major.y = element_blank(),
+        panel.grid.minor.y = element_blank(),
+        axis.line = element_line(colour = "dark grey"))+
+  theme(axis.title.x = element_text(size=16),#margin = margin(t = 10, r = 0, b = 0, l = 0)),
+        axis.text.x = element_text(size=10),
+        axis.title.y = element_text(size=16),#margin = margin(t = 0, r = 10, b = 0, l = 0)),
+        axis.text.y = element_text(size=10),legend.position="none",
+        legend.title = element_blank(),
+        legend.text = element_text(size=15),
+        legend.background = element_rect(fill="white",colour ="white"),
+        title = element_text(size=14))
+
+```
+
+---
+# Diff-in-Diff as an identification strategy
+
+```{r dd3, fig.height=5, fig.align='center', dev='svg', echo=FALSE, warning=FALSE}
+#Traditional diff in diff:
+
+Y1 = c(2,4)
+Y0 = c(1,2)
+Y1c = c(2,3)
+
+d = data.frame(cbind(c(0,1,0,1),c(Y0,Y1),c(0,0,1,1)))
+names(d) = c("t","Y","Z")
+
+ggplot(d, aes(x = t, y = Y, group=factor(Z), color=factor(Z)), fill="white") +
+  geom_line(lwd=1.1) +
+  geom_point(size=3)+
+  geom_vline(xintercept = 0.5,lty=2,col="dark grey",lwd=1)+
+  geom_segment(aes(x = 0, y = Y1[1], xend = 1, yend = Y1c[2]), lty=3,lwd=1,col="#820a94") +
+  geom_point(aes(x=1,y=Y1c[2]),pch=1,col="#820a94", size=3) +
+  geom_segment(aes(x=1+0.05,y=Y1c[2],xend=1+0.05,yend=Y1[2]),lwd=0.8,lty=1,
+               arrow=arrow(length = unit(0.03, "npc"),type="closed"),arrow.fill="#FCCE25",col="#FCCE25") +
+  scale_color_manual(values=c("#F89441","#820a94")) +
+  
+  annotate("text", x=1.1,y=3.5,label = bquote(""~tau),col="#FCCE25",size=10) + 
+  annotate("text",x=0.4,y=4.7,label = "Pre-Intervention", size=6, colour="dark grey",hjust=1, family="Fira Sans Condensed")+
+  annotate("text",x=0.6,y=4.7,label = "Post-Intervention", size=6, colour="dark grey",hjust=0, family="Fira Sans Condensed")+
+  
+    annotate("rect",xmin=-1, xmax=-0.4,ymin=0,ymax=1,alpha=1, color="dark grey", fill="white")+
+    annotate("segment",x=-0.95,y=0.3,xend=-0.8,yend=0.3,lty=1,col="#F89441",lwd=1) +
+    annotate("text",x=-0.77,y=0.3,label = "Control", size=4, colour="black",hjust=0, 
+             family="Fira Sans Condensed")+
+    annotate("segment",x=-0.95,y=0.7,xend=-0.8,yend=0.7,lty=1,col="#820a94",lwd=1) +
+    annotate("text",x=-0.77,y=0.7,label = "Treat", size=4, colour="black",hjust=0, 
+             family="Fira Sans Condensed")+
+  
+  theme_bw()+
+  theme_ipsum_fsc(plot_title_face = "bold") + #plain 
+  xlab("Time") + ylab("Outcome")+
+  xlim(-1,2) + ylim(0,5)+
+  theme(plot.margin=unit(c(1,1,1.5,1.2),"cm"),
+        panel.grid.major.x = element_blank(),
+        panel.grid.minor.x = element_blank(),
+        panel.grid.major.y = element_blank(),
+        panel.grid.minor.y = element_blank(),
+        axis.line = element_line(colour = "dark grey"))+
+  theme(axis.title.x = element_text(size=16),#margin = margin(t = 10, r = 0, b = 0, l = 0)),
+        axis.text.x = element_text(size=10),
+        axis.title.y = element_text(size=16),#margin = margin(t = 0, r = 10, b = 0, l = 0)),
+        axis.text.y = element_text(size=10),legend.position="none",
+        legend.title = element_blank(),
+        legend.text = element_text(size=15),
+        legend.background = element_rect(fill="white",colour ="white"),
+        title = element_text(size=14))
+
+```
+
+---
+# Very popular for policy evaluation
+
+```{r gg, fig.height=5, fig.align='center', dev='svg', echo=FALSE, warning=FALSE}
+#Data for publications (updated 06/2022 See excel)
+d = data.frame(cbind(as.numeric(seq(2021,2000,-1)),
+                     c(1380,
+953,
+806,
+635,
+489,
+386,
+265,
+226,
+164,
+125,
+77,
+67,
+56,
+45,
+28,
+19,
+23,
+22,
+5,
+4,
+6,
+3
+)))
+
+names(d) = c("Year","Pub")
+
+ggplot(d, aes(x = Year, y = Pub), fill="white") +
+  geom_line(lwd=1.1, color = "#820a94") +
+  geom_point(size=3, color = "#820a94") +
+  theme_bw()+
+  theme_ipsum_fsc(plot_title_face = "bold") + #plain 
+  xlab("Year") + ylab("Num. Publications")+
+  xlim(2000,2021) +
+  
+  theme(plot.margin=unit(c(1,1,1.5,1.2),"cm"),
+        panel.grid.major.x = element_blank(),
+        panel.grid.minor.x = element_blank(),
+        panel.grid.major.y = element_blank(),
+        panel.grid.minor.y = element_blank(),
+        axis.line = element_line(colour = "dark grey"))+
+  theme(axis.title.x = element_text(size=16),#margin = margin(t = 10, r = 0, b = 0, l = 0)),
+        axis.text.x = element_text(size=10),
+        axis.title.y = element_text(size=16),#margin = margin(t = 0, r = 10, b = 0, l = 0)),
+        axis.text.y = element_text(size=10),legend.position="none",
+        legend.title = element_blank(),
+        legend.text = element_text(size=15),
+        legend.background = element_rect(fill="white",colour ="white"),
+        title = element_text(size=14))
+
+```
+.source[Source: Web of Science]
+
+---
+
+# What about parallel trends?
+
+.pull-left[
+.center[
+![:scale 80%](https://raw.githubusercontent.com/maibennett/website_github/master/exampleSite/content/images/data_comic.jpg)]
+]
+
+.pull-right[]
+
+---
+
+# What about parallel trends?
+
+.pull-left[
+.center[
+![:scale 80%](https://raw.githubusercontent.com/maibennett/website_github/master/exampleSite/content/images/data_comic.jpg)]
+]
+
+.pull-right[
+
+- Main identification assumption **.darkorange[fails]**]
+  
+---
+
+# What about parallel trends?
+
+.pull-left[
+.center[
+![:scale 80%](https://raw.githubusercontent.com/maibennett/website_github/master/exampleSite/content/images/data_comic.jpg)]
+]
+
+.pull-right[
+
+- Main identification assumption **.darkorange[fails]**
+
+- Find sub-groups that potentially **.darkorange[follow PTA]**
+
+  - E.g. similar units in treatment and control
+
+  - Similar to synthetic control intuition.
+]
+
+---
+# What about parallel trends?
+
+.pull-left[
+.center[
+![:scale 80%](https://raw.githubusercontent.com/maibennett/website_github/master/exampleSite/content/images/data_comic.jpg)]
+]
+
+.pull-right[
+
+- Main identification assumption **.darkorange[fails]**
+
+- Find sub-groups that potentially **.darkorange[follow PTA]**
+
+  - E.g. similar units in treatment and control
+
+  - Similar to synthetic control intuition.
+
+- Can matching help? 
+
+  - It's **.darkorange[complicated]** .small[(Ham & Miratrix, 2022; Zeldow & Hatfield, 2021; Basu & Small, 2020; Lindner & McConnell, 2018; Daw & Hatfield, 2018 (x2); Ryan, 2018; Ryan et al., 2018)]
+]
+
+---
+
+# This paper
+
+- Identify contexts when matching can recover causal estimates under **.darkorange[violations of the parallel trend assumption]**.
+
+  - Partial identification in some cases.
+
+- Use **.darkorange[mixed-integer programming matching (MIP)]** to balance covariates directly.
+
+--
+<br/>
+<br/>
+
+.pull-left[
+.box-6trans[**Simulations:**<br/>Different DGP scenarios]
+]
+
+.pull-right[
+.box-6trans[**Application:**<br/>School segregation & vouchers]
+]
+
+
+---
+background-position: 50% 50%
+class: left, bottom, inverse
+.big[
+Let's get started
+<br>
+<br>
+]
+---
+
+# DD Setup
+
+- Let $Y_{it}(z)$ be the potential outcome for unit $i$ in period $t$ under treatment $z$.
+
+- Intervention implemented in $T_0$ $\rightarrow$ No units are treated in $t\leq T_0$
+--
+
+- Difference-in-Differences (DD) focuses on ATT for $t>T_0$:
+
+$$ATT(t) = E[Y_{it}(1) - Y_{it}(0)|Z=1]$$
+--
+
+- **.darkorange[Assumptions for DD]**:
+
+  - Parallel-trend assumption (PTA)
+  
+  - Common shocks
+  
+  $$E[Y_{i1}(0) - Y_{i0}(0) | Z=1] = E[Y_{i1}(0) - Y_{i0}(0) | Z=0]$$
+---
+# DD Setup (cont.)
+
+- Under these assumptions:
+$$
+\begin{align}
+\hat{\tau}^{DD} = &\color{#820a94}{\overbrace{\color{black}{E[Y_{i1}|Z=1] - E[Y_{i1}|Z=0]}}^{\color{#820a94}{\Delta_{post}}}} - \\
+&\color{#F89441}{\underbrace{\color{black}{(E[Y_{i0}|Z=1] - E[Y_{i0}|Z=0])}}_{\color{#F89441}{\Delta_{pre}}}}
+\end{align}
+$$
+  - Where $t=0$ and $t=1$ are the pre- and post-intervention periods, respectively.
+  
+  - $Y_{it} = Y_{it}(1)\cdot Z_i + (1-Z_i)\cdot Y_{it}(0)$ is the observed outcome.
+
+---
+# But what if the PTA doesn't hold?
+
+.pull-left[
+Potential outcomes are a function of observed (X) and unobserved characteristics (u):
+
+$$Y_{it}(0) = g(X_{it}, u_{it}, t)$$
+$$Y_{it}(1) = g(X_{it}, u_{it}, t) + \tau\mathrm{I}(t>T_0)$$
+]
+
+.pull-right[
+```{r po1, fig.height=7, fig.align='center', dev='svg', echo=FALSE, warning=FALSE}
+#Data for publications (updated 06/2022 See excel)
+
+d <- data.frame(
+  t = rep(seq(-5,5),2),
+  treat = c(rep(1,11),rep(0,11))
+)
+
+d$y = NA
+
+for(i in -5:5){
+  set.seed(i + 3)
+  
+  y1 <- 1 + 0.04*i + 0.1*sqrt(i+5)+ rnorm(100,0,0.5)
+  y0 <- y1
+  
+  if(i>0){
+    y1 = y1 + 0.1*i
+  }
+
+  d$y[d$t==i & d$treat==1] = mean(y1)  
+  d$y[d$t==i & d$treat==0] = mean(y0)
+}
+
+cols <- c("#820a94", "#F89441")
+
+ggplot(d, aes(x = t, y = y, group = factor(treat, levels = c(1,0)), color = factor(treat, levels = c(1,0)))) +
+  geom_line(lwd=1.1) +
+  geom_point(size=3) +
+  geom_vline(aes(xintercept = 0), color = "grey", lty = 2) +
+  scale_color_manual(values = cols, labels = c("E[Y(1)|T = t]","E[Y(0)|T = t]")) + 
+  theme_bw()+
+  theme_ipsum_fsc(plot_title_face = "bold") + #plain 
+  xlab("Time") +
+  xlim(-5, 5) +
+  
+  theme(plot.margin=unit(c(1,1,1.5,1.2),"cm"),
+        panel.grid.major.x = element_blank(),
+        panel.grid.minor.x = element_blank(),
+        panel.grid.major.y = element_blank(),
+        panel.grid.minor.y = element_blank(),
+        axis.line.y = element_blank(),
+        axis.line.x = element_line(colour = "grey"))+
+  theme(axis.title.x = element_text(size=22),#margin = margin(t = 10, r = 0, b = 0, l = 0)),
+        axis.text.x = element_text(size=18),
+        axis.title.y = element_blank(),#margin = margin(t = 0, r = 10, b = 0, l = 0)),
+        axis.text.y = element_blank(),legend.position=c(0.2,0.9),
+        legend.title = element_blank(),
+        legend.text = element_text(size=25, color = "#333f48"),
+        legend.background = element_rect(fill="white",colour ="white"),
+        title = element_text(size=14))
+
+```
+
+]
+
+---
+# But what if the PTA doesn't hold?
+
+.pull-left[
+Potential outcomes are a function of observed (X) and unobserved characteristics (u):
+
+$$Y_{it}(0) = g(X_{it}, u_{it}, t)$$
+$$Y_{it}(1) = g(X_{it}, u_{it}, t) + \tau\mathrm{I}(t>T_0)$$
+
+... but $X_{it}| Z_i = z \sim F_x(t,z)$ and $u_{it}| Z_i = z \sim F_u(t,z)$  
+]
+
+.pull-right[
+```{r po2, fig.height=7,  fig.align='center', dev='svg', echo=FALSE, warning=FALSE}
+#Data for publications (updated 06/2022 See excel)
+
+d <- data.frame(
+  t = rep(seq(-5,5),2),
+  treat = c(rep(1,11),rep(0,11))
+)
+
+d$y = NA
+d$y1p = NA
+
+for(i in -5:5){
+  set.seed(i + 3)
+  
+  y1 <- 2 + 0.09*i + 0.1*sqrt(i+5)+ rnorm(100,0,0.5)
+  y0 <- y1 - 0.04*i - 0.3
+  y1p = y1
+  
+  if(i>0){
+    y1 = y1 + 0.15*i
+  }
+
+  d$y[d$t==i & d$treat==1] = mean(y1)  
+  d$y[d$t==i & d$treat==0] = mean(y0)
+  d$y1p[d$t==i & d$treat==1] = mean(y1p)
+}
+
+cols <- c("#820a94", "#F89441")
+
+ggplot(d, aes(x = t, y = y, group = factor(treat, levels = c(1,0)), color = factor(treat, levels = c(1,0)))) +
+  geom_line(lwd=1.1) +
+  geom_point(size=3) +
+  geom_line(aes(x = t, y = y1p), color = cols[1], lty = 2) +
+  geom_vline(aes(xintercept = 0), color = "grey", lty = 2) +
+  scale_color_manual(values = cols, labels = c("E[Y(1)|Z = 1, T = t]","E[Y(0)|Z = 0, T = t]")) + 
+  theme_bw()+
+  theme_ipsum_fsc(plot_title_face = "bold") + #plain 
+  xlab("Time") +
+  xlim(-5, 5) +
+  
+  theme(plot.margin=unit(c(1,1,1.5,1.2),"cm"),
+        panel.grid.major.x = element_blank(),
+        panel.grid.minor.x = element_blank(),
+        panel.grid.major.y = element_blank(),
+        panel.grid.minor.y = element_blank(),
+        axis.line.y = element_blank(),
+        axis.line.x = element_line(colour = "grey"))+
+  theme(axis.title.x = element_text(size=22),#margin = margin(t = 10, r = 0, b = 0, l = 0)),
+        axis.text.x = element_text(size=18),
+        axis.title.y = element_blank(),#margin = margin(t = 0, r = 10, b = 0, l = 0)),
+        axis.text.y = element_blank(),legend.position=c(0.2,0.9),
+        legend.title = element_blank(),
+        legend.text = element_text(size=25, color = "#333f48"),
+        legend.background = element_rect(fill="white",colour ="white"),
+        title = element_text(size=14))
+
+```
+
+]
+---
+
+# Violations to the PTA
+
+.pull-left[
+- Under PTA, $g_1(t) = g_0(t) + h(t) + \tau(t)\mathrm{I}(t>T_0)$, where:
+
+  - $g_z(t) = E[Y_{it}(0) | Z=z, T=t]$
+  - $h(t) = \alpha$
+]
+
+.pull-right[
+![](https://media.giphy.com/media/L8yQ0RQBItqso/giphy.gif)
+]
+
+---
+# Violations to the PTA
+
+.pull-left[
+- Under PTA, $g_1(t) = g_0(t) + h(t) + \tau(t)\mathrm{I}(t>T_0)$, where:
+
+  - $g_z(t) = E[Y_{it}(0) | Z=z, T=t]$
+  - $h(t) = \alpha$
+
+- Bias in a DD setting depends on the structure of $h(t)$.
+
+- Confounding in DD affect **.darkorange[trends]** and not **.darkorange[levels]**.
+]
+
+.pull-right[
+![](https://media.giphy.com/media/L8yQ0RQBItqso/giphy.gif)
+]
+
+---
+
+# Violations to the PTA
+
+.pull-left[
+- Under PTA, $g_1(t) = g_0(t) + h(t) + \tau(t)\mathrm{I}(t>T_0)$, where:
+
+  - $g_z(t) = E[Y_{it}(0) | Z=z, T=t]$
+  - $h(t) = \alpha$
+
+- Bias in a DD setting depends on the structure of $h(t)$.
+
+- Confounding in DD affect **.darkorange[trends]** and not **.darkorange[levels]**.
+
+- Contextual knowledge is important!
+]
+
+.pull-right[
+![](https://media.giphy.com/media/L8yQ0RQBItqso/giphy.gif)
+]
+
+---
+# Two distinct problems when combining matching + DD
+
+.pull-left[
+- **.darkorange[Bias when matching on time-varying covariates]**:
+  
+  - Depends on the structure of time variation
+  
+- **.darkorange[Regression to the mean]**:
+
+  - Both groups come from different populations
+  
+  - Particularly salient when matching on previous outcomes and small number of pre-periods.
+]
+
+.pull-right[
+<img src="https://raw.githubusercontent.com/maibennett/presentations/main/content/presentations/DD/bb_20201202/images/reg_to_the_mean.svg" alt="diagram" width="500"/>
+]
+
+---
+# Using pre-trends as robustness check
+
+- Let's use two points in the pre-intervention period: $(t, t') \in (-\infty, T_0]$
+
+- Define $\Delta$ as the bias in the pre-intervention period:
+
+$$
+\begin{aligned}
+E[Y_{it'}(1)| Z = 1] - E[Y_{it'}(0)| Z = 0] -(E[Y_{it}(1)|Z=1] - E[Y_{it}(0)|Z = 0]) &=\\
+E[g(X_{it'},u_{it'}, t')|Z=1] - E[g(X_{it'},u_{it'}, t')|Z=0] -& \\
+(E[g(X_{it},u_{it}, t)|Z=1] - E[g(X_{it},u_{it}, t)|Z=0]) &= \Delta
+\end{aligned}
+$$
+--
+
+- $\Delta \neq 0$ due to $X$, $u$, or both.
+
+- Find $\mathbf{X} = \mathbf{X^T}$, so that $\Delta = 0$ (i.e. assume no differential time-varying unobserved confounder)
+
+---
+# How do we match?
+
+- Match on covariates or outcomes? Levels or trends?
+
+- Propensity score matching? Optimal matching? etc.
+
+--
+
+This paper:
+
+- **.darkorange[Match on covariates]** that could make groups behave differently.
+
+- Use of **.darkorange[Mixed-Integer Programming (MIP) Matching]** .small[(Zubizarreta, 2015; Bennett, Zubizarreta, & Vielma, 2020)]:
+
+  - Balance covariates directly
+  
+  - Yield largest matched sample under balancing constraints (cardinality matching)
+  
+  - Works with large samples
+
+---
+background-position: 50% 50%
+class: left, bottom, inverse
+.big[
+Simulations
+<br>
+<br>
+]
+
+---
+
+# Different scenarios
+
+.pull-left[
+**Time-invariant covariates:**
+
+.box-1.medium.sp-after-half[S1: Time-invariant covariate effect]
+
+.box-2.medium.sp-after-half[S2: Time-varying covariate effect]
+
+.box-3.medium.sp-after-half[S3: Treatment-independent covariate]
+
+]
+
+--
+
+.pull-right[
+**Time-varying covariates:**
+
+.box-4.medium.sp-after-half[S4: Parallel evolution]
+
+.box-6.medium.sp-after-half[S5: Evolution differs by group]
+
+.box-7.medium.sp-after-half[S6: Evolution diverges in post]
+]
+
+<br>
+<br>
+.source[Following Zeldow & Hatfield (2021)]
+
+---
+
+.center[
+![:scale 90%](https://raw.githubusercontent.com/maibennett/presentations/main/content/presentations/DD/sree_20210927/images/zeldow_hatfield_table.png)
+]
+
+.source[Table 1 from Zeldow & Hatfield (2021)]
+---
+
+# Different ways to control
+
+.small[
+<div class="center"><table>
+<thead>
+<tr>
+<th>Model</th>
+<th>Pseudo <code class="remark-inline-code">R</code> code</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Simple</td>
+<td><code class="remark-inline-code">lm(y ~ a*p + t)</code> </td>
+</tr>
+<tr>
+<td>Covariate Adjusted (CA)</td>
+<td><code class="remark-inline-code">lm(y ~ a*p + t + x)</code> </td>
+</tr>
+<tr>
+<td>Time-Varying Adjusted (TVA)</td>
+<td><code class="remark-inline-code">lm(y ~ a*p + t*x)</code> </td>
+</tr>
+<tr>
+<td>Match on pre-treat outcomes</td>
+<td><code class="remark-inline-code">lm(y ~ a*p + t, data=out.match)</code> </td>
+</tr>
+<tr>
+<td>Match on pre-treat 1st diff</td>
+<td><code class="remark-inline-code">lm(y ~ a*p + t, data=out.lag.match)</code> </td>
+</tr>
+<tr>
+<td>Match on pre-treat cov (PS)</td>
+<td><code class="remark-inline-code">lm(y ~ a*p + t, data=cov.match)</code> </td>
+</tr>
+<tr>
+<td id="highlight">Match on pre-treat cov (MIP)</td>
+<td id="highlight"><code class="remark-inline-code">Event study (data=cov.match.mip)</code></td>
+</tr>
+<tr>
+<td id="highlight">Match on all cov (MIP)</td>
+<td id="highlight"><code class="remark-inline-code">Event study (data=cov.match.mip.all)</code></td>
+</tr>
+</tbody>
+</table>
+</div>
+]
+.bottom[
+.source[Following Zeldow & Hatfield (2021)]]
+
+---
+#Parameters:
+
+.center[
+Parameter                            | Value
+-------------------------------------|----------------------------------------------
+Number of obs (N)                               | 1,000 
+`Pr(Z=1)`              | 0.5 
+Time periods (T)          | 10 
+Last pre-intervention period (T_0)          | 5 
+Matching PS          | Nearest neighbor
+MIP Matching tolerance          | .05 SD
+Number of simulations | 1,000
+]
+
+- Estimate compared to sample ATT (_different for matching_)
+- When matching with post-treat covariates $\rightarrow$ compared with direct effect $\tau$
+---
+#Results: Time-constant covariates
+
+```{r res1, fig.width=9, fig.height=5.5, fig.align='center', dev='svg', echo=FALSE, warning=FALSE}
+d = read.csv("https://raw.githubusercontent.com/maibennett/presentations/main/content/presentations/DD/asa_20210609/sim_ppt.csv")
+
+attach(d)
+
+d = data.frame(cbind(c(s1,s2,s3,s4,s5,s5alt,s6),rep(c("Simple","CA","TVA","Match (level)",
+                                                      "Match (trend)","Match (cov PS)",
+                                                      "Match (cov MIP)",
+                                                      "Match (cov MIP all)"),7),
+                     c(rep("S1: Time-invariant_cov effect",8),
+                       rep("S2: Time-varying_cov effect",8),
+                       rep("S3: Treat-independent_cov effect",8),
+                       rep("S4: Parallel_evolution",8),
+                       rep("S5: Evolution diff._by group",8),
+                       rep("S5: Evolution diff._by group (adj)",8),
+                       rep("S6: Evolution diff._in post",8)),
+                     c(rep("Constant",24),rep("Varying",32))))
+names(d) = c("bias","adj","type","var")
+
+d$bias = as.numeric(d$bias)
+d$type = factor(d$type,levels = unique(d$type))
+
+levels(d$type) <- gsub("_", "\n", levels(d$type)) 
+
+ggplot(d[d$var=="Constant",], aes(x = factor(adj, levels=unique(d$adj)), y = bias), fill="white") +
+    geom_hline(yintercept = 0,lty=2,col="dark grey",lwd=1)+
+  geom_point(size=3)+
+  geom_segment(aes(x = factor(adj, levels=unique(d$adj)), y = 0, 
+                   xend = factor(adj, levels=unique(d$adj)), yend = bias), 
+               lty=1,lwd=1,col="#820a94") +
+  scale_color_manual(values=c("#F89441","#820a94")) +
+  
+  theme_bw()+
+  theme_ipsum_fsc(plot_title_face = "bold") + #plain 
+  xlab("") + ylab("% Bias")+
+  theme(plot.margin=unit(c(1,1,1.5,1.2),"cm"),
+        panel.grid.major.x = element_blank(),
+        panel.grid.minor.x = element_blank(),
+        panel.grid.major.y = element_blank(),
+        panel.grid.minor.y = element_blank(),
+        axis.line = element_line(colour = "dark grey"))+
+  theme(axis.title.x = element_text(size=16),#margin = margin(t = 10, r = 0, b = 0, l = 0)),
+        axis.text.x = element_text(size=10,angle = 45,hjust=1,vjust=1,margin=margin(0.1,0,0,0)),
+        axis.title.y = element_text(size=16),#margin = margin(t = 0, r = 10, b = 0, l = 0)),
+        axis.text.y = element_text(size=10),legend.position="none",
+        legend.title = element_blank(),
+        legend.text = element_text(size=15),
+        legend.background = element_rect(fill="white",colour ="white"),
+        title = element_text(size=14),
+        strip.text = element_text(family="Fira Sans Condensed")) + ylim(-0.5,1) +
+  facet_grid(cols=vars(type))
+
+```
+
+
+---
+# Results: Time-varying covariates
+
+```{r res2, fig.width=9, fig.height=5.5, fig.align='center', dev='svg', echo=FALSE, warning=FALSE}
+ggplot(d[d$var=="Varying" & d$type!="S5: Evolution diff.\nby group",], 
+       aes(x = factor(adj, levels=unique(d$adj)), y = bias), fill="white") +
+    geom_hline(yintercept = 0,lty=2,col="dark grey",lwd=1)+
+  geom_point(size=3)+
+  geom_segment(aes(x = factor(adj, levels=unique(d$adj)), y = 0, 
+                   xend = factor(adj, levels=unique(d$adj)), yend = bias), 
+               lty=1,lwd=1,col="#820a94") +
+  scale_color_manual(values=c("#F89441","#820a94")) +
+  
+  theme_bw()+
+  theme_ipsum_fsc(plot_title_face = "bold") + #plain 
+  xlab("") + ylab("% Bias")+
+  theme(plot.margin=unit(c(1,1,1.5,1.2),"cm"),
+        panel.grid.major.x = element_blank(),
+        panel.grid.minor.x = element_blank(),
+        panel.grid.major.y = element_blank(),
+        panel.grid.minor.y = element_blank(),
+        axis.line = element_line(colour = "dark grey"))+
+  theme(axis.title.x = element_text(size=16, family="Fira Sans Condensed"),
+        #margin = margin(t = 10, r = 0, b = 0, l = 0)),
+        axis.text.x = element_text(size=10,angle = 45,hjust=1,vjust=1,margin=margin(0.1,0,0,0)),
+        axis.title.y = element_text(size=16),#margin = margin(t = 0, r = 10, b = 0, l = 0)),
+        axis.text.y = element_text(size=10),legend.position="none",
+        legend.title = element_blank(),
+        legend.text = element_text(size=15),
+        legend.background = element_rect(fill="white",colour ="white"),
+        title = element_text(size=14, family="Fira Sans Condensed"),
+        strip.text = element_text(family="Fira Sans Condensed")) + ylim(-0.5,1) +
+  facet_grid(cols=vars(factor(type,levels = unique(d$type[d$var=="Varying" & d$type!=
+                                                            "Evolution differs by group"]))))
+
+```
+---
+# Results: Time-varying covariates
+
+- In these simulations. for time-varying covariates:
+  
+  - Matching on pre-treatment covariates returns a <u>unbiased</u> ATT estimate **.darkorange[if covariates evolve similarly over time in the pre-intervention period and are not affected by the treatment]**.
+
+--
+
+  - Matching on treatment covariates returns a <u>biased</u> ATT estimate **.darkorange[if covariates evolve differently over time and/or are affected by treatment]**.
+  
+--
+
+.box-6[Can we do something with this?]
+
+--
+
+- Matching on pre- and post-intervention covariates returns the **.darkorange[direct effect of the treatment on the outcome]** [REFERENCES]
+
+- Depending on the context, this could be an **.darkorange[upper or lower bound]** for the true ATT effect.
+
+  - Sensitivity analysis to create bounds (Hong, Yang, & Qin, 2021)
+
+---
+# Other simulations
+
+- Test **.darkorange[regression to the mean]** under no effect:
+
+  - Vary autocorrelation of $X_i(t)$ (low vs. high)
+  - $X_0(t)$ and $X_1(t)$ come from the same or different distribution.
+  
+- Similar conclusions to Ham & Miratrix (2022) regarding the reliability of X on Y.
+
+```{r res3, fig.width=9, fig.height=4.5, fig.align='center', dev='svg', echo=FALSE, warning=FALSE}
+
+#different-high/different-low - same-high/same-low
+results = c(0.039/1.067,0.192/1.063,0.028/1.013,0.10/1.015)
+
+d = data.frame(cbind(results,c("Different dist.","Different dist.",
+                               "Same dist.","Same dist."),c("High corr","Low corr",
+                                                            "High corr","Low corr")))
+names(d) = c("bias","dist","corr")
+d$bias = as.numeric(d$bias)
+
+ggplot(d, aes(x = factor(corr, levels=unique(d$corr)), y = bias), fill="white") +
+    geom_hline(yintercept = 0,lty=2,col="dark grey",lwd=1)+
+  geom_point(size=3)+
+  geom_segment(aes(x = factor(corr, levels=unique(d$corr)), y = 0, 
+                   xend = factor(corr, levels=unique(d$corr)), yend = bias), 
+               lty=1,lwd=1,col="#820a94") +
+  scale_color_manual(values=c("#F89441","#820a94")) +
+  
+  theme_bw()+
+  theme_ipsum_fsc(plot_title_face = "bold") + #plain 
+  xlab("") + ylab("% Bias")+
+  theme(plot.margin=unit(c(1,1,1.5,1.2),"cm"),
+        panel.grid.major.x = element_blank(),
+        panel.grid.minor.x = element_blank(),
+        panel.grid.major.y = element_blank(),
+        panel.grid.minor.y = element_blank(),
+        axis.line = element_line(colour = "dark grey"))+
+  theme(axis.title.x = element_text(size=16, family="Fira Sans Condensed"),
+        #margin = margin(t = 10, r = 0, b = 0, l = 0)),
+        axis.text.x = element_text(size=10,angle = 45,hjust=1,vjust=1,margin=margin(0.1,0,0,0)),
+        axis.title.y = element_text(size=16),#margin = margin(t = 0, r = 10, b = 0, l = 0)),
+        axis.text.y = element_text(size=10),legend.position="none",
+        legend.title = element_blank(),
+        legend.text = element_text(size=15),
+        legend.background = element_rect(fill="white",colour ="white"),
+        title = element_text(size=14, family="Fira Sans Condensed"),
+        strip.text = element_text(family="Fira Sans Condensed")) + ylim(-0.5,0.5) +
+  facet_grid(cols=vars(factor(dist,levels = unique(d$dist))))
+
+```
+
+
+---
+background-position: 50% 50%
+class: left, bottom, inverse
+.big[
+Application
+<br>
+<br>
+]
+---
+#Preferential Voucher Scheme in Chile
+
+- Universal **.darkorange[flat voucher]** scheme $\stackrel{\mathbf{2008}}{\mathbf{\longrightarrow}}$ Universal + **.darkorange[preferential voucher]** scheme
+
+- Preferential voucher scheme:
+  - Targeted to bottom 40% of vulnerable students
+
+  - Additional 50% of voucher per student
+
+  - Additional money for concentration of SEP students.
+
+--
+<br/>
+.pull-left[
+.box-3b.medium.sp-after-half[Students:<br/>- Verify SEP status<br/>- Attend a SEP school]
+]
+
+.pull-right[
+.box-6b.medium.sp-after-half[Schools:<br/>- Opt-into the policy<br/>- No selection, no fees<br/>- Resources ~ performance]
+]
+
+---
+#Impact of the SEP policy
+
+- **.darkorange[Positive impact on test scores]** for lower-income students (Aguirre, 2019; Nielson, 2016)
+
+- Design could have **.darkorange[increased]** socioeconomic segregation
+  - Incentives for concentration of SEP students
+  
+- Key decision variables for schools: Performance, current SEP students, competition, add-on fees.
+
+- **.darkorange[Diff-in-diff (w.r.t. 2007) for SEP and non-SEP schools]**:
+  - Only for **.darkorange[private-subsidized schools]**
+  
+  - Matching between 2005-2007 --> Effect estimated for 2008-2011
+  
+  - Outcome: Average students' household income
+  
+---
+#Before Matching
+
+.pull-left[
+<img src="https://raw.githubusercontent.com/maibennett/presentations/main/content/presentations/DD/bb_20201202/images/pta_all.svg" alt="diagram" width="800"/>
+]  
+
+.pull-right[
+<img src="https://raw.githubusercontent.com/maibennett/presentations/main/content/presentations/DD/bb_20201202/images/dd_all.svg" alt="diagram" width="800"/>
+]
+
+---
+# Matching + DD
+
+- **.darkorange[Prior to matching]**: No parallel pre-trend, covariates evolve differently for both groups.
+
+- **.darkorange[Different types of schools]**:
+
+  - Schools that charge high co-payment fees.
+  
+  - Schools with low number of SEP student enrolled.
+
+- **.darkorange[MIP Matching]** using constant or "sticky" covariates:
+
+  - Mean balance (0.05 SD): Rural, enrollment, number of schools in county, charges add-on fees
+  
+  - Fine balance: Test scores, monthly average voucher.
+  
+---
+# After matching
+
+.pull-left[
+<img src="https://raw.githubusercontent.com/maibennett/presentations/main/content/presentations/DD/bb_20201202/images/pta_match.svg" alt="diagram" width="800"/>
+]
+.pull-right[
+<img src="https://raw.githubusercontent.com/maibennett/presentations/main/content/presentations/DD/bb_20201202/images/dd_match.svg" alt="diagram" width="800"/>
+]
+
+---
+#Results
+
+- **.darkorange[Matched schools]**:
+
+  - More vulnerable and lower test scores than the population mean.
+
+- **.darkorange[6% increase in the income gap]** between SEP and non-SEP schools in matched DD:
+
+  - SEP schools attracted even more vulnerable students.
+  
+  - Non-SEP schools increased their average family income.
+
+--
+
+- There is a need to **.darkorange[evaluate the policy as a whole]**.
+
+  - Unintended consequences also matter.
+
+---
+background-position: 50% 50%
+class: left, bottom, inverse
+.big[
+Let's wrap it up
+<br>
+<br>
+]
+---
+#Conclusions
+
+.pull-left[
+- **.darkorange[Matching can be an important tool to address violations in PTA]**.
+
+- Relevant to think whether groups come from the **.darkorange[same]** or **.darkorange[different]** populations.
+
+- **.darkorange[Serial correlation]** also plays an important role: Don't match on random noise.]
+
+.pull-right[
+![](https://media.giphy.com/media/drwxYI2fxqQGqRZ9Pe/giphy.gif)
+]
+
+---
+#Conclusions
+
+.pull-left[
+- **.darkorange[Matching can be an important tool to address violations in PTA]**.
+
+- Relevant to think whether groups come from the **.darkorange[same]** or **.darkorange[different]** populations.
+
+- **.darkorange[Serial correlation]** also plays an important role: Don't match on random noise.
+
+  
+.box-7.medium.sp-after-half[Match well and match smart!
+]]
+.pull-right[
+![](https://media.giphy.com/media/drwxYI2fxqQGqRZ9Pe/giphy.gif)
+]
+
+---
+class: inverse, center, middle
+
+<br>
+<br>
+<br>
+
+<h1 class="title-own">A Difference-in-Differences Approach<br/>using Mixed-Integer Programming Matching</h1>
+
+<br>
+<br>
+.small[Magdalena Bennett&nbsp;&nbsp;&nbsp;<br>*McCombs School of Business, The University of Texas at Austin*&nbsp;&nbsp;&nbsp;]
+
+<br>
+
+.small[Universidad Diego Portales<br>June 23rd, 2022]
+
+
+---
+# Time-invariant covariates
+
+$$X_i \stackrel{ind}{\sim} N(m(z_i),v(z_i))$$
+$$Y_i(t) \stackrel{ind}{\sim} N(1+z_i+treat_{it}+u_i+x_i+f(t)+g(x_i,t),1)$$
+
+--
+<br>
+<br>
+
+.box-1b[S1) Time-invariant covariate effect: g(x<sub>i</sub>,t) = 0]
+
+.box-2b[S2) Time-varying covariate effect: g(x<sub>i</sub>,t) &#8800; 0]
+
+.box-3b[S3) Time-varying covariate effect: m(z<sub>i</sub>) = &mu; and v(z<sub>i</sub>) = &sigma;]
+
+---
+# Time-varying covariates
+
+$$X_{it} = x_{(t-1)i} + h(z_i,t)\cdot r_i + m(z_i,t)$$
+$$Y_i(t) \stackrel{ind}{\sim} N(1+z_i+treat_{it}+u_i+x_i+f(t)+g(x_i,t),1)$$
+
+--
+<br>
+<br>
+
+.box-4b[S4) Parallel evolution: h(z<sub>i</sub>,t) = h(t) and m(z<sub>i</sub>,t) = 0]
+
+.box-6b[S5) Evolution differs by group: m(z<sub>i</sub>,t) = 0]
+
+.box-7b[S6) Evolution differs in post: h(z<sub>i</sub>,t) = h(t) and m(z<sub>i</sub>,t) = Post*m(z<sub>i</sub>,t)]
+
+---
+# Time-invariant Covariates
+
+.box-1a.medium.sp-after-half[S1: Time-invariant covariate effect]
+.small[
+$$X_i \stackrel{ind}{\sim} N(m(z_i),v(z_i))$$
+$$Y_i(t) \stackrel{ind}{\sim} N(1+z_i+treat_{it}+u_i+x_i+f(t),1)$$]
+
+--
+.box-2a.medium.sp-after-half[S2: Time-varying covariate effect]
+.small[
+$$X_i \stackrel{ind}{\sim} N(m(z_i),v(z_i))$$
+$$Y_i(t) \stackrel{ind}{\sim} N(1+z_i+treat_{it}+u_i+x_i+f(t)+g(x_i,t),1)$$]
+
+--
+.box-3a.medium.sp-after-half[S3: Treatment-independent covariate]
+.small[
+$$X_i \stackrel{ind}{\sim} N(1,1)$$
+$$Y_i(t) \stackrel{ind}{\sim} N(1+z_i+treat_{it}+u_i+x_i+f(t)+g(x_i,t),1)$$]
+
+---
+# Time-varying Covariates
+
+.box-4a.medium.sp-after-half[S4: Parallel evolution]
+.small[
+$$X_{it} = x_{(t-1)i} + m_1(t)\cdot z$$
+$$Y_i(t) \stackrel{ind}{\sim} N(1+z_i+treat_{it}+u_i+x_i+f(t)+g(x_i,t),1)$$]
+
+--
+.box-6a.medium.sp-after-half[S5: Evolution differs by group]
+.small[
+$$X_{it} = x_{(t-1)i} + m_2(z_i,t)\cdot z$$
+$$Y_i(t) \stackrel{ind}{\sim} N(1+z_i+treat_{it}+u_i+x_i+f(t)+g(x_i,t),1)$$]
+
+--
+.box-7a.medium.sp-after-half[S6: Evolution diverges in post]
+.small[
+$$X_{it} = x_{(t-1)i} + m_1(t)\cdot z - m_3(z_i,t)$$
+$$Y_i(t) \stackrel{ind}{\sim} N(1+z_i+treat_{it}+u_i+x_i+f(t)+g(x_i,t),1)$$]
+
+---
+# Covariate evolution: Time-invariant
+
+.center[
+<img src="https://raw.githubusercontent.com/maibennett/presentations/main/content/presentations/DD/bb_20201202/images/cov_1.svg" alt="diagram" width="900"/>]
+
+---
+# Covariate evolution: Time-varying
+
+.center[
+<img src="https://raw.githubusercontent.com/maibennett/presentations/main/content/presentations/DD/bb_20201202/images/cov_2.svg" alt="diagram" width="900"/>]

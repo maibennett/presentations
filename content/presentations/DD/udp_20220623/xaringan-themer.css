@@ -414,25 +414,32 @@ table.dataTable.hover tbody tr:hover, table.dataTable.display tbody tr:hover {
   margin-bottom: 0.7em !important;
 }
 .box-1,.box-1a,.box-1s,.box-1b,.box-1l,.box-1LA,.section-title-1 {
-  background-color: #0D0887;
+  background-color: #3b0768;
+  border-radius: 15px;
 }
 .box-2,.box-2a,.box-2s,.box-2b,.box-2l,.box-2LA,.section-title-2 {
-  background-color: #5601A4;
+  background-color: #291594;
+  border-radius: 15px;
 }
 .box-3,.box-3a,.box-3s,.box-3b,.box-3l,.box-3LA,.section-title-3 {
   background-color: #820a94;
+  border-radius: 15px;
 }
 .box-4,.box-4a,.box-4s,.box-4b,.box-4l,.box-4LA,.section-title-4 {
   background-color: #BF3984;
+  border-radius: 15px;
 }
 .box-5,.box-5a,.box-5s,.box-5b,.box-5l,.box-5LA,.section-title-5 {
-  background-color: #E16462;
+  background-color: #f87241;
+  border-radius: 15px;
 }
 .box-6,.box-6a,.box-6s,.box-6b,.box-6l,.box-6LA,.section-title-6 {
   background-color: #F89441;
+  border-radius: 15px;
 }
 .box-7,.box-7a,.box-7s,.box-7b,.box-7l,.box-7LA,.section-title-7 {
-  background-color: #FCCE25;
+  background-color: #f8c741;
+  border-radius: 15px;
 }
 .box-7, .box-6, .box-5, .box-4, .box-3, .box-2, .box-1 {
   color: #FFFFFF;
@@ -482,34 +489,6 @@ table.dataTable.hover tbody tr:hover, table.dataTable.display tbody tr:hover {
   overflow: hidden;
   padding: 0.4em 0.4em;
   display: table;
-}
-.box-1,.box-1a,.box-1s,.box-1b,.box-1l,.box-1LA,.section-title-1 {
-  background-color: #5A3D66;
-  border-radius: 15px;
-}
-.box-2,.box-2a,.box-2s,.box-2b,.box-2l,.box-2LA,.section-title-2 {
-  background-color: #9442B5;
-  border-radius: 15px;
-}
-.box-3,.box-3a,.box-3s,.box-3b,.box-3l,.box-3LA,.section-title-3 {
-  background-color: #820a94;
-  border-radius: 15px;
-}
-.box-4,.box-4a,.box-4s,.box-4b,.box-4l,.box-4LA,.section-title-4 {
-  background-color: #A5AC20;
-  border-radius: 15px;
-}
-.box-5,.box-5a,.box-5s,.box-5b,.box-5l,.box-5LA,.section-title-5 {
-  background-color: #DAE058;
-  border-radius: 15px;
-}
-.box-6,.box-6a,.box-6s,.box-6b,.box-6l,.box-6LA,.section-title-6 {
-  background-color: #F89441;
-  border-radius: 15px;
-}
-.box-7,.box-7a,.box-7s,.box-7b,.box-7l,.box-7LA,.section-title-7 {
-  background-color: #FCCE25;
-  border-radius: 15px;
 }
 .box-1t,.box-1tL,.section-title-1t {
   background-color: rgba(13, 8, 135,0.3);
@@ -680,10 +659,10 @@ table.dataTable.hover tbody tr:hover, table.dataTable.display tbody tr:hover {
   color: #333f48;
 }
 .box-1trans,.box-1transl,.box-1Trans {
-  border: 5px solid #5A3D66;
+  border: 5px solid #3b0768;
 }
 .box-2trans,.box-2transl,.box-2Trans {
-  border: 5px solid #9442B5;
+  border: 5px solid #291594;
 }
 .box-3trans,.box-3transl,.box-3Trans {
   border: 5px solid #820a94;
@@ -692,13 +671,13 @@ table.dataTable.hover tbody tr:hover, table.dataTable.display tbody tr:hover {
   border: 5px solid #A5AC20;
 }
 .box-5trans,.box-5transl,.box-5Trans {
-  border: 5px solid #DAE058;
+  border: 5px solid #f87241;
 }
 .box-6trans,.box-6transl,.box-6Trans {
-  border: 5px solid rgba(248, 148, 65,1);
+  border: 5px solid #F89441;
 }
 .box-7trans,.box-7transl,.box-7Trans {
-  border: 5px solid rgba(252, 206, 37,1);
+  border: 5px solid #f8c741;
 }
 .image-80 img {
   scale: 80%;

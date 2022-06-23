@@ -98,13 +98,20 @@ style_mono_accent(
                                "line-height" = "1.3"),
     ".medium" = list("font-size" = "1.4em"),
     ".sp-after-half" = list("margin-bottom" = "0.7em !important"),
-    ".box-1,.box-1a,.box-1s,.box-1b,.box-1l,.box-1LA,.section-title-1" = list("background-color" = "#0D0887"),
-    ".box-2,.box-2a,.box-2s,.box-2b,.box-2l,.box-2LA,.section-title-2" = list("background-color" = "#5601A4"),
-    ".box-3,.box-3a,.box-3s,.box-3b,.box-3l,.box-3LA,.section-title-3" = list("background-color" = "#820a94"),
-    ".box-4,.box-4a,.box-4s,.box-4b,.box-4l,.box-4LA,.section-title-4" = list("background-color" = "#BF3984"),
-    ".box-5,.box-5a,.box-5s,.box-5b,.box-5l,.box-5LA,.section-title-5" = list("background-color" = "#E16462"),
-    ".box-6,.box-6a,.box-6s,.box-6b,.box-6l,.box-6LA,.section-title-6" = list("background-color" = "#F89441"),
-    ".box-7,.box-7a,.box-7s,.box-7b,.box-7l,.box-7LA,.section-title-7" = list("background-color" = "#FCCE25"),
+    ".box-1,.box-1a,.box-1s,.box-1b,.box-1l,.box-1LA,.section-title-1" = list("background-color" = "#3b0768",
+                                                                              "border-radius" = "15px"),
+    ".box-2,.box-2a,.box-2s,.box-2b,.box-2l,.box-2LA,.section-title-2" = list("background-color" = "#291594",
+                                                                              "border-radius" = "15px"),
+    ".box-3,.box-3a,.box-3s,.box-3b,.box-3l,.box-3LA,.section-title-3" = list("background-color" = "#820a94",
+                                                                              "border-radius" = "15px"),
+    ".box-4,.box-4a,.box-4s,.box-4b,.box-4l,.box-4LA,.section-title-4" = list("background-color" = "#BF3984",
+                                                                              "border-radius" = "15px"),
+    ".box-5,.box-5a,.box-5s,.box-5b,.box-5l,.box-5LA,.section-title-5" = list("background-color" = "#f87241",
+                                                                              "border-radius" = "15px"),
+    ".box-6,.box-6a,.box-6s,.box-6b,.box-6l,.box-6LA,.section-title-6" = list("background-color" = "#F89441",
+                                                                              "border-radius" = "15px"),
+    ".box-7,.box-7a,.box-7s,.box-7b,.box-7l,.box-7LA,.section-title-7" = list("background-color" = "#f8c741",
+                                                                              "border-radius" = "15px"),
    
     ".box-7, .box-6, .box-5, .box-4, .box-3, .box-2, .box-1" = list("color" = "#FFFFFF",
                                                                     "margin" = "0em auto",
@@ -143,20 +150,20 @@ style_mono_accent(
                     "overflow" = "hidden",
                     "padding" = "0.4em 0.4em",
                     "display" = "table"),
-    ".box-1,.box-1a,.box-1s,.box-1b,.box-1l,.box-1LA,.section-title-1" = list("background-color" = "#5A3D66",
-                                                                              "border-radius" = "15px"),
-    ".box-2,.box-2a,.box-2s,.box-2b,.box-2l,.box-2LA,.section-title-2" = list("background-color" = "#9442B5",
-                                                                              "border-radius" = "15px"),
-    ".box-3,.box-3a,.box-3s,.box-3b,.box-3l,.box-3LA,.section-title-3" = list("background-color" = "#820a94",
-                                                                              "border-radius" = "15px"),
-    ".box-4,.box-4a,.box-4s,.box-4b,.box-4l,.box-4LA,.section-title-4" = list("background-color" = "#A5AC20",
-                                                                              "border-radius" = "15px"),
-    ".box-5,.box-5a,.box-5s,.box-5b,.box-5l,.box-5LA,.section-title-5" = list("background-color" = "#DAE058",
-                                                                              "border-radius" = "15px"),
-    ".box-6,.box-6a,.box-6s,.box-6b,.box-6l,.box-6LA,.section-title-6" = list("background-color" = "#F89441",
-                                                                              "border-radius" = "15px"),
-    ".box-7,.box-7a,.box-7s,.box-7b,.box-7l,.box-7LA,.section-title-7" = list("background-color" = "#FCCE25",
-                                                                              "border-radius" = "15px"),
+    # ".box-1,.box-1a,.box-1s,.box-1b,.box-1l,.box-1LA,.section-title-1" = list("background-color" = "#6e077d",
+    #                                                                           "border-radius" = "15px"),
+    # ".box-2,.box-2a,.box-2s,.box-2b,.box-2l,.box-2LA,.section-title-2" = list("background-color" = "#800791",
+    #                                                                           "border-radius" = "15px"),
+    # ".box-3,.box-3a,.box-3s,.box-3b,.box-3l,.box-3LA,.section-title-3" = list("background-color" = "#820a94",
+    #                                                                           "border-radius" = "15px"),
+    # ".box-4,.box-4a,.box-4s,.box-4b,.box-4l,.box-4LA,.section-title-4" = list("background-color" = "#A5AC20",
+    #                                                                           "border-radius" = "15px"),
+    # ".box-5,.box-5a,.box-5s,.box-5b,.box-5l,.box-5LA,.section-title-5" = list("background-color" = "#f28122",
+    #                                                                           "border-radius" = "15px"),
+    # ".box-6,.box-6a,.box-6s,.box-6b,.box-6l,.box-6LA,.section-title-6" = list("background-color" = "#F89441",
+    #                                                                           "border-radius" = "15px"),
+    # ".box-7,.box-7a,.box-7s,.box-7b,.box-7l,.box-7LA,.section-title-7" = list("background-color" = "#faa055",
+    #                                                                           "border-radius" = "15px"),
    
    ".box-1t,.box-1tL,.section-title-1t" = list("background-color" = "rgba(13, 8, 135,0.3)",
                                       "color"="rgba(13, 8, 135,1)",
@@ -297,13 +304,13 @@ style_mono_accent(
                                                                                                            "color" = "#333f48"),
    
    
-    ".box-1trans,.box-1transl,.box-1Trans" = list("border"="5px solid #5A3D66"),
-    ".box-2trans,.box-2transl,.box-2Trans" = list("border"="5px solid #9442B5"),
+    ".box-1trans,.box-1transl,.box-1Trans" = list("border"="5px solid #3b0768"),
+    ".box-2trans,.box-2transl,.box-2Trans" = list("border"="5px solid #291594"),
     ".box-3trans,.box-3transl,.box-3Trans" = list("border"="5px solid #820a94"),
     ".box-4trans,.box-4transl,.box-4Trans" = list("border"="5px solid #A5AC20"),
-    ".box-5trans,.box-5transl,.box-5Trans" = list("border"="5px solid #DAE058"),
-    ".box-6trans,.box-6transl,.box-6Trans" = list("border"="5px solid rgba(248, 148, 65,1)"),
-    ".box-7trans,.box-7transl,.box-7Trans" = list("border"="5px solid rgba(252, 206, 37,1)"),
+    ".box-5trans,.box-5transl,.box-5Trans" = list("border"="5px solid #f87241"),
+    ".box-6trans,.box-6transl,.box-6Trans" = list("border"="5px solid #F89441"),
+    ".box-7trans,.box-7transl,.box-7Trans" = list("border"="5px solid #f8c741"),
    
    ".image-80 img" = list("scale" = "80%"),
    ".pull-left-little_l" = list("float" = "left",
@@ -834,7 +841,7 @@ for(i in -5:5){
   set.seed(i + 3)
   
   y1 <- 2 + 0.09*i + 0.1*sqrt(i+5)+ rnorm(100,0,0.5)
-  y0 <- y1 - 0.04*i - 0.3
+  y0 <- y1 - 0.04*i - 0.3 
   y1p = y1
   
   if(i>0){
@@ -857,7 +864,7 @@ ggplot(d, aes(x = t, y = y, group = factor(treat, levels = c(1,0)), color = fact
   theme_bw()+
   theme_ipsum_fsc(plot_title_face = "bold") + #plain 
   xlab("Time") +
-  xlim(-5, 5) +
+  xlim(-5, 5) + 
   
   theme(plot.margin=unit(c(1,1,1.5,1.2),"cm"),
         panel.grid.major.x = element_blank(),
@@ -961,8 +968,24 @@ ggplot(d, aes(x = t, y = y, group = factor(treat, levels = c(1,0)), color = fact
 $$
 \begin{aligned}
 E[Y_{it'}(1)| Z = 1] - E[Y_{it'}(0)| Z = 0] -(E[Y_{it}(1)|Z=1] - E[Y_{it}(0)|Z = 0]) &=\\
-E[g(X_{it'},u_{it'}, t')|Z=1] - E[g(X_{it'},u_{it'}, t')|Z=0] -& \\
-(E[g(X_{it},u_{it}, t)|Z=1] - E[g(X_{it},u_{it}, t)|Z=0]) &= \Delta
+\color{#ffffff}{\overbrace{\color{black}{E[g(X_{it'},u_{it'}, t')|Z=1] - E[g(X_{it'},u_{it'}, t')|Z=0]}}^{\color{#ffffff}{\Delta_{post}}}} -& \\
+(\color{#ffffff}{\underbrace{\color{black}{E[g(X_{it'},u_{it'}, t')|Z=1] - E[g(X_{it'},u_{it'}, t')|Z=0]}}_{\color{#ffffff}{\Delta_{pre}}}}) &= \Delta
+\end{aligned}
+$$
+
+
+---
+# Using pre-trends as robustness check
+
+- Let's use two points in the pre-intervention period: $(t, t') \in (-\infty, T_0]$
+
+- Define $\Delta$ as the bias in the pre-intervention period:
+
+$$
+\begin{aligned}
+E[Y_{it'}(1)| Z = 1] - E[Y_{it'}(0)| Z = 0] -(E[Y_{it}(1)|Z=1] - E[Y_{it}(0)|Z = 0]) &=\\
+\color{#820a94}{\overbrace{\color{black}{E[g(X_{it'},u_{it'}, t')|Z=1] - E[g(X_{it'},u_{it'}, t')|Z=0]}}^{\color{#820a94}{\Delta_{post}}}} -& \\
+(\color{#F89441}{\underbrace{\color{black}{E[g(X_{it'},u_{it'}, t')|Z=1] - E[g(X_{it'},u_{it'}, t')|Z=0]}}_{\color{#F89441}{\Delta_{pre}}}}) &= \Delta
 \end{aligned}
 $$
 --
@@ -970,6 +993,56 @@ $$
 - $\Delta \neq 0$ due to $X$, $u$, or both.
 
 - Find $\mathbf{X} = \mathbf{X^T}$, so that $\Delta = 0$ (i.e. assume no differential time-varying unobserved confounder)
+
+---
+# How does matching help?
+
+- If **.darkorange[X is constant or evolves similarly for both groups]**:
+
+  - Matching on pre-treatment covariates can **.darkorange[eliminate/significantly reduce bias]**
+  
+--
+<br>
+<br>
+
+- If **.darkorange[X evolves differently over time** for Z=0 and Z=1]:
+
+  - Matching on pre-treatment covariates **.darkorange[still returns a biased estimate]**
+  
+--
+<br>
+<br>
+
+.box-6trans[Can we do something about it?]
+
+---
+# Matching on post-intervention covariates
+
+
+- Adjusting for post-intervention covariates can **.darkorange[introduce bias]** (Rosenbaum, 1984)
+
+  - E.g. collider bias
+
+--
+<br>
+<br>
+
+- If pre-parallel trends test **.darkorange[fails]** (e.g. $\Delta=0$), $\rightarrow$ match on **.darkorange[post-intervention]** covariates for bounding the direct effect (DE) and indirect effect (IE) .small[(Hong, Yang, & Qin, 2021)]
+
+--
+<br>
+<br>
+
+- Decompose ATT as:
+
+  - Direct effect: $E[Y(1, X(0)) - Y(0,X(0))| Z=1]$
+  - Indirect effect: $E[Y(1,X(1)) - Y(1, X(0))| Z=1]$
+
+--
+<br>
+<br>
+
+- Using different values of the *potential* correlation between $X_{t'}(0)$ and $X_{t'}(1)$ $\rightarrow$ conditional distribution of $X_{t'}(0)$ as a function of $X_t$ and $X_{t'}(1)$.
 
 ---
 # How do we match?
@@ -983,6 +1056,8 @@ $$
 This paper:
 
 - **.darkorange[Match on covariates]** that could make groups behave differently.
+  
+  - Use distribution of  covariates to match on a template (for post-treat covariates).
 
 - Use of **.darkorange[Mixed-Integer Programming (MIP) Matching]** .small[(Zubizarreta, 2015; Bennett, Zubizarreta, & Vielma, 2020)]:
 
@@ -1008,11 +1083,11 @@ Simulations
 .pull-left[
 **Time-invariant covariates:**
 
-.box-1.medium.sp-after-half[S1: Time-invariant covariate effect]
+.box-1trans[S1: Time-invariant covariate effect]
 
-.box-2.medium.sp-after-half[S2: Time-varying covariate effect]
+.box-2trans[S2: Time-varying covariate effect]
 
-.box-3.medium.sp-after-half[S3: Treatment-independent covariate]
+.box-3trans[S3: Treatment-independent covariate]
 
 ]
 
@@ -1021,11 +1096,11 @@ Simulations
 .pull-right[
 **Time-varying covariates:**
 
-.box-4.medium.sp-after-half[S4: Parallel evolution]
+.box-5trans[S4: Parallel evolution]
 
-.box-6.medium.sp-after-half[S5: Evolution differs by group]
+.box-6trans[S5: Evolution differs by group]
 
-.box-7.medium.sp-after-half[S6: Evolution diverges in post]
+.box-7trans[S6: Evolution diverges in post]
 ]
 
 <br>
@@ -1202,28 +1277,6 @@ ggplot(d[d$var=="Varying" & d$type!="S5: Evolution diff.\nby group",],
                                                             "Evolution differs by group"]))))
 
 ```
----
-# Results: Time-varying covariates
-
-- In these simulations. for time-varying covariates:
-  
-  - Matching on pre-treatment covariates returns a <u>unbiased</u> ATT estimate **.darkorange[if covariates evolve similarly over time in the pre-intervention period and are not affected by the treatment]**.
-
---
-
-  - Matching on treatment covariates returns a <u>biased</u> ATT estimate **.darkorange[if covariates evolve differently over time and/or are affected by treatment]**.
-  
---
-
-.box-6[Can we do something with this?]
-
---
-
-- Matching on pre- and post-intervention covariates returns the **.darkorange[direct effect of the treatment on the outcome]** [REFERENCES]
-
-- Depending on the context, this could be an **.darkorange[upper or lower bound]** for the true ATT effect.
-
-  - Sensitivity analysis to create bounds (Hong, Yang, & Qin, 2021)
 
 ---
 # Other simulations
@@ -1235,7 +1288,7 @@ ggplot(d[d$var=="Varying" & d$type!="S5: Evolution diff.\nby group",],
   
 - Similar conclusions to Ham & Miratrix (2022) regarding the reliability of X on Y.
 
-```{r res3, fig.width=9, fig.height=4.5, fig.align='center', dev='svg', echo=FALSE, warning=FALSE}
+```{r res3, fig.width=9, fig.height=4, fig.align='center', dev='svg', echo=FALSE, warning=FALSE}
 
 #different-high/different-low - same-high/same-low
 results = c(0.039/1.067,0.192/1.063,0.028/1.013,0.10/1.015)
@@ -1299,13 +1352,18 @@ Application
   - Additional money for concentration of SEP students.
 
 --
+
 <br/>
 .pull-left[
-.box-3b.medium.sp-after-half[Students:<br/>- Verify SEP status<br/>- Attend a SEP school]
+.center[
+.box-6trans[Students:<br/>- Verify SEP status<br/>- Attend a SEP school]
+]
 ]
 
 .pull-right[
-.box-6b.medium.sp-after-half[Schools:<br/>- Opt-into the policy<br/>- No selection, no fees<br/>- Resources ~ performance]
+.center[
+.box-6trans[Schools:<br/>- Opt-into the policy<br/>- No selection, no fees<br/>- Resources ~ performance]
+]
 ]
 
 ---
@@ -1339,7 +1397,7 @@ Application
 ---
 # Matching + DD
 
-- **.darkorange[Prior to matching]**: No parallel pre-trend, covariates evolve differently for both groups.
+- **.darkorange[Prior to matching]**: No parallel pre-trend
 
 - **.darkorange[Different types of schools]**:
 
@@ -1391,31 +1449,35 @@ Let's wrap it up
 <br>
 ]
 ---
-#Conclusions
+#Conclusions & Next Steps
 
 .pull-left[
-- **.darkorange[Matching can be an important tool to address violations in PTA]**.
+- Matching can be an important tool to address **.darkorange[violations in PTA]**.
 
-- Relevant to think whether groups come from the **.darkorange[same]** or **.darkorange[different]** populations.
+- **.darkorange[Partial identification]** can also be useful
 
-- **.darkorange[Serial correlation]** also plays an important role: Don't match on random noise.]
+- **.darkorange[Serial correlation]** also plays an important role: Don't match on random noise.
+
+- Next steps: Sensitivity analysis to hidden bias ]
 
 .pull-right[
 ![](https://media.giphy.com/media/drwxYI2fxqQGqRZ9Pe/giphy.gif)
 ]
 
 ---
-#Conclusions
+#Conclusions & Next Steps
 
 .pull-left[
-- **.darkorange[Matching can be an important tool to address violations in PTA]**.
+- Matching can be an important tool to address **.darkorange[violations in PTA]**.
 
-- Relevant to think whether groups come from the **.darkorange[same]** or **.darkorange[different]** populations.
+- **.darkorange[Partial identification]** can also be useful
 
 - **.darkorange[Serial correlation]** also plays an important role: Don't match on random noise.
 
+- Next steps: Sensitivity analysis to hidden bias  
+
   
-.box-7.medium.sp-after-half[Match well and match smart!
+.box-6trans[Match well and match smart!
 ]]
 .pull-right[
 ![](https://media.giphy.com/media/drwxYI2fxqQGqRZ9Pe/giphy.gif)

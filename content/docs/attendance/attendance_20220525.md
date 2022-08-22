@@ -15,7 +15,7 @@ toc: true
 
 <h3> Abstract </h3>
 
-**Beyond exclusion: The role of the causal effect of testing on attendance on the day of the test**
+**Beyond exclusion: The role of high-stake testing on attendance**
 
 *Magdalena Bennett (University of Texas at Austin), Christopher Neilson (Princeton University), & Nicolás Rojas (Columbia University)*
 

@@ -32,7 +32,7 @@ Some preliminary results also show high levels of heterogeneity between schools 
 <meta charset="UTF-8">
 </head>
 
-<a class="btn btn-link btn-sm px-4 mb-2" href="https://github.com/maibennett/presentations/blob/main/presentations/Attendance/ACIC_20220524/mbennett_attendance_poster.Rmd" role="button"> Download code &#128187;</a>
+<a class="btn btn-link btn-sm px-4 mb-2" href="https://github.com/maibennett/presentations/tree/main/content/presentations/Attendance/ACIC_20220524" role="button"> Download code &#128187;</a>
 <a class="btn btn-link btn-sm px-4 mb-2" href="https://raw.githack.com/maibennett/presentations/main/content/presentations/Attendance/ACIC_20220524/mbennett_attendance_poster.html" role="button"> Open poster &#128194;</a>
 
 <style>

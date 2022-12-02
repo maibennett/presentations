@@ -1,0 +1,21 @@
+
+- CustomerID: Identification for customer
+- ProdTaken: Binary variable for whether the package was purchased (1) or not (0)
+- Age: Age of the client (years)
+- TypeofContact: Type of contact
+- CityTier: City tier (from 1 to 3 in order)
+- DurationOfPitch: Duration of pitch (in minutes)
+- Occupation: Occupation for the customer
+- Gender: Gender
+- NumberOfPersonVisiting: Number of persons that will be traveling
+- NumberOfFollowups: Number of follow-ups
+- ProductPitched: Type of package pitched
+- PreferredPropertyStar: Preferred property they would like to stay (1 to 5 stars)
+- MaritalStatus: Marital Status
+- NumberOfTrips: Number of trips
+- Passport: Whether the customer has a passport or not
+- PitchSatisfactionScore: Pitch satisfaction score
+- OwnCar: Whether the customer owns a car or not
+- NumberOfChildrenVisiting: Number of children traveling
+- Designation: Designation
+- MonthlyIncome: Monthly income

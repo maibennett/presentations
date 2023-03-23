@@ -421,18 +421,26 @@ class: inverse, center, middle
 ---
 # What do we mean by zoned-in areas?
 
+.pull-left[
 - **Zoned-in area**: Area for a new school *S'* attendance zone.
+]
 
-[INSERT MAP]
+.center[
+![:scale 50%](https://raw.githubusercontent.com/maibennett/presentations/main/content/presentations/AttendanceZones/AEFP_20230324/images/map1.png)]
+
 
 ---
 # What do we mean by zoned-out area?
 
+.pull-left[
 - **Zoned-out area**: New attendance zone for school *S* after the opening of schools *S'*.
 
 - **Spillover school**: School which had a part of their catchment area zoned-out.
+]
 
-[INSERT MAP]
+.center[
+![:scale 50%](https://raw.githubusercontent.com/maibennett/presentations/main/content/presentations/AttendanceZones/AEFP_20230324/images/map2.png)]
+
 
 ---
 # Data
@@ -473,6 +481,9 @@ class: inverse, center, middle
 # Broader picture: What happens to districts?
 
 - Compare districts with a new school between 2012 and 2016 vs districts with no new schools.
+
+.center[
+![:scale 50%](https://raw.githubusercontent.com/maibennett/presentations/main/content/presentations/AttendanceZones/AEFP_20230324/images/map0_districts.png)]
 
 ---
 # Zoned-in Areas: How do neighborhoods change?

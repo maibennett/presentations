@@ -422,7 +422,7 @@ class: inverse, center, middle
 # What do we mean by zoned-in areas?
 
 .pull-left[
-- **Zoned-in area**: Area for a new school *S'* attendance zone.
+- **Zoned-in area**: Attendance zone for a new school *S'*.
 ]
 
 .center[
@@ -434,6 +434,7 @@ class: inverse, center, middle
 
 .pull-left[
 - **Zoned-out area**: New attendance zone for school *S* after the opening of schools *S'*.
+<br>
 
 - **Spillover school**: School which had a part of their catchment area zoned-out.
 ]

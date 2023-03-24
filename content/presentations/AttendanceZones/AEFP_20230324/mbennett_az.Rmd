@@ -439,7 +439,7 @@ class: inverse, center, middle
 
 .pull-right[
 .center[
-![](https://raw.githubusercontent.com/maibennett/presentations/main/content/presentations/AttendanceZones/AEFP_20230324/images/map_TX.png)]
+![:scale 90%](https://raw.githubusercontent.com/maibennett/presentations/main/content/presentations/AttendanceZones/AEFP_20230324/images/map_TX.png)
 ]
 ]
 
@@ -453,8 +453,6 @@ class: inverse, center, middle
   - Zoned-in areas (i.e. neighborhoods)?
   
   - Zoned-out areas (i.e. neighborhoods and schools)?
-
-<br>
 
 - **.darkorange[New high schools]** in Texas that changed AZ $\rightarrow$ mostly gentrified areas
 
@@ -462,7 +460,7 @@ class: inverse, center, middle
 
 .pull-right[
 .center[
-![](https://raw.githubusercontent.com/maibennett/presentations/main/content/presentations/AttendanceZones/AEFP_20230324/images/map_TX.png)]
+![:scale 90%](https://raw.githubusercontent.com/maibennett/presentations/main/content/presentations/AttendanceZones/AEFP_20230324/images/map_TX.png)
 ]
 ]
 
@@ -477,11 +475,9 @@ class: inverse, center, middle
   
   - Zoned-out areas (i.e. neighborhoods and schools)?
   
-<br>
 
 - **.darkorange[New high schools]** in Texas that changed AZ $\rightarrow$ mostly gentrified areas
 
-<br>
 
 - **.darkorange[Outcomes of interest]**:
 
@@ -494,7 +490,7 @@ class: inverse, center, middle
 
 .pull-right[
 .center[
-![](https://raw.githubusercontent.com/maibennett/presentations/main/content/presentations/AttendanceZones/AEFP_20230324/images/map_TX.png)]
+![:scale 90%](https://raw.githubusercontent.com/maibennett/presentations/main/content/presentations/AttendanceZones/AEFP_20230324/images/map_TX.png)
 ]
 ]
 ---
@@ -582,7 +578,7 @@ $$\hat{Y}^{aug}_{1T}(0) = \sum_{W_i=0}\gamma_iY_{iT}+\color{#db5f12}{(\hat{m}_{i
 
 --
 
-- Proposal of **.darkorange[sensitivity analysis to hidden bias]**:
+- Proposal of **.darkorange[sensitivity analysis to hidden bias]** .small[(Rosenbaum, 2002; Keele et al., 2019)]:
 
   - *How much should an unobserved confounder affect the probability of treatment (i.e. new school opening there vs in a control area) to explain away the results we find?*
 
@@ -649,6 +645,7 @@ $$\hat{Y}^{aug}_{1T}(0) = \sum_{W_i=0}\gamma_iY_{iT}+\color{#db5f12}{(\hat{m}_{i
 .center[
 ![](https://raw.githubusercontent.com/maibennett/presentations/main/content/presentations/AttendanceZones/AEFP_20230324/images/map_zoned_in_out.png)]
 ]
+
 ---
 # Zoned-in Areas: How do neighborhoods change?
 

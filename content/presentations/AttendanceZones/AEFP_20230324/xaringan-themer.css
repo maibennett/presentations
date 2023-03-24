@@ -69,6 +69,12 @@
   --white: #FFFFFF;
   --darkorange: #db5f12;
   --coolblue: #4493AE;
+  --col1: #003f5c;
+  --col2: #58508d;
+  --col3: #bc5090;
+  --col4: #ff6361;
+  --col5: #ffa600;
+  --col6: #f87241;
 }
 
 html {
@@ -341,6 +347,42 @@ table.dataTable.hover tbody tr:hover, table.dataTable.display tbody tr:hover {
 }
 .bg-coolblue {
   background-color: var(--coolblue);
+}
+.col1 {
+  color: var(--col1);
+}
+.bg-col1 {
+  background-color: var(--col1);
+}
+.col2 {
+  color: var(--col2);
+}
+.bg-col2 {
+  background-color: var(--col2);
+}
+.col3 {
+  color: var(--col3);
+}
+.bg-col3 {
+  background-color: var(--col3);
+}
+.col4 {
+  color: var(--col4);
+}
+.bg-col4 {
+  background-color: var(--col4);
+}
+.col5 {
+  color: var(--col5);
+}
+.bg-col5 {
+  background-color: var(--col5);
+}
+.col6 {
+  color: var(--col6);
+}
+.bg-col6 {
+  background-color: var(--col6);
 }
 
 
@@ -676,7 +718,7 @@ table.dataTable.hover tbody tr:hover, table.dataTable.display tbody tr:hover {
   border: 5px solid #f87241;
 }
 .box-6trans,.box-6transl,.box-6Trans {
-  border: 5px solid #F89441;
+  border: 5px solid #BF3984;
 }
 .box-7trans,.box-7transl,.box-7Trans {
   border: 5px solid #f8c741;

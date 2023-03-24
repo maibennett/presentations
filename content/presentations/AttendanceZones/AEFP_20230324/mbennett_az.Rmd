@@ -427,6 +427,7 @@ class: inverse, center, middle
 ---
 # This paper
 
+.pull-left[
 
 - How do **.darkorange[changes in attendance zones (AZ)]** affect:
 
@@ -434,14 +435,52 @@ class: inverse, center, middle
   
   - Zoned-out areas (i.e. neighborhoods and schools)?
   
---
-<br>
+]
+
+.pull-right[
+.center[
+![](https://raw.githubusercontent.com/maibennett/presentations/main/content/presentations/AttendanceZones/AEFP_20230324/images/map_TX.png)]
+]
+]
+
+---
+# This paper
+
+.pull-left[
+
+- How do **.darkorange[changes in attendance zones (AZ)]** affect:
+
+  - Zoned-in areas (i.e. neighborhoods)?
+  
+  - Zoned-out areas (i.e. neighborhoods and schools)?
+
 <br>
 
 - **.darkorange[New high schools]** in Texas that changed AZ $\rightarrow$ mostly gentrified areas
 
---
+]
+
+.pull-right[
+.center[
+![](https://raw.githubusercontent.com/maibennett/presentations/main/content/presentations/AttendanceZones/AEFP_20230324/images/map_TX.png)]
+]
+]
+
+---
+# This paper
+
+.pull-left[
+
+- How do **.darkorange[changes in attendance zones (AZ)]** affect:
+
+  - Zoned-in areas (i.e. neighborhoods)?
+  
+  - Zoned-out areas (i.e. neighborhoods and schools)?
+  
 <br>
+
+- **.darkorange[New high schools]** in Texas that changed AZ $\rightarrow$ mostly gentrified areas
+
 <br>
 
 - **.darkorange[Outcomes of interest]**:
@@ -451,7 +490,13 @@ class: inverse, center, middle
   - Differences in school composition
 
   - Differences in neighborhood composition 
+]
 
+.pull-right[
+.center[
+![](https://raw.githubusercontent.com/maibennett/presentations/main/content/presentations/AttendanceZones/AEFP_20230324/images/map_TX.png)]
+]
+]
 ---
 # What do we mean by zoned-in and zoned-out areas?
 

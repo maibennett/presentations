@@ -571,12 +571,26 @@ $$\hat{Y}^{aug}_{1T}(0) = \sum_{W_i=0}\gamma_iY_{iT}+\color{#db5f12}{(\hat{m}_{i
 ---
 # What happens within districts?
 
+.pull-left[
 - Identify **.darkorange[6 new high schools]** between 2012-2016 that change AZ.
 
 - Compare attendance zones *within districts* to create a counterfactual.
 
---
-<br>
+]
+
+.pull-right[
+.center[
+![](https://raw.githubusercontent.com/maibennett/presentations/main/content/presentations/AttendanceZones/AEFP_20230324/images/map_zoned_in_out.png)]
+]
+
+---
+# What happens within districts?
+
+.pull-left[
+- Identify **.darkorange[6 new high schools]** between 2012-2016 that change AZ.
+
+- Compare attendance zones *within districts* to create a counterfactual.
+
 <br>
 
 - **.darkorange[Important caveat]**:
@@ -584,7 +598,12 @@ $$\hat{Y}^{aug}_{1T}(0) = \sum_{W_i=0}\gamma_iY_{iT}+\color{#db5f12}{(\hat{m}_{i
   - Limited sample size $\rightarrow$ under-powered.
   
   - Trends are suggestive.
+]
 
+.pull-right[
+.center[
+![](https://raw.githubusercontent.com/maibennett/presentations/main/content/presentations/AttendanceZones/AEFP_20230324/images/map_zoned_in_out.png)]
+]
 ---
 # Zoned-in Areas: How do neighborhoods change?
 

@@ -42,32 +42,30 @@ class: inverse, center, middle
 ---
 # Attendance zones, new schools, and segregation
 
-- Schools can either **.col6[attract]** or **.col6[push away]** residents depending on socioeconomic characteristics .small[(Hasan &amp; Kumar, 2019; Gibbons, Machin, &amp; Silva 2013; Figlio &amp; Lucas, 2004)]
+- Schools can either **.darkorange[attract]** or **.darkorange[push away]** residents depending on socioeconomic characteristics .small[(Hasan &amp; Kumar, 2019; Gibbons, Machin, &amp; Silva 2013; Figlio &amp; Lucas, 2004)]
 
 --
 &lt;br&gt;
 &lt;br&gt;
 
-- Neighborhoods have important effects on **.col6[long-term outcomes]** .small[(Chetty et al. 2020)]
+- Neighborhoods have important effects on **.darkorange[long-term outcomes]** .small[(Chetty et al. 2020)]
 
 --
 &lt;br&gt;
 &lt;br&gt;
 
-- Racial and socioeconomic disparities in the school system also have long-term effects on students .small[(Reardon, 2016; Billings et al., 2014)]
+- **.darkorange[Racial and socioeconomic disparities]** in the school system also have long-term effects on students .small[(Reardon, 2016; Billings et al., 2014)]
 
 --
 
-.box-7Trans[New public schools opening &lt;br&gt;
-&amp;darr;&lt;br&gt;
-Changes in attendance zones]
+.box-7Trans[New public schools opening &amp;rarr; Changes in attendance zones]
 
 
 ---
 # This paper
 
 
-- How do **.col6[changes in attendance zones (AZ)]** affect:
+- How do **.darkorange[changes in attendance zones (AZ)]** affect:
 
   - Zoned-in areas (i.e. neighborhoods)?
   
@@ -77,13 +75,13 @@ Changes in attendance zones]
 &lt;br&gt;
 &lt;br&gt;
 
-- **.col6[New high schools]** in Texas that changed AZ
+- **.darkorange[New high schools]** in Texas that changed AZ `\(\rightarrow\)` mostly gentrified areas
 
 --
 &lt;br&gt;
 &lt;br&gt;
 
-- **.col6[Outcomes of interest]**:
+- **.darkorange[Outcomes of interest]**:
 
   - Differences in scores and score gaps between race/ethnicity
 
@@ -133,38 +131,42 @@ Changes in attendance zones]
 ---
 # Data
 
-- **.col6[Common Core Data (CCD) [2005-2019]]**: Administrative data from NCES, including demographic and socioeconomic characteristics of schools.
+- **.darkorange[Common Core Data (CCD) [2005-2019]]**: Administrative data from NCES, including demographic and socioeconomic characteristics of schools.
 
 --
 &lt;br&gt;
+&lt;br&gt;
 
-- **.col6[Texas Educacion Agency (TEA) data [2005-2019]]**: Performance data for schools over time.
+- **.darkorange[Texas Educacion Agency (TEA) data [2005-2019]]**: Performance data for schools over time.
 
 --
 &lt;br&gt;
+&lt;br&gt;
 
-- **.col6[Attendance zones maps [2009-2017]]**: Geographic data for school boundaries over time from SABS, SABINS, and Maponics.
+- **.darkorange[Attendance zones maps [2009-2017]]**: Geographic data for school boundaries over time from SABS, SABINS, and Maponics.
 
 --
 &lt;br&gt;
+&lt;br&gt;
 
-- **.col6[Census and American Community Survey (ACS) data [2010-2019]]**: Demographic information at the census tract level
+- **.darkorange[Census and American Community Survey (ACS) data [2010-2019]]**: Demographic information at the census tract level
 
 --
 &lt;br&gt;
+&lt;br&gt;
 
-- **.col6[Housing Prices data [2005-2019]]**: Information about housing prices over time from CoreLogic and Zillow *(coming soon)*.
+- **.darkorange[Housing Prices data [2005-2019]]**: Information about housing prices over time from CoreLogic and Zillow *(coming soon)*.
 
 ---
 # Identification Strategy: An Augmented Synthetic Control Method
 
-- Use a **.col6[weighted average]** of similar districts/schools/AZ/neighborhoods to create a comparison group for affected areas.
+- Use a **.darkorange[weighted average]** of similar districts/schools/AZ/neighborhoods to create a comparison group for affected areas.
 
 --
 
-- Under **.col6[Augmented Synthetic Control Method]** (ASCM) (Ben-Michael et al., 2020) there is a correction for poor fit:
+- Under **.darkorange[Augmented Synthetic Control Method]** (ASCM) (Ben-Michael et al., 2020) there is a correction for poor fit:
 
-`$$\hat{Y}^{aug}_{1T}(0) = \sum_{W_i=0}\gamma_iY_{iT}+\color{#820a94}{(\hat{m}_{iT}(\mathbf{X_i})-\sum_{W_i=0}\gamma_i\hat{m}_{iT}(\mathbf{X_i}))}$$`
+`$$\hat{Y}^{aug}_{1T}(0) = \sum_{W_i=0}\gamma_iY_{iT}+\color{#db5f12}{(\hat{m}_{iT}(\mathbf{X_i})-\sum_{W_i=0}\gamma_i\hat{m}_{iT}(\mathbf{X_i}))}$$`
 .small[
 - `\(m_{iT}\)`: Estimator for `\(Y_{iT}(0)\)`
 - Extrapolation for "bias correction".
@@ -172,20 +174,23 @@ Changes in attendance zones]
 
 --
 
-- Proposal of **.col6[sensitivity analysis to hidden bias]**:
+- Proposal of **.darkorange[sensitivity analysis to hidden bias]**:
 
   - *How much should an unobserved confounder affect the probability of treatment (i.e. new school opening there vs in a control area) to explain away the results we find?*
 
 ---
 # Broader picture: What happens to districts?
 
+.pull-left[
 - Compare districts with a new school between 2012 and 2016 vs districts with no new schools.
 
 - ASCM for different characteristics, adjusting for other baseline covariates (e.g. number of schools, enrollment, %FRPL, % race/ethnicity)
+]
 
+.pull-right[
 .center[
-![:scale 40%](https://raw.githubusercontent.com/maibennett/presentations/main/content/presentations/AttendanceZones/AEFP_20230324/images/map0_districts.png)]
-
+![](https://raw.githubusercontent.com/maibennett/presentations/main/content/presentations/AttendanceZones/AEFP_20230324/images/map0_districts.png)]
+]
 ---
 # Districts with new schools increase gap in Math
 
@@ -203,7 +208,7 @@ Changes in attendance zones]
 ---
 # What happens within districts?
 
-- Identify **.col6[6 new high schools]** between 2012-2016 that change AZ.
+- Identify **.darkorange[6 new high schools]** between 2012-2016 that change AZ.
 
 - Compare attendance zones *within districts* to create a counterfactual.
 
@@ -211,7 +216,7 @@ Changes in attendance zones]
 &lt;br&gt;
 &lt;br&gt;
 
-- **.col6[Important caveat]**:
+- **.darkorange[Important caveat]**:
 
   - Limited sample size `\(\rightarrow\)` under-powered.
   
@@ -243,7 +248,7 @@ Changes in attendance zones]
 ---
 # Zoned-out Areas: How are schools affected?
 
-- **.col6[Demographics]**: Decreasing trend in white students enrollment (left) vs increasing trend in African American enrollment (right).
+- **.darkorange[Demographics]**: Decreasing trend in white students enrollment (left) vs increasing trend in African American enrollment (right).
 
 .pull-left[
 .center[
@@ -258,7 +263,7 @@ Changes in attendance zones]
 ---
 # Zoned-out Areas: How are schools affected?
 
-- **.col6[Performance]**: Decreasing trend % of proficiency (sharper for African American students).
+- **.darkorange[Performance]**: Decreasing trend % of proficiency (sharper for African American students).
 
 .center[
 ![:scale 60%](https://raw.githubusercontent.com/maibennett/presentations/main/content/presentations/AttendanceZones/AEFP_20230324/images/zones_out_scores.png)]
@@ -281,13 +286,13 @@ Changes in attendance zones]
 ---
 # Wrapping up
 
-- Attendance zones have a huge role in **.col6[shaping neighborhoods]** and nearby areas.
+- Attendance zones have a huge role in **.darkorange[shaping neighborhoods]** and nearby areas.
 
 --
 &lt;br&gt;
 &lt;br&gt;
 
-- Importance of understanding the effects of **.col6[new schools]** and their location and boundaries.
+- Importance of understanding the effects of **.darkorange[new schools]** and their location and boundaries.
 
 --
 &lt;br&gt;
@@ -299,7 +304,7 @@ Changes in attendance zones]
 &lt;br&gt;
 &lt;br&gt;
 
-- **.col6[Next steps]**:
+- **.darkorange[Next steps]**:
   
   - Include other states (e.g. CA)
   - Analyze housing prices over time.

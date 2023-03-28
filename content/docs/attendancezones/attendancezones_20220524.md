@@ -11,7 +11,7 @@ weight: 400
 toc: true
 ---
 
-<h4> Date: 05/24/2023</h4>
+<h4> Date: 03/24/2023</h4>
 
 <h3> Abstract </h3>
 
@@ -26,8 +26,8 @@ What happens to existing neighborhoods when new schools are built? This project 
 <meta charset="UTF-8">
 </head>
 
-<a class="btn btn-link btn-sm px-4 mb-2" href="https://github.com/maibennett/presentations/tree/main/content/presentations/AttendanceZones/AEFP_20230524" role="button"> Download code &#128187;</a>
-<a class="btn btn-link btn-sm px-4 mb-2" href="https://raw.githack.com/maibennett/presentations/main/content/presentations/AttendanceZones/AEFP_20230524/mbennett_az.html" role="button"> Open poster &#128194;</a>
+<a class="btn btn-link btn-sm px-4 mb-2" href="https://github.com/maibennett/presentations/tree/main/content/presentations/AttendanceZones/AEFP_20230324" role="button"> Download code &#128187;</a>
+<a class="btn btn-link btn-sm px-4 mb-2" href="https://raw.githack.com/maibennett/presentations/main/content/presentations/AttendanceZones/AEFP_20230324/mbennett_az.html" role="button"> Open slides &#128194;</a>
 
 <style>
 .resp-container {
@@ -53,7 +53,7 @@ What happens to existing neighborhoods when new schools are built? This project 
 </style>
 
 <div class="resp-container">
-    <iframe class="testiframe" src="https://slides.magdalenabennett.com/presentations/AttendancezONES/AEFP_20230524/mbennett_az.html">
+    <iframe class="testiframe" src="https://slides.magdalenabennett.com/presentations/AttendanceZones/AEFP_20230324/mbennett_az.html">
       Oops! Your browser doesn't support this.
     </iframe>
 </div>

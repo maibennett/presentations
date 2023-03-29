@@ -379,7 +379,7 @@ class: inverse, center, middle
 <br>
 <br>
 
-.left[.small[IROM Brownbag<br>March 29th, 2023]]]
+.left[.small[IROM Brown Bag<br>March 29th, 2023]]]
 
 .pull-right-little_l[
 <br>
@@ -1442,7 +1442,7 @@ class: inverse, center, middle
 <br>
 <br>
 
-.left[.small[IROM Brownbag<br>March 29th, 2023]]]
+.left[.small[IROM Brown Bag<br>March 29th, 2023]]]
 
 .pull-right-little_l[
 <br>

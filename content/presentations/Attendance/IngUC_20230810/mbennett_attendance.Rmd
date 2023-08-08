@@ -1072,9 +1072,6 @@ ggplot(data = df_plot, aes(x = GPA_pos, y = outcome*100, fill = factor(type), co
         title = element_text(size=14)) +
   facet_wrap(~factor(grade_treat, levels = c(FALSE,TRUE), labels = c("Non-tested grade","Tested grade")))
 
-
-
-
 ```
 
 

@@ -379,7 +379,7 @@ class: inverse, center, middle
 <br>
 <br>
 
-.left[.small[IROM Brown Bag<br>August 8th, 2023]]]
+.left[.small[Seminario Ingeniería UC<br>August 8th, 2023]]]
 
 .pull-right-little_l[
 <br>

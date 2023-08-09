@@ -1197,8 +1197,8 @@ load("https://raw.githubusercontent.com/maibennett/presentations/main/content/pr
 #                      distance = "euclidean", min.nc = 2, max.nc = 10, 
 #                      method = "kmeans")
 
-df_wide_test$cluster = res.nbclust$best.partition
-df_wide_test$cluster = factor(df_wide_test$cluster, levels = c(1,2), labels=c(1,2))
+df_wide_test$cluster = res.nbclust$Best.partition
+df_wide_test$cluster = factor(df_wide_test$cluster, levels = c(1,2,3), labels=c(1,2,3))
 
 g1 = ggplot(df_wide_test, aes(x = cluster, y = diff_4_D1)) + 
         geom_boxplot(aes(fill = cluster, color = cluster)) + 
@@ -1317,7 +1317,7 @@ g4 = ggplot(df_wide_test, aes(x = cluster, y = diff_4_D10)) +
 ```{r, echo=FALSE, message=FALSE, warning=FALSE}
 library(modelsummary)
 
-d_tab <- read.csv("https://raw.githubusercontent.com/maibennett/presentations/main/content/presentations/Attendance/Salem_20220405/data/d_tab.csv")
+d_tab <- read.csv("https://raw.githubusercontent.com/maibennett/presentations/main/content/presentations/Attendance/Salem_20220405/data/d_tabv5.csv")
 
 d_tab <- d_tab %>% dplyr::select(-c(X, rbd))
 
@@ -1330,7 +1330,7 @@ d_tab <- d_tab %>% rename(`Avg. SIMCE Lang` = Avg..SIMCE.Lang,
                           `Diff D9 GPA` = Diff.D9.GPA,
                           `Diff D10 GPA` = Diff.D10.GPA)
 
-d_tab$cluster = factor(d_tab$cluster, levels = c(1,2), labels = c("Cluster 1\nSimilar", "Cluster 2\nLower att"))
+d_tab$cluster = factor(d_tab$cluster, levels = c(1,2), labels = c("Cluster 1\nIncrease att", "Cluster 2\nLower att"))
 
 datasummary_balance(~ cluster, data = d_tab, dinm_statistic = "p.value", fmt = "%.2f", dinm = TRUE, align = c("lcccccc"),
                     output = "html",

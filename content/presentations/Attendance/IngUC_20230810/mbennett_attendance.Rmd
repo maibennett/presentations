@@ -1180,23 +1180,40 @@ ggplot(data = df_plot, aes(x = GPA_pos, y = outcome*100, fill = factor(type), co
 ---
 # Can we characterize these schools?
 
+- **.coolblue[K-means clustering]** Use differences between predicted and observed attendance.
+
+  - 2 optimal clusters.
+
 ```{r cluster_plot, fig.height=5.5, fig.width=8, fig.align='center', dev='svg', echo=FALSE, warning=FALSE, message=FALSE}
 library(factoextra)
 library(NbClust)
 library(FactoMineR)
+library(patchwork)
 
-df_wide_test <- read.csv("https://raw.githubusercontent.com/maibennett/presentations/main/content/presentations/Attendance/IngUC_20230810/data/df_wide_testv5.csv")
+load("https://raw.githubusercontent.com/maibennett/presentations/main/content/presentations/Attendance/IngUC_20230810/data/df_wide_testv5.RData")
 
-set.seed(123)
+#set.seed(120)
+#res.nbclust <-NbClust(data = scale(df_wide_test[,-1]), diss = NULL, 
+#                      distance = "euclidean", min.nc = 2, max.nc = 10, 
+#                      method = "kmeans")
 
-PCA_clus <- kmeans(scale(df_wide_test[,-1]), 2, nstart=25)
-PCA_clus$cluster <- factor(PCA_clus$cluster, levels = c(1,2), labels=c("Higher Att","Lower Att (bottom)", "Lowe Att (overall)"))
-fviz_cluster(PCA_clus, data = scale(df_wide_test[,-1]), frame.type = "convex",
-             geom = c("point"))+ 
-  scale_color_manual(values = c(cols[3], cols[2], cols[5])) +
-  scale_fill_manual(values = c(alpha(cols[3],0.3), alpha(cols[2],0.3),
-                               alpha(cols[5],0.3))) +
-  theme_ipsum_fsc() + ggtitle("") + 
+df_wide_test$cluster = res.nbclust$best.partition
+df_wide_test$cluster = factor(df_wide_test$cluster, levels = c(1,2), labels=c(1,2))
+
+g1 = ggplot(df_wide_test, aes(x = cluster, y = diff_4_D1)) + 
+        geom_boxplot(aes(fill = cluster, color = cluster)) + 
+  xlab("Cluster") +
+  ylab("Diff. obs - predicted") + ggtitle("D1 attendance") +
+  scale_color_manual(values = c(cols[3],cols[2])) +
+  scale_fill_manual(values = c(alpha(cols[3],0.4),alpha(cols[2],0.4))) +
+  #ggplot2::annotate("text", x = 10, y = 6, label = "Adj. R2 = 0.48", size = 6, colour = "dark grey", hjust=0,family="Fira Sans Condensed") +
+  theme_ipsum_fsc(plot_title_face = "bold",plot_title_size = 18) + #plain
+  theme(plot.margin=unit(c(1,1,1.5,1.2),"cm"),
+        panel.grid.major.x = element_blank(),
+        panel.grid.minor.x = element_blank(),
+        panel.grid.major.y = element_blank(),
+        panel.grid.minor.y = element_blank(),
+        axis.line = element_line(colour = "dark grey"))+
   theme(axis.title.x = element_text(size=18),#margin = margin(t = 10, r = 0, b = 0, l = 0)),
         axis.text.x = element_text(size=14),
         axis.title.y = element_text(size=18),#margin = margin(t = 0, r = 10, b = 0, l = 0)),
@@ -1205,6 +1222,91 @@ fviz_cluster(PCA_clus, data = scale(df_wide_test[,-1]), frame.type = "convex",
         legend.text = element_text(size=15),
         legend.background = element_rect(fill="white",colour ="white"),
         title = element_text(size=14))
+
+g2 = ggplot(df_wide_test, aes(x = cluster, y = diff_4_D2)) + 
+        geom_boxplot(aes(fill = cluster, color = cluster)) + 
+  xlab("Cluster") +
+  ylab("Diff. obs - predicted") + ggtitle("D2 attendance") +
+  scale_color_manual(values = c(cols[3],cols[2])) +
+  scale_fill_manual(values = c(alpha(cols[3],0.4),alpha(cols[2],0.4))) +
+  #ggplot2::annotate("text", x = 10, y = 6, label = "Adj. R2 = 0.48", size = 6, colour = "dark grey", hjust=0,family="Fira Sans Condensed") +
+  theme_ipsum_fsc(plot_title_face = "bold",plot_title_size = 18) + #plain
+  theme(plot.margin=unit(c(1,1,1.5,1.2),"cm"),
+        panel.grid.major.x = element_blank(),
+        panel.grid.minor.x = element_blank(),
+        panel.grid.major.y = element_blank(),
+        panel.grid.minor.y = element_blank(),
+        axis.line = element_line(colour = "dark grey"))+
+  theme(axis.title.x = element_text(size=18),#margin = margin(t = 10, r = 0, b = 0, l = 0)),
+        axis.text.x = element_text(size=14),
+        axis.title.y = element_text(size=18),#margin = margin(t = 0, r = 10, b = 0, l = 0)),
+        axis.text.y = element_text(size=14),legend.position=c(0.1,0.1),
+        legend.title = element_blank(),
+        legend.text = element_text(size=15),
+        legend.background = element_rect(fill="white",colour ="white"),
+        title = element_text(size=14))
+
+g3 = ggplot(df_wide_test, aes(x = cluster, y = diff_4_D9)) + 
+                geom_boxplot(aes(fill = cluster, color = cluster)) + 
+  xlab("Cluster") +
+  ylab("Diff. obs - predicted") + ggtitle("D9 attendance") +
+  scale_color_manual(values = c(cols[3],cols[2])) +
+  scale_fill_manual(values = c(alpha(cols[3],0.4),alpha(cols[2],0.4))) +
+  #ggplot2::annotate("text", x = 10, y = 6, label = "Adj. R2 = 0.48", size = 6, colour = "dark grey", hjust=0,family="Fira Sans Condensed") +
+  theme_ipsum_fsc(plot_title_face = "bold",plot_title_size = 18) + #plain
+  theme(plot.margin=unit(c(1,1,1.5,1.2),"cm"),
+        panel.grid.major.x = element_blank(),
+        panel.grid.minor.x = element_blank(),
+        panel.grid.major.y = element_blank(),
+        panel.grid.minor.y = element_blank(),
+        axis.line = element_line(colour = "dark grey"))+
+  theme(axis.title.x = element_text(size=18),#margin = margin(t = 10, r = 0, b = 0, l = 0)),
+        axis.text.x = element_text(size=14),
+        axis.title.y = element_text(size=18),#margin = margin(t = 0, r = 10, b = 0, l = 0)),
+        axis.text.y = element_text(size=14),legend.position=c(0.1,0.1),
+        legend.title = element_blank(),
+        legend.text = element_text(size=15),
+        legend.background = element_rect(fill="white",colour ="white"),
+        title = element_text(size=14))
+
+g4 = ggplot(df_wide_test, aes(x = cluster, y = diff_4_D10)) + 
+                geom_boxplot(aes(fill = cluster, color = cluster)) + 
+  xlab("Cluster") +
+  ylab("Diff. obs - predicted") + ggtitle("D10 attendance") +
+  scale_color_manual(values = c(cols[3],cols[2])) +
+  scale_fill_manual(values = c(alpha(cols[3],0.4),alpha(cols[2],0.4))) +
+  #ggplot2::annotate("text", x = 10, y = 6, label = "Adj. R2 = 0.48", size = 6, colour = "dark grey", hjust=0,family="Fira Sans Condensed") +
+  theme_ipsum_fsc(plot_title_face = "bold",plot_title_size = 18) + #plain
+  theme(plot.margin=unit(c(1,1,1.5,1.2),"cm"),
+        panel.grid.major.x = element_blank(),
+        panel.grid.minor.x = element_blank(),
+        panel.grid.major.y = element_blank(),
+        panel.grid.minor.y = element_blank(),
+        axis.line = element_line(colour = "dark grey"))+
+  theme(axis.title.x = element_text(size=18),#margin = margin(t = 10, r = 0, b = 0, l = 0)),
+        axis.text.x = element_text(size=14),
+        axis.title.y = element_text(size=18),#margin = margin(t = 0, r = 10, b = 0, l = 0)),
+        axis.text.y = element_text(size=14),legend.position=c(0.1,0.1),
+        legend.title = element_blank(),
+        legend.text = element_text(size=15),
+        legend.background = element_rect(fill="white",colour ="white"),
+        title = element_text(size=14))
+
+(g1 + g2) / (g3 + g4) + plot_layout(guides = "collect")
+#fviz_cluster(PCA_clus, data = scale(df_wide_test[,-1]), frame.type = "convex",
+#             geom = c("point"))+ 
+#  scale_color_manual(values = c(cols[3], cols[2], cols[5])) +
+#  scale_fill_manual(values = c(alpha(cols[3],0.3), alpha(cols[2],0.3),
+#                               alpha(cols[5],0.3))) +
+#  theme_ipsum_fsc() + ggtitle("") + 
+#  theme(axis.title.x = element_text(size=18),#margin = margin(t = 10, r = #0, b = 0, l = 0)),
+#        axis.text.x = element_text(size=14),
+#        axis.title.y = element_text(size=18),#margin = margin(t = 0, r = #10, b = 0, l = 0)),
+#        axis.text.y = element_text(size=14),legend.position=c(0.1,0.1),
+#        legend.title = element_blank(),
+#        legend.text = element_text(size=15),
+#        legend.background = element_rect(fill="white",colour ="white"),
+#        title = element_text(size=14))
 
 ```
 

@@ -1330,7 +1330,7 @@ d_tab <- d_tab %>% rename(`Avg. SIMCE Lang` = Avg..SIMCE.Lang,
                           `Diff D9 GPA` = Diff.D9.GPA,
                           `Diff D10 GPA` = Diff.D10.GPA)
 
-d_tab$cluster = factor(d_tab$cluster, levels = c(1,2), labels = c("Cluster 1\nIncrease att", "Cluster 2\nLower att"))
+d_tab$cluster = factor(d_tab$cluster, levels = c(1,2), labels = c("Cluster 1\nIncrease att", "Cluster 2\nLower att (bottom)"))
 
 datasummary_balance(~ cluster, data = d_tab, dinm_statistic = "p.value", fmt = "%.2f", dinm = TRUE, align = c("lcccccc"),
                     output = "html",

@@ -640,7 +640,7 @@ table.dataTable.hover tbody tr:hover, table.dataTable.display tbody tr:hover {
   overflow: hidden;
   padding: 0.4em 0.4em;
   font-weight: 600;
-  font-size: 31px;
+  font-size: 24px;
   display: table;
   text-align: center;
   border-width: thick;

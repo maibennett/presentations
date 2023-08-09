@@ -362,7 +362,7 @@ Attendance Patterns for the Day of the Test
 Where
 - `\(Y_{ipsgt}\)`: Binary attendance for student `\(i\)`, from GPA group `\(p\)`, in school `\(s\)` and grade `\(g\)`, for day `\(t\)`.
 
-- `\(D^{PT}_{ipsgt}\)`: Indicator variable `\(\mathrm{I(p = P, t = T, g = G^*)}\)`, where `\(G^*\)` is the tested grade.
+- `\(D^{PT}_{ipsgt}\)`: Indicator variables (lags and leads) for students that belong to a tested grade.
 
 ---
 # Clear difference in attendance by performance for 2nd grade
@@ -692,11 +692,38 @@ Predicting the Counterfactual
 ---
 # Example: Comparisons between schools?
 
+.pull-left[
+.center[
+.box-7trans[**School1**&lt;br&gt;
+.small[Math: 258&lt;br&gt;
+Language: 260]]
+]]
+
+.pull-right[
+.center[
+.box-7trans[**School2**&lt;br&gt;
+.small[Math: 259&lt;br&gt;
+Language: 256]]
+]]
+--
 &lt;img src="mbennett_attendance_files/figure-html/prediction_example-1.svg" style="display: block; margin: auto;" /&gt;
 
 ---
 # Example: Comparisons between schools?
+.pull-left[
+.center[
+.box-7trans[**School1**&lt;br&gt;
+.small[Math: 258&lt;br&gt;
+Language: 260]]
+]]
 
+.pull-right[
+.center[
+.box-7trans[**School2**&lt;br&gt;
+.small[Math: 259&lt;br&gt;
+Language: 256]]
+]]
+--
 &lt;img src="mbennett_attendance_files/figure-html/prediction_example2-1.svg" style="display: block; margin: auto;" /&gt;
 
 ---

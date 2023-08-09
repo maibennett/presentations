@@ -262,7 +262,7 @@ style_mono_accent(
                                                                                                  "overflow" = "hidden",
                                                                                                  "padding" = "0.4em 0.4em",
                                                                                                  "font-weight" = "600",
-                                                                                                 "font-size" = "31px",
+                                                                                                 "font-size" = "24px",
                                                                                                  "display" = "table",
                                                                                                  "text-align" = "center",
                                                                                                  "border-width" = "thick",
@@ -1078,8 +1078,22 @@ ggplot(data = df_plot, aes(x = GPA_pos, y = outcome*100, fill = factor(type), co
 ---
 # Example: Comparisons between schools?
 
-```{r prediction_example, fig.height=6, fig.width=10, fig.align='center', dev='svg', echo=FALSE, warning=FALSE, message=FALSE}
-df_plot <- read.csv("https://raw.githubusercontent.com/maibennett/presentations/main/content/presentations/Attendance/Salem_20220405/data/plot_data_xgb2017_updated_1_100_lag_example.csv")
+.pull-left[
+.center[
+.box-7trans[**School1**<br>
+.small[Math: 258<br>
+Language: 260]]
+]]
+
+.pull-right[
+.center[
+.box-7trans[**School2**<br>
+.small[Math: 259<br>
+Language: 256]]
+]]
+--
+```{r prediction_example, fig.height=5, fig.width=10, fig.align='center', dev='svg', echo=FALSE, warning=FALSE, message=FALSE}
+df_plot <- read.csv("https://raw.githubusercontent.com/maibennett/presentations/main/content/presentations/Attendance/IngUC_20230810/data/plot_data_gpboost2017_updated_examplev5.csv")
 
 df_plot$GPA_pos = factor(df_plot$GPA_pos, levels = c("D1","D2","D3D8","D9","D10"))
 
@@ -1113,8 +1127,21 @@ ggplot(data = df_plot, aes(x = GPA_pos, y = outcome*100, fill = factor(type), co
 
 ---
 # Example: Comparisons between schools?
+.pull-left[
+.center[
+.box-7trans[**School1**<br>
+.small[Math: 258<br>
+Language: 260]]
+]]
 
-```{r prediction_example2, fig.height=6, fig.width=10, fig.align='center', dev='svg', echo=FALSE, warning=FALSE, message=FALSE}
+.pull-right[
+.center[
+.box-7trans[**School2**<br>
+.small[Math: 259<br>
+Language: 256]]
+]]
+
+```{r prediction_example2, fig.height=5, fig.width=10, fig.align='center', dev='svg', echo=FALSE, warning=FALSE, message=FALSE}
 library(ggforce)
 
 ann_plot <- data.frame(rbd = 25002, GPA_pos = factor("D1", levels = c("D1","D2","D3D8","D9","D10")),
@@ -1158,16 +1185,17 @@ library(factoextra)
 library(NbClust)
 library(FactoMineR)
 
-df_wide_test <- read.csv("https://raw.githubusercontent.com/maibennett/presentations/main/content/presentations/Attendance/Salem_20220405/data/df_wide_test.csv")
+df_wide_test <- read.csv("https://raw.githubusercontent.com/maibennett/presentations/main/content/presentations/Attendance/IngUC_20230810/data/df_wide_testv5.csv")
 
 set.seed(123)
 
 PCA_clus <- kmeans(scale(df_wide_test[,-1]), 2, nstart=25)
-PCA_clus$cluster <- factor(PCA_clus$cluster, levels = c(1,2), labels=c("Similar","Lower Att"))
+PCA_clus$cluster <- factor(PCA_clus$cluster, levels = c(1,2), labels=c("Higher Att","Lower Att (bottom)", "Lowe Att (overall)"))
 fviz_cluster(PCA_clus, data = scale(df_wide_test[,-1]), frame.type = "convex",
              geom = c("point"))+ 
-  scale_color_manual(values = c(cols[3], cols[2])) +
-  scale_fill_manual(values = c(alpha(cols[3],0.3), alpha(cols[2],0.3))) +
+  scale_color_manual(values = c(cols[3], cols[2], cols[5])) +
+  scale_fill_manual(values = c(alpha(cols[3],0.3), alpha(cols[2],0.3),
+                               alpha(cols[5],0.3))) +
   theme_ipsum_fsc() + ggtitle("") + 
   theme(axis.title.x = element_text(size=18),#margin = margin(t = 10, r = 0, b = 0, l = 0)),
         axis.text.x = element_text(size=14),

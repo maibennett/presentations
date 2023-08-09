@@ -1190,14 +1190,12 @@ library(NbClust)
 library(FactoMineR)
 library(patchwork)
 
-load("https://raw.githubusercontent.com/maibennett/presentations/main/content/presentations/Attendance/IngUC_20230810/data/df_wide_testv5.RData")
+df_wide_test = read.csv("https://raw.githubusercontent.com/maibennett/presentations/main/content/presentations/Attendance/IngUC_20230810/data/df_wide_testv5.csv")
 
 #set.seed(120)
 #res.nbclust <-NbClust(data = scale(df_wide_test[,-1]), diss = NULL, 
 #                      distance = "euclidean", min.nc = 2, max.nc = 10, 
 #                      method = "kmeans")
-
-df_wide_test$cluster = res.nbclust$Best.partition
 df_wide_test$cluster = factor(df_wide_test$cluster, levels = c(1,2,3), labels=c(1,2,3))
 
 g1 = ggplot(df_wide_test, aes(x = cluster, y = diff_4_D1)) + 
@@ -1317,7 +1315,7 @@ g4 = ggplot(df_wide_test, aes(x = cluster, y = diff_4_D10)) +
 ```{r, echo=FALSE, message=FALSE, warning=FALSE}
 library(modelsummary)
 
-d_tab <- read.csv("https://raw.githubusercontent.com/maibennett/presentations/main/content/presentations/Attendance/Salem_20220405/data/d_tabv5.csv")
+d_tab <- read.csv("https://raw.githubusercontent.com/maibennett/presentations/main/content/presentations/Attendance/IngUC_20230810/data/d_tabv5.csv")
 
 d_tab <- d_tab %>% dplyr::select(-c(X, rbd))
 
@@ -1358,12 +1356,9 @@ datasummary_balance(~ cluster, data = d_tab, dinm_statistic = "p.value", fmt = "
 # There are differences in score distributions between clusters
 
 ```{r dist_score_cluster, fig.height=5.5, fig.width=8, fig.align='center', dev='svg', echo=FALSE, warning=FALSE, message=FALSE}
-dir_data2 = "C:/Users/mc72574/Dropbox/UT/UT Research/Asistencia/"
-
-d_tab <- read.csv(paste0(dir_data2,"data/working/d_tab.csv"))
 
 d_tab %>% filter(!is.na(cluster)) %>%
-ggplot(aes(x = Avg..SIMCE.Math, color = factor(cluster), fill = factor(cluster))) +
+ggplot(aes(x = `Avg. SIMCE Math`, color = factor(cluster), fill = factor(cluster))) +
   geom_density() +
   scale_color_manual(name = "Cluster", labels = c("Similar","Lower att"),values = c(cols[2],cols[3])) +
   scale_fill_manual(name = "Cluster", labels = c("Similar","Lower att"),values = c(alpha(cols[2],0.2),alpha(cols[3],0.2))) +

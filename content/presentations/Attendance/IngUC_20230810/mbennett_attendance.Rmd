@@ -398,30 +398,6 @@ class: inverse, center, middle
 
 
 ---
-# The big picture
-
---
-.pull-left[
-<br>
-<br>
-.center[.box-2Trans[Causal Inference]]
-
-]
-
-
-.pull-right[
-<br>
-<br>
-.center[.box-3Trans[Prediction (ML)]]
-
-]
---
-
-.center[
-![:scale 30%](https://raw.githubusercontent.com/maibennett/presentations/main/content/presentations/Attendance/PRC_20220426/images/arrows.png)]
-.box-5Trans[Evidence-Based Policy]
-
----
 # Motivation
 
 - Results from **.coolblue[high-stakes tests]** widely used in education policy

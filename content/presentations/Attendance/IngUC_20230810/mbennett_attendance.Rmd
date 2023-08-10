@@ -1180,10 +1180,10 @@ ggplot(data = df_plot, aes(x = GPA_pos, y = outcome*100, fill = factor(type), co
 ---
 # Can we characterize these schools?
 
+.small[
 - **.coolblue[K-means clustering]** Use differences between predicted and observed attendance.
-
-  - 2 optimal clusters.
-
+  - 2 optimal clusters]
+--
 ```{r cluster_plot, fig.height=5.5, fig.width=8, fig.align='center', dev='svg', echo=FALSE, warning=FALSE, message=FALSE}
 library(factoextra)
 library(NbClust)
@@ -1201,7 +1201,7 @@ df_wide_test$cluster = factor(df_wide_test$cluster, levels = c(1,2,3), labels=c(
 g1 = ggplot(df_wide_test, aes(x = cluster, y = diff_4_D1)) + 
         geom_boxplot(aes(fill = cluster, color = cluster)) + 
   xlab("Cluster") +
-  ylab("Diff. obs - predicted") + ggtitle("D1 attendance") +
+  ylab("Diff. obs - predicted") + ggtitle("D1 GPA") +
   scale_color_manual(values = c(cols[3],cols[2])) +
   scale_fill_manual(values = c(alpha(cols[3],0.4),alpha(cols[2],0.4))) +
   #ggplot2::annotate("text", x = 10, y = 6, label = "Adj. R2 = 0.48", size = 6, colour = "dark grey", hjust=0,family="Fira Sans Condensed") +
@@ -1212,9 +1212,9 @@ g1 = ggplot(df_wide_test, aes(x = cluster, y = diff_4_D1)) +
         panel.grid.major.y = element_blank(),
         panel.grid.minor.y = element_blank(),
         axis.line = element_line(colour = "dark grey"))+
-  theme(axis.title.x = element_text(size=18),#margin = margin(t = 10, r = 0, b = 0, l = 0)),
+  theme(axis.title.x = element_text(size=14),#margin = margin(t = 10, r = 0, b = 0, l = 0)),
         axis.text.x = element_text(size=14),
-        axis.title.y = element_text(size=18),#margin = margin(t = 0, r = 10, b = 0, l = 0)),
+        axis.title.y = element_text(size=14),#margin = margin(t = 0, r = 10, b = 0, l = 0)),
         axis.text.y = element_text(size=14),legend.position=c(0.1,0.1),
         legend.title = element_blank(),
         legend.text = element_text(size=15),
@@ -1224,7 +1224,7 @@ g1 = ggplot(df_wide_test, aes(x = cluster, y = diff_4_D1)) +
 g2 = ggplot(df_wide_test, aes(x = cluster, y = diff_4_D2)) + 
         geom_boxplot(aes(fill = cluster, color = cluster)) + 
   xlab("Cluster") +
-  ylab("Diff. obs - predicted") + ggtitle("D2 attendance") +
+  ylab("Diff. obs - predicted") + ggtitle("D2 GPA") +
   scale_color_manual(values = c(cols[3],cols[2])) +
   scale_fill_manual(values = c(alpha(cols[3],0.4),alpha(cols[2],0.4))) +
   #ggplot2::annotate("text", x = 10, y = 6, label = "Adj. R2 = 0.48", size = 6, colour = "dark grey", hjust=0,family="Fira Sans Condensed") +
@@ -1235,9 +1235,9 @@ g2 = ggplot(df_wide_test, aes(x = cluster, y = diff_4_D2)) +
         panel.grid.major.y = element_blank(),
         panel.grid.minor.y = element_blank(),
         axis.line = element_line(colour = "dark grey"))+
-  theme(axis.title.x = element_text(size=18),#margin = margin(t = 10, r = 0, b = 0, l = 0)),
+  theme(axis.title.x = element_text(size=14),#margin = margin(t = 10, r = 0, b = 0, l = 0)),
         axis.text.x = element_text(size=14),
-        axis.title.y = element_text(size=18),#margin = margin(t = 0, r = 10, b = 0, l = 0)),
+        axis.title.y = element_text(size=14),#margin = margin(t = 0, r = 10, b = 0, l = 0)),
         axis.text.y = element_text(size=14),legend.position=c(0.1,0.1),
         legend.title = element_blank(),
         legend.text = element_text(size=15),
@@ -1247,7 +1247,7 @@ g2 = ggplot(df_wide_test, aes(x = cluster, y = diff_4_D2)) +
 g3 = ggplot(df_wide_test, aes(x = cluster, y = diff_4_D9)) + 
                 geom_boxplot(aes(fill = cluster, color = cluster)) + 
   xlab("Cluster") +
-  ylab("Diff. obs - predicted") + ggtitle("D9 attendance") +
+  ylab("Diff. obs - predicted") + ggtitle("D9 GPA") +
   scale_color_manual(values = c(cols[3],cols[2])) +
   scale_fill_manual(values = c(alpha(cols[3],0.4),alpha(cols[2],0.4))) +
   #ggplot2::annotate("text", x = 10, y = 6, label = "Adj. R2 = 0.48", size = 6, colour = "dark grey", hjust=0,family="Fira Sans Condensed") +
@@ -1258,9 +1258,9 @@ g3 = ggplot(df_wide_test, aes(x = cluster, y = diff_4_D9)) +
         panel.grid.major.y = element_blank(),
         panel.grid.minor.y = element_blank(),
         axis.line = element_line(colour = "dark grey"))+
-  theme(axis.title.x = element_text(size=18),#margin = margin(t = 10, r = 0, b = 0, l = 0)),
+  theme(axis.title.x = element_text(size=14),#margin = margin(t = 10, r = 0, b = 0, l = 0)),
         axis.text.x = element_text(size=14),
-        axis.title.y = element_text(size=18),#margin = margin(t = 0, r = 10, b = 0, l = 0)),
+        axis.title.y = element_text(size=14),#margin = margin(t = 0, r = 10, b = 0, l = 0)),
         axis.text.y = element_text(size=14),legend.position=c(0.1,0.1),
         legend.title = element_blank(),
         legend.text = element_text(size=15),
@@ -1270,7 +1270,7 @@ g3 = ggplot(df_wide_test, aes(x = cluster, y = diff_4_D9)) +
 g4 = ggplot(df_wide_test, aes(x = cluster, y = diff_4_D10)) + 
                 geom_boxplot(aes(fill = cluster, color = cluster)) + 
   xlab("Cluster") +
-  ylab("Diff. obs - predicted") + ggtitle("D10 attendance") +
+  ylab("Diff. obs - predicted") + ggtitle("D10 GPA") +
   scale_color_manual(values = c(cols[3],cols[2])) +
   scale_fill_manual(values = c(alpha(cols[3],0.4),alpha(cols[2],0.4))) +
   #ggplot2::annotate("text", x = 10, y = 6, label = "Adj. R2 = 0.48", size = 6, colour = "dark grey", hjust=0,family="Fira Sans Condensed") +
@@ -1281,9 +1281,9 @@ g4 = ggplot(df_wide_test, aes(x = cluster, y = diff_4_D10)) +
         panel.grid.major.y = element_blank(),
         panel.grid.minor.y = element_blank(),
         axis.line = element_line(colour = "dark grey"))+
-  theme(axis.title.x = element_text(size=18),#margin = margin(t = 10, r = 0, b = 0, l = 0)),
+  theme(axis.title.x = element_text(size=14),#margin = margin(t = 10, r = 0, b = 0, l = 0)),
         axis.text.x = element_text(size=14),
-        axis.title.y = element_text(size=18),#margin = margin(t = 0, r = 10, b = 0, l = 0)),
+        axis.title.y = element_text(size=14),#margin = margin(t = 0, r = 10, b = 0, l = 0)),
         axis.text.y = element_text(size=14),legend.position=c(0.1,0.1),
         legend.title = element_blank(),
         legend.text = element_text(size=15),
@@ -1360,8 +1360,8 @@ datasummary_balance(~ cluster, data = d_tab, dinm_statistic = "p.value", fmt = "
 d_tab %>% filter(!is.na(cluster)) %>%
 ggplot(aes(x = `Avg. SIMCE Math`, color = factor(cluster), fill = factor(cluster))) +
   geom_density() +
-  scale_color_manual(name = "Cluster", labels = c("Similar","Lower att"),values = c(cols[2],cols[3])) +
-  scale_fill_manual(name = "Cluster", labels = c("Similar","Lower att"),values = c(alpha(cols[2],0.2),alpha(cols[3],0.2))) +
+  scale_color_manual(name = "Cluster", labels = c("Increase Att","Lower att"),values = c(cols[2],cols[3])) +
+  scale_fill_manual(name = "Cluster", labels = c("Increase Att","Lower att"),values = c(alpha(cols[2],0.2),alpha(cols[3],0.2))) +
   xlab("SIMCE Math") + ylab("Density") +
   theme_ipsum_fsc() + #plain
   theme(plot.margin=unit(c(1,1,1,1),"cm"),
@@ -1407,7 +1407,7 @@ How can we **.coolblue[impute missing scores]**?
   - **.coolblue[Scenario 1]**: Not impute at all. Show observed distributions.
   
   - **.coolblue[Scenario 2]**: Impute by decile only for the difference between predicted and observed attendance.
-    - Imputed score: (a) overall min, (b) decile min
+    - Imputed score: (a) overall min, (b) decile min, (c) min school, or (d) min decile by school.
   
   - **.coolblue[Scenario 3]**: Impute every missing student.
     - Imputed score: overall min
@@ -1424,17 +1424,23 @@ How can we **.coolblue[impute missing scores]**?
 # Scenario 1 vs Scenario 3: No imputation and Impute all
 
 ```{r imputation_diff1, fig.height=5.5, fig.width=8, fig.align='center', dev='svg', echo=FALSE, warning=FALSE, message=FALSE}
-impute <- read.csv(paste0(dir_data2,"data/working/impute.csv"))
+impute <- read.csv("https://raw.githubusercontent.com/maibennett/presentations/main/content/presentations/Attendance/IngUC_20230810/data/imputev5.csv")
 
 impute2 <- impute
 
-impute2$mean[impute2$imputation %in% c("Impute Pred-Obs (All)", "Impute Pred-Obs (Decile)")] <- NA
+impute2$mean[impute2$imputation %in% c("Impute Pred-Obs (Min All)",
+  "Impute Pred-Obs (Min Decile)",
+  "Impute Pred-Obs (Min School)",
+  "Impute Pred-Obs (Min School Decile)")] <- NA
 
 ggplot(data = impute2, aes(x = factor(imputation, levels = c("Impute All",
-                                                            "Impute Pred-Obs (All)",
-                                                            "Impute Pred-Obs (Decile)",
-                                                            "No Imputation")), 
+          "Impute Pred-Obs (Min All)",
+          "Impute Pred-Obs (Min Decile)",
+          "Impute Pred-Obs (Min School)",
+          "Impute Pred-Obs (Min School Decile)",
+          "No Imputation")), 
                           y = mean, color = factor(cluster), fill = factor(cluster))) +
+    geom_point(pch = 21, size = 4, stroke = 1.2) +
   geom_segment(aes(x = "Impute All", xend = "Impute All", y = impute$mean[impute$cluster==1 & impute$imputation=="Impute All"],
                    yend = impute$mean[impute$cluster==2 & impute$imputation=="Impute All"]), color = "grey") +
   #geom_segment(aes(x = "Impute Pred-Obs (All)", xend = "Impute Pred-Obs (All)", y = impute$mean[impute$cluster==1 & impute$imputation=="Impute Pred-Obs (All)"],
@@ -1443,12 +1449,9 @@ ggplot(data = impute2, aes(x = factor(imputation, levels = c("Impute All",
 #                   yend = impute$mean[impute$cluster==2 & impute$imputation=="Impute Pred-Obs (Decile)"]), color = "grey") +
   geom_segment(aes(x = "No Imputation", xend = "No Imputation", y = impute$mean[impute$cluster==1 & impute$imputation=="No Imputation"],
                    yend = impute$mean[impute$cluster==2 & impute$imputation=="No Imputation"]), color = "grey") +
-  
-  geom_point(pch = 21, size = 4, stroke = 1.2) +
 
-
-  scale_color_manual(name = "Cluster", labels = c("Similar","Lower att"),values = c(cols[2],cols[3])) +
-  scale_fill_manual(name = "Cluster", labels = c("Similar","Lower att"),values = c(alpha(cols[2],0.8),alpha(cols[3],0.8))) +
+  scale_color_manual(name = "Cluster", labels = c("Increase Att","Lower att"),values = c(cols[2],cols[3])) +
+  scale_fill_manual(name = "Cluster", labels = c("Increase Att","Lower att"),values = c(alpha(cols[2],0.8),alpha(cols[3],0.8))) +
   ylab("SIMCE Math") + xlab("") +
   ylim(180,280) +
   coord_flip()+
@@ -1473,27 +1476,32 @@ ggplot(data = impute2, aes(x = factor(imputation, levels = c("Impute All",
 # Imputing Predicted - Observed is less extreme
 
 ```{r imputation_diff2, fig.height=5.5, fig.width=8, fig.align='center', dev='svg', echo=FALSE, warning=FALSE, message=FALSE}
-ggplot(data = impute, aes(x = factor(imputation, levels = c("Impute All",
-                                                            "Impute Pred-Obs (All)",
-                                                            "Impute Pred-Obs (Decile)",
-                                                            "No Imputation")), 
-                          y = mean, color = factor(cluster), fill = factor(cluster))) +
-  geom_segment(aes(x = "Impute All", xend = "Impute All", y = impute$mean[impute$cluster==1 & impute$imputation=="Impute All"],
-                   yend = impute$mean[impute$cluster==2 & impute$imputation=="Impute All"]), color = "grey") +
-  geom_segment(aes(x = "Impute Pred-Obs (All)", xend = "Impute Pred-Obs (All)", y = impute$mean[impute$cluster==1 & impute$imputation=="Impute Pred-Obs (All)"],
-                   yend = impute$mean[impute$cluster==2 & impute$imputation=="Impute Pred-Obs (All)"]), color = "grey") +
-  geom_segment(aes(x = "Impute Pred-Obs (Decile)", xend = "Impute Pred-Obs (Decile)", y = impute$mean[impute$cluster==1 & impute$imputation=="Impute Pred-Obs (Decile)"],
-                   yend = impute$mean[impute$cluster==2 & impute$imputation=="Impute Pred-Obs (Decile)"]), color = "grey") +
-  geom_segment(aes(x = "No Imputation", xend = "No Imputation", y = impute$mean[impute$cluster==1 & impute$imputation=="No Imputation"],
-                   yend = impute$mean[impute$cluster==2 & impute$imputation=="No Imputation"]), color = "grey") +
-  
+ggplot(data = impute, aes(y = factor(imputation, levels = c("Impute All",
+          "Impute Pred-Obs (Min All)",
+          "Impute Pred-Obs (Min Decile)",
+          "Impute Pred-Obs (Min School)",
+          "Impute Pred-Obs (Min School Decile)",
+          "No Imputation")), 
+                          x = mean, color = factor(cluster), fill = factor(cluster))) +
   geom_point(pch = 21, size = 4, stroke = 1.2) +
-
-  scale_color_manual(name = "Cluster", labels = c("Similar","Lower att"),values = c(cols[2],cols[3])) +
-  scale_fill_manual(name = "Cluster", labels = c("Similar","Lower att"),values = c(alpha(cols[2],0.8),alpha(cols[3],0.8))) +
-  ylab("SIMCE Math") + xlab("") +
-  ylim(180,280) +
-  coord_flip()+
+  geom_segment(aes(y = "Impute All", yend = "Impute All", x = impute$mean[impute$cluster==1 & impute$imputation=="Impute All"],
+                   xend = impute$mean[impute$cluster==2 & impute$imputation=="Impute All"]), color = "grey") +
+  geom_segment(aes(y = "Impute Pred-Obs (Min All)", yend = "Impute Pred-Obs (Min All)", x = impute$mean[impute$cluster==1 & impute$imputation=="Impute Pred-Obs (Min All)"],
+                   xend = impute$mean[impute$cluster==2 & impute$imputation=="Impute Pred-Obs (Min All)"]), color = "grey") +
+  geom_segment(aes(y = "Impute Pred-Obs (Min Decile)", yend = "Impute Pred-Obs (Min Decile)", x = impute$mean[impute$cluster==1 & impute$imputation=="Impute Pred-Obs (Min Decile)"],
+                   xend = impute$mean[impute$cluster==2 & impute$imputation=="Impute Pred-Obs (Min Decile)"]), color = "grey") +
+  geom_segment(aes(y = "Impute Pred-Obs (Min School)", yend = "Impute Pred-Obs (Min School)", x = impute$mean[impute$cluster==1 & impute$imputation=="Impute Pred-Obs (Min School)"],
+                   xend = impute$mean[impute$cluster==2 & impute$imputation=="Impute Pred-Obs (Min School)"]), color = "grey") +
+  geom_segment(aes(y = "Impute Pred-Obs (Min School Decile)", yend = "Impute Pred-Obs (Min School Decile)", x = impute$mean[impute$cluster==1 & impute$imputation=="Impute Pred-Obs (Min School Decile)"],
+                   xend = impute$mean[impute$cluster==2 & impute$imputation=="Impute Pred-Obs (Min School Decile)"]), color = "grey") +
+  geom_segment(aes(y = "No Imputation", yend = "No Imputation", x = impute$mean[impute$cluster==1 & impute$imputation=="No Imputation"],
+                   xend = impute$mean[impute$cluster==2 & impute$imputation=="No Imputation"]), color = "grey") +
+  
+  scale_color_manual(name = "Cluster", labels = c("Increase Att","Lower att"),values = c(cols[2],cols[3])) +
+  scale_fill_manual(name = "Cluster", labels = c("Increase Att","Lower att"),values = c(alpha(cols[2],0.8),alpha(cols[3],0.8))) +
+  xlab("SIMCE Math") + ylab("") +
+  xlim(180,280) +
+  #coord_flip()+
   theme_ipsum_fsc() + #plain
   theme(plot.margin=unit(c(0.5,0.5,0.5,0.5),"cm"),
         panel.grid.major.x = element_blank(),

@@ -1399,6 +1399,8 @@ How can we **.coolblue[impute missing scores]**?
 # Scenario 1 vs Scenario 3: No imputation and Impute all
 
 ```{r imputation_diff1, fig.height=5.5, fig.width=8, fig.align='center', dev='svg', echo=FALSE, warning=FALSE, message=FALSE}
+d_tab2 <- read.csv("https://raw.githubusercontent.com/maibennett/presentations/main/content/presentations/Attendance/IngUC_20230810/data/imputev5_tab2.csv")
+
 impute <- read.csv("https://raw.githubusercontent.com/maibennett/presentations/main/content/presentations/Attendance/IngUC_20230810/data/imputev5.csv")
 
 impute2 <- impute

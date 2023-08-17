@@ -379,7 +379,7 @@ class: inverse, center, middle
 <br>
 <br>
 
-.left[.small[Workshop on Economics of Education<br>August 17th, 2023]]]
+.left[.small[Valle Nevado Workshop on Economics of Education<br>Universidad de los Andes<br>August 17th, 2023]]]
 
 .pull-right-little_l[
 <br>
@@ -644,8 +644,8 @@ graph_maker <- function(nyear, ngrado){
     geom_vline(xintercept = 0, color = text_color, linetype = "dashed", lwd = 0.8) +
     scale_x_continuous( labels = scales::number_format(accuracy = 1), breaks = -5:5 ) +
     scale_y_continuous( breaks = seq(from = -8, to = 8, by = 2), lim = c(-8, 8), 
-                        labels = dollar_format(suffix = "%", prefix = "") ) + 
-    xlab("Days since test") + ylab("Event study estimate")+
+                        labels = dollar_format(suffix = "", prefix = "") ) + 
+    xlab("Days since test") + ylab("Event study estimate (pp)")+
     theme_ipsum_fsc() +
     theme(plot.margin=unit(c(1,1,1.5,1.2),"cm"),
           panel.grid.major.x = element_blank(),
@@ -697,14 +697,28 @@ round_esp <- function(var){
   trunc(round(var, digits = 2)*100)/100
 }
 # Data to build the graph 
-data_graph <- temp1 %>%
+data_graph1 <- temp1 %>%
   dplyr::select(- stakes) %>% 
   filter(agno == 2014) %>%  
-  pivot_longer(.,  starts_with("est") | starts_with("se") | starts_with("pval"), names_to = "variable", values_to = "value") %>% 
+  pivot_longer(.,  starts_with("est") | starts_with("se") | starts_with("pval"), names_to = "variable", values_to = "est") %>% 
   mutate(variable = as.factor(variable)) %>% 
   mutate(variable = recode_factor(variable, `est1` = "D1", `est2` = "D2", `est3` = "D3D8", `est4` = "D9", `est5` = "D10", `est98` = "D10-D1", `est97` = "All")) %>% 
-  filter(str_detect(variable, "se") == F & str_detect(variable, "pval") == F) %>%   
-  mutate(value = value*100)  
+  filter(str_detect(variable, "se") == F & str_detect(variable, "pval") == F) %>%
+  mutate(est = est*100) 
+
+data_graph2 <- temp1 %>%
+  dplyr::select(- stakes) %>% 
+  filter(agno == 2014) %>%  
+  pivot_longer(.,  starts_with("est") | starts_with("se") | starts_with("pval"), names_to = "variable", values_to = "se") %>% 
+  mutate(variable = as.factor(variable)) %>% 
+  mutate(variable = recode_factor(variable, `se1` = "D1", `se2` = "D2", `se3` = "D3D8", `se4` = "D9", `se5` = "D10", `se98` = "D10-D1", `se97` = "All")) %>% 
+  filter(str_detect(variable, "est") == F & str_detect(variable, "pval") == F) %>%
+  mutate(se = se*100) 
+
+data_graph = left_join(data_graph1, data_graph2, by = c("grado", "agno", "variable"))
+  
+data_graph = data_graph %>% mutate(cih = est+1.96*se,
+                                   cil = est-1.96+se)
 
 gr <- data_graph  %>% 
   filter(variable != "All" & variable != "D10-D1") %>% 
@@ -712,8 +726,8 @@ gr <- data_graph  %>%
            forcats::fct_relevel("6", "8", "10", "2", "4") %>% 
            recode_factor(`6` = "6th Grade", `8` = "8th Grade", `10` = "10th Grade", `2` = "2nd Grade", `4` = "4th Grade"),
          variable =  variable %>% recode_factor(`D1` = "1st Decile", `D2` = "2nd Decile", `D3D8` = "3rd-8th Decile", `D9` = "9th decile", `D10` = "10th decile")) %>% 
-  ggplot(., aes(x = variable, y = value)) +
-  geom_segment( aes(x = variable, xend = variable, y = 0, yend = value), color = "grey") + 
+  ggplot(., aes(x = variable, y = est)) +
+  geom_segment( aes(x = variable, xend = variable, y = est-1.96*se, yend = est + 1.96*se), color = "grey") + 
     geom_hline(yintercept = 0, color = "grey") + 
   geom_hline(yintercept = 0, color = "grey") +  
   geom_hline(yintercept = -4, color = "grey90") +
@@ -722,7 +736,7 @@ gr <- data_graph  %>%
   geom_hline(yintercept = 6, color = "grey90") +
   geom_hline(yintercept = -2, color = "grey90") +
   geom_hline(yintercept = 2, color = "grey90") + 
-  geom_point( aes(x = variable, y = value, color = variable, fill=variable), pch = 21, size = 4, stroke = 1.1) +
+  geom_point( aes(x = variable, y = est, color = variable, fill=variable), pch = 21, size = 1, stroke = 1.1) +
   #theme_light() +
   theme(
     panel.grid.major.x = element_blank(),
@@ -730,8 +744,8 @@ gr <- data_graph  %>%
     axis.ticks.x = element_blank()
   ) +
   xlab("\n GPA Performance") +
-  ylab("Change in Attendance \n") + theme_ipsum_fsc() + 
-  scale_y_continuous(limits= c(-6, 4), breaks =  seq(from = -6, to = 4, by = 2), labels = dollar_format(suffix = "%", prefix = "")) + 
+  ylab("Change in Attendance (pp) \n") + theme_ipsum_fsc() + 
+  scale_y_continuous(limits= c(-8, 4), breaks =  seq(from = -8, to = 4, by = 2), labels = dollar_format(suffix = "", prefix = "")) + 
   facet_wrap(~grado, ncol = 3, as.table = F) + 
   scale_colour_discrete("GPA") + 
   theme(legend.title.align=0.5) + 
@@ -741,7 +755,7 @@ gr <- data_graph  %>%
   scale_fill_manual("GPA", values = c(alpha(cols[1],0.8), alpha(cols[2],0.8), alpha(cols[3],0.8), 
                                       alpha(cols[4],0.8), alpha(cols[5],0.8))) + 
   theme_ipsum_fsc(plot_title_face = "bold",plot_title_size = 20) +
-  labs(caption = "Note: p < 0.05 for all estimates except those touching the 0 bar. \n Markers symbols are the coefficients of the effect of testing on attendance.", color = text_color) +
+  labs(caption = "Note: 95% CI in grey. \n These results are for the year 2014.", color = text_color) +
       theme(plot.margin=unit(c(1,1,1.5,1.2),"cm"),
           panel.grid.major.x = element_blank(),
           panel.grid.minor.x = element_blank(),
@@ -780,41 +794,16 @@ shift_legend2(gr)
 
 - Students are **.coolblue[excluded due to other reasons]** (justified)
 
-<br>
-- Students experience a **.coolblue[disutility from testing]**
+- Low-performing students are **.coolblue[less aware of the test]**
 
-<br>
+- Students experience a **.coolblue[disutility from testing]**
 
 - Schools directly **.coolblue[(des)incentivize attendance of (lower)higher performers]**
-
----
-# No evidence of self-selection from students because of testing
-
-.pull-left[
-- Students experience a **.coolblue[disutility from testing]**
-
-  - Use of **.coolblue[no-stake test]** applied to schools $\rightarrow$ No effect on attendance
-
-]
-
-.pull-right[
-.small[
-```{r, echo=FALSE, warning=FALSE, message=FALSE}
-tab_no_stakes <- read.csv("https://raw.githubusercontent.com/maibennett/presentations/main/content/presentations/Attendance/Salem_20220405/data/no_stake_results.csv")
-
-kableExtra::kable(tab_no_stakes, align = "lccccc", caption = "Results for No-Stakes Test",
-             col.names = c('Grade - Year', 'D1', 'D2', 'D3D8', 'D9', 'D10'), format = "html") %>% 
-  kable_paper(bootstrap_options = c("hover","condensed"), full_width = FALSE)
-```
-]
-]
 
 ---
 # Differences in communication and incentives between high and low performers
 
-- Schools directly **.coolblue[(des)incentivize attendance of (lower)higher performers]**
-
-  - 2017 survey for students in test-taking grades.
+- 2017 survey for students in test-taking grades.
 
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
 tab4th <- read.csv("https://raw.githubusercontent.com/maibennett/presentations/main/content/presentations/Attendance/Salem_20220405/images/survey_4th.csv")
@@ -830,15 +819,35 @@ kableExtra::kable(tab4th, align = "lcccc", caption = "Results for 4th Grade",
 ---
 # Differences in communication and incentives between high and low performers
 
-- Schools directly **.coolblue[(des)incentivize attendance of (lower)higher performers]**
-
-  - 2017 survey for students in test-taking grades.
+- 2017 survey for students in test-taking grades.
 
 ```{r, echo=FALSE, results='asis'}
 tab10th %>% kbl(align = "lcccc", caption = "Results for 10th Grade",
              col.names = c('GPA Decile', 'Told', 'Notification', 'Preparation', 'Grades'), format = "html") %>% 
   kable_paper(bootstrap_options = c("hover","condensed"), full_width = FALSE)
 ```
+
+---
+# No evidence of self-selection from students because of testing
+
+.pull-left[
+- Students experience a **.coolblue[disutility from testing]**
+
+  - Use of **.coolblue[no-stake test]** applied to schools (~300 schools per year) $\rightarrow$ No effect on attendance
+
+]
+
+.pull-right[
+.small[
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+tab_no_stakes <- read.csv("https://raw.githubusercontent.com/maibennett/presentations/main/content/presentations/Attendance/Salem_20220405/data/no_stake_results.csv")
+
+kableExtra::kable(tab_no_stakes, align = "lccccc", caption = "Results for No-Stakes Test",
+             col.names = c('Grade - Year', 'D1', 'D2', 'D3D8', 'D9', 'D10'), format = "html") %>% 
+  kable_paper(bootstrap_options = c("hover","condensed"), full_width = FALSE)
+```
+]
+]
 
 ---
 background-position: 50% 50%
@@ -875,7 +884,7 @@ Predicting the Counterfactual
 <br>
 <br>
 
-- Use data between 1st and 5th grade (2017) - 4th grade is treated: 
+- Use data between 1st and 5th grade (2017) in the Metropolitan region - 4th grade is treated: 
 
   - Data **.coolblue[before]** the test to **.coolblue[predict attendance on the day of the test]**.
 
@@ -1247,8 +1256,8 @@ ggplot(data = impute2, aes(x = factor(imputation, levels = c("Impute All",
   geom_segment(aes(x = "No Imputation", xend = "No Imputation", y = impute$mean[impute$cluster==1 & impute$imputation=="No Imputation"],
                    yend = impute$mean[impute$cluster==2 & impute$imputation=="No Imputation"]), color = "grey") +
 
-  scale_color_manual(name = "Cluster", labels = c("Increase Att","Lower att"),values = c(cols[2],cols[3])) +
-  scale_fill_manual(name = "Cluster", labels = c("Increase Att","Lower att"),values = c(alpha(cols[2],0.8),alpha(cols[3],0.8))) +
+  scale_color_manual(name = "Cluster", labels = c("Increase Att (Mean)","Lower att (Mean)"),values = c(cols[2],cols[3])) +
+  scale_fill_manual(name = "Cluster", labels = c("Increase Att (Mean)","Lower att (Mean)"),values = c(alpha(cols[2],0.8),alpha(cols[3],0.8))) +
   ylab("SIMCE Math") + xlab("") +
   ylim(180,280) +
   coord_flip()+
@@ -1294,8 +1303,8 @@ ggplot(data = impute, aes(y = factor(imputation, levels = c("Impute All",
   geom_segment(aes(y = "No Imputation", yend = "No Imputation", x = impute$mean[impute$cluster==1 & impute$imputation=="No Imputation"],
                    xend = impute$mean[impute$cluster==2 & impute$imputation=="No Imputation"]), color = "grey") +
   
-  scale_color_manual(name = "Cluster", labels = c("Increase Att","Lower att"),values = c(cols[2],cols[3])) +
-  scale_fill_manual(name = "Cluster", labels = c("Increase Att","Lower att"),values = c(alpha(cols[2],0.8),alpha(cols[3],0.8))) +
+  scale_color_manual(name = "Cluster", labels = c("Increase Att (Mean)","Lower att (Mean)"),values = c(cols[2],cols[3])) +
+  scale_fill_manual(name = "Cluster", labels = c("Increase Att (Mean)","Lower att (Mean)"),values = c(alpha(cols[2],0.8),alpha(cols[3],0.8))) +
   xlab("SIMCE Math") + ylab("") +
   xlim(180,280) +
   #coord_flip()+
@@ -1351,12 +1360,7 @@ Let's Wrap Up...
 
   - Work in progress: How does non-representativeness and different imputation strategies impact policies and information provision? What score do we impute and for whom?
   
---
-<br>
-<br>
 
-- Importance of **.coolblue[data availability]**
-  
 ---
 class: inverse, center, middle
 
@@ -1373,7 +1377,7 @@ class: inverse, center, middle
 <br>
 <br>
 
-.left[.small[Workshop on Economics of Education<br>August 17th, 2023]]]
+.left[.small[Valle Nevado Workshop on Economics of Education<br>Universidad de los Andes<br>August 17th, 2023]]]
 
 .pull-right-little_l[
 <br>

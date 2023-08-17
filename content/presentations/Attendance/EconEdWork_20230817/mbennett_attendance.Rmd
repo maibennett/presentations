@@ -1360,6 +1360,7 @@ Let's Wrap Up...
 - Non-representative patterns of absenteeism **.coolblue[beyond exclusion of low-performers]**
   
   - High heterogeneity between schools
+  - Identification of gaming schools (e.g. persistance)
  
 --
 <br>

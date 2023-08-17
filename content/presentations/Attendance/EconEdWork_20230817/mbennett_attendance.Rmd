@@ -425,7 +425,7 @@ class: inverse, center, middle
 
 - Prior literature related to student exclusion:
 
-  - Reclassification of low-performers as students with disabilities .small[(Figlio & Loeb, 2011)]
+  - Reclassification of low-performers as students with disabilities .small[(e.g. Figlio & Getzler, 2007; Cullen & Reback, 2006)]
   - Use of disciplinary measures to exclude low-performers .small[(Figlio, 2006)]
 
 --

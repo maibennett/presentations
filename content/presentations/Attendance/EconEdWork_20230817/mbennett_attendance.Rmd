@@ -425,7 +425,7 @@ class: inverse, center, middle
 
 - Prior literature related to student exclusion:
 
-  - Reclassification of low-performers as students with disabilities .small[(e.g. Figlio & Getzler, 2007; Cullen & Reback, 2006)]
+  - Reclassification of low-performers as students with disabilities .small[(e.g. Figlio & Loeb, 2011; Figlio & Getzler, 2007; Cullen & Reback, 2006)]
   - Use of disciplinary measures to exclude low-performers .small[(Figlio, 2006)]
 
 --
@@ -433,9 +433,8 @@ class: inverse, center, middle
 <br>
 - Some studies analyzing the **.coolblue[effect of attendance manipulation in Chile]**
   
-  - Differences between scores before and after imputation .small[(Cuesta et al., 2020)]
+  - Distortion in quality signals .small[(Cuesta et al., 2020)]
   - Manipulation for specific vulnerable schools (SEP) to raise scores .small[(Feigenberg et al., 2019; Quezada & Hippel, 2017)]
-  
 
 --
 <br>

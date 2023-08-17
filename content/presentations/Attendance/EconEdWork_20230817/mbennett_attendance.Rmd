@@ -431,9 +431,11 @@ class: inverse, center, middle
 --
 <br>
 <br>
-- Less attention on **.coolblue[non-representative attendance patterns]**
+- Some studies analyzing the **.coolblue[effect of attendance manipulation in Chile]**
   
   - Differences between scores before and after imputation .small[(Cuesta et al., 2020)]
+  - Manipulation for specific vulnerable schools (SEP) to raise scores .small[(Feigenberg et al., 2019; Quezada & Hippel, 2017)]
+  
 
 --
 <br>
@@ -792,11 +794,16 @@ shift_legend2(gr)
 ---
 # Potential mechanisms that explain these patterns
 
+<br>
+
 - Students are **.coolblue[excluded due to other reasons]** (justified)
+
 
 - Low-performing students are **.coolblue[less aware of the test]**
 
+
 - Students experience a **.coolblue[disutility from testing]**
+
 
 - Schools directly **.coolblue[(des)incentivize attendance of (lower)higher performers]**
 
@@ -831,7 +838,7 @@ tab10th %>% kbl(align = "lcccc", caption = "Results for 10th Grade",
 # No evidence of self-selection from students because of testing
 
 .pull-left[
-- Students experience a **.coolblue[disutility from testing]**
+- Students experience a **.coolblue[disutility from testing]**?
 
   - Use of **.coolblue[no-stake test]** applied to schools (~300 schools per year) $\rightarrow$ No effect on attendance
 
@@ -890,6 +897,8 @@ Predicting the Counterfactual
 
 ---
 # Overall predictions over performance distribution
+
+- AUC for non-tested grades: 0.798
 
 ```{r prediction_all, fig.height=5.5, fig.width=10, fig.align='center', dev='svg', echo=FALSE, warning=FALSE, message=FALSE}
 df_plot <- read.csv("https://raw.githubusercontent.com/maibennett/presentations/main/content/presentations/Attendance/IngUC_20230810/data/plot_data_gpboost2017_updated_all_schoolsv5.csv")
@@ -1226,8 +1235,14 @@ How can we **.coolblue[impute missing scores]**?
 ---
 # Scenario 1 vs Scenario 3: No imputation and Impute all
 
-```{r imputation_diff1, fig.height=5.5, fig.width=8, fig.align='center', dev='svg', echo=FALSE, warning=FALSE, message=FALSE}
+```{r imputation_diff1, fig.height=5.5, fig.width=10, fig.align='center', dev='svg', echo=FALSE, warning=FALSE, message=FALSE}
+library(ggdist)
+
 d_tab2 <- read.csv("https://raw.githubusercontent.com/maibennett/presentations/main/content/presentations/Attendance/IngUC_20230810/data/imputev5_tab2.csv")
+
+d_tab2_long = d_tab2 %>% pivot_longer(., cols = starts_with("impute_"),
+                                      names_to = "imputation", 
+                                      values_to = "Avg_Math_Simce")
 
 impute <- read.csv("https://raw.githubusercontent.com/maibennett/presentations/main/content/presentations/Attendance/IngUC_20230810/data/imputev5.csv")
 
@@ -1238,28 +1253,39 @@ impute2$mean[impute2$imputation %in% c("Impute Pred-Obs (Min All)",
   "Impute Pred-Obs (Min School)",
   "Impute Pred-Obs (Min School Decile)")] <- NA
 
-ggplot(data = impute2, aes(x = factor(imputation, levels = c("Impute All",
+impute2_wide = impute2 %>% pivot_wider(data = ., id_cols = imputation,
+                                       names_from = cluster, 
+                                       names_prefix = "clus", 
+                                       values_from = mean)
+
+impute2_wide = impute2_wide %>% mutate(diff = clus1 - clus2)
+
+d_tab2_long = d_tab2_long %>% mutate(imputation = ifelse(imputation == "impute_all", "Impute All", imputation),
+                                     imputation = ifelse(imputation == "impute_no", "No Imputation", imputation),
+                                     imputation = ifelse(imputation == "impute_pred_min_all", "Impute Pred-Obs (Min All)", imputation),
+                                     imputation = ifelse(imputation == "impute_pred_min_decile", "Impute Pred-Obs (Min Decile)", imputation),
+                                     imputation = ifelse(imputation == "impute_pred_min_school", "Impute Pred-Obs (Min School)", imputation),
+                                     imputation = ifelse(imputation == "impute_pred_min_school_GPA", "Impute Pred-Obs (Min School Decile)", imputation))
+
+d_tab2_long$imputation = factor(d_tab2_long$imputation, levels = c("Impute All",
           "Impute Pred-Obs (Min All)",
           "Impute Pred-Obs (Min Decile)",
           "Impute Pred-Obs (Min School)",
           "Impute Pred-Obs (Min School Decile)",
-          "No Imputation")), 
-                          y = mean, color = factor(cluster), fill = factor(cluster))) +
-    geom_point(pch = 21, size = 4, stroke = 1.2) +
-  geom_segment(aes(x = "Impute All", xend = "Impute All", y = impute$mean[impute$cluster==1 & impute$imputation=="Impute All"],
-                   yend = impute$mean[impute$cluster==2 & impute$imputation=="Impute All"]), color = "grey") +
-  #geom_segment(aes(x = "Impute Pred-Obs (All)", xend = "Impute Pred-Obs (All)", y = impute$mean[impute$cluster==1 & impute$imputation=="Impute Pred-Obs (All)"],
-#                   yend = impute$mean[impute$cluster==2 & impute$imputation=="Impute Pred-Obs (All)"]), color = "grey") +
-#  geom_segment(aes(x = "Impute Pred-Obs (Decile)", xend = "Impute Pred-Obs (Decile)", y = impute$mean[impute$cluster==1 & impute$imputation=="Impute Pred-Obs (Decile)"],
-#                   yend = impute$mean[impute$cluster==2 & impute$imputation=="Impute Pred-Obs (Decile)"]), color = "grey") +
-  geom_segment(aes(x = "No Imputation", xend = "No Imputation", y = impute$mean[impute$cluster==1 & impute$imputation=="No Imputation"],
-                   yend = impute$mean[impute$cluster==2 & impute$imputation=="No Imputation"]), color = "grey") +
+          "No Imputation"))
 
-  scale_color_manual(name = "Cluster", labels = c("Increase Att (Mean)","Lower att (Mean)"),values = c(cols[2],cols[3])) +
-  scale_fill_manual(name = "Cluster", labels = c("Increase Att (Mean)","Lower att (Mean)"),values = c(alpha(cols[2],0.8),alpha(cols[3],0.8))) +
-  ylab("SIMCE Math") + xlab("") +
-  ylim(180,280) +
-  coord_flip()+
+d_tab2_long1 = d_tab2_long
+
+d_tab2_long1$Avg_Math_Simce[d_tab2_long1$imputation %in% c("Impute Pred-Obs (Min All)",
+  "Impute Pred-Obs (Min Decile)",
+  "Impute Pred-Obs (Min School)",
+  "Impute Pred-Obs (Min School Decile)")] <- NA
+
+ggplot(data = d_tab2_long1, aes(y = imputation, x = Avg_Math_Simce, fill = factor(cluster), color = factor(cluster))) + stat_halfeye(height = 0.8) + 
+   scale_color_manual(name = "Cluster", labels = c("Increase Att","Lower att"),values = c(cols[2],cols[3])) +
+  scale_fill_manual(name = "Cluster", labels = c("Increase Att","Lower att"),values = c(alpha(cols[2],0.3),alpha(cols[3],0.3))) +
+  xlab("SIMCE Math") + ylab("") +
+  xlim(100,350) +
   theme_ipsum_fsc() + #plain
   theme(plot.margin=unit(c(0.5,0.5,0.5,0.5),"cm"),
         panel.grid.major.x = element_blank(),
@@ -1270,43 +1296,32 @@ ggplot(data = impute2, aes(x = factor(imputation, levels = c("Impute All",
   theme(axis.title.x = element_text(size=14),#margin = margin(t = 10, r = 0, b = 0, l = 0)),
         axis.text.x = element_text(size=12),
         axis.title.y = element_text(size=14),#margin = margin(t = 0, r = 10, b = 0, l = 0)),
-        axis.text.y = element_text(size=12),legend.position=c(0.25,0.9),
+        axis.text.y = element_text(size=12),legend.position=c(0.15,0.9),
         legend.title = element_text(size = 12),
         legend.text = element_text(size=10),
         legend.background = element_rect(fill="white",colour ="grey"),
-        title = element_text(size=14))
+        title = element_text(size=14)) +
+  geom_text(data = impute2_wide, aes(label = round(diff,1), x = (clus1 + clus2)/2, y = imputation), inherit.aes = FALSE, nudge_y = 0.2, color = text_color, hjust = "middle") 
+
 ```
 
 ---
 # Imputing Predicted - Observed is less extreme
 
-```{r imputation_diff2, fig.height=5.5, fig.width=8, fig.align='center', dev='svg', echo=FALSE, warning=FALSE, message=FALSE}
-ggplot(data = impute, aes(y = factor(imputation, levels = c("Impute All",
-          "Impute Pred-Obs (Min All)",
-          "Impute Pred-Obs (Min Decile)",
-          "Impute Pred-Obs (Min School)",
-          "Impute Pred-Obs (Min School Decile)",
-          "No Imputation")), 
-                          x = mean, color = factor(cluster), fill = factor(cluster))) +
-  geom_point(pch = 21, size = 4, stroke = 1.2) +
-  geom_segment(aes(y = "Impute All", yend = "Impute All", x = impute$mean[impute$cluster==1 & impute$imputation=="Impute All"],
-                   xend = impute$mean[impute$cluster==2 & impute$imputation=="Impute All"]), color = "grey") +
-  geom_segment(aes(y = "Impute Pred-Obs (Min All)", yend = "Impute Pred-Obs (Min All)", x = impute$mean[impute$cluster==1 & impute$imputation=="Impute Pred-Obs (Min All)"],
-                   xend = impute$mean[impute$cluster==2 & impute$imputation=="Impute Pred-Obs (Min All)"]), color = "grey") +
-  geom_segment(aes(y = "Impute Pred-Obs (Min Decile)", yend = "Impute Pred-Obs (Min Decile)", x = impute$mean[impute$cluster==1 & impute$imputation=="Impute Pred-Obs (Min Decile)"],
-                   xend = impute$mean[impute$cluster==2 & impute$imputation=="Impute Pred-Obs (Min Decile)"]), color = "grey") +
-  geom_segment(aes(y = "Impute Pred-Obs (Min School)", yend = "Impute Pred-Obs (Min School)", x = impute$mean[impute$cluster==1 & impute$imputation=="Impute Pred-Obs (Min School)"],
-                   xend = impute$mean[impute$cluster==2 & impute$imputation=="Impute Pred-Obs (Min School)"]), color = "grey") +
-  geom_segment(aes(y = "Impute Pred-Obs (Min School Decile)", yend = "Impute Pred-Obs (Min School Decile)", x = impute$mean[impute$cluster==1 & impute$imputation=="Impute Pred-Obs (Min School Decile)"],
-                   xend = impute$mean[impute$cluster==2 & impute$imputation=="Impute Pred-Obs (Min School Decile)"]), color = "grey") +
-  geom_segment(aes(y = "No Imputation", yend = "No Imputation", x = impute$mean[impute$cluster==1 & impute$imputation=="No Imputation"],
-                   xend = impute$mean[impute$cluster==2 & impute$imputation=="No Imputation"]), color = "grey") +
-  
-  scale_color_manual(name = "Cluster", labels = c("Increase Att (Mean)","Lower att (Mean)"),values = c(cols[2],cols[3])) +
-  scale_fill_manual(name = "Cluster", labels = c("Increase Att (Mean)","Lower att (Mean)"),values = c(alpha(cols[2],0.8),alpha(cols[3],0.8))) +
+```{r imputation_diff2, fig.height=5.5, fig.width=10, fig.align='center', dev='svg', echo=FALSE, warning=FALSE, message=FALSE}
+
+impute_wide = impute %>% pivot_wider(data = ., id_cols = imputation,
+                                       names_from = cluster, 
+                                       names_prefix = "clus", 
+                                       values_from = mean)
+
+impute_wide = impute_wide %>% mutate(diff = clus1 - clus2)
+
+ggplot(data = d_tab2_long, aes(y = imputation, x = Avg_Math_Simce, fill = factor(cluster), color = factor(cluster))) + stat_halfeye(height = 0.8) + 
+   scale_color_manual(name = "Cluster", labels = c("Increase Att","Lower att"),values = c(cols[2],cols[3])) +
+  scale_fill_manual(name = "Cluster", labels = c("Increase Att","Lower att"),values = c(alpha(cols[2],0.3),alpha(cols[3],0.3))) +
   xlab("SIMCE Math") + ylab("") +
-  xlim(180,280) +
-  #coord_flip()+
+  xlim(100,350) +
   theme_ipsum_fsc() + #plain
   theme(plot.margin=unit(c(0.5,0.5,0.5,0.5),"cm"),
         panel.grid.major.x = element_blank(),
@@ -1317,11 +1332,13 @@ ggplot(data = impute, aes(y = factor(imputation, levels = c("Impute All",
   theme(axis.title.x = element_text(size=14),#margin = margin(t = 10, r = 0, b = 0, l = 0)),
         axis.text.x = element_text(size=12),
         axis.title.y = element_text(size=14),#margin = margin(t = 0, r = 10, b = 0, l = 0)),
-        axis.text.y = element_text(size=12),legend.position=c(0.25,0.9),
+        axis.text.y = element_text(size=12),legend.position=c(0.15,0.9),
         legend.title = element_text(size = 12),
         legend.text = element_text(size=10),
         legend.background = element_rect(fill="white",colour ="grey"),
-        title = element_text(size=14))
+        title = element_text(size=14)) +
+  geom_text(data = impute_wide, aes(label = round(diff,1), x = (clus1 + clus2)/2, y = imputation), inherit.aes = FALSE, nudge_y = 0.2, color = text_color, hjust = "middle")
+
 ```
 
 ---

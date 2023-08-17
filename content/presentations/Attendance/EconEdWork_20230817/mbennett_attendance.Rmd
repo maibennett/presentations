@@ -890,7 +890,6 @@ Predicting the Counterfactual
 
 ---
 # Overall predictions over performance distribution
-[Include accuracy measures]
 
 ```{r prediction_all, fig.height=5.5, fig.width=10, fig.align='center', dev='svg', echo=FALSE, warning=FALSE, message=FALSE}
 df_plot <- read.csv("https://raw.githubusercontent.com/maibennett/presentations/main/content/presentations/Attendance/IngUC_20230810/data/plot_data_gpboost2017_updated_all_schoolsv5.csv")

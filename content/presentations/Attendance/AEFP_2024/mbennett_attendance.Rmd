@@ -904,6 +904,8 @@ dir_data2 = "C:/Users/mc72574/Dropbox/UT/UT Research/Asistencia/"
 
 df_final= read.csv(paste0(dir_data2,"data/working/boxplot_data_xgboost2017_v7.csv"))
 
+df_final$GPA_pos = factor(df_final$GPA_pos, levels = c("D1","D2","D3D8","D9","D10"))
+
 ggplot(data = df_final, aes(x = GPA_pos, y = mean_outcome*100, fill = factor(type), color = factor(type))) + 
   geom_point(pch = 21, position = position_dodge(width = 1), alpha=.6, size = 4) +
   geom_errorbar(aes(x=GPA_pos, ymin=ci_lower*100, ymax=ci_upper*100, color = factor(type)), 

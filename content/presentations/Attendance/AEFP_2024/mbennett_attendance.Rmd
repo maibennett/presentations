@@ -894,6 +894,50 @@ Predicting the Counterfactual
 
   - Data **.coolblue[before]** the test to **.coolblue[predict attendance on the day of the test]**.
 
+
+---
+# Overall predictions over performance distribution
+
+
+```{r prediction_all_boxplot, fig.height=5.5, fig.width=10, fig.align='center', dev='svg', echo=FALSE, warning=FALSE, message=FALSE}
+dir_data2 = "C:/Users/mc72574/Dropbox/UT/UT Research/Asistencia/"
+
+df_final= read.csv(paste0(dir_data2,"data/working/boxplot_data_xgboost2017_v7.csv"))
+
+ggplot(data = df_final, aes(x = GPA_pos, y = mean_outcome*100, fill = factor(type), color = factor(type))) + 
+  geom_point(pch = 21, position = position_dodge(width = 1), alpha=.6, size = 4) +
+  geom_errorbar(aes(x=GPA_pos, ymin=ci_lower*100, ymax=ci_upper*100, color = factor(type)), 
+                width=0.2, alpha=0.9, linewidth=0.6,
+                position = position_dodge(width = 1))+
+  geom_vline(aes(xintercept = 1.5), lty = 2, color = "lightgrey") +
+  geom_vline(aes(xintercept = 2.5), lty = 2, color = "lightgrey") +
+  geom_vline(aes(xintercept = 3.5), lty = 2, color = "lightgrey") +
+  geom_vline(aes(xintercept = 4.5), lty = 2, color = "lightgrey") +
+  scale_y_continuous(limits=c(0,100),oob = rescale_none) +
+  scale_color_manual(values = c(cols[3],cols[5])) +
+  scale_fill_manual(values = c(alpha(cols[3],0.8),alpha(cols[5],0.8))) +
+  theme_bw()+
+  xlab("GPA deciles") + ylab("% Attendance") +
+  #ggplot2::annotate("text", x = 10, y = 6, label = "Adj. R2 = 0.48", size = 6, colour = "dark grey", hjust=0,family="Fira Sans Condensed") +
+  theme_ipsum_fsc(plot_title_face = "bold",plot_title_size = 24) + #plain
+  theme(plot.margin=unit(c(1,1,1.5,1.2),"cm"),
+        panel.grid.major.x = element_blank(),
+        panel.grid.minor.x = element_blank(),
+        panel.grid.major.y = element_blank(),
+        panel.grid.minor.y = element_blank(),
+        axis.line = element_line(colour = "dark grey"))+
+  theme(axis.title.x = element_text(size=18),#margin = margin(t = 10, r = 0, b = 0, l = 0)),
+        axis.text.x = element_text(size=14),
+        axis.title.y = element_text(size=18),#margin = margin(t = 0, r = 10, b = 0, l = 0)),
+        axis.text.y = element_text(size=14),legend.position=c(0.1,0.1),
+        legend.title = element_blank(),
+        legend.text = element_text(size=15),
+        legend.background = element_rect(fill="white",colour ="white"),
+        title = element_text(size=14)) +
+  facet_wrap(~factor(grade_treat, levels = c(FALSE,TRUE), labels = c("Non-tested grade","Tested grade")))
+
+```
+
 ---
 # Overall predictions over performance distribution
 

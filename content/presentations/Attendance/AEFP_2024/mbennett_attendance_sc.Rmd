@@ -1,0 +1,1653 @@
+---
+output:
+  xaringan::moon_reader:
+    self_contained: true
+    css: ["xaringan-themer.css", "style.css"]
+    lib_dir: libs
+    nature:
+      slideNumberFormat: |
+        <div class="progress-bar-container">
+          <div class="progress-bar" style="width: calc(%current% / %total% * 100%);">
+          </div>
+        </div>
+      highlightStyle: github
+      highlightLines: true
+      ratio: "16:9"
+      beforeInit: "macros.js"
+    includes:
+      in_header: header.html
+    seal: false
+always_allow_html: true
+tables: true
+---
+
+```{r setup, include=FALSE}
+options(htmltools.dir.version = FALSE)
+knitr::opts_chunk$set(fig.showtext = TRUE)
+#knitr::opts_chunk$set(cache=TRUE)
+```
+
+```{r xaringan-themer, include=FALSE, warning=FALSE}
+library(xaringanthemer)
+
+theme_xaringan(
+  text_color = "#333f48",
+  background_color = "#FFFFFF",
+  accent_color = "#900DA4",
+  text_font = "Fira Mono",
+  text_font_use_google = TRUE,
+  title_font = "Fira Sans Condensed",
+  title_font_use_google = TRUE
+)
+
+style_mono_accent(
+  #base_color = "#bf5700",
+  extra_fonts = list(google_font("Fira Sans","200","300","400","500","600"),
+                     google_font("Fira Sans Condensed"),
+                     google_font("Jost")),
+  base_color = "#333f48",
+  header_font_google = google_font("Yanone Kaffeesatz","200","300","400","500","600","700"),
+  text_font_google   = google_font("Jost"),
+  code_font_google   = google_font("Fira Mono"),
+  text_bold_color = "#333f48",
+  text_font_size = "130%",
+  colors = c(
+    red = "#f34213",
+    purple = "#900DA4",
+    orange = "#ff8811",
+    green = "#136f63",
+    white = "#FFFFFF",
+    coolblue = "#4493AE"),
+  extra_css = list(
+    ".body" = list("font-family" = "Jost"),
+    ".remark-slide table" = list("display" = "table",
+                   "width" = "80%",
+                   "text-align" = "left"),
+    
+    #".remark-slide-number" = list("display" = "none"),
+    
+    ".strong" = list("font-weight" = "400"),
+    ".big" = list("font-size" = "250%",
+                     "font-family" = "Yanone Kaffeesatz",
+                     "font-weight"="400"),
+    ".small" = list("font-size" = "80%"),
+    ".smaller" = list("font-size" = "70%"),
+    ".tiny" = list("font-size" = "50%"),
+    ".tinylist" = list("font-size" = "62.5%"),
+    ".source" = list("color" = "#8c8c8c",
+                     "font-size" = "80%"),
+    ".remark-slide table td#highlight" = list("background-color" = "#eee1f0",
+                                  "color" = "#900DA4",
+                                  "font-weight" = "500"),
+   # ".remark-slide table thead th" = list(),
+    ".title-slide h1" = list("font-weight" = "500"),
+    ".title-slide h2" = list("font-weight" = "400",
+                             "font-size" =  "100%",
+                             "font-family" = "Jost"),
+    ".title-slide h3" = list("font-family" = "Jost",
+                             "font-size" = "80%",
+                             "font-weight" = "200"),
+    ".center2" = list("margin" = "0",
+                      "position" = "absolute",
+                      "top" = "50%",
+                      "left" = "50%",
+                      "-ms-transform" = "translate(-50%, -50%)",
+                      "transform" = "translate(-50%, -50%)"),
+    ".section-title h1" = list("color" = "#FFFFFF",
+                               "font-size" = "2.3em",
+                               "line-height" = "1.3"),
+    ".medium" = list("font-size" = "1.4em"),
+    ".sp-after-half" = list("margin-bottom" = "0.7em !important"),
+    ".box-1,.box-1a,.box-1b,.section-title-1" = list("background-color" = "#5A3D66"),
+    ".box-2,.box-2a,.box-2b,.section-title-2" = list("background-color" = "#9442B5"),
+    ".box-3,.box-3a,.box-3b,.section-title-3" = list("background-color" = "#4493AE"),
+    ".box-4,.box-4a,.box-4b,.section-title-4" = list("background-color" = "#A5AC20"),
+    ".box-5,.box-5a,.box-5b,.section-title-5" = list("background-color" = "#DAE058"),
+    ".box-6,.box-6a,.box-6b,.section-title-6" = list("background-color" = "#F89441"),
+    ".box-7,.box-7a,.box-7b,.section-title-7" = list("background-color" = "#FCCE25"),
+    ".box-7, .box-6, .box-5, .box-4, .box-3, .box-2, .box-1" = list("color" = "#FFFFFF",
+                                                                    "margin" = "0em auto",
+                                                                    "overflow" = "hidden",
+                                                                    "padding" = "0.4em 0.4em",
+                                                                    "font-weight" = "600",
+                                                                    "font-size" = "31px",
+                                                                    "display" = "table",
+                                                                    "text-align" = "center",
+                                                                    "font-family" = "Jost"),
+    ".box-7a, .box-6a, .box-5a, .box-4a, .box-3a, .box-2a, .box-1a" = list("color" = "#FFFFFF",
+                                                                          "left" = "0px",
+                                                                          "overflow" = "hidden",
+                                                                      "padding" = "0.4em 0.4em",
+                                                                      "font-weight" = "600",
+                                                                      "font-size" = "25px",
+                                                                      "display" = "table",
+                                                                      "text-align" = "center",
+                                                                      "font-family" = "Fira Sans"),
+       ".box-7b, .box-6b, .box-5b, .box-4b, .box-3b, .box-2b, .box-1b" = list("color" = "#FFFFFF",
+                                                                          "left" = "0px",
+                                                                          "overflow" = "hidden",
+                                                                      "padding" = "0.4em 0.4em",
+                                                                      "font-weight" = "600",
+                                                                      "font-size" = "25px",
+                                                                      "display" = "table",
+                                                                      "text-align" = "left",
+                                                                      "font-family" = "Fira Sans"),
+       ".medium" = list("font-size" = "1.4em"),
+    ".sp-after-half" = list("margin-bottom" = "0.7em !important"),
+    ".box-0" = list("background-color" = "#DAE058",
+                    "border-radius" = "15px",
+                    "font-size" = "110%",
+                    "color" = "#FFFFFF",
+                    "margin" = "0em auto",
+                    "overflow" = "hidden",
+                    "padding" = "0.4em 0.4em",
+                    "display" = "table"),
+    ".box-1,.box-1a,.box-1s,.box-1b,.box-1l,.box-1LA,.section-title-1" = list("background-color" = "#5A3D66",
+                                                                              "border-radius" = "15px"),
+    ".box-2,.box-2a,.box-2s,.box-2b,.box-2l,.box-2LA,.section-title-2" = list("background-color" = "#9442B5",
+                                                                              "border-radius" = "15px"),
+    ".box-3,.box-3a,.box-3s,.box-3b,.box-3l,.box-3LA,.section-title-3" = list("background-color" = "#4493AE",
+                                                                              "border-radius" = "15px"),
+    ".box-4,.box-4a,.box-4s,.box-4b,.box-4l,.box-4LA,.section-title-4" = list("background-color" = "#A5AC20",
+                                                                              "border-radius" = "15px"),
+    ".box-5,.box-5a,.box-5s,.box-5b,.box-5l,.box-5LA,.section-title-5" = list("background-color" = "#DAE058",
+                                                                              "border-radius" = "15px"),
+    ".box-6,.box-6a,.box-6s,.box-6b,.box-6l,.box-6LA,.section-title-6" = list("background-color" = "#F89441",
+                                                                              "border-radius" = "15px"),
+    ".box-7,.box-7a,.box-7s,.box-7b,.box-7l,.box-7LA,.section-title-7" = list("background-color" = "#FCCE25",
+                                                                              "border-radius" = "15px"),
+   
+   ".box-1t,.box-1tL,.section-title-1t" = list("background-color" = "rgba(13, 8, 135,0.3)",
+                                      "color"="rgba(13, 8, 135,1)",
+                                      "font-family" = "Yanone Kaffeesatz",
+                                      "border-radius" = "15px"),
+    ".box-2t,.box-2tL,.section-title-2t" = list("background-color" = "rgba(86, 1, 164,0.3)",
+                                       "color" = "rgba(86, 1, 164,1)",
+                                       "font-family" = "Yanone Kaffeesatz",
+                                       "border-radius" = "15px"),
+    ".box-3t,.box-3tL,.section-title-3t" = list("background-color" = "rgba(144, 13, 164,0.3)",
+                                       "color" = "rgba(144, 13, 164,1)",
+                                       "font-family" = "Yanone Kaffeesatz",
+                                       "border-radius" = "15px"),
+    ".box-4t,.box-4tL,.section-title-4t" = list("background-color" = "rgba(191, 57, 132,0.3)",
+                                       "color" = "rgba(191, 57, 132,1)",
+                                       "font-family" = "Yanone Kaffeesatz",
+                                       "border-radius" = "15px"),
+    ".box-5t,.box-5tL,.section-title-5t" = list("background-color" = "rgba(225, 100, 98,0.3)",
+                                       "color" = "rgba(225, 100, 98,1)",
+                                       "font-family" = "Jost",
+                                       "border-radius" = "15px"),
+    ".box-6t,.box-6tL,.section-title-6t" = list("background-color" = "rgba(248, 148, 65,0.3)",
+                                       "color" = "rgba(248, 148, 65,1)",
+                                       "font-family" = "Yanone Kaffeesatz",
+                                       "border-radius" = "15px"),
+    ".box-7t,.box-7tL,.section-title-7t" = list("background-color" = "rgba(252, 206, 37,0.3)",
+                                       "color" = "rgba(252, 206, 37,1)",
+                                       "font-family" = "Yanone Kaffeesatz",
+                                       "border-radius" = "15px"),
+   
+   ".box-7t, .box-6t, .box-5t, .box-4t, .box-3t, .box-2t, .box-1t" = list("margin" = "0em auto",
+                                                                    "overflow" = "hidden",
+                                                                    "padding" = "0.4em 0.4em",
+                                                                    "font-weight" = "600",
+                                                                    "font-size" = "25px",
+                                                                    "display" = "table",
+                                                                    "text-align" = "center"),
+   
+   ".box-7tL, .box-6tL, .box-5tL, .box-4tL, .box-3tL, .box-2tL, .box-1tL" = list("margin" = "0em auto",
+                                                                    "overflow" = "hidden",
+                                                                    "padding" = "0.4em 0.4em",
+                                                                    "font-weight" = "600",
+                                                                    "font-size" = "50px",
+                                                                    "display" = "table",
+                                                                    "text-align" = "center"),
+   
+    ".box-7, .box-6, .box-5, .box-4, .box-3, .box-2, .box-1" = list("color" = "#FFFFFF",
+                                                                    "margin" = "0em auto",
+                                                                    "overflow" = "hidden",
+                                                                    "padding" = "0.4em 0.4em",
+                                                                    "font-weight" = "600",
+                                                                    "font-size" = "31px",
+                                                                    "display" = "table",
+                                                                    "text-align" = "center",
+                                                                    "font-family" = "Jost"),
+    ".box-7a, .box-6a, .box-5a, .box-4a, .box-3a, .box-2a, .box-1a" = list("color" = "#FFFFFF",
+                                                                          "left" = "0px",
+                                                                          "overflow" = "hidden",
+                                                                      "padding" = "0.4em 0.4em",
+                                                                      "font-weight" = "600",
+                                                                      "font-size" = "25px",
+                                                                      "display" = "table",
+                                                                      "text-align" = "center",
+                                                                      "font-family" = "Yanone Kaffeesatz"),
+   ".box-7s, .box-6s, .box-5s, .box-4s, .box-3s, .box-2s, .box-1s" = list("color" = "#FFFFFF",
+                                                                          "left" = "0px",
+                                                                          "overflow" = "hidden",
+                                                                      "padding" = "0.2em 0.2em",
+                                                                      "font-weight" = "400",
+                                                                      "font-size" = "100%",
+                                                                      "display" = "inline",
+                                                                      "text-align" = "center",
+                                                                      "font-family" = "Yanone Kaffeesatz"),
+       ".box-7b, .box-6b, .box-5b, .box-4b, .box-3b, .box-2b, .box-1b" = list("color" = "#FFFFFF",
+                                                                          "left" = "0px",
+                                                                          "overflow" = "hidden",
+                                                                      "padding" = "0.4em 0.4em",
+                                                                      "font-weight" = "600",
+                                                                      "font-size" = "25px",
+                                                                      "display" = "table",
+                                                                      "text-align" = "left",
+                                                                      "font-family" = "Yanone Kaffeesatz"),
+   ".box-7l, .box-6l, .box-5l, .box-4l, .box-3l, .box-2l, .box-1l" = list("color" = "#FFFFFF",
+                                                                    "margin" = "0em auto",
+                                                                    "overflow" = "hidden",
+                                                                    "padding" = "0.4em 0.4em",
+                                                                    "font-weight" = "600",
+                                                                    "font-size" = "45px",
+                                                                    "display" = "table",
+                                                                    "text-align" = "center",
+                                                                      "font-family" = "Yanone Kaffeesatz"),
+   ".box-7LA, .box-6LA, .box-5LA, .box-4LA, .box-3LA, .box-2LA, .box-1LA" = list("color" = "#FFFFFF",
+                                                                    "margin" = "0em auto",
+                                                                    "overflow" = "hidden",
+                                                                    "padding" = "0.4em 0.4em",
+                                                                    "font-weight" = "600",
+                                                                    "font-size" = "55px",
+                                                                    "display" = "table",
+                                                                    "text-align" = "center",
+                                                                      "font-family" = "Yanone Kaffeesatz"),
+       ".box-1trans,.box-2trans,.box-3trans,.box-4trans,.box-5trans,.box-6trans,.box-7trans" = list("background-color" = "#FFFFFF",
+                                                                                                 "font-family" = "Yanone Kaffeesatz",
+                                                                                                 "border-radius" = "15px",
+                                                                                                 "margin" = "0em auto",
+                                                                                                 "overflow" = "hidden",
+                                                                                                 "padding" = "0.4em 0.4em",
+                                                                                                 "font-weight" = "600",
+                                                                                                 "font-size" = "24px",
+                                                                                                 "display" = "table",
+                                                                                                 "text-align" = "center",
+                                                                                                 "border-width" = "thick",
+                                                                                                 "color" = "#333f48"),
+   
+       ".box-1Trans,.box-2Trans,.box-3Trans,.box-4Trans,.box-5Trans,.box-6Trans,.box-7Trans" = list("background-color" = "#FFFFFF",
+                                                                                                 "font-family" = "Yanone Kaffeesatz",
+                                                                                                 "border-radius" = "15px",
+                                                                                                 "margin" = "0em auto",
+                                                                                                 "overflow" = "hidden",
+                                                                                                 "padding" = "0.4em 0.4em",
+                                                                                                 "font-weight" = "600",
+                                                                                                 "font-size" = "51px",
+                                                                                                 "display" = "table",
+                                                                                                 "text-align" = "center",
+                                                                                                 "border-width" = "thick",
+                                                                                                 "color" = "#333f48"),
+   
+       ".box-1transl,.box-2transl,.box-3transl,.box-4transl,.box-5transl,.box-6transl,.box-7transl" = list("background-color" = "#FFFFFF",
+                                                                                                           "font-family" = "Yanone Kaffeesatz",
+                                                                                                           "border-radius" = "15px",
+                                                                                                           "left" = "0px",
+                                                                                                           "overflow" = "hidden",
+                                                                                                           "padding" = "0.4em 0.4em",
+                                                                                                           "font-weight" = "600",
+                                                                                                           "font-size" = "31px",
+                                                                                                           "display" = "table",
+                                                                                                           "text-align" = "left",
+                                                                                                           "border-width" = "thick",
+                                                                                                           "color" = "#333f48"),
+   
+   
+    ".box-1trans,.box-1transl,.box-1Trans" = list("border"="5px solid #5A3D66"),
+    ".box-2trans,.box-2transl,.box-2Trans" = list("border"="5px solid #9442B5"),
+    ".box-3trans,.box-3transl,.box-3Trans" = list("border"="5px solid #4493AE"),
+    ".box-4trans,.box-4transl,.box-4Trans" = list("border"="5px solid #A5AC20"),
+    ".box-5trans,.box-5transl,.box-5Trans" = list("border"="5px solid #DAE058"),
+    ".box-6trans,.box-6transl,.box-6Trans" = list("border"="5px solid rgba(248, 148, 65,1)"),
+    ".box-7trans,.box-7transl,.box-7Trans" = list("border"="5px solid rgba(252, 206, 37,1)"),
+   
+   ".image-80 img" = list("scale" = "80%"),
+   ".pull-left-little_l" = list("float" = "left",
+                                "width" = "57%"),
+   ".pull-right-little_l" = list("float" = "right",
+                                "width" = "37%"),
+   ".pull-left-little_r" = list("float" = "left",
+                                "width" = "27%"),
+   ".pull-right-little_r" = list("float" = "right",
+                                "width" = "67%")
+
+  )
+)
+
+#,"li" = list("font-size" = "150%")
+#    "li" = list("font-size" = "110%"),
+#    "ul" = list("font-size" = "110%"),
+#color palette
+#5601A4
+#900DA4
+#F89441
+#FCCE25
+```
+
+```{r setup2, echo=FALSE, message=FALSE, warning = FALSE}
+library(knitr)
+library(showtext)
+library(xaringanExtra)
+
+options(knitr.table.format = "html") 
+
+#xaringanExtra::use_scribble()
+
+```
+
+```{r fonts, message=FALSE, echo=FALSE, warning = FALSE}
+font_add_google("Fira Sans Condensed", "Fira Sans Condensed")
+font_add_google("Fira Sans", "Fira Sans")
+font_add_google("Jost", "Jost")
+```
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
+library(tidyverse)
+library(ggthemes)
+library(ggplot2)
+library(firasans)
+library(hrbrthemes)
+library(extrafont)
+library(RColorBrewer)
+library(viridis)
+library(firasans)
+library(hrbrthemes)
+library(extrafont)
+library(gridExtra)
+library(pBrackets)
+library(patchwork)
+library(kableExtra)
+
+#loadfonts(device = "win")
+col_text = "#333f48"
+
+options(scipen = 0)
+```
+
+class: inverse, center, middle
+
+<br>
+
+.left[
+<h1 class="title-own">Beyond Exclusion:<br/>The Role of High-Stake Testing on Attendance the Day of the Test</h1>]
+
+.pull-left-little_l[
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+
+.left[.small[AEFP Conference<br>March 14th, 2024]]]
+
+.pull-right-little_l[
+<br>
+.small[.right[Magdalena Bennett&nbsp;&nbsp;&nbsp;<br>*The University of Texas at Austin*&nbsp;&nbsp;&nbsp;]]
+
+<br>
+.small[.right[Christopher Neilson&nbsp;&nbsp;&nbsp;<br>*Yale University*&nbsp;&nbsp;&nbsp;]]
+
+<br>
+.small[.right[Nicolás Rojas&nbsp;&nbsp;&nbsp;<br>*Columbia University*&nbsp;&nbsp;&nbsp;]]
+
+]
+<br>
+<br>
+<br>
+
+
+---
+# Motivation
+
+Results from **.coolblue[high-stakes tests]** widely used in education policy
+   
+- E.g. funding, promotions, school closures, school choice, etc.
+<br>
+<br>
+
+---
+# Motivation
+
+Results from **.coolblue[high-stakes tests]** widely used in education policy
+   
+- E.g. funding, promotions, school closures, school choice, etc.
+<br>
+
+**.coolblue[Assumption]**: Standardize tests used as a proxy of school quality
+<br>
+
+
+---
+# Motivation
+
+Results from **.coolblue[high-stakes tests]** widely used in education policy
+   
+- E.g. funding, promotions, school closures, school choice, etc.
+<br>
+
+**.coolblue[Assumption]**: Standardize tests used as a proxy of school quality
+<br>
+<br>
+
+**.coolblue[Multiple issues]** with the use of standardized tests:
+- Teaching to the test/explicit cheating.
+  
+- Correlation with SES.
+  
+- **.coolblue[Non-representative patterns of attendance.]**
+  
+---
+# Motivation
+
+Results from **.coolblue[high-stakes tests]** widely used in education policy
+   
+- E.g. funding, promotions, school closures, school choice, etc.
+<br>
+
+**.coolblue[Assumption]**: Standardize tests used as a proxy of school quality
+<br>
+<br>
+
+**.coolblue[Multiple issues]** with the use of standardized tests:
+- Teaching to the test/explicit cheating.
+  
+- Correlation with SES.
+  
+- **.coolblue[Non-representative patterns of attendance.]**
+  
+  - Prior work: Re-classification of low-performers .small[(e.g. Figlio & Loeb, 2011; Figlio & Getzler, 2007; Cullen & Reback, 2006)]; Use of disciplinary measures .small[(Figlio, 2006)]; Distortions in quality signals .small[(Cuesta et al., 2020)]
+  
+---
+# This paper
+
+**.coolblue[Attendance Patterns]**
+
+- Event study approach:
+
+  - *How do these exclusions patterns look like? Are these the same for every (type of) school and every grade?*
+  
+  - Focus beyond bottom performers
+  
+  - Robustness checks for alternative mechanisms
+
+--
+
+**.coolblue[What can be done?]**
+
+- Machine learning prediction:
+
+  - Identification of schools that are most likely gaming the system
+  
+  - Consequences of blanket policies in imputation of scores
+
+---
+background-position: 50% 50%
+class: left, middle, inverse
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+.big[
+Context of the Study and Data
+]
+
+---
+# The Chilean context: Standardized testing
+
+- Chile has a **.coolblue[universal voucher system]** (school choice)
+
+--
+<br>
+<br>
+
+- Universal standardized testing since 1980's (SIMCE)
+  
+  - For all 4th graders; then extended to other grades.
+
+--
+<br>
+<br>
+
+- SIMCE as **.coolblue[high-stake]** testing:
+
+  - Results widely available in a universal voucher system
+  
+  - Tied to teachers' bonuses
+  
+  - Tied to budget restrictions and school closures
+  
+---
+# Data Available
+
+- **.coolblue[Standardized tests 2011-2018 (SIMCE)]**
+
+  - Scores at student and school level for different subjects (Math, Language, History, and Science)
+  
+  - Student's socioeconomic characterization (parental questionnaire)
+
+--
+<br>
+<br>
+
+- **.coolblue[Daily attendance data 2011-2018 (SIGE)]**
+
+  - Use for voucher payments (each day has &#126; 2.5 million records)
+  
+--
+<br>
+<br>
+
+- **.coolblue[GPA Performance 2011-2018 (Rendimiento)]**
+
+  - Use GPA performance deciles within school-grade
+  
+
+---
+background-position: 50% 50%
+class: left, middle, inverse
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+.big[
+Attendance Patterns for the Day of the Test
+]
+
+
+---
+# Empirical approach for difference in attendance
+
+- Event study centered around the day of the test (T=0):
+
+$$Y_{ipsgt} = \sum_{P=1}^5\sum_{T=-4}^5 \tau^{PT}D^{PT}_{ipsgt} + \gamma_{pt} +\alpha_i + \epsilon_{ipsgt}$$
+
+Where
+- $Y_{ipsgt}$: Binary attendance for student $i$, from GPA group $p$, in school $s$ and grade $g$, for day $t$.
+
+- $D^{PT}_{ipsgt}$: Indicator variables (lags and leads) for students that belong to a tested grade.
+
+---
+# Clear difference in attendance by performance for 2nd grade
+
+```{r event_study_plot2nd, fig.height=5.5, fig.width=9, fig.align='center', dev='svg', echo=FALSE, warning=FALSE, message=FALSE}
+library(ggplot2)
+library(tidyverse)
+library(hrbrthemes)
+library(firasans)
+library(haven)
+library(scales)
+library(patchwork)
+
+# Directories
+dir_data <- "C:/Users/mc72574/Dropbox/UT/UT Research/Asistencia/archivos_mai_18032022/"
+dir_output <- "C:/Users/mc72574/Dropbox/Hugo/Sites/presentations/content/presentations/Attendance/Salem_20220405/images/"
+
+# Color palettes:
+text_color <- "#333f48"
+#cols <- c("#0D0887","#5601A4","#900DA4","#BF3984","#E16462","#F89441","#FCCE25")
+#cols <- c("#003f5c","#58508d","#bc5090","#ff6361","#ffa600")
+cols <- c("#5A3D66","#9442B5","#4493AE","#A5AC20","#DAE058")
+
+results <- haven::read_dta(paste0(dir_data, "results.dta"))
+
+
+# Builds a function that generates a graph 
+graph_maker <- function(nyear, ngrado){
+  graph <- ggplot(data = results %>% 
+                    filter(agno == nyear & grado == ngrado & mod == 3 & gpa == 1)) + 
+    geom_line(aes( y = est*100, x = t,  color = "LP (D1)")) + 
+    geom_line(aes( y = cil*100, x = t, color = "LP (D1)"), linetype = "dashed") +
+    geom_line(aes( y = ciu*100, x = t, color = "LP (D1)"), linetype = "dashed") +
+    geom_point(aes( y = est*100, x = t, color = "LP (D1)", fill = "LP (D1)"), size = 3, pch=21, stroke = 1.1) + 
+    geom_line(data = results %>% 
+                filter(agno == nyear & grado == ngrado & mod == 3 & gpa == 4), aes( y = est*100, x = t, color = "HP (D10)")) + 
+    geom_line(data = results %>% 
+                filter(agno == nyear & grado == ngrado & mod == 3 & gpa == 4), aes( y = cil*100, x = t, color = "HP (D10)"), linetype = "dashed") +
+    geom_line(data = results %>% 
+                filter(agno == nyear & grado == ngrado & mod == 3 & gpa == 4), aes( y = ciu*100, x = t, color = "HP (D10)"), linetype = "dashed") +
+    geom_point(data = results %>% 
+                 filter(agno == nyear & grado == ngrado & mod == 3 & gpa == 4), aes( y = est*100, x = t, color = "HP (D10)",
+                                                                                     fill = "HP (D10)"),
+               size = 3, pch = 21, stroke = 1.1) + 
+    geom_hline(yintercept = 0) + 
+    #geom_hline(yintercept = -4, color = "gray" ) + 
+    #geom_hline(yintercept = 4, color = "gray") + 
+    geom_vline(xintercept = 0, color = text_color, linetype = "dashed", lwd = 0.8) +
+    scale_x_continuous( labels = scales::number_format(accuracy = 1), breaks = -5:5 ) +
+    scale_y_continuous( breaks = seq(from = -8, to = 8, by = 2), lim = c(-8, 8), 
+                        labels = dollar_format(suffix = "", prefix = "") ) + 
+    xlab("Days since test") + ylab("Event study estimate (pp)")+
+    theme_ipsum_fsc() +
+    theme(plot.margin=unit(c(1,1,1.5,1.2),"cm"),
+          panel.grid.major.x = element_blank(),
+          panel.grid.minor.x = element_blank(),
+          #panel.grid.major.y = element_blank(),
+          panel.grid.minor.y = element_blank(),
+          axis.line = element_line(colour = "dark grey"))+
+    scale_color_manual(values=c(cols[3], cols[4]), name = "Estimate",
+                       labels = c("10th GPA Decile", "1st GPA Decile")) + 
+    scale_fill_manual(values=c(alpha(cols[3],0.8), alpha(cols[4],0.8)), name = "Estimate",
+                      labels = c("10th GPA Decile", "1st GPA Decile")) + 
+    theme(legend.position = c(0.9,0.9)) +
+    theme(axis.title.x = element_text(size=18),#margin = margin(t = 10, r = 0, b = 0, l = 0)),
+          axis.text.x = element_text(size=14),
+          axis.title.y = element_text(size=18),#margin = margin(t = 0, r = 10, b = 0, l = 0)),
+          axis.text.y = element_text(size=14),
+          plot.title = element_text(size=30),
+          legend.title = element_blank())
+  if (ngrado != 2) {
+    graph <- graph + geom_vline(xintercept = 1, color = text_color, linetype = "dashed", lwd=0.8) 
+  }
+  return(graph)
+}
+
+g2 <- graph_maker(2014, 2) #+ ggtitle("2nd grade") + theme(plot.title = element_text(hjust = 0))
+g4 <- graph_maker(2014, 4) #+ ggtitle("4th grade") + theme(plot.title = element_text(hjust = 0))
+g6 <- graph_maker(2014, 6) #+ ggtitle("6th grade") + theme(plot.title = element_text(hjust = 0))
+g8 <- graph_maker(2014, 8) #+ ggtitle("8th grade") + theme(plot.title = element_text(hjust = 0))
+g10 <- graph_maker(2014, 10) #+ ggtitle("10th grade") + theme(plot.title = element_text(hjust = 0))
+
+g2
+```
+
+---
+# No effect on lower performers for 10th grade
+
+```{r event_study_plot10th, fig.height=5.5, fig.width=9, fig.align='center', dev='svg', echo=FALSE, warning=FALSE, message=FALSE}
+g10
+```
+
+---
+# Attendance patterns differ by grade
+
+```{r event_study_plot, fig.height=5.5, fig.width=10, fig.align='center', dev='svg', echo=FALSE, warning=FALSE, message=FALSE}
+library(lemon)
+
+temp1 <- haven::read_dta(paste0(dir_data, "temp_t3.dta"))
+round_esp <- function(var){
+  trunc(round(var, digits = 2)*100)/100
+}
+# Data to build the graph 
+data_graph1 <- temp1 %>%
+  dplyr::select(- stakes) %>% 
+  filter(agno == 2014) %>%  
+  pivot_longer(.,  starts_with("est") | starts_with("se") | starts_with("pval"), names_to = "variable", values_to = "est") %>% 
+  mutate(variable = as.factor(variable)) %>% 
+  mutate(variable = recode_factor(variable, `est1` = "D1", `est2` = "D2", `est3` = "D3D8", `est4` = "D9", `est5` = "D10", `est98` = "D10-D1", `est97` = "All")) %>% 
+  filter(str_detect(variable, "se") == F & str_detect(variable, "pval") == F) %>%
+  mutate(est = est*100) 
+
+data_graph2 <- temp1 %>%
+  dplyr::select(- stakes) %>% 
+  filter(agno == 2014) %>%  
+  pivot_longer(.,  starts_with("est") | starts_with("se") | starts_with("pval"), names_to = "variable", values_to = "se") %>% 
+  mutate(variable = as.factor(variable)) %>% 
+  mutate(variable = recode_factor(variable, `se1` = "D1", `se2` = "D2", `se3` = "D3D8", `se4` = "D9", `se5` = "D10", `se98` = "D10-D1", `se97` = "All")) %>% 
+  filter(str_detect(variable, "est") == F & str_detect(variable, "pval") == F) %>%
+  mutate(se = se*100) 
+
+data_graph = left_join(data_graph1, data_graph2, by = c("grado", "agno", "variable"))
+  
+data_graph = data_graph %>% mutate(cih = est+1.96*se,
+                                   cil = est-1.96+se)
+
+gr <- data_graph  %>% 
+  filter(variable != "All" & variable != "D10-D1") %>% 
+  mutate(grado = as.factor(grado) %>% 
+           forcats::fct_relevel("6", "8", "10", "2", "4") %>% 
+           recode_factor(`6` = "6th Grade", `8` = "8th Grade", `10` = "10th Grade", `2` = "2nd Grade", `4` = "4th Grade"),
+         variable =  variable %>% recode_factor(`D1` = "1st Decile", `D2` = "2nd Decile", `D3D8` = "3rd-8th Decile", `D9` = "9th decile", `D10` = "10th decile")) %>% 
+  ggplot(., aes(x = variable, y = est)) +
+  geom_segment( aes(x = variable, xend = variable, y = est-1.96*se, yend = est + 1.96*se), color = "grey") + 
+    geom_hline(yintercept = 0, color = "grey") + 
+  geom_hline(yintercept = 0, color = "grey") +  
+  geom_hline(yintercept = -4, color = "grey90") +
+  geom_hline(yintercept = -6, color = "grey90") + 
+  geom_hline(yintercept = 4, color = "grey90") +  
+  geom_hline(yintercept = 6, color = "grey90") +
+  geom_hline(yintercept = -2, color = "grey90") +
+  geom_hline(yintercept = 2, color = "grey90") + 
+  geom_point( aes(x = variable, y = est, color = variable, fill=variable), pch = 21, size = 1, stroke = 1.1) +
+  #theme_light() +
+  theme(
+    panel.grid.major.x = element_blank(),
+    panel.border = element_blank(),
+    axis.ticks.x = element_blank()
+  ) +
+  xlab("\n GPA Performance") +
+  ylab("Change in Attendance (pp) \n") + theme_ipsum_fsc() + 
+  scale_y_continuous(limits= c(-8, 4), breaks =  seq(from = -8, to = 4, by = 2), labels = dollar_format(suffix = "", prefix = "")) + 
+  facet_wrap(~grado, ncol = 3, as.table = F) + 
+  scale_colour_discrete("GPA") + 
+  theme(legend.title.align=0.5) + 
+  scale_x_discrete(labels=c("1st Decile" = "D1", "2nd Decile" = "D2", "3rd-8th Decile" = "D3D8",
+                            "9th decile" = "D9", "10th decile" = "D10")) + 
+  scale_color_manual("GPA", values = c(cols[1], cols[2], cols[3], cols[4], cols[5])) + 
+  scale_fill_manual("GPA", values = c(alpha(cols[1],0.8), alpha(cols[2],0.8), alpha(cols[3],0.8), 
+                                      alpha(cols[4],0.8), alpha(cols[5],0.8))) + 
+  theme_ipsum_fsc(plot_title_face = "bold",plot_title_size = 20) +
+  labs(caption = "Note: 95% CI in grey. \n These results are for the year 2014.", color = text_color) +
+      theme(plot.margin=unit(c(1,1,1.5,1.2),"cm"),
+          panel.grid.major.x = element_blank(),
+          panel.grid.minor.x = element_blank(),
+          panel.grid.major.y = element_blank(),
+          panel.grid.minor.y = element_blank(),
+          axis.line = element_line(colour = "dark grey")) +
+  theme(axis.text=element_text(size = 14), axis.title = element_text(size = 16,face="bold")) + 
+  theme(legend.title = element_text(size = 14, face = "bold"), 
+        legend.text = element_text( size = 12),
+        strip.text = element_text(size = 14, family = "Fira Sans Condensed"), 
+        plot.caption = element_text(size = 12))
+
+shift_legend2 <- function(p) {
+  # ...
+  # to grob
+  gp <- ggplotGrob(p)
+  facet.panels <- grep("^panel", gp[["layout"]][["name"]])
+  empty.facet.panels <- sapply(facet.panels, function(i) "zeroGrob" %in% class(gp[["grobs"]][[i]]))
+  empty.facet.panels <- facet.panels[empty.facet.panels]
+  
+  # establish name of empty panels
+  empty.facet.panels <- gp[["layout"]][empty.facet.panels, ]
+  names <- empty.facet.panels$name
+  # example of names:
+  #[1] "panel-3-2" "panel-3-3"
+  
+  # now we just need a simple call to reposition the legend
+  reposition_legend(p, 'center', panel=names)
+}
+
+shift_legend2(gr)
+```
+
+---
+# Potential mechanisms that explain these patterns
+
+<br>
+
+- Students are **.coolblue[excluded due to other reasons]** (justified)
+
+
+- Low-performing students are **.coolblue[less aware of the test]**
+
+
+- Students experience a **.coolblue[disutility from testing]**
+
+
+- Schools directly **.coolblue[(des)incentivize attendance of (lower)higher performers]**
+
+---
+# Differences in communication and incentives between high and low performers
+
+- 2017 survey for students in test-taking grades.
+
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+tab4th = read.csv("https://raw.githubusercontent.com/maibennett/presentations/main/content/presentations/Attendance/Salem_20220405/images/survey_4th.csv")
+
+tab10th = read.csv("https://raw.githubusercontent.com/maibennett/presentations/main/content/presentations/Attendance/Salem_20220405/images/survey_10th.csv")
+
+kableExtra::kable(tab4th, align = "lcccc", caption = "Results for 4th Grade",
+             col.names = c('GPA Decile', 'Told', 'Notification', 'Preparation', 'Grades'), format = "html") %>% 
+   kable_paper(full_width = FALSE)
+ # kable_paper(bootstrap_options = c("hover","condensed"), full_width = FALSE)
+```
+
+
+---
+# Differences in communication and incentives between high and low performers
+
+- 2017 survey for students in test-taking grades.
+
+```{r, echo=FALSE, results='asis'}
+tab10th %>% kbl(align = "lcccc", caption = "Results for 10th Grade",
+             col.names = c('GPA Decile', 'Told', 'Notification', 'Preparation', 'Grades'), format = "html") %>% 
+  kable_paper(bootstrap_options = c("hover","condensed"), full_width = FALSE)
+```
+
+---
+# No evidence of self-selection from students because of testing
+
+.pull-left[
+- Students experience a **.coolblue[disutility from testing]**?
+
+  - Use of **.coolblue[no-stake test]** applied to schools (~300 schools per year) $\rightarrow$ No effect on attendance
+
+]
+
+.pull-right[
+.small[
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+tab_no_stakes <- read.csv("https://raw.githubusercontent.com/maibennett/presentations/main/content/presentations/Attendance/Salem_20220405/data/no_stake_results.csv")
+
+kableExtra::kable(tab_no_stakes, align = "lccccc", caption = "Results for No-Stakes Test",
+             col.names = c('Grade - Year', 'D1', 'D2', 'D3D8', 'D9', 'D10'), format = "html") %>% 
+  kable_paper(bootstrap_options = c("hover","condensed"), full_width = FALSE)
+```
+]
+]
+
+---
+background-position: 50% 50%
+class: left, middle, inverse
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+.big[
+Predicting the Counterfactual
+]
+
+---
+# How do these results compare to predicted counterfactual?
+
+- Can we use **.coolblue[this existing rich panel data]** to predict attendance on the day of the test *as if it was a regular day*?
+
+--
+<br>
+<br>
+
+- Use **.coolblue[Extreme Gradient Boosting (XGBoost)]** with panel data for **.coolblue[attendance prediction]** 
+  
+  - Predictor variables include day of the week, grade, GPA group, and sibling's attendance, in addition to schools' characteristics. 
+  
+--
+<br>
+<br>
+
+- Use data between 1st and 5th grade (2017) in the Metropolitan region - 4th grade is treated: 
+
+  - Data **.coolblue[before]** the test to **.coolblue[predict attendance on the day of the test]**.
+
+
+---
+# Overall predictions over performance distribution
+
+```{r prediction_all_boxplot1, fig.height=5.3, fig.width=10, fig.align='center', dev='svg', echo=FALSE, warning=FALSE, message=FALSE}
+df_final = read.csv("https://raw.githubusercontent.com/maibennett/presentations/main/content/presentations/Attendance/AEFP_2024/data/boxplot_data_xgboost2017_v7.csv")
+
+df_final = df_final %>% mutate(type = ifelse(type == "Observed", 
+                                             "Predicted", "Observed"),
+                               type = factor(type, 
+                                             levels = c("Predicted", "Observed")))
+
+df_final$GPA_pos = factor(df_final$GPA_pos, levels = c("D1","D2","D3D8","D9","D10"))
+
+df_final = df_final %>% mutate(upper = mean_outcome + sd_outcome,
+                               lower = mean_outcome - sd_outcome,
+                               upper = ifelse(upper > 1, 1, upper))
+
+df_final2 = df_final %>% group_by(GPA_pos, grade_treat) %>%
+  mutate(diff_mean = mean_outcome[1] - mean_outcome[2]) %>% ungroup()
+
+g1 = ggplot(data = df_final, aes(x = GPA_pos, y = mean_outcome*100, fill = type, color = type)) + 
+  geom_point(pch = 21, position = position_dodge(width = 1), alpha=.6, size = 4) +
+  geom_errorbar(aes(x=GPA_pos, ymin=(lower)*100, 
+                    ymax=(upper)*100, color = factor(type)), 
+                width=0.2, alpha=0.9, linewidth=0.6,
+                position = position_dodge(width = 1))+
+  geom_vline(aes(xintercept = 1.5), lty = 2, color = "lightgrey") +
+  geom_vline(aes(xintercept = 2.5), lty = 2, color = "lightgrey") +
+  geom_vline(aes(xintercept = 3.5), lty = 2, color = "lightgrey") +
+  geom_vline(aes(xintercept = 4.5), lty = 2, color = "lightgrey") +
+  scale_y_continuous(limits=c(0,100),oob = rescale_none) +
+  scale_color_manual(values = c(cols[3],cols[5])) +
+  scale_fill_manual(values = c(alpha(cols[3],0.8),alpha(cols[5],0.8))) +
+  theme_bw()+
+  xlab("GPA deciles") + ylab("% Attendance") +
+  #ggplot2::annotate("text", x = 10, y = 6, label = "Adj. R2 = 0.48", size = 6, colour = "dark grey", hjust=0,family="Fira Sans Condensed") +
+  theme_ipsum_fsc(plot_title_face = "bold",plot_title_size = 24) + #plain
+  theme(plot.margin=unit(c(1,1,1.5,1.2),"cm"),
+        panel.grid.major.x = element_blank(),
+        panel.grid.minor.x = element_blank(),
+        panel.grid.major.y = element_blank(),
+        panel.grid.minor.y = element_blank(),
+        axis.line = element_line(colour = "dark grey"))+
+  theme(axis.title.x = element_text(size=14),#margin = margin(t = 10, r = 0, b = 0, l = 0)),
+        axis.text.x = element_text(size=14),
+        axis.title.y = element_text(size=14),#margin = margin(t = 0, r = 10, b = 0, l = 0)),
+        axis.text.y = element_text(size=14),legend.position=c(0.08,0.15),
+        legend.title = element_blank(),
+        legend.text = element_text(size=13),
+        legend.background = element_rect(fill="white",colour ="white"),
+        title = element_text(size=14)) +
+    geom_rect(data = df_final[df_final$grade_treat == TRUE, ], 
+            aes(xmin = -Inf, xmax = Inf, ymin = -Inf, ymax = Inf), 
+            fill = "white", color = "white") + # Covering the entire right facet
+  facet_wrap(~factor(grade_treat, levels = c(FALSE,TRUE), labels = c("Non-tested grade","Tested grade"))) +
+  annotate("text", x = Inf, y = -Inf, label = "*Bars denote +/- 1 SD",
+           hjust = 1, vjust = 0, size = 4, color = "grey")
+
+
+g11 = ggplot(data = df_final[df_final$grade_treat==FALSE,], 
+            aes(x = GPA_pos, y = mean_outcome*100, fill = type, 
+                color = type)) + 
+  geom_point(pch = 21, position = position_dodge(width = 1), alpha=.6, size = 4) +
+  geom_errorbar(aes(x=GPA_pos, ymin=(lower)*100, 
+                    ymax=(upper)*100, color = factor(type)), 
+                width=0.2, alpha=0.9, linewidth=0.6,
+                position = position_dodge(width = 1))+
+  geom_vline(aes(xintercept = 1.5), lty = 2, color = "lightgrey") +
+  geom_vline(aes(xintercept = 2.5), lty = 2, color = "lightgrey") +
+  geom_vline(aes(xintercept = 3.5), lty = 2, color = "lightgrey") +
+  geom_vline(aes(xintercept = 4.5), lty = 2, color = "lightgrey") +
+  scale_y_continuous(limits=c(0,100),oob = rescale_none) +
+  scale_color_manual(values = c(cols[3],cols[5])) +
+  scale_fill_manual(values = c(alpha(cols[3],0.8),alpha(cols[5],0.8))) +
+  theme_bw()+
+  xlab("GPA deciles") + ylab("% Attendance") +
+  #ggplot2::annotate("text", x = 10, y = 6, label = "Adj. R2 = 0.48", size = 6, colour = "dark grey", hjust=0,family="Fira Sans Condensed") +
+  theme_ipsum_fsc(plot_title_face = "bold") + ggtitle("Non-tested grade") + 
+  theme(plot.margin=unit(c(1,1,1.5,1.2),"cm"),
+        panel.grid.major.x = element_blank(),
+        panel.grid.minor.x = element_blank(),
+        panel.grid.major.y = element_blank(),
+        panel.grid.minor.y = element_blank(),
+        axis.line = element_line(colour = "dark grey"))+
+  theme(axis.title.x = element_text(size=14),#margin = margin(t = 10, r = 0, b = 0, l = 0)),
+        axis.text.x = element_text(size=14),
+        axis.title.y = element_text(size=14),#margin = margin(t = 0, r = 10, b = 0, l = 0)),
+        axis.text.y = element_text(size=14),legend.position=c(0.15,0.15),
+        legend.title = element_blank(),
+        legend.text = element_text(size=13),
+        legend.background = element_rect(fill="white",colour ="white"),
+        title = element_text(size=14, color = col_text)) +
+  annotate("text", x = Inf, y = 5, label = "*Bars denote +/- 1 SD",
+           hjust = 1, vjust = 0, size = 4, color = "grey")
+
+
+g12 = ggplot(data = df_final[df_final$grade_treat==FALSE,], 
+            aes(x = GPA_pos, y = mean_outcome*100, fill = type, 
+                color = type)) + 
+  geom_point(pch = 21, position = position_dodge(width = 1), alpha=.6, size = 4) +
+  geom_errorbar(aes(x=GPA_pos, ymin=(lower)*100, 
+                    ymax=(upper)*100, color = factor(type)), 
+                width=0.2, alpha=0.9, linewidth=0.6,
+                position = position_dodge(width = 1))+
+  geom_vline(aes(xintercept = 1.5), lty = 2, color = "lightgrey") +
+  geom_vline(aes(xintercept = 2.5), lty = 2, color = "lightgrey") +
+  geom_vline(aes(xintercept = 3.5), lty = 2, color = "lightgrey") +
+  geom_vline(aes(xintercept = 4.5), lty = 2, color = "lightgrey") +
+  scale_y_continuous(limits=c(0,100),oob = rescale_none) +
+  scale_color_manual(values = c(cols[3],cols[5])) +
+  scale_fill_manual(values = c(alpha(cols[3],0.8),alpha(cols[5],0.8))) +
+  theme_bw()+
+  xlab("GPA deciles") + ylab("% Attendance") +
+  #ggplot2::annotate("text", x = 10, y = 6, label = "Adj. R2 = 0.48", size = 6, colour = "dark grey", hjust=0,family="Fira Sans Condensed") +
+  theme_ipsum_fsc(plot_title_face = "bold") + ggtitle("") + 
+  theme(plot.margin=unit(c(1,1,1.5,1.2),"cm"),
+        panel.grid.major.x = element_blank(),
+        panel.grid.minor.x = element_blank(),
+        panel.grid.major.y = element_blank(),
+        panel.grid.minor.y = element_blank(),
+        axis.line = element_blank())+
+  theme(axis.title.x = element_blank(),#margin = margin(t = 10, r = 0, b = 0, l = 0)),
+        axis.text.x = element_blank(),
+        axis.title.y = element_blank(),#margin = margin(t = 0, r = 10, b = 0, l = 0)),
+        axis.text.y = element_blank(),legend.position="none",
+        legend.title = element_blank(),
+        legend.text = element_blank(),
+        legend.background = element_rect(fill="white",colour ="white"),
+        title = element_blank()) +
+    geom_rect(data = df_final[df_final$grade_treat == TRUE, ], 
+            aes(xmin = -Inf, xmax = Inf, ymin = -Inf, ymax = Inf), 
+            fill = "white", color = "white")
+
+
+
+g2 = ggplot(data = df_final2, aes(x = GPA_pos, y = diff_mean*100)) + 
+    geom_hline(aes(yintercept = 0), lty = 1, color = "grey") +
+  geom_point(pch = 22, alpha=.6, size = 3, color = cols[1], 
+             fill = alpha(cols[1],0.6)) +
+  geom_vline(aes(xintercept = 1.5), lty = 2, color = "lightgrey") +
+  geom_vline(aes(xintercept = 2.5), lty = 2, color = "lightgrey") +
+  geom_vline(aes(xintercept = 3.5), lty = 2, color = "lightgrey") +
+  geom_vline(aes(xintercept = 4.5), lty = 2, color = "lightgrey") +
+  scale_y_continuous(limits=c(-5,5),oob = rescale_none, breaks = c(-5, 0, 5)) +
+  theme_bw()+
+  xlab("") + ylab(expression(Delta* " Obs - Pred")) +
+  #ggplot2::annotate("text", x = 10, y = 6, label = "Adj. R2 = 0.48", size = 6, colour = "dark grey", hjust=0,family="Fira Sans Condensed") +
+  theme_ipsum_fsc(plot_title_face = "bold",plot_title_size = 24) + #plain
+  theme(plot.margin=unit(c(1,1,1.5,1.2),"cm"),
+        panel.grid.major.x = element_blank(),
+        panel.grid.minor.x = element_blank(),
+        panel.grid.major.y = element_blank(),
+        panel.grid.minor.y = element_blank(),
+        axis.line.y = element_line(colour = "dark grey"),
+        axis.line.x = element_blank())+
+  theme(axis.title.x = element_blank(),#margin = margin(t = 10, r = 0, b = 0, l = 0)),
+        axis.text.x = element_blank(),
+        axis.title.y = element_text(size=14),#margin = margin(t = 0, r = 10, b = 0, l = 0)),
+        axis.text.y = element_text(size=14),legend.position=c(0.1,0.1),
+        legend.title = element_blank(),
+        legend.text = element_text(size=15),
+        legend.background = element_rect(fill="white",colour ="white"),
+        title = element_blank(),
+        strip.text = element_blank()) +
+      geom_rect(data = df_final2[df_final2$grade_treat == TRUE, ], 
+            aes(xmin = -Inf, xmax = Inf, ymin = -Inf, ymax = Inf), 
+            fill = "white", color = "white") + # Covering the entire right facet
+  facet_wrap(~factor(grade_treat, levels = c(FALSE,TRUE), labels = c("Non-tested grade","Tested grade")), labeller = labeller(NULL)) 
+
+g1_right_removed = ggplot(data = subset(df_final, grade_treat == FALSE),
+                           aes(x = GPA_pos, y = mean_outcome * 100, 
+                               fill =factor(type), color = factor(type))) + 
+  geom_point(pch = 21, position = position_dodge(width = 1), alpha = .6, size = 4) +
+  geom_errorbar(aes(x = GPA_pos, ymin = lower * 100, ymax = upper * 100, 
+                    color = factor(type)), width = 0.2, alpha = 0.9, linewidth = 0.6,
+                position = position_dodge(width = 1)) +
+  geom_vline(aes(xintercept = 1.5), lty = 2, color = "lightgrey") +
+  geom_vline(aes(xintercept = 2.5), lty = 2, color = "lightgrey") +
+  geom_vline(aes(xintercept = 3.5), lty = 2, color = "lightgrey") +
+  geom_vline(aes(xintercept = 4.5), lty = 2, color = "lightgrey") +
+  scale_y_continuous(limits = c(0, 100), oob = rescale_none) +
+  scale_color_manual(values = c(cols[3], cols[5])) +
+  scale_fill_manual(values = c(alpha(cols[3], 0.8), alpha(cols[5], 0.8))) +
+  theme_bw() +
+  xlab("GPA deciles") + ylab("% Attendance") +
+  theme_ipsum_fsc(plot_title_face = "bold", plot_title_size = 24) + #plain
+  theme(plot.margin = unit(c(1, 1, 1.5, 0.6), "cm"),
+        panel.grid.major.x = element_blank(),
+        panel.grid.minor.x = element_blank(),
+        panel.grid.major.y = element_blank(),
+        panel.grid.minor.y = element_blank(),
+        axis.line = element_line(colour = "dark grey"),
+        axis.title.x = element_text(size = 14),
+        axis.text.x = element_text(size = 14),
+        axis.title.y = element_text(size = 14),
+        axis.text.y = element_text(size = 14),
+        legend.position = c(0.08, 0.15),
+        legend.title = element_blank(),
+        legend.text = element_text(size = 13),
+        legend.background = element_rect(fill = "white", colour = "white"),
+        title = element_text(size = 14)) +
+  facet_wrap(~ factor(grade_treat, levels = c(FALSE, TRUE), labels = c("Non-tested grade", "Tested grade")))
+
+
+# Reduce the space between plots
+g11 = g11 + theme(plot.margin = margin(0, 0, 0, 0))
+g12 = g12 + theme(plot.margin = margin(0, 0, 0, 0))
+g1_right_removed = g1_right_removed + theme(plot.margin = margin(0, 0, 0, 0))
+g2 = g2 + theme(plot.margin = margin(0, 0, 0, 0))
+
+
+(g11 + g12) / g2 + plot_layout(heights = c(2, 1))
+
+
+```
+
+
+---
+# Overall predictions over performance distribution
+
+```{r prediction_all_boxplot2, fig.height=5.3, fig.width=10, fig.align='center', dev='svg', echo=FALSE, warning=FALSE, message=FALSE}
+g11 = g11 + xlab("")
+
+g13 = ggplot(data = df_final[df_final$grade_treat==TRUE,], 
+            aes(x = GPA_pos, y = mean_outcome*100, fill = type, 
+                color = type)) + 
+  geom_point(pch = 21, position = position_dodge(width = 1), alpha=.6, size = 4) +
+  geom_errorbar(aes(x=GPA_pos, ymin=(lower)*100, 
+                    ymax=(upper)*100, color = factor(type)), 
+                width=0.2, alpha=0.9, linewidth=0.6,
+                position = position_dodge(width = 1))+
+  geom_vline(aes(xintercept = 1.5), lty = 2, color = "lightgrey") +
+  geom_vline(aes(xintercept = 2.5), lty = 2, color = "lightgrey") +
+  geom_vline(aes(xintercept = 3.5), lty = 2, color = "lightgrey") +
+  geom_vline(aes(xintercept = 4.5), lty = 2, color = "lightgrey") +
+  scale_y_continuous(limits=c(0,100),oob = rescale_none) +
+  scale_color_manual(values = c(cols[3],cols[5])) +
+  scale_fill_manual(values = c(alpha(cols[3],0.8),alpha(cols[5],0.8))) +
+  theme_bw()+
+  xlab("GPA deciles") + ylab("% Attendance") +
+  #ggplot2::annotate("text", x = 10, y = 6, label = "Adj. R2 = 0.48", size = 6, colour = "dark grey", hjust=0,family="Fira Sans Condensed") +
+  theme_ipsum_fsc(plot_title_face = "bold") + ggtitle("Tested grade") + 
+  theme(plot.margin=unit(c(1,1,1.5,1.2),"cm"),
+        panel.grid.major.x = element_blank(),
+        panel.grid.minor.x = element_blank(),
+        panel.grid.major.y = element_blank(),
+        panel.grid.minor.y = element_blank(),
+        axis.line.y = element_blank(),
+        axis.line.x = element_line(colour = "dark grey"))+
+  theme(axis.title.x = element_text(size=14),#margin = margin(t = 10, r = 0, b = 0, l = 0)),
+        axis.text.x = element_text(size=14),
+        axis.title.y = element_blank(),#margin = margin(t = 0, r = 10, b = 0, l = 0)),
+        axis.text.y = element_blank(),legend.position="none",
+        legend.title = element_blank(),
+        legend.text = element_text(size=13),
+        legend.background = element_rect(fill="white",colour ="white"),
+        title = element_text(size=14, color = col_text))
+
+g2 = ggplot(data = df_final2, aes(x = GPA_pos, y = diff_mean*100)) + 
+    geom_hline(aes(yintercept = 0), lty = 1, color = "grey") +
+  geom_point(pch = 22, alpha=.6, size = 3, color = cols[1], 
+             fill = alpha(cols[1],0.6)) +
+  geom_vline(aes(xintercept = 1.5), lty = 2, color = "lightgrey") +
+  geom_vline(aes(xintercept = 2.5), lty = 2, color = "lightgrey") +
+  geom_vline(aes(xintercept = 3.5), lty = 2, color = "lightgrey") +
+  geom_vline(aes(xintercept = 4.5), lty = 2, color = "lightgrey") +
+  scale_y_continuous(limits=c(-5,5),oob = rescale_none, breaks = c(-5, 0, 5)) +
+  theme_bw()+
+  xlab("") + ylab(expression(Delta* " Obs - Pred")) +
+  #ggplot2::annotate("text", x = 10, y = 6, label = "Adj. R2 = 0.48", size = 6, colour = "dark grey", hjust=0,family="Fira Sans Condensed") +
+  theme_ipsum_fsc(plot_title_face = "bold",plot_title_size = 24) + #plain
+  theme(plot.margin=unit(c(1,1,1.5,1.2),"cm"),
+        panel.grid.major.x = element_blank(),
+        panel.grid.minor.x = element_blank(),
+        panel.grid.major.y = element_blank(),
+        panel.grid.minor.y = element_blank(),
+        axis.line.y = element_line(colour = "dark grey"),
+        axis.line.x = element_blank())+
+  theme(axis.title.x = element_blank(),#margin = margin(t = 10, r = 0, b = 0, l = 0)),
+        axis.text.x = element_blank(),
+        axis.title.y = element_text(size=14),#margin = margin(t = 0, r = 10, b = 0, l = 0)),
+        axis.text.y = element_text(size=14),legend.position=c(0.1,0.1),
+        legend.title = element_blank(),
+        legend.text = element_text(size=15),
+        legend.background = element_rect(fill="white",colour ="white"),
+        title = element_blank(),
+        strip.text = element_blank()) +
+  facet_wrap(~factor(grade_treat, levels = c(FALSE,TRUE), labels = c("Non-tested grade","Tested grade")), labeller = labeller(NULL))
+
+# Reduce the space between plots
+g13 = g13 + theme(plot.margin = margin(0, 0, 0, 0))
+g2 = g2 + theme(plot.margin = margin(0, 0, 0, 0))
+
+(g11 + g13) / g2 + plot_layout(heights = c(2, 1))
+
+```
+
+
+---
+# Example: Comparisons between schools?
+
+.pull-left[
+.center[
+.box-7trans[**School1**<br>
+.small[Math: 258<br>
+Language: 260]]
+]]
+
+.pull-right[
+.center[
+.box-7trans[**School2**<br>
+.small[Math: 259<br>
+Language: 256]]
+]]
+--
+```{r prediction_example, fig.height=5, fig.width=10, fig.align='center', dev='svg', echo=FALSE, warning=FALSE, message=FALSE}
+df_plot <- read.csv("https://raw.githubusercontent.com/maibennett/presentations/main/content/presentations/Attendance/IngUC_20230810/data/plot_data_gpboost2017_updated_examplev5.csv")
+
+df_plot$GPA_pos = factor(df_plot$GPA_pos, levels = c("D1","D2","D3D8","D9","D10"))
+
+df_plot$type = factor(df_plot$type, levels = c("Estimated", "Obs"),
+                      labels = c("Predicted", "Observed"))
+
+ggplot(data = df_plot, aes(x = GPA_pos, y = outcome*100, fill = type, color = type)) + 
+  geom_bar(stat="identity",position = "dodge2", alpha=.6, lwd=1) +
+  #geom_errorbar(aes(x=GPA_pos, ymin=ci_l*100, ymax=ci_h*100), width=0.4, colour="dark grey", alpha=0.9, size=1.3,
+  #              position = position_dodge(width = 1))+
+  scale_y_continuous(limits=c(0,100),oob = rescale_none) +
+  theme_bw()+
+  xlab("GPA deciles") + ylab("% Attendance") +
+  scale_color_manual(values = c(cols[3],cols[5])) +
+  scale_fill_manual(values = c(alpha(cols[3],0.8),alpha(cols[5],0.8))) +
+  #ggplot2::annotate("text", x = 10, y = 6, label = "Adj. R2 = 0.48", size = 6, colour = "dark grey", hjust=0,family="Fira Sans Condensed") +
+  theme_ipsum_fsc(plot_title_face = "bold",plot_title_size = 24) + #plain
+  theme(plot.margin=unit(c(1,1,1.5,1.2),"cm"),
+        panel.grid.major.x = element_blank(),
+        panel.grid.minor.x = element_blank(),
+        panel.grid.major.y = element_blank(),
+        panel.grid.minor.y = element_blank(),
+        axis.line = element_line(colour = "dark grey"))+
+  theme(axis.title.x = element_text(size=14),#margin = margin(t = 10, r = 0, b = 0, l = 0)),
+        axis.text.x = element_text(size=12),
+        axis.title.y = element_text(size=14),#margin = margin(t = 0, r = 10, b = 0, l = 0)),
+        axis.text.y = element_text(size=12),legend.position=c(0.07,0.1),
+        legend.title = element_blank(),
+        legend.text = element_text(size=10, hjust = 0.5, vjust = 0.5),
+        legend.background = element_rect(fill="white",colour ="white"),
+        legend.margin = margin(-1, 1, 1, 0),
+        #legend.box.margin = margin(0, 0, 0, 0), 
+        title = element_text(size=14)) +
+  facet_grid(grade_treat ~ factor(rbd, levels = c(10658,25002), labels = c("School 1", "School 2")))
+```
+
+---
+# Example: Comparisons between schools?
+.pull-left[
+.center[
+.box-7trans[**School1**<br>
+.small[Math: 258<br>
+Language: 260]]
+]]
+
+.pull-right[
+.center[
+.box-7trans[**School2**<br>
+.small[Math: 259<br>
+Language: 256]]
+]]
+
+```{r prediction_example2, fig.height=5, fig.width=10, fig.align='center', dev='svg', echo=FALSE, warning=FALSE, message=FALSE}
+library(ggforce)
+
+ann_plot <- data.frame(rbd = 25002, GPA_pos = factor("D1", levels = c("D1","D2","D3D8","D9","D10")),
+                       grade_treat = "Tested")
+
+ggplot(data = df_plot, aes(x = GPA_pos, y = outcome*100, fill = type, color = type)) + 
+  geom_bar(stat="identity",position = "dodge2", alpha=.6, lwd=1) +
+  #geom_errorbar(aes(x=GPA_pos, ymin=ci_l*100, ymax=ci_h*100), width=0.4, colour="dark grey", alpha=0.9, size=1.3,
+  #              position = position_dodge(width = 1))+
+  scale_y_continuous(limits=c(0,100),oob = rescale_none) +
+  theme_bw()+
+  xlab("GPA deciles") + ylab("% Attendance") +
+  scale_color_manual(values = c(cols[3],cols[5])) +
+  scale_fill_manual(values = c(alpha(cols[3],0.8),alpha(cols[5],0.8))) +
+  #ggplot2::annotate("text", x = 10, y = 6, label = "Adj. R2 = 0.48", size = 6, colour = "dark grey", hjust=0,family="Fira Sans Condensed") +
+  theme_ipsum_fsc(plot_title_face = "bold",plot_title_size = 24) + #plain
+  theme(plot.margin=unit(c(1,1,1.5,1.2),"cm"),
+        panel.grid.major.x = element_blank(),
+        panel.grid.minor.x = element_blank(),
+        panel.grid.major.y = element_blank(),
+        panel.grid.minor.y = element_blank(),
+        axis.line = element_line(colour = "dark grey"))+
+  theme(axis.title.x = element_text(size=14),#margin = margin(t = 10, r = 0, b = 0, l = 0)),
+        axis.text.x = element_text(size=12),
+        axis.title.y = element_text(size=14),#margin = margin(t = 0, r = 10, b = 0, l = 0)),
+        axis.text.y = element_text(size=12),legend.position=c(0.07,0.1),
+        legend.title = element_blank(),
+        legend.text = element_text(size=10, hjust = 0.5, vjust = 0.5),
+        legend.background = element_rect(fill="white",colour ="white"),
+        legend.margin = margin(-1, 1, 1, 0),
+        title = element_text(size=14)) +
+  facet_grid(grade_treat ~ factor(rbd, levels = c(10658,25002), labels = c("School 1", "School 2"))) +
+  geom_ellipse(data = ann_plot, aes(x0 = 1, y0 = 60 , a = 0.5, b = 40, angle = 0),
+              inherit.aes = FALSE, color = cols[2], lwd=1.2)
+```
+
+---
+# Can we characterize these schools?
+
+.small[
+- **.coolblue[K-means clustering]** Use differences between predicted and observed attendance.
+  - 2 optimal clusters]
+--
+```{r cluster_plot, fig.height=5, fig.width=8, fig.align='center', dev='svg', echo=FALSE, warning=FALSE, message=FALSE}
+library(factoextra)
+library(NbClust)
+library(FactoMineR)
+
+df_wide_test = read.csv("https://raw.githubusercontent.com/maibennett/presentations/main/content/presentations/Attendance/IngUC_20230810/data/df_wide_testv5.csv")
+
+#set.seed(120)
+#res.nbclust <-NbClust(data = scale(df_wide_test[,-1]), diss = NULL, 
+#                      distance = "euclidean", min.nc = 2, max.nc = 10, 
+#                      method = "kmeans")
+df_wide_test$cluster = factor(df_wide_test$cluster, levels = c(1,2,3), labels=c(1,2,3))
+
+g1 = ggplot(df_wide_test, aes(x = cluster, y = diff_4_D1)) + 
+        geom_boxplot(aes(fill = cluster, color = cluster)) + 
+  xlab("") +
+  ylab("Diff. obs - pred") + ggtitle("D1 GPA") +
+  scale_color_manual(name = "Cluster",values = c(cols[2],cols[3])) +
+  scale_fill_manual(name = "Cluster", values = c(alpha(cols[2],0.4),alpha(cols[3],0.4))) +
+  #ggplot2::annotate("text", x = 10, y = 6, label = "Adj. R2 = 0.48", size = 6, colour = "dark grey", hjust=0,family="Fira Sans Condensed") +
+  theme_ipsum_fsc(plot_title_face = "bold",plot_title_size = 18) + #plain
+  theme(plot.margin=unit(c(0,1,1,1.2),"cm"),
+        panel.grid.major.x = element_blank(),
+        panel.grid.minor.x = element_blank(),
+        panel.grid.major.y = element_blank(),
+        panel.grid.minor.y = element_blank(),
+        axis.line = element_line(colour = "dark grey"))+
+  theme(axis.title.x = element_text(size=14),#margin = margin(t = 10, r = 0, b = 0, l = 0)),
+        axis.text.x = element_text(size=14),
+        axis.title.y = element_text(size=14),#margin = margin(t = 0, r = 10, b = 0, l = 0)),
+        axis.text.y = element_text(size=14),legend.position=c(0.1,0.1),
+        legend.title = element_text(size = 12),
+        legend.text = element_text(size=15),
+        legend.background = element_rect(fill="white",colour ="white"),
+        title = element_text(size=14))
+
+g2 = ggplot(df_wide_test, aes(x = cluster, y = diff_4_D2)) + 
+        geom_boxplot(aes(fill = cluster, color = cluster)) + 
+  xlab("") +
+  ylab("Diff. obs - pred") + ggtitle("D2 GPA") +
+  scale_color_manual(name = "Cluster",values = c(cols[2],cols[3])) +
+  scale_fill_manual(name = "Cluster", values = c(alpha(cols[2],0.4),alpha(cols[3],0.4))) +
+  #ggplot2::annotate("text", x = 10, y = 6, label = "Adj. R2 = 0.48", size = 6, colour = "dark grey", hjust=0,family="Fira Sans Condensed") +
+  theme_ipsum_fsc(plot_title_face = "bold",plot_title_size = 18) + #plain
+  theme(plot.margin=unit(c(0,1,1,1.2),"cm"),
+        panel.grid.major.x = element_blank(),
+        panel.grid.minor.x = element_blank(),
+        panel.grid.major.y = element_blank(),
+        panel.grid.minor.y = element_blank(),
+        axis.line = element_line(colour = "dark grey"))+
+  theme(axis.title.x = element_text(size=14),#margin = margin(t = 10, r = 0, b = 0, l = 0)),
+        axis.text.x = element_text(size=14),
+        axis.title.y = element_text(size=14),#margin = margin(t = 0, r = 10, b = 0, l = 0)),
+        axis.text.y = element_text(size=14),legend.position=c(0.1,0.1),
+        legend.title = element_text(size = 12),
+        legend.text = element_text(size=15),
+        legend.background = element_rect(fill="white",colour ="white"),
+        title = element_text(size=14))
+
+g3 = ggplot(df_wide_test, aes(x = cluster, y = diff_4_D9)) + 
+                geom_boxplot(aes(fill = cluster, color = cluster)) + 
+  xlab("") +
+  ylab("Diff. obs - pred") + ggtitle("D9 GPA") +
+  scale_color_manual(name = "Cluster",values = c(cols[2],cols[3])) +
+  scale_fill_manual(name = "Cluster", values = c(alpha(cols[2],0.4),alpha(cols[3],0.4))) +
+  #ggplot2::annotate("text", x = 10, y = 6, label = "Adj. R2 = 0.48", size = 6, colour = "dark grey", hjust=0,family="Fira Sans Condensed") +
+  theme_ipsum_fsc(plot_title_face = "bold",plot_title_size = 18) + #plain
+  theme(plot.margin=unit(c(0,1,1,1.2),"cm"),
+        panel.grid.major.x = element_blank(),
+        panel.grid.minor.x = element_blank(),
+        panel.grid.major.y = element_blank(),
+        panel.grid.minor.y = element_blank(),
+        axis.line = element_line(colour = "dark grey"))+
+  theme(axis.title.x = element_text(size=14),#margin = margin(t = 10, r = 0, b = 0, l = 0)),
+        axis.text.x = element_text(size=14),
+        axis.title.y = element_text(size=14),#margin = margin(t = 0, r = 10, b = 0, l = 0)),
+        axis.text.y = element_text(size=14),legend.position=c(0.1,0.1),
+        legend.title = element_text(size = 12),
+        legend.text = element_text(size=15),
+        legend.background = element_rect(fill="white",colour ="white"),
+        title = element_text(size=14))
+
+g4 = ggplot(df_wide_test, aes(x = cluster, y = diff_4_D10)) + 
+                geom_boxplot(aes(fill = cluster, color = cluster)) + 
+  xlab("") +
+  ylab("Diff. obs - pred") + ggtitle("D10 GPA") +
+  scale_color_manual(name = "Cluster",values = c(cols[2],cols[3])) +
+  scale_fill_manual(name = "Cluster", values = c(alpha(cols[2],0.4),alpha(cols[3],0.4))) +
+  #ggplot2::annotate("text", x = 10, y = 6, label = "Adj. R2 = 0.48", size = 6, colour = "dark grey", hjust=0,family="Fira Sans Condensed") +
+  theme_ipsum_fsc(plot_title_face = "bold",plot_title_size = 18) + #plain
+  theme(plot.margin=unit(c(0,1,1,1.2),"cm"),
+        panel.grid.major.x = element_blank(),
+        panel.grid.minor.x = element_blank(),
+        panel.grid.major.y = element_blank(),
+        panel.grid.minor.y = element_blank(),
+        axis.line = element_line(colour = "dark grey"))+
+  theme(axis.title.x = element_text(size=14),#margin = margin(t = 10, r = 0, b = 0, l = 0)),
+        axis.text.x = element_text(size=14),
+        axis.title.y = element_text(size=14),#margin = margin(t = 0, r = 10, b = 0, l = 0)),
+        axis.text.y = element_text(size=14),legend.position=c(0.1,0.1),
+        legend.title = element_text(size = 12),
+        legend.text = element_text(size=15),
+        legend.background = element_rect(fill="white",colour ="white"),
+        title = element_text(size=14))
+
+(g1 + g2) / (g3 + g4) + plot_layout(guides = "collect") & theme(legend.position = 'right')
+#fviz_cluster(PCA_clus, data = scale(df_wide_test[,-1]), frame.type = "convex",
+#             geom = c("point"))+ 
+#  scale_color_manual(values = c(cols[3], cols[2], cols[5])) +
+#  scale_fill_manual(values = c(alpha(cols[3],0.3), alpha(cols[2],0.3),
+#                               alpha(cols[5],0.3))) +
+#  theme_ipsum_fsc() + ggtitle("") + 
+#  theme(axis.title.x = element_text(size=18),#margin = margin(t = 10, r = #0, b = 0, l = 0)),
+#        axis.text.x = element_text(size=14),
+#        axis.title.y = element_text(size=18),#margin = margin(t = 0, r = #10, b = 0, l = 0)),
+#        axis.text.y = element_text(size=14),legend.position=c(0.1,0.1),
+#        legend.title = element_blank(),
+#        legend.text = element_text(size=15),
+#        legend.background = element_rect(fill="white",colour ="white"),
+#        title = element_text(size=14))
+
+```
+
+---
+# Schools that appear to exclude lower-perfoming students are also more vulnerable
+
+.smaller[
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
+library(modelsummary)
+
+d_tab <- read.csv("https://raw.githubusercontent.com/maibennett/presentations/main/content/presentations/Attendance/IngUC_20230810/data/d_tabv5.csv")
+
+d_tab <- d_tab %>% dplyr::select(-c(X, rbd))
+
+d_tab <- d_tab %>% rename(`Avg. SIMCE Lang` = Avg..SIMCE.Lang,
+                          `Avg. SIMCE Math` = Avg..SIMCE.Math,
+                          `SEP status` = SEP.status,
+                          `% Priority Students` = X..Priority.Students,
+                          `Diff D1 GPA` = Diff.D1.GPA,
+                          `Diff D2 GPA` = Diff.D2.GPA,
+                          `Diff D9 GPA` = Diff.D9.GPA,
+                          `Diff D10 GPA` = Diff.D10.GPA)
+
+d_tab$cluster = factor(d_tab$cluster, levels = c(1,2), labels = c("Cluster 1\nIncrease att", "Cluster 2\nLower att (bottom)"))
+
+datasummary_balance(~ cluster, data = d_tab, dinm_statistic = "p.value", fmt = "%.2f", dinm = TRUE, align = c("lcccccc"),
+                    output = "html",
+                    notes = "Note: Diff DX GPA represents the difference between obs. attendance and predicted attendance for decile X") %>% kable_paper(bootstrap_options = c("condensed"), full_width = FALSE)
+
+```
+]
+
+---
+# Implications for imputation policies
+
+- **.coolblue[How to handle this absenteeism problem?]**
+
+  - E.g.: Observed attendance (no imputation), attendance as if the test hadn't happened (impute "typical day"), everybody is present.
+  
+--
+<br>
+<br>
+
+- Proposals to impute **.coolblue[lowest scores for absent students]** to disincentivize arbitrary exclusion
+
+  - Most vulnerable schools have higher absenteeism rates $\rightarrow$ Increase inequality and non-representativeness
+
+---
+# Some imputation exercises
+
+How can we **.coolblue[impute missing scores]**?
+
+  - **.coolblue[Scenario 1]**: Not impute at all. Show observed distributions.
+  
+  - **.coolblue[Scenario 2]**: Impute by decile only for the difference between predicted and observed attendance.
+    - Imputed score: (a) overall min, (b) decile min, (c) min school, or (d) min decile by school.
+  
+  - **.coolblue[Scenario 3]**: Impute every missing student.
+    - Imputed score: overall min
+  
+--
+
+**.coolblue[Some caveats]**:
+
+  - Difference between predicted and obs. captures total incentives/disincentives in attendance.
+  
+  - Imputed score might be too optimistic (e.g. real score would be lower than observed distribution)
+  
+---
+# Scenario 1 vs Scenario 3: No imputation and Impute all
+
+```{r imputation_diff1, fig.height=5.5, fig.width=10, fig.align='center', dev='svg', echo=FALSE, warning=FALSE, message=FALSE}
+library(ggdist)
+
+d_tab2 <- read.csv("https://raw.githubusercontent.com/maibennett/presentations/main/content/presentations/Attendance/IngUC_20230810/data/imputev5_tab2.csv")
+
+d_tab2_long = d_tab2 %>% pivot_longer(., cols = starts_with("impute_"),
+                                      names_to = "imputation", 
+                                      values_to = "Avg_Math_Simce")
+
+impute <- read.csv("https://raw.githubusercontent.com/maibennett/presentations/main/content/presentations/Attendance/IngUC_20230810/data/imputev5.csv")
+
+impute2 <- impute
+
+impute2$mean[impute2$imputation %in% c("Impute Pred-Obs (Min All)",
+  "Impute Pred-Obs (Min Decile)",
+  "Impute Pred-Obs (Min School)",
+  "Impute Pred-Obs (Min School Decile)")] <- NA
+
+impute2_wide = impute2 %>% pivot_wider(data = ., id_cols = imputation,
+                                       names_from = cluster, 
+                                       names_prefix = "clus", 
+                                       values_from = mean)
+
+impute2_wide = impute2_wide %>% mutate(diff = clus1 - clus2)
+
+d_tab2_long = d_tab2_long %>% mutate(imputation = ifelse(imputation == "impute_all", "Impute All", imputation),
+                                     imputation = ifelse(imputation == "impute_no", "No Imputation", imputation),
+                                     imputation = ifelse(imputation == "impute_pred_min_all", "Impute Pred-Obs (Min All)", imputation),
+                                     imputation = ifelse(imputation == "impute_pred_min_decile", "Impute Pred-Obs (Min Decile)", imputation),
+                                     imputation = ifelse(imputation == "impute_pred_min_school", "Impute Pred-Obs (Min School)", imputation),
+                                     imputation = ifelse(imputation == "impute_pred_min_school_GPA", "Impute Pred-Obs (Min School Decile)", imputation))
+
+d_tab2_long$imputation = factor(d_tab2_long$imputation, levels = c("Impute All",
+          "Impute Pred-Obs (Min All)",
+          "Impute Pred-Obs (Min Decile)",
+          "Impute Pred-Obs (Min School)",
+          "Impute Pred-Obs (Min School Decile)",
+          "No Imputation"))
+
+d_tab2_long1 = d_tab2_long
+
+d_tab2_long1$Avg_Math_Simce[d_tab2_long1$imputation %in% c("Impute Pred-Obs (Min All)",
+  "Impute Pred-Obs (Min Decile)",
+  "Impute Pred-Obs (Min School)",
+  "Impute Pred-Obs (Min School Decile)")] <- NA
+
+ggplot(data = d_tab2_long1, aes(y = imputation, x = Avg_Math_Simce, fill = factor(cluster), color = factor(cluster))) + stat_halfeye(height = 0.8) + 
+   scale_color_manual(name = "Cluster", labels = c("Increase Att","Lower att"),values = c(cols[2],cols[3])) +
+  scale_fill_manual(name = "Cluster", labels = c("Increase Att","Lower att"),values = c(alpha(cols[2],0.3),alpha(cols[3],0.3))) +
+  xlab("SIMCE Math") + ylab("") +
+  xlim(100,350) +
+  theme_ipsum_fsc() + #plain
+  theme(plot.margin=unit(c(0.5,0.5,0.5,0.5),"cm"),
+        panel.grid.major.x = element_blank(),
+        panel.grid.minor.x = element_blank(),
+        panel.grid.major.y = element_blank(),
+        panel.grid.minor.y = element_blank(),
+        axis.line = element_line(colour = "dark grey"))+
+  theme(axis.title.x = element_text(size=14),#margin = margin(t = 10, r = 0, b = 0, l = 0)),
+        axis.text.x = element_text(size=12),
+        axis.title.y = element_text(size=14),#margin = margin(t = 0, r = 10, b = 0, l = 0)),
+        axis.text.y = element_text(size=12),legend.position=c(0.15,0.9),
+        legend.title = element_text(size = 12),
+        legend.text = element_text(size=10),
+        legend.background = element_rect(fill="white",colour ="grey"),
+        title = element_text(size=14)) +
+  geom_text(data = impute2_wide, aes(label = round(diff,1), x = (clus1 + clus2)/2, y = imputation), inherit.aes = FALSE, nudge_y = 0.2, color = text_color, hjust = "middle") 
+
+```
+
+---
+# Imputing Predicted - Observed is less extreme
+
+```{r imputation_diff2, fig.height=5.5, fig.width=10, fig.align='center', dev='svg', echo=FALSE, warning=FALSE, message=FALSE}
+
+impute_wide = impute %>% pivot_wider(data = ., id_cols = imputation,
+                                       names_from = cluster, 
+                                       names_prefix = "clus", 
+                                       values_from = mean)
+
+impute_wide = impute_wide %>% mutate(diff = clus1 - clus2)
+
+ggplot(data = d_tab2_long, aes(y = imputation, x = Avg_Math_Simce, fill = factor(cluster), color = factor(cluster))) + stat_halfeye(height = 0.8) + 
+   scale_color_manual(name = "Cluster", labels = c("Increase Att","Lower att"),values = c(cols[2],cols[3])) +
+  scale_fill_manual(name = "Cluster", labels = c("Increase Att","Lower att"),values = c(alpha(cols[2],0.3),alpha(cols[3],0.3))) +
+  xlab("SIMCE Math") + ylab("") +
+  xlim(100,350) +
+  theme_ipsum_fsc() + #plain
+  theme(plot.margin=unit(c(0.5,0.5,0.5,0.5),"cm"),
+        panel.grid.major.x = element_blank(),
+        panel.grid.minor.x = element_blank(),
+        panel.grid.major.y = element_blank(),
+        panel.grid.minor.y = element_blank(),
+        axis.line = element_line(colour = "dark grey"))+
+  theme(axis.title.x = element_text(size=14),#margin = margin(t = 10, r = 0, b = 0, l = 0)),
+        axis.text.x = element_text(size=12),
+        axis.title.y = element_text(size=14),#margin = margin(t = 0, r = 10, b = 0, l = 0)),
+        axis.text.y = element_text(size=12),legend.position=c(0.15,0.9),
+        legend.title = element_text(size = 12),
+        legend.text = element_text(size=10),
+        legend.background = element_rect(fill="white",colour ="grey"),
+        title = element_text(size=14)) +
+  geom_text(data = impute_wide, aes(label = round(diff,1), x = (clus1 + clus2)/2, y = imputation), inherit.aes = FALSE, nudge_y = 0.2, color = text_color, hjust = "middle")
+
+```
+
+---
+background-position: 50% 50%
+class: left, middle, inverse
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+.big[
+Let's Wrap Up...
+]
+
+---
+# Conclusions and next steps
+
+- Non-representative patterns of absenteeism **.coolblue[beyond exclusion of low-performers]**
+  
+  - High heterogeneity between schools
+  - Identification of gaming schools (e.g. persistance)
+ 
+--
+<br>
+<br>
+
+- **.coolblue[Communication strategies]** play important role for **.coolblue[lower-performing students]**
+
+--
+<br>
+<br>
+
+- Impact of **.coolblue[imputation policies]**?
+
+  - Work in progress: How does non-representativeness and different imputation strategies impact policies and information provision? What score do we impute and for whom?
+  
+
+---
+class: inverse, center, middle
+
+<br>
+
+.left[
+<h1 class="title-own">Beyond Exclusion:<br/>The Role of High-Stake Testing on Attendance the Day of the Test</h1>]
+
+.pull-left-little_l[
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+
+.left[.small[AEFP Conference<br>March 14th, 2023]]]
+
+.pull-right-little_l[
+<br>
+.small[.right[Magdalena Bennett&nbsp;&nbsp;&nbsp;<br>*The University of Texas at Austin*&nbsp;&nbsp;&nbsp;]]
+
+<br>
+.small[.right[Christopher Neilson&nbsp;&nbsp;&nbsp;<br>*Yale University*&nbsp;&nbsp;&nbsp;]]
+
+<br>
+.small[.right[Nicolás Rojas&nbsp;&nbsp;&nbsp;<br>*Columbia University*&nbsp;&nbsp;&nbsp;]]
+
+]
+<br>
+<br>
+<br>

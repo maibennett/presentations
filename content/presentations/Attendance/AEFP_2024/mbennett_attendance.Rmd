@@ -358,6 +358,7 @@ library(extrafont)
 library(gridExtra)
 library(pBrackets)
 library(patchwork)
+library(kableExtra)
 
 #loadfonts(device = "win")
 
@@ -379,7 +380,7 @@ class: inverse, center, middle
 <br>
 <br>
 
-.left[.small[Valle Nevado Workshop on Economics of Education<br>Universidad de los Andes<br>August 17th, 2023]]]
+.left[.small[AEFP Conference<br>March 14th, 2024]]]
 
 .pull-right-little_l[
 <br>
@@ -477,7 +478,7 @@ class: left, middle, inverse
 <br>
 <br>
 .big[
-The Chilean Educational Context
+Context of the Study and Data
 ]
 
 ---
@@ -506,46 +507,6 @@ The Chilean Educational Context
   - Tied to budget restrictions and school closures
   
 ---
-# SIMCE and absenteeism
-
-- Use of **.coolblue[pre-filled communication]** for parents to be sent out by schools
-
-  - Evidence that parents from lower-income students are less likely to receive information
-  
---
-<br>
-<br>
-
-- **.coolblue[No real consequences for low attendance]**:
-  
-  - Between 2005-2007, non-representative results where marked with symbols
-  
-  - No imputation strategy so far
-  
---
-<br>
-<br>
-
-- Improvement of regulation for **.coolblue[justifying students exclusion]**
-
-  - E.g. specific disabilities (blindness) or non-Spanish speakers.
-
-
----
-background-position: 50% 50%
-class: left, middle, inverse
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-.big[
-Attendance Patterns for the Day of the Test
-]
-
----
 # Data Available
 
 - **.coolblue[Standardized tests 2011-2018 (SIMCE)]**
@@ -570,19 +531,25 @@ Attendance Patterns for the Day of the Test
 
   - Use GPA performance deciles within school-grade
   
+--
+
+**.coolblue[Summary:]** $\approx$ 5,500 schools per year, across 5 grades (2nd-10th) $\rightarrow$ over 1,000,000 students per year.
+
+
 ---
-# Observations from our data
+background-position: 50% 50%
+class: left, middle, inverse
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+.big[
+Attendance Patterns for the Day of the Test
+]
 
-```{r, echo=FALSE, warning=FALSE, message=FALSE}
-library(kableExtra)
-
-obs <- read.csv("https://raw.githubusercontent.com/maibennett/presentations/main/content/presentations/Attendance/Salem_20220405/data/obs_tested.csv")
-
-kableExtra::kable(obs, align = "lccc", caption = "Data description",
-             col.names = c('Grade', 'Years tested', 'Num Schools', 'Num Students'), format = "html",
-             format.args = list(big.mark = ',')) %>% 
-  kable_paper(bootstrap_options = c("hover","condensed"), full_width = FALSE)
-```
 
 ---
 # Empirical approach for difference in attendance
@@ -898,17 +865,26 @@ Predicting the Counterfactual
 ---
 # Overall predictions over performance distribution
 
-
-```{r prediction_all_boxplot, fig.height=5.5, fig.width=10, fig.align='center', dev='svg', echo=FALSE, warning=FALSE, message=FALSE}
+```{r prediction_all_boxplot1, fig.height=5.3, fig.width=10, fig.align='center', dev='svg', echo=FALSE, warning=FALSE, message=FALSE}
 dir_data2 = "C:/Users/mc72574/Dropbox/UT/UT Research/Asistencia/"
 
 df_final= read.csv(paste0(dir_data2,"data/working/boxplot_data_xgboost2017_v7.csv"))
 
+df_final = read.csv("https://raw.githubusercontent.com/maibennett/presentations/main/content/presentations/Attendance/AEFP_2024/data/boxplot_data_xgboost2017_v7.csv")
+
 df_final$GPA_pos = factor(df_final$GPA_pos, levels = c("D1","D2","D3D8","D9","D10"))
 
-ggplot(data = df_final, aes(x = GPA_pos, y = mean_outcome*100, fill = factor(type), color = factor(type))) + 
+df_final = df_final %>% mutate(upper = mean_outcome + sd_outcome,
+                               lower = mean_outcome - sd_outcome,
+                               upper = ifelse(upper>1, 1, upper))
+
+df_final2 = df_final %>% group_by(GPA_pos, grade_treat) %>%
+  mutate(diff_mean = mean_outcome[1] - mean_outcome[2]) %>% ungroup()
+
+g1 = ggplot(data = df_final, aes(x = GPA_pos, y = mean_outcome*100, fill = factor(type), color = factor(type))) + 
   geom_point(pch = 21, position = position_dodge(width = 1), alpha=.6, size = 4) +
-  geom_errorbar(aes(x=GPA_pos, ymin=ci_lower*100, ymax=ci_upper*100, color = factor(type)), 
+  geom_errorbar(aes(x=GPA_pos, ymin=(lower)*100, 
+                    ymax=(upper)*100, color = factor(type)), 
                 width=0.2, alpha=0.9, linewidth=0.6,
                 position = position_dodge(width = 1))+
   geom_vline(aes(xintercept = 1.5), lty = 2, color = "lightgrey") +
@@ -928,37 +904,105 @@ ggplot(data = df_final, aes(x = GPA_pos, y = mean_outcome*100, fill = factor(typ
         panel.grid.major.y = element_blank(),
         panel.grid.minor.y = element_blank(),
         axis.line = element_line(colour = "dark grey"))+
-  theme(axis.title.x = element_text(size=18),#margin = margin(t = 10, r = 0, b = 0, l = 0)),
+  theme(axis.title.x = element_text(size=14),#margin = margin(t = 10, r = 0, b = 0, l = 0)),
         axis.text.x = element_text(size=14),
-        axis.title.y = element_text(size=18),#margin = margin(t = 0, r = 10, b = 0, l = 0)),
-        axis.text.y = element_text(size=14),legend.position=c(0.1,0.1),
+        axis.title.y = element_text(size=14),#margin = margin(t = 0, r = 10, b = 0, l = 0)),
+        axis.text.y = element_text(size=14),legend.position=c(0.08,0.15),
         legend.title = element_blank(),
-        legend.text = element_text(size=15),
+        legend.text = element_text(size=13),
         legend.background = element_rect(fill="white",colour ="white"),
         title = element_text(size=14)) +
+    geom_rect(data = df_final[df_final$grade_treat == TRUE, ], 
+            aes(xmin = -Inf, xmax = Inf, ymin = -Inf, ymax = Inf), 
+            fill = "white", color = "white") + # Covering the entire right facet
   facet_wrap(~factor(grade_treat, levels = c(FALSE,TRUE), labels = c("Non-tested grade","Tested grade")))
 
-```
 
----
-# Overall predictions over performance distribution
-
-- AUC for non-tested grades: 0.798
-
-```{r prediction_all, fig.height=5.5, fig.width=10, fig.align='center', dev='svg', echo=FALSE, warning=FALSE, message=FALSE}
-df_plot <- read.csv("https://raw.githubusercontent.com/maibennett/presentations/main/content/presentations/Attendance/IngUC_20230810/data/plot_data_gpboost2017_updated_all_schoolsv5.csv")
-
-df_plot$GPA_pos = factor(df_plot$GPA_pos, levels = c("D1","D2","D3D8","D9","D10"))
-
-ggplot(data = df_plot, aes(x = GPA_pos, y = outcome*100, fill = factor(type), color = factor(type))) + 
-  geom_bar(stat="identity",position = "dodge2", alpha=.6, lwd=1.5) +
-  geom_errorbar(aes(x=GPA_pos, ymin=ci_l*100, ymax=ci_h*100), width=0.4, colour="dark grey", alpha=0.9, size=1.3,
+g11 = ggplot(data = df_final[df_final$grade_treat==FALSE,], 
+            aes(x = GPA_pos, y = mean_outcome*100, fill = factor(type), 
+                color = factor(type))) + 
+  geom_point(pch = 21, position = position_dodge(width = 1), alpha=.6, size = 4) +
+  geom_errorbar(aes(x=GPA_pos, ymin=(lower)*100, 
+                    ymax=(upper)*100, color = factor(type)), 
+                width=0.2, alpha=0.9, linewidth=0.6,
                 position = position_dodge(width = 1))+
-  scale_y_continuous(limits=c(50,100),oob = rescale_none) +
+  geom_vline(aes(xintercept = 1.5), lty = 2, color = "lightgrey") +
+  geom_vline(aes(xintercept = 2.5), lty = 2, color = "lightgrey") +
+  geom_vline(aes(xintercept = 3.5), lty = 2, color = "lightgrey") +
+  geom_vline(aes(xintercept = 4.5), lty = 2, color = "lightgrey") +
+  scale_y_continuous(limits=c(0,100),oob = rescale_none) +
   scale_color_manual(values = c(cols[3],cols[5])) +
   scale_fill_manual(values = c(alpha(cols[3],0.8),alpha(cols[5],0.8))) +
   theme_bw()+
   xlab("GPA deciles") + ylab("% Attendance") +
+  #ggplot2::annotate("text", x = 10, y = 6, label = "Adj. R2 = 0.48", size = 6, colour = "dark grey", hjust=0,family="Fira Sans Condensed") +
+  theme_ipsum_fsc(plot_title_face = "bold") + ggtitle("Non-tested grade") + 
+  theme(plot.margin=unit(c(1,1,1.5,1.2),"cm"),
+        panel.grid.major.x = element_blank(),
+        panel.grid.minor.x = element_blank(),
+        panel.grid.major.y = element_blank(),
+        panel.grid.minor.y = element_blank(),
+        axis.line = element_line(colour = "dark grey"))+
+  theme(axis.title.x = element_text(size=14),#margin = margin(t = 10, r = 0, b = 0, l = 0)),
+        axis.text.x = element_text(size=14),
+        axis.title.y = element_text(size=14),#margin = margin(t = 0, r = 10, b = 0, l = 0)),
+        axis.text.y = element_text(size=14),legend.position=c(0.15,0.15),
+        legend.title = element_blank(),
+        legend.text = element_text(size=13),
+        legend.background = element_rect(fill="white",colour ="white"),
+        title = element_text(size=14))
+
+
+g12 = ggplot(data = df_final[df_final$grade_treat==FALSE,], 
+            aes(x = GPA_pos, y = mean_outcome*100, fill = factor(type), 
+                color = factor(type))) + 
+  geom_point(pch = 21, position = position_dodge(width = 1), alpha=.6, size = 4) +
+  geom_errorbar(aes(x=GPA_pos, ymin=(lower)*100, 
+                    ymax=(upper)*100, color = factor(type)), 
+                width=0.2, alpha=0.9, linewidth=0.6,
+                position = position_dodge(width = 1))+
+  geom_vline(aes(xintercept = 1.5), lty = 2, color = "lightgrey") +
+  geom_vline(aes(xintercept = 2.5), lty = 2, color = "lightgrey") +
+  geom_vline(aes(xintercept = 3.5), lty = 2, color = "lightgrey") +
+  geom_vline(aes(xintercept = 4.5), lty = 2, color = "lightgrey") +
+  scale_y_continuous(limits=c(0,100),oob = rescale_none) +
+  scale_color_manual(values = c(cols[3],cols[5])) +
+  scale_fill_manual(values = c(alpha(cols[3],0.8),alpha(cols[5],0.8))) +
+  theme_bw()+
+  xlab("GPA deciles") + ylab("% Attendance") +
+  #ggplot2::annotate("text", x = 10, y = 6, label = "Adj. R2 = 0.48", size = 6, colour = "dark grey", hjust=0,family="Fira Sans Condensed") +
+  theme_ipsum_fsc(plot_title_face = "bold") + ggtitle("") + 
+  theme(plot.margin=unit(c(1,1,1.5,1.2),"cm"),
+        panel.grid.major.x = element_blank(),
+        panel.grid.minor.x = element_blank(),
+        panel.grid.major.y = element_blank(),
+        panel.grid.minor.y = element_blank(),
+        axis.line = element_blank())+
+  theme(axis.title.x = element_blank(),#margin = margin(t = 10, r = 0, b = 0, l = 0)),
+        axis.text.x = element_blank(),
+        axis.title.y = element_blank(),#margin = margin(t = 0, r = 10, b = 0, l = 0)),
+        axis.text.y = element_blank(),legend.position="none",
+        legend.title = element_blank(),
+        legend.text = element_blank(),
+        legend.background = element_rect(fill="white",colour ="white"),
+        title = element_blank()) +
+    geom_rect(data = df_final[df_final$grade_treat == TRUE, ], 
+            aes(xmin = -Inf, xmax = Inf, ymin = -Inf, ymax = Inf), 
+            fill = "white", color = "white")
+
+
+
+g2 = ggplot(data = df_final2, aes(x = GPA_pos, y = diff_mean*100)) + 
+    geom_hline(aes(yintercept = 0), lty = 1, color = "grey") +
+  geom_point(pch = 22, alpha=.6, size = 3, color = cols[1], 
+             fill = alpha(cols[1],0.6)) +
+  geom_vline(aes(xintercept = 1.5), lty = 2, color = "lightgrey") +
+  geom_vline(aes(xintercept = 2.5), lty = 2, color = "lightgrey") +
+  geom_vline(aes(xintercept = 3.5), lty = 2, color = "lightgrey") +
+  geom_vline(aes(xintercept = 4.5), lty = 2, color = "lightgrey") +
+  scale_y_continuous(limits=c(-5,5),oob = rescale_none, breaks = c(-5, 0, 5)) +
+  theme_bw()+
+  xlab("") + ylab(expression(Delta* " Obs - Pred")) +
   #ggplot2::annotate("text", x = 10, y = 6, label = "Adj. R2 = 0.48", size = 6, colour = "dark grey", hjust=0,family="Fira Sans Condensed") +
   theme_ipsum_fsc(plot_title_face = "bold",plot_title_size = 24) + #plain
   theme(plot.margin=unit(c(1,1,1.5,1.2),"cm"),
@@ -966,16 +1010,147 @@ ggplot(data = df_plot, aes(x = GPA_pos, y = outcome*100, fill = factor(type), co
         panel.grid.minor.x = element_blank(),
         panel.grid.major.y = element_blank(),
         panel.grid.minor.y = element_blank(),
-        axis.line = element_line(colour = "dark grey"))+
-  theme(axis.title.x = element_text(size=18),#margin = margin(t = 10, r = 0, b = 0, l = 0)),
-        axis.text.x = element_text(size=14),
-        axis.title.y = element_text(size=18),#margin = margin(t = 0, r = 10, b = 0, l = 0)),
+        axis.line.y = element_line(colour = "dark grey"),
+        axis.line.x = element_blank())+
+  theme(axis.title.x = element_blank(),#margin = margin(t = 10, r = 0, b = 0, l = 0)),
+        axis.text.x = element_blank(),
+        axis.title.y = element_text(size=14),#margin = margin(t = 0, r = 10, b = 0, l = 0)),
         axis.text.y = element_text(size=14),legend.position=c(0.1,0.1),
         legend.title = element_blank(),
         legend.text = element_text(size=15),
         legend.background = element_rect(fill="white",colour ="white"),
-        title = element_text(size=14)) +
-  facet_wrap(~factor(grade_treat, levels = c(FALSE,TRUE), labels = c("Non-tested grade","Tested grade")))
+        title = element_blank(),
+        strip.text = element_blank()) +
+      geom_rect(data = df_final2[df_final2$grade_treat == TRUE, ], 
+            aes(xmin = -Inf, xmax = Inf, ymin = -Inf, ymax = Inf), 
+            fill = "white", color = "white") + # Covering the entire right facet
+  facet_wrap(~factor(grade_treat, levels = c(FALSE,TRUE), labels = c("Non-tested grade","Tested grade")), labeller = labeller(NULL)) 
+
+g1_right_removed = ggplot(data = subset(df_final, grade_treat == FALSE),
+                           aes(x = GPA_pos, y = mean_outcome * 100, 
+                               fill =factor(type), color = factor(type))) + 
+  geom_point(pch = 21, position = position_dodge(width = 1), alpha = .6, size = 4) +
+  geom_errorbar(aes(x = GPA_pos, ymin = lower * 100, ymax = upper * 100, 
+                    color = factor(type)), width = 0.2, alpha = 0.9, linewidth = 0.6,
+                position = position_dodge(width = 1)) +
+  geom_vline(aes(xintercept = 1.5), lty = 2, color = "lightgrey") +
+  geom_vline(aes(xintercept = 2.5), lty = 2, color = "lightgrey") +
+  geom_vline(aes(xintercept = 3.5), lty = 2, color = "lightgrey") +
+  geom_vline(aes(xintercept = 4.5), lty = 2, color = "lightgrey") +
+  scale_y_continuous(limits = c(0, 100), oob = rescale_none) +
+  scale_color_manual(values = c(cols[3], cols[5])) +
+  scale_fill_manual(values = c(alpha(cols[3], 0.8), alpha(cols[5], 0.8))) +
+  theme_bw() +
+  xlab("GPA deciles") + ylab("% Attendance") +
+  theme_ipsum_fsc(plot_title_face = "bold", plot_title_size = 24) + #plain
+  theme(plot.margin = unit(c(1, 1, 1.5, 0.6), "cm"),
+        panel.grid.major.x = element_blank(),
+        panel.grid.minor.x = element_blank(),
+        panel.grid.major.y = element_blank(),
+        panel.grid.minor.y = element_blank(),
+        axis.line = element_line(colour = "dark grey"),
+        axis.title.x = element_text(size = 14),
+        axis.text.x = element_text(size = 14),
+        axis.title.y = element_text(size = 14),
+        axis.text.y = element_text(size = 14),
+        legend.position = c(0.08, 0.15),
+        legend.title = element_blank(),
+        legend.text = element_text(size = 13),
+        legend.background = element_rect(fill = "white", colour = "white"),
+        title = element_text(size = 14)) +
+  facet_wrap(~ factor(grade_treat, levels = c(FALSE, TRUE), labels = c("Non-tested grade", "Tested grade")))
+
+
+# Reduce the space between plots
+g11 = g11 + theme(plot.margin = margin(0, 0, 0, 0))
+g12 = g12 + theme(plot.margin = margin(0, 0, 0, 0))
+g1_right_removed = g1_right_removed + theme(plot.margin = margin(0, 0, 0, 0))
+g2 = g2 + theme(plot.margin = margin(0, 0, 0, 0))
+
+
+(g11 + g12) / g2 + plot_layout(heights = c(2, 1))
+
+
+```
+
+
+---
+# Overall predictions over performance distribution
+
+```{r prediction_all_boxplot2, fig.height=5.3, fig.width=10, fig.align='center', dev='svg', echo=FALSE, warning=FALSE, message=FALSE}
+g11 = g11 + xlab("")
+
+g13 = ggplot(data = df_final[df_final$grade_treat==TRUE,], 
+            aes(x = GPA_pos, y = mean_outcome*100, fill = factor(type), 
+                color = factor(type))) + 
+  geom_point(pch = 21, position = position_dodge(width = 1), alpha=.6, size = 4) +
+  geom_errorbar(aes(x=GPA_pos, ymin=(lower)*100, 
+                    ymax=(upper)*100, color = factor(type)), 
+                width=0.2, alpha=0.9, linewidth=0.6,
+                position = position_dodge(width = 1))+
+  geom_vline(aes(xintercept = 1.5), lty = 2, color = "lightgrey") +
+  geom_vline(aes(xintercept = 2.5), lty = 2, color = "lightgrey") +
+  geom_vline(aes(xintercept = 3.5), lty = 2, color = "lightgrey") +
+  geom_vline(aes(xintercept = 4.5), lty = 2, color = "lightgrey") +
+  scale_y_continuous(limits=c(0,100),oob = rescale_none) +
+  scale_color_manual(values = c(cols[3],cols[5])) +
+  scale_fill_manual(values = c(alpha(cols[3],0.8),alpha(cols[5],0.8))) +
+  theme_bw()+
+  xlab("GPA deciles") + ylab("% Attendance") +
+  #ggplot2::annotate("text", x = 10, y = 6, label = "Adj. R2 = 0.48", size = 6, colour = "dark grey", hjust=0,family="Fira Sans Condensed") +
+  theme_ipsum_fsc(plot_title_face = "bold") + ggtitle("Tested grade") + 
+  theme(plot.margin=unit(c(1,1,1.5,1.2),"cm"),
+        panel.grid.major.x = element_blank(),
+        panel.grid.minor.x = element_blank(),
+        panel.grid.major.y = element_blank(),
+        panel.grid.minor.y = element_blank(),
+        axis.line.y = element_blank(),
+        axis.line.x = element_line(colour = "dark grey"))+
+  theme(axis.title.x = element_text(size=14),#margin = margin(t = 10, r = 0, b = 0, l = 0)),
+        axis.text.x = element_text(size=14),
+        axis.title.y = element_blank(),#margin = margin(t = 0, r = 10, b = 0, l = 0)),
+        axis.text.y = element_blank(),legend.position="none",
+        legend.title = element_blank(),
+        legend.text = element_text(size=13),
+        legend.background = element_rect(fill="white",colour ="white"),
+        title = element_text(size=14))
+
+g2 = ggplot(data = df_final2, aes(x = GPA_pos, y = diff_mean*100)) + 
+    geom_hline(aes(yintercept = 0), lty = 1, color = "grey") +
+  geom_point(pch = 22, alpha=.6, size = 3, color = cols[1], 
+             fill = alpha(cols[1],0.6)) +
+  geom_vline(aes(xintercept = 1.5), lty = 2, color = "lightgrey") +
+  geom_vline(aes(xintercept = 2.5), lty = 2, color = "lightgrey") +
+  geom_vline(aes(xintercept = 3.5), lty = 2, color = "lightgrey") +
+  geom_vline(aes(xintercept = 4.5), lty = 2, color = "lightgrey") +
+  scale_y_continuous(limits=c(-5,5),oob = rescale_none, breaks = c(-5, 0, 5)) +
+  theme_bw()+
+  xlab("") + ylab(expression(Delta* " Obs - Pred")) +
+  #ggplot2::annotate("text", x = 10, y = 6, label = "Adj. R2 = 0.48", size = 6, colour = "dark grey", hjust=0,family="Fira Sans Condensed") +
+  theme_ipsum_fsc(plot_title_face = "bold",plot_title_size = 24) + #plain
+  theme(plot.margin=unit(c(1,1,1.5,1.2),"cm"),
+        panel.grid.major.x = element_blank(),
+        panel.grid.minor.x = element_blank(),
+        panel.grid.major.y = element_blank(),
+        panel.grid.minor.y = element_blank(),
+        axis.line.y = element_line(colour = "dark grey"),
+        axis.line.x = element_blank())+
+  theme(axis.title.x = element_blank(),#margin = margin(t = 10, r = 0, b = 0, l = 0)),
+        axis.text.x = element_blank(),
+        axis.title.y = element_text(size=14),#margin = margin(t = 0, r = 10, b = 0, l = 0)),
+        axis.text.y = element_text(size=14),legend.position=c(0.1,0.1),
+        legend.title = element_blank(),
+        legend.text = element_text(size=15),
+        legend.background = element_rect(fill="white",colour ="white"),
+        title = element_blank(),
+        strip.text = element_blank()) +
+  facet_wrap(~factor(grade_treat, levels = c(FALSE,TRUE), labels = c("Non-tested grade","Tested grade")), labeller = labeller(NULL))
+
+# Reduce the space between plots
+g13 = g13 + theme(plot.margin = margin(0, 0, 0, 0))
+g2 = g2 + theme(plot.margin = margin(0, 0, 0, 0))
+
+(g11 + g13) / g2 + plot_layout(heights = c(2, 1))
 
 ```
 
@@ -1439,7 +1614,7 @@ class: inverse, center, middle
 <br>
 <br>
 
-.left[.small[Valle Nevado Workshop on Economics of Education<br>Universidad de los Andes<br>August 17th, 2023]]]
+.left[.small[AEFP Conference<br>March 14th, 2023]]]
 
 .pull-right-little_l[
 <br>
@@ -1455,3 +1630,28 @@ class: inverse, center, middle
 <br>
 <br>
 <br>
+
+---
+# SIMCE and absenteeism
+
+- Use of **.coolblue[pre-filled communication]** for parents to be sent out by schools
+
+  - Evidence that parents from lower-income students are less likely to receive information
+  
+--
+<br>
+<br>
+
+- **.coolblue[No real consequences for low attendance]**:
+  
+  - Between 2005-2007, non-representative results where marked with symbols
+  
+  - No imputation strategy so far
+  
+--
+<br>
+<br>
+
+- Improvement of regulation for **.coolblue[justifying students exclusion]**
+
+  - E.g. specific disabilities (blindness) or non-Spanish speakers.

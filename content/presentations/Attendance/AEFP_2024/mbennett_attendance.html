@@ -39,7 +39,7 @@ class: inverse, center, middle
 &lt;br&gt;
 &lt;br&gt;
 
-.left[.small[Valle Nevado Workshop on Economics of Education&lt;br&gt;Universidad de los Andes&lt;br&gt;August 17th, 2023]]]
+.left[.small[AEFP Conference&lt;br&gt;March 14th, 2024]]]
 
 .pull-right-little_l[
 &lt;br&gt;
@@ -137,7 +137,7 @@ class: left, middle, inverse
 &lt;br&gt;
 &lt;br&gt;
 .big[
-The Chilean Educational Context
+Context of the Study and Data
 ]
 
 ---
@@ -166,46 +166,6 @@ The Chilean Educational Context
   - Tied to budget restrictions and school closures
   
 ---
-# SIMCE and absenteeism
-
-- Use of **.coolblue[pre-filled communication]** for parents to be sent out by schools
-
-  - Evidence that parents from lower-income students are less likely to receive information
-  
---
-&lt;br&gt;
-&lt;br&gt;
-
-- **.coolblue[No real consequences for low attendance]**:
-  
-  - Between 2005-2007, non-representative results where marked with symbols
-  
-  - No imputation strategy so far
-  
---
-&lt;br&gt;
-&lt;br&gt;
-
-- Improvement of regulation for **.coolblue[justifying students exclusion]**
-
-  - E.g. specific disabilities (blindness) or non-Spanish speakers.
-
-
----
-background-position: 50% 50%
-class: left, middle, inverse
-&lt;br&gt;
-&lt;br&gt;
-&lt;br&gt;
-&lt;br&gt;
-&lt;br&gt;
-&lt;br&gt;
-&lt;br&gt;
-.big[
-Attendance Patterns for the Day of the Test
-]
-
----
 # Data Available
 
 - **.coolblue[Standardized tests 2011-2018 (SIMCE)]**
@@ -230,52 +190,25 @@ Attendance Patterns for the Day of the Test
 
   - Use GPA performance deciles within school-grade
   
----
-# Observations from our data
+--
 
-&lt;table class=" lightable-paper" style='font-family: "Arial Narrow", arial, helvetica, sans-serif; width: auto !important; margin-left: auto; margin-right: auto;'&gt;
-&lt;caption&gt;Data description&lt;/caption&gt;
- &lt;thead&gt;
-  &lt;tr&gt;
-   &lt;th style="text-align:left;"&gt; Grade &lt;/th&gt;
-   &lt;th style="text-align:center;"&gt; Years tested &lt;/th&gt;
-   &lt;th style="text-align:center;"&gt; Num Schools &lt;/th&gt;
-   &lt;th style="text-align:center;"&gt; Num Students &lt;/th&gt;
-  &lt;/tr&gt;
- &lt;/thead&gt;
-&lt;tbody&gt;
-  &lt;tr&gt;
-   &lt;td style="text-align:left;"&gt; 2 &lt;/td&gt;
-   &lt;td style="text-align:center;"&gt; 2013, 2014, 2015 &lt;/td&gt;
-   &lt;td style="text-align:center;"&gt; 5,266 &lt;/td&gt;
-   &lt;td style="text-align:center;"&gt; 628,073 &lt;/td&gt;
-  &lt;/tr&gt;
-  &lt;tr&gt;
-   &lt;td style="text-align:left;"&gt; 4 &lt;/td&gt;
-   &lt;td style="text-align:center;"&gt; 2011, 2013-2018 &lt;/td&gt;
-   &lt;td style="text-align:center;"&gt; 5,673 &lt;/td&gt;
-   &lt;td style="text-align:center;"&gt; 1,461,289 &lt;/td&gt;
-  &lt;/tr&gt;
-  &lt;tr&gt;
-   &lt;td style="text-align:left;"&gt; 6 &lt;/td&gt;
-   &lt;td style="text-align:center;"&gt; 2013-2016, 2018 &lt;/td&gt;
-   &lt;td style="text-align:center;"&gt; 5,516 &lt;/td&gt;
-   &lt;td style="text-align:center;"&gt; 1,056,243 &lt;/td&gt;
-  &lt;/tr&gt;
-  &lt;tr&gt;
-   &lt;td style="text-align:left;"&gt; 8 &lt;/td&gt;
-   &lt;td style="text-align:center;"&gt; 2011, 2013-2015, 2017 &lt;/td&gt;
-   &lt;td style="text-align:center;"&gt; 5,545 &lt;/td&gt;
-   &lt;td style="text-align:center;"&gt; 1,078,140 &lt;/td&gt;
-  &lt;/tr&gt;
-  &lt;tr&gt;
-   &lt;td style="text-align:left;"&gt; 10 &lt;/td&gt;
-   &lt;td style="text-align:center;"&gt; 2013-2018 &lt;/td&gt;
-   &lt;td style="text-align:center;"&gt; 2,623 &lt;/td&gt;
-   &lt;td style="text-align:center;"&gt; 1,213,067 &lt;/td&gt;
-  &lt;/tr&gt;
-&lt;/tbody&gt;
-&lt;/table&gt;
+**.coolblue[Summary:]** `\(\approx\)` 5,500 schools per year, across 5 grades (2nd-10th) `\(\rightarrow\)` over 1,000,000 students per year.
+
+
+---
+background-position: 50% 50%
+class: left, middle, inverse
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+.big[
+Attendance Patterns for the Day of the Test
+]
+
 
 ---
 # Empirical approach for difference in attendance
@@ -598,15 +531,13 @@ Predicting the Counterfactual
 ---
 # Overall predictions over performance distribution
 
+&lt;img src="mbennett_attendance_files/figure-html/prediction_all_boxplot1-1.svg" style="display: block; margin: auto;" /&gt;
 
-&lt;img src="mbennett_attendance_files/figure-html/prediction_all_boxplot-1.svg" style="display: block; margin: auto;" /&gt;
 
 ---
 # Overall predictions over performance distribution
 
-- AUC for non-tested grades: 0.798
-
-&lt;img src="mbennett_attendance_files/figure-html/prediction_all-1.svg" style="display: block; margin: auto;" /&gt;
+&lt;img src="mbennett_attendance_files/figure-html/prediction_all_boxplot2-1.svg" style="display: block; margin: auto;" /&gt;
 
 
 ---
@@ -864,7 +795,7 @@ class: inverse, center, middle
 &lt;br&gt;
 &lt;br&gt;
 
-.left[.small[Valle Nevado Workshop on Economics of Education&lt;br&gt;Universidad de los Andes&lt;br&gt;August 17th, 2023]]]
+.left[.small[AEFP Conference&lt;br&gt;March 14th, 2023]]]
 
 .pull-right-little_l[
 &lt;br&gt;
@@ -880,6 +811,31 @@ class: inverse, center, middle
 &lt;br&gt;
 &lt;br&gt;
 &lt;br&gt;
+
+---
+# SIMCE and absenteeism
+
+- Use of **.coolblue[pre-filled communication]** for parents to be sent out by schools
+
+  - Evidence that parents from lower-income students are less likely to receive information
+  
+--
+&lt;br&gt;
+&lt;br&gt;
+
+- **.coolblue[No real consequences for low attendance]**:
+  
+  - Between 2005-2007, non-representative results where marked with symbols
+  
+  - No imputation strategy so far
+  
+--
+&lt;br&gt;
+&lt;br&gt;
+
+- Improvement of regulation for **.coolblue[justifying students exclusion]**
+
+  - E.g. specific disabilities (blindness) or non-Spanish speakers.
     </textarea>
 <style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
 <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>

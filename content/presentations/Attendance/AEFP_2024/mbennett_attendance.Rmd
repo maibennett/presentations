@@ -877,12 +877,9 @@ Predicting the Counterfactual
 ```{r prediction_all_boxplot1, fig.height=5.3, fig.width=10, fig.align='center', dev='svg', echo=FALSE, warning=FALSE, message=FALSE}
 df_final = read.csv("https://raw.githubusercontent.com/maibennett/presentations/main/content/presentations/Attendance/AEFP_2024/data/boxplot_data_xgboost2017_v7.csv")
 
-df_final = df_final %>% mutate(type = ifelse(type == "Observed", 
-                                             "Predicted", "Observed"),
-                               type = factor(type, 
-                                             levels = c("Predicted", "Observed")))
-
 df_final$GPA_pos = factor(df_final$GPA_pos, levels = c("D1","D2","D3D8","D9","D10"))
+
+df_final$type = factor(df_final$type, levels = c("Predicted", "Observed"))
 
 df_final = df_final %>% mutate(upper = mean_outcome + sd_outcome,
                                lower = mean_outcome - sd_outcome,

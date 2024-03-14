@@ -361,6 +361,7 @@ library(patchwork)
 library(kableExtra)
 
 #loadfonts(device = "win")
+col_text = "#333f48"
 
 options(scipen = 0)
 ```
@@ -779,9 +780,9 @@ shift_legend2(gr)
 - 2017 survey for students in test-taking grades.
 
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
-tab4th <- read.csv("https://raw.githubusercontent.com/maibennett/presentations/main/content/presentations/Attendance/Salem_20220405/images/survey_4th.csv")
+tab4th = read.csv("https://raw.githubusercontent.com/maibennett/presentations/main/content/presentations/Attendance/Salem_20220405/images/survey_4th.csv")
 
-tab10th <- read.csv("https://raw.githubusercontent.com/maibennett/presentations/main/content/presentations/Attendance/Salem_20220405/images/survey_10th.csv")
+tab10th = read.csv("https://raw.githubusercontent.com/maibennett/presentations/main/content/presentations/Attendance/Salem_20220405/images/survey_10th.csv")
 
 kableExtra::kable(tab4th, align = "lcccc", caption = "Results for 4th Grade",
              col.names = c('GPA Decile', 'Told', 'Notification', 'Preparation', 'Grades'), format = "html") %>% 
@@ -845,13 +846,9 @@ Predicting the Counterfactual
 <br>
 <br>
 
-- Use **.coolblue[GPBoost]** (Sigrist, 2020) with panel data for **.coolblue[attendance prediction]** 
+- Use **.coolblue[Extreme Gradient Boosting (XGBoost)]** with panel data for **.coolblue[attendance prediction]** 
   
-  - Combines Gaussian Processes and Gradient Boosting.
-  
-  - Model includes random effects for both student and date.
-  
-  - Predictor variables include day of the week, grade, GPA group, and sibling's attendance. 
+  - Predictor variables include day of the week, grade, GPA group, and sibling's attendance, in addition to schools' characteristics. 
   
 --
 <br>
@@ -866,10 +863,6 @@ Predicting the Counterfactual
 # Overall predictions over performance distribution
 
 ```{r prediction_all_boxplot1, fig.height=5.3, fig.width=10, fig.align='center', dev='svg', echo=FALSE, warning=FALSE, message=FALSE}
-dir_data2 = "C:/Users/mc72574/Dropbox/UT/UT Research/Asistencia/"
-
-df_final= read.csv(paste0(dir_data2,"data/working/boxplot_data_xgboost2017_v7.csv"))
-
 df_final = read.csv("https://raw.githubusercontent.com/maibennett/presentations/main/content/presentations/Attendance/AEFP_2024/data/boxplot_data_xgboost2017_v7.csv")
 
 df_final$GPA_pos = factor(df_final$GPA_pos, levels = c("D1","D2","D3D8","D9","D10"))
@@ -950,7 +943,7 @@ g11 = ggplot(data = df_final[df_final$grade_treat==FALSE,],
         legend.title = element_blank(),
         legend.text = element_text(size=13),
         legend.background = element_rect(fill="white",colour ="white"),
-        title = element_text(size=14))
+        title = element_text(size=14, color = col_text))
 
 
 g12 = ggplot(data = df_final[df_final$grade_treat==FALSE,], 
@@ -1113,7 +1106,7 @@ g13 = ggplot(data = df_final[df_final$grade_treat==TRUE,],
         legend.title = element_blank(),
         legend.text = element_text(size=13),
         legend.background = element_rect(fill="white",colour ="white"),
-        title = element_text(size=14))
+        title = element_text(size=14, color = col_text))
 
 g2 = ggplot(data = df_final2, aes(x = GPA_pos, y = diff_mean*100)) + 
     geom_hline(aes(yintercept = 0), lty = 1, color = "grey") +
@@ -1178,7 +1171,7 @@ df_plot <- read.csv("https://raw.githubusercontent.com/maibennett/presentations/
 df_plot$GPA_pos = factor(df_plot$GPA_pos, levels = c("D1","D2","D3D8","D9","D10"))
 
 ggplot(data = df_plot, aes(x = GPA_pos, y = outcome*100, fill = factor(type), color = factor(type))) + 
-  geom_bar(stat="identity",position = "dodge2", alpha=.6, lwd=1.5) +
+  geom_bar(stat="identity",position = "dodge2", alpha=.6, lwd=1) +
   #geom_errorbar(aes(x=GPA_pos, ymin=ci_l*100, ymax=ci_h*100), width=0.4, colour="dark grey", alpha=0.9, size=1.3,
   #              position = position_dodge(width = 1))+
   scale_y_continuous(limits=c(0,100),oob = rescale_none) +
@@ -1194,12 +1187,12 @@ ggplot(data = df_plot, aes(x = GPA_pos, y = outcome*100, fill = factor(type), co
         panel.grid.major.y = element_blank(),
         panel.grid.minor.y = element_blank(),
         axis.line = element_line(colour = "dark grey"))+
-  theme(axis.title.x = element_text(size=18),#margin = margin(t = 10, r = 0, b = 0, l = 0)),
-        axis.text.x = element_text(size=14),
-        axis.title.y = element_text(size=18),#margin = margin(t = 0, r = 10, b = 0, l = 0)),
-        axis.text.y = element_text(size=14),legend.position=c(0.1,0.1),
+  theme(axis.title.x = element_text(size=14),#margin = margin(t = 10, r = 0, b = 0, l = 0)),
+        axis.text.x = element_text(size=12),
+        axis.title.y = element_text(size=14),#margin = margin(t = 0, r = 10, b = 0, l = 0)),
+        axis.text.y = element_text(size=12),legend.position=c(0.1,0.1),
         legend.title = element_blank(),
-        legend.text = element_text(size=15),
+        legend.text = element_text(size=10),
         legend.background = element_rect(fill="white",colour ="white"),
         title = element_text(size=14)) +
   facet_grid(grade_treat ~ factor(rbd, levels = c(10658,25002), labels = c("School 1", "School 2")))
@@ -1228,7 +1221,7 @@ ann_plot <- data.frame(rbd = 25002, GPA_pos = factor("D1", levels = c("D1","D2",
                        grade_treat = "Tested")
 
 ggplot(data = df_plot, aes(x = GPA_pos, y = outcome*100, fill = factor(type), color = factor(type))) + 
-  geom_bar(stat="identity",position = "dodge2", alpha=.6, lwd=1.5) +
+  geom_bar(stat="identity",position = "dodge2", alpha=.6, lwd=1) +
   #geom_errorbar(aes(x=GPA_pos, ymin=ci_l*100, ymax=ci_h*100), width=0.4, colour="dark grey", alpha=0.9, size=1.3,
   #              position = position_dodge(width = 1))+
   scale_y_continuous(limits=c(0,100),oob = rescale_none) +
@@ -1244,12 +1237,12 @@ ggplot(data = df_plot, aes(x = GPA_pos, y = outcome*100, fill = factor(type), co
         panel.grid.major.y = element_blank(),
         panel.grid.minor.y = element_blank(),
         axis.line = element_line(colour = "dark grey"))+
-  theme(axis.title.x = element_text(size=18),#margin = margin(t = 10, r = 0, b = 0, l = 0)),
-        axis.text.x = element_text(size=14),
-        axis.title.y = element_text(size=18),#margin = margin(t = 0, r = 10, b = 0, l = 0)),
-        axis.text.y = element_text(size=14),legend.position=c(0.1,0.1),
+  theme(axis.title.x = element_text(size=14),#margin = margin(t = 10, r = 0, b = 0, l = 0)),
+        axis.text.x = element_text(size=12),
+        axis.title.y = element_text(size=14),#margin = margin(t = 0, r = 10, b = 0, l = 0)),
+        axis.text.y = element_text(size=12),legend.position=c(0.1,0.1),
         legend.title = element_blank(),
-        legend.text = element_text(size=15),
+        legend.text = element_text(size=10),
         legend.background = element_rect(fill="white",colour ="white"),
         title = element_text(size=14)) +
   facet_grid(grade_treat ~ factor(rbd, levels = c(10658,25002), labels = c("School 1", "School 2"))) +
@@ -1411,7 +1404,7 @@ d_tab$cluster = factor(d_tab$cluster, levels = c(1,2), labels = c("Cluster 1\nIn
 
 datasummary_balance(~ cluster, data = d_tab, dinm_statistic = "p.value", fmt = "%.2f", dinm = TRUE, align = c("lcccccc"),
                     output = "html",
-                    notes = "Note: Diff DX GPA represents the difference between obs. attendance and predicted attendance for decile X") %>% kable_paper(bootstrap_options = c("hover","condensed"), full_width = FALSE)
+                    notes = "Note: Diff DX GPA represents the difference between obs. attendance and predicted attendance for decile X") %>% kable_paper(bootstrap_options = c("condensed"), full_width = FALSE)
 
 ```
 ]

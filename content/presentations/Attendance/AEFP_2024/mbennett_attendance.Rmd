@@ -791,13 +791,14 @@ shift_legend2(gr)
 - 2017 survey for students in test-taking grades.
 
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
+library(tinytable)
+
 tab4th = read.csv("https://raw.githubusercontent.com/maibennett/presentations/main/content/presentations/Attendance/Salem_20220405/images/survey_4th.csv")
 
 tab10th = read.csv("https://raw.githubusercontent.com/maibennett/presentations/main/content/presentations/Attendance/Salem_20220405/images/survey_10th.csv")
 
 kableExtra::kable(tab4th, align = "lcccc", caption = "Results for 4th Grade",
-             col.names = c('GPA Decile', 'Told', 'Notification', 'Preparation', 'Grades'), format = "html") %>% 
-   kable_paper(full_width = FALSE)
+             col.names = c('GPA Decile', 'Told', 'Notification', 'Preparation', 'Grades'), format = "html") %>% kable_paper(full_width = FALSE)
  # kable_paper(bootstrap_options = c("hover","condensed"), full_width = FALSE)
 ```
 

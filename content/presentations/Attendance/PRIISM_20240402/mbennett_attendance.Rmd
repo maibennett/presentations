@@ -836,12 +836,12 @@ kableExtra::kable(tab4th, align = "lcccc", caption = "Results for 4th Grade",
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
 # Convert #A5AC20 to RGBA for transparency
 color_rgba <- "rgba(165, 172, 32, 0.3)"  # This includes the transparency
-text_color <- "#A5AC20"  # Your specified color for the text
+text_col <- "#A5AC20"  # Your specified color for the text
 
 # Assuming tab4th is your data frame
 # Apply cell_spec to the desired cells
-tab4th$Told[1] <- cell_spec(tab4th$Told[1], "html", background = color_rgba, color = text_color, bold = TRUE)
-tab4th$Notification[1] <- cell_spec(tab4th$Notification[1], "html", background = color_rgba, color = text_color, bold = TRUE)
+tab4th$Told[1] <- cell_spec(tab4th$Told[1], "html", background = color_rgba, color = text_col, bold = TRUE)
+tab4th$Notification[1] <- cell_spec(tab4th$Notification[1], "html", background = color_rgba, color = text_col, bold = TRUE)
 
 # Now generate the table with kable and apply the additional styling
 kable(tab4th, align = "lcccc", caption = "Results for 4th Grade",
@@ -880,8 +880,8 @@ kable(tab4th, align = "lcccc", caption = "Results for 4th Grade",
 
 ```{r, echo=FALSE, results='asis'}
 
-tab10th$Told[1] <- cell_spec(tab10th$Told[1], "html", background = color_rgba, color = text_color, bold = TRUE)
-tab10th$Notification[1] <- cell_spec(tab10th$Notification[1], "html", background = color_rgba, color = text_color, bold = TRUE)
+tab10th$Told[1] <- cell_spec(tab10th$Told[1], "html", background = color_rgba, color = text_col, bold = TRUE)
+tab10th$Notification[1] <- cell_spec(tab10th$Notification[1], "html", background = color_rgba, color = text_col, bold = TRUE)
 
 tab10th$Told[3] <- cell_spec(tab10th$Told[3], "html", background = color_rgba2, color = text_color2, bold = TRUE)
 tab10th$Notification[3] <- cell_spec(tab10th$Notification[3], "html", background = color_rgba2, color = text_color2, bold = TRUE)
@@ -1396,7 +1396,8 @@ df_wide_test$cluster = factor(df_wide_test$cluster, levels = c(1,2,3), labels=c(
 
 g1 = ggplot(df_wide_test, aes(x = cluster, y = diff_4_D1*100)) + 
         geom_boxplot(aes(fill = cluster, color = cluster)) + 
-  xlab("") +
+  xlab("") + ylim(-75,50) + 
+  scale_y_continuous(limits=c(-75,50),oob = rescale_none, breaks = c(-50, 0, 50)) +
   ylab(expression(Delta* " Obs - Pred (pp)")) + ggtitle("D1 GPA") +
   scale_color_manual(name = "Cluster",values = c(cols[2],cols[3])) +
   scale_fill_manual(name = "Cluster", values = c(alpha(cols[2],0.4),alpha(cols[3],0.4))) +
@@ -1409,17 +1410,18 @@ g1 = ggplot(df_wide_test, aes(x = cluster, y = diff_4_D1*100)) +
         panel.grid.minor.y = element_blank(),
         axis.line = element_line(colour = "dark grey"))+
   theme(axis.title.x = element_text(size=14),#margin = margin(t = 10, r = 0, b = 0, l = 0)),
-        axis.text.x = element_text(size=14),
+        axis.text.x = element_text(size=12),
         axis.title.y = element_text(size=14),#margin = margin(t = 0, r = 10, b = 0, l = 0)),
-        axis.text.y = element_text(size=14),legend.position=c(0.1,0.1),
+        axis.text.y = element_text(size=12),legend.position=c(0.1,0.1),
         legend.title = element_text(size = 12),
-        legend.text = element_text(size=15),
+        legend.text = element_text(size=12),
         legend.background = element_rect(fill="white",colour ="white"),
-        plot.title = element_text(size=14, color = col_text))
+        plot.title = element_text(size=12, color = col_text))
 
 g2 = ggplot(df_wide_test, aes(x = cluster, y = diff_4_D2*100)) + 
         geom_boxplot(aes(fill = cluster, color = cluster)) + 
-  xlab("") +
+  xlab("") + ylim(-75,50) + 
+  scale_y_continuous(limits=c(-75,50),oob = rescale_none, breaks = c(-50, 0, 50)) +
   ylab(expression(Delta* " Obs - Pred (pp)")) + ggtitle("D2 GPA") +
   scale_color_manual(name = "Cluster",values = c(cols[2],cols[3])) +
   scale_fill_manual(name = "Cluster", values = c(alpha(cols[2],0.4),alpha(cols[3],0.4))) +
@@ -1432,17 +1434,18 @@ g2 = ggplot(df_wide_test, aes(x = cluster, y = diff_4_D2*100)) +
         panel.grid.minor.y = element_blank(),
         axis.line = element_line(colour = "dark grey"))+
   theme(axis.title.x = element_text(size=14),#margin = margin(t = 10, r = 0, b = 0, l = 0)),
-        axis.text.x = element_text(size=14),
+        axis.text.x = element_text(size=12),
         axis.title.y = element_text(size=14),#margin = margin(t = 0, r = 10, b = 0, l = 0)),
-        axis.text.y = element_text(size=14),legend.position=c(0.1,0.1),
+        axis.text.y = element_text(size=12),legend.position=c(0.1,0.1),
         legend.title = element_text(size = 12),
-        legend.text = element_text(size=15),
+        legend.text = element_text(size=12),
         legend.background = element_rect(fill="white",colour ="white"),
-        plot.title = element_text(size=14, color = col_text))
+        plot.title = element_text(size=12, color = col_text))
 
 g3 = ggplot(df_wide_test, aes(x = cluster, y = diff_4_D9*100)) + 
                 geom_boxplot(aes(fill = cluster, color = cluster)) + 
-  xlab("") +
+  xlab("") + ylim(-75,50) + 
+  scale_y_continuous(limits=c(-75,50),oob = rescale_none, breaks = c(-50, 0, 50)) +
   ylab(expression(Delta* " Obs - Pred (pp)")) + ggtitle("D9 GPA") +
   scale_color_manual(name = "Cluster",values = c(cols[2],cols[3])) +
   scale_fill_manual(name = "Cluster", values = c(alpha(cols[2],0.4),alpha(cols[3],0.4))) +
@@ -1455,17 +1458,18 @@ g3 = ggplot(df_wide_test, aes(x = cluster, y = diff_4_D9*100)) +
         panel.grid.minor.y = element_blank(),
         axis.line = element_line(colour = "dark grey"))+
   theme(axis.title.x = element_text(size=14),#margin = margin(t = 10, r = 0, b = 0, l = 0)),
-        axis.text.x = element_text(size=14),
+        axis.text.x = element_text(size=12),
         axis.title.y = element_text(size=14),#margin = margin(t = 0, r = 10, b = 0, l = 0)),
-        axis.text.y = element_text(size=14),legend.position=c(0.1,0.1),
+        axis.text.y = element_text(size=12),legend.position=c(0.1,0.1),
         legend.title = element_text(size = 12),
-        legend.text = element_text(size=15),
+        legend.text = element_text(size=12),
         legend.background = element_rect(fill="white",colour ="white"),
-        plot.title = element_text(size=14, color = col_text))
+        plot.title = element_text(size=12, color = col_text))
 
 g4 = ggplot(df_wide_test, aes(x = cluster, y = diff_4_D10*100)) + 
                 geom_boxplot(aes(fill = cluster, color = cluster)) + 
-  xlab("") +
+  xlab("") + ylim(-75,50) + 
+  scale_y_continuous(limits=c(-75,50),oob = rescale_none, breaks = c(-50, 0, 50)) +
   ylab(expression(Delta* " Obs - Pred (pp)")) + ggtitle("D10 GPA") +
   scale_color_manual(name = "Cluster",values = c(cols[2],cols[3])) +
   scale_fill_manual(name = "Cluster", values = c(alpha(cols[2],0.4),alpha(cols[3],0.4))) +
@@ -1478,13 +1482,13 @@ g4 = ggplot(df_wide_test, aes(x = cluster, y = diff_4_D10*100)) +
         panel.grid.minor.y = element_blank(),
         axis.line = element_line(colour = "dark grey"))+
   theme(axis.title.x = element_text(size=14),#margin = margin(t = 10, r = 0, b = 0, l = 0)),
-        axis.text.x = element_text(size=14),
+        axis.text.x = element_text(size=12),
         axis.title.y = element_text(size=14),#margin = margin(t = 0, r = 10, b = 0, l = 0)),
-        axis.text.y = element_text(size=14),legend.position=c(0.1,0.1),
+        axis.text.y = element_text(size=12),legend.position=c(0.1,0.1),
         legend.title = element_text(size = 12),
-        legend.text = element_text(size=15),
+        legend.text = element_text(size=12),
         legend.background = element_rect(fill="white",colour ="white"),
-        plot.title = element_text(size=14, color = col_text))
+        plot.title = element_text(size=12, color = col_text))
 
 (g1 + g2) / (g3 + g4) + plot_layout(guides = "collect") & theme(legend.position = 'right')
 #fviz_cluster(PCA_clus, data = scale(df_wide_test[,-1]), frame.type = "convex",
@@ -1548,14 +1552,16 @@ kable(balance_tab2, format = "html", align = c("l", "c", "c", "c", "c", "c", "c"
 ```{r, echo=FALSE, message=FALSE, warning=FALSE}
 # Convert #A5AC20 to RGBA for transparency
 color_rgba <- "rgba(148,66,181, 0.3)"  # This includes the transparency
-text_color <- "#9442B5"  # Your specified color for the text
+text_col <- "#9442B5"  # Your specified color for the text
 
 balance_tab = datasummary_balance(~ cluster, data = d_tab, dinm_statistic = "p.value", fmt = "%.2f", dinm = TRUE, align = c("lcccccc"),
                     output = "data.frame",
                     notes = "Note: Diff DX GPA represents the difference between obs. attendance and predicted attendance for decile X")
 
-balance_tab$`Diff. in Means`[3] = cell_spec(balance_tab$`Diff. in Means`[1], "html", background = color_rgba, color = text_color, bold = TRUE)
-balance_tab$`Diff. in Means`[5] = cell_spec(balance_tab$`Diff. in Means`[2], "html", background = color_rgba, color = text_color, bold = TRUE)
+balance_tab$`Diff. in Means`[3] = cell_spec(balance_tab$`Diff. in Means`[3], "html", background = color_rgba, color = text_col, bold = TRUE)
+balance_tab$`Diff. in Means`[5] = cell_spec(balance_tab$`Diff. in Means`[5], "html", background = color_rgba, color = text_col, bold = TRUE)
+balance_tab$` `[3] = cell_spec(balance_tab$` `[3], "html", background = color_rgba, color = text_col, bold = TRUE)
+balance_tab$` `[5] = cell_spec(balance_tab$` `[5], "html", background = color_rgba, color = text_col, bold = TRUE)
 
 balance_tab2 = balance_tab
 names(balance_tab2) = c(" ","Mean","SD","Mean","SD", "Diff. in Means", "P-value")
@@ -1592,14 +1598,16 @@ d_tab <- d_tab %>% rename(`Avg. SIMCE Lang` = Avg..SIMCE.Lang,
 d_tab$cluster = factor(d_tab$cluster, levels = c(1,2), labels = c("Cluster 1\nIncrease att", "Cluster 2\nLower att (bottom)"))
 # Convert #A5AC20 to RGBA for transparency
 color_rgba <- "rgba(148,66,181, 0.3)"  # This includes the transparency
-text_color <- "#9442B5"  # Your specified color for the text
+text_col <- "#9442B5"  # Your specified color for the text
 
 balance_tab = datasummary_balance(~ cluster, data = d_tab, dinm_statistic = "p.value", fmt = "%.2f", dinm = TRUE, align = c("lcccccc"),
                     output = "data.frame",
                     notes = "Note: Diff DX GPA represents the difference between obs. attendance and predicted attendance for decile X")
 
-balance_tab$`Diff. in Means`[1] = cell_spec(balance_tab$`Diff. in Means`[3], "html", background = color_rgba, color = text_color, bold = TRUE)
-balance_tab$`Diff. in Means`[2] = cell_spec(balance_tab$`Diff. in Means`[5], "html", background = color_rgba, color = text_color, bold = TRUE)
+balance_tab$`Diff. in Means`[1] = cell_spec(balance_tab$`Diff. in Means`[1], "html", background = color_rgba, color = text_col, bold = TRUE)
+balance_tab$`Diff. in Means`[2] = cell_spec(balance_tab$`Diff. in Means`[2], "html", background = color_rgba, color = text_col, bold = TRUE)
+balance_tab$` `[1] = cell_spec(balance_tab$` `[1], "html", background = color_rgba, color = text_col, bold = TRUE)
+balance_tab$` `[2] = cell_spec(balance_tab$` `[2], "html", background = color_rgba, color = text_col, bold = TRUE)
 
 balance_tab2 = balance_tab
 names(balance_tab2) = c(" ","Mean","SD","Mean","SD", "Diff. in Means", "P-value")

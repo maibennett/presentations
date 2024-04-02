@@ -502,7 +502,7 @@ The Chilean Educational Context
 <br>
 <br>
 
-- SIMCE as **.coolblue[high-stake]** testing:
+- SIMCE as a **.coolblue[high-stake]** test:
 
   - Results widely available in a universal voucher system
   

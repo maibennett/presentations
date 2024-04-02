@@ -1,7 +1,7 @@
 ---
 output:
   xaringan::moon_reader:
-    css: ["xaringan-themer.css", "style.css"]
+    css: ["style.css", "xaringan-themer.css"]
     lib_dir: libs
     nature:
       slideNumberFormat: |
@@ -80,7 +80,9 @@ style_mono_accent(
     ".remark-slide table td#highlight" = list("background-color" = "#eee1f0",
                                   "color" = "#900DA4",
                                   "font-weight" = "500"),
-   # ".remark-slide table thead th" = list(),
+    
+    ".remark-slide table tbody tr" = list("background-color" = "#FFFFFF"),
+    
     ".title-slide h1" = list("font-weight" = "500"),
     ".title-slide h2" = list("font-weight" = "400",
                              "font-size" =  "100%",
@@ -328,6 +330,7 @@ style_mono_accent(
 #FCCE25
 ```
 
+
 ```{r setup2, echo=FALSE, message=FALSE, warning = FALSE}
 library(knitr)
 library(showtext)
@@ -460,7 +463,7 @@ class: inverse, center, middle
 
 --
 
-**.coolblue[Imputation Policies]**
+**.coolblue[What can be done?]**
 
 - Machine learning prediction:
 
@@ -814,6 +817,7 @@ shift_legend2(gr)
 - 2017 survey for students in test-taking grades.
 
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
+
 tab4th <- read.csv("https://raw.githubusercontent.com/maibennett/presentations/main/content/presentations/Attendance/Salem_20220405/images/survey_4th.csv")
 
 tab10th <- read.csv("https://raw.githubusercontent.com/maibennett/presentations/main/content/presentations/Attendance/Salem_20220405/images/survey_10th.csv")
@@ -821,6 +825,51 @@ tab10th <- read.csv("https://raw.githubusercontent.com/maibennett/presentations/
 kableExtra::kable(tab4th, align = "lcccc", caption = "Results for 4th Grade",
              col.names = c('GPA Decile', 'Told', 'Notification', 'Preparation', 'Grades'), format = "html") %>% 
   kable_paper(bootstrap_options = c("hover","condensed"), full_width = FALSE)
+
+```
+
+---
+# Differences in communication and incentives between high and low performers
+
+- 2017 survey for students in test-taking grades.
+
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+# Convert #A5AC20 to RGBA for transparency
+color_rgba <- "rgba(165, 172, 32, 0.3)"  # This includes the transparency
+text_color <- "#A5AC20"  # Your specified color for the text
+
+# Assuming tab4th is your data frame
+# Apply cell_spec to the desired cells
+tab4th$Told[1] <- cell_spec(tab4th$Told[1], "html", background = color_rgba, color = text_color, bold = TRUE)
+tab4th$Notification[1] <- cell_spec(tab4th$Notification[1], "html", background = color_rgba, color = text_color, bold = TRUE)
+
+# Now generate the table with kable and apply the additional styling
+kable(tab4th, align = "lcccc", caption = "Results for 4th Grade",
+      col.names = c('GPA Decile', 'Told', 'Notification', 'Preparation', 'Grades'), format = "html", escape = F) %>%
+  kable_paper(bootstrap_options = c("hover", "condensed"), full_width = FALSE)
+
+```
+
+---
+# Differences in communication and incentives between high and low performers
+
+- 2017 survey for students in test-taking grades.
+
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+# Convert #A5AC20 to RGBA for transparency
+color_rgba2 <- "rgba(68,147,174, 0.3)"  # This includes the transparency
+text_color2 <- "#4493AE"  # Your specified color for the text
+
+# Assuming tab4th is your data frame
+# Apply cell_spec to the desired cells
+tab4th$Told[3] <- cell_spec(tab4th$Told[3], "html", background = color_rgba2, color = text_color2, bold = TRUE)
+tab4th$Notification[3] <- cell_spec(tab4th$Notification[3], "html", background = color_rgba2, color = text_color2, bold = TRUE)
+
+# Now generate the table with kable and apply the additional styling
+kable(tab4th, align = "lcccc", caption = "Results for 4th Grade",
+      col.names = c('GPA Decile', 'Told', 'Notification', 'Preparation', 'Grades'), format = "html", escape = F) %>%
+  kable_paper(bootstrap_options = c("hover", "condensed"), full_width = FALSE)
+
 ```
 
 
@@ -830,8 +879,15 @@ kableExtra::kable(tab4th, align = "lcccc", caption = "Results for 4th Grade",
 - 2017 survey for students in test-taking grades.
 
 ```{r, echo=FALSE, results='asis'}
+
+tab10th$Told[1] <- cell_spec(tab10th$Told[1], "html", background = color_rgba, color = text_color, bold = TRUE)
+tab10th$Notification[1] <- cell_spec(tab10th$Notification[1], "html", background = color_rgba, color = text_color, bold = TRUE)
+
+tab10th$Told[3] <- cell_spec(tab10th$Told[3], "html", background = color_rgba2, color = text_color2, bold = TRUE)
+tab10th$Notification[3] <- cell_spec(tab10th$Notification[3], "html", background = color_rgba2, color = text_color2, bold = TRUE)
+
 tab10th %>% kbl(align = "lcccc", caption = "Results for 10th Grade",
-             col.names = c('GPA Decile', 'Told', 'Notification', 'Preparation', 'Grades'), format = "html") %>% 
+             col.names = c('GPA Decile', 'Told', 'Notification', 'Preparation', 'Grades'), format = "html", escape = F) %>% 
   kable_paper(bootstrap_options = c("hover","condensed"), full_width = FALSE)
 ```
 
@@ -882,7 +938,7 @@ Predicting the Counterfactual
 
 - Use **.coolblue[Extreme Gradient Boosting (XGBoost)]** with panel data for **.coolblue[attendance prediction]** 
   
-  - Predictor variables include day of the week, grade, GPA group, and sibling's attendance, in addition to schools' characteristics. 
+  - Predictor variables include lags for attendance, day of the week, grade, GPA group, and sibling's attendance, in addition to student and schools' characteristics. 
   
 --
 <br>
@@ -920,10 +976,10 @@ df_final2 = df_final %>% group_by(GPA_pos, grade_treat) %>% arrange(type, .by_gr
          lower_diff = -(lower[1] - mean_outcome[2])) %>% ungroup()
 
 g1 = ggplot(data = df_final, aes(x = GPA_pos, y = mean_outcome*100, fill = type, color = type)) + 
-  geom_point(pch = 21, position = position_dodge(width = 1), alpha=.6, size = 3) +
+  geom_point(pch = 21, position = position_dodge(width = 1), alpha=.6, size = 2.5) +
   geom_errorbar(aes(x=GPA_pos, ymin=(lower)*100, 
                     ymax=(upper)*100, color = factor(type)), 
-                width=0.2, alpha=0.9, linewidth=0.6,
+                width=0.1, alpha=0.9, linewidth=0.6,
                 position = position_dodge(width = 1))+
   geom_vline(aes(xintercept = 1.5), lty = 2, color = "lightgrey") +
   geom_vline(aes(xintercept = 2.5), lty = 2, color = "lightgrey") +
@@ -932,7 +988,7 @@ g1 = ggplot(data = df_final, aes(x = GPA_pos, y = mean_outcome*100, fill = type,
   scale_y_continuous(limits=c(0,100),oob = rescale_none) +
   scale_color_manual(values = c(cols[3],cols[5])) +
   scale_fill_manual(values = c(alpha(cols[3],0.8),alpha(cols[5],0.8))) +
-  theme_bw()+
+  theme_bw()+ ylim(50,100) +
   xlab("GPA deciles") + ylab("% Attendance") +
   #ggplot2::annotate("text", x = 10, y = 6, label = "Adj. R2 = 0.48", size = 6, colour = "dark grey", hjust=0,family="Fira Sans Condensed") +
   theme_ipsum_fsc(plot_title_face = "bold",plot_title_size = 24) + #plain
@@ -961,10 +1017,10 @@ g1 = ggplot(data = df_final, aes(x = GPA_pos, y = mean_outcome*100, fill = type,
 g11 = ggplot(data = df_final[df_final$grade_treat==FALSE,], 
             aes(x = GPA_pos, y = mean_outcome*100, fill = type, 
                 color = type)) + 
-  geom_point(pch = 21, position = position_dodge(width = 1), alpha=.6, size = 3) +
+  geom_point(pch = 21, position = position_dodge(width = 1), alpha=.6, size = 2.5) +
   geom_errorbar(aes(x=GPA_pos, ymin=(lower)*100, 
                     ymax=(upper)*100, color = factor(type)), 
-                width=0.2, alpha=0.9, linewidth=0.6,
+                width=0.1, alpha=0.9, linewidth=0.6,
                 position = position_dodge(width = 1))+
   geom_vline(aes(xintercept = 1.5), lty = 2, color = "lightgrey") +
   geom_vline(aes(xintercept = 2.5), lty = 2, color = "lightgrey") +
@@ -973,7 +1029,7 @@ g11 = ggplot(data = df_final[df_final$grade_treat==FALSE,],
   scale_y_continuous(limits=c(0,100),oob = rescale_none) +
   scale_color_manual(values = c(cols[3],cols[5])) +
   scale_fill_manual(values = c(alpha(cols[3],0.8),alpha(cols[5],0.8))) +
-  theme_bw()+
+  theme_bw()+ ylim(50,100) +
   xlab("GPA deciles") + ylab("% Attendance") +
   #ggplot2::annotate("text", x = 10, y = 6, label = "Adj. R2 = 0.48", size = 6, colour = "dark grey", hjust=0,family="Fira Sans Condensed") +
   theme_ipsum_fsc(plot_title_face = "bold") + ggtitle("Non-tested grade") + 
@@ -998,10 +1054,10 @@ g11 = ggplot(data = df_final[df_final$grade_treat==FALSE,],
 g12 = ggplot(data = df_final[df_final$grade_treat==FALSE,], 
             aes(x = GPA_pos, y = mean_outcome*100, fill = type, 
                 color = type)) + 
-  geom_point(pch = 21, position = position_dodge(width = 1), alpha=.6, size = 3) +
+  geom_point(pch = 21, position = position_dodge(width = 1), alpha=.6, size = 2.5) +
   geom_errorbar(aes(x=GPA_pos, ymin=(lower)*100, 
                     ymax=(upper)*100, color = factor(type)), 
-                width=0.2, alpha=0.9, linewidth=0.6,
+                width=0.1, alpha=0.9, linewidth=0.6,
                 position = position_dodge(width = 1))+
   geom_vline(aes(xintercept = 1.5), lty = 2, color = "lightgrey") +
   geom_vline(aes(xintercept = 2.5), lty = 2, color = "lightgrey") +
@@ -1010,7 +1066,7 @@ g12 = ggplot(data = df_final[df_final$grade_treat==FALSE,],
   scale_y_continuous(limits=c(0,100),oob = rescale_none) +
   scale_color_manual(values = c(cols[3],cols[5])) +
   scale_fill_manual(values = c(alpha(cols[3],0.8),alpha(cols[5],0.8))) +
-  theme_bw()+
+  theme_bw()+ ylim(50,100) +
   xlab("GPA deciles") + ylab("% Attendance") +
   #ggplot2::annotate("text", x = 10, y = 6, label = "Adj. R2 = 0.48", size = 6, colour = "dark grey", hjust=0,family="Fira Sans Condensed") +
   theme_ipsum_fsc(plot_title_face = "bold") + ggtitle("") + 
@@ -1046,7 +1102,7 @@ g2 = ggplot(data = df_final2, aes(x = GPA_pos, y = diff_mean*100)) +
   geom_vline(aes(xintercept = 2.5), lty = 2, color = "lightgrey") +
   geom_vline(aes(xintercept = 3.5), lty = 2, color = "lightgrey") +
   geom_vline(aes(xintercept = 4.5), lty = 2, color = "lightgrey") +
-  scale_y_continuous(limits=c(-5,5),oob = rescale_none, breaks = c(-5, 0, 5)) +
+  scale_y_continuous(limits=c(-10,10),oob = rescale_none, breaks = c(-10, 0, 10)) +
   theme_bw()+
   xlab("") + ylab(expression(Delta* " Obs - Pred (pp)")) +
   #ggplot2::annotate("text", x = 10, y = 6, label = "Adj. R2 = 0.48", size = 6, colour = "dark grey", hjust=0,family="Fira Sans Condensed") +
@@ -1075,7 +1131,7 @@ g2 = ggplot(data = df_final2, aes(x = GPA_pos, y = diff_mean*100)) +
 g1_right_removed = ggplot(data = subset(df_final, grade_treat == FALSE),
                            aes(x = GPA_pos, y = mean_outcome * 100, 
                                fill =factor(type), color = factor(type))) + 
-  geom_point(pch = 21, position = position_dodge(width = 1), alpha = .6, size = 4) +
+  geom_point(pch = 21, position = position_dodge(width = 1), alpha = .6, size = 2.5) +
   geom_errorbar(aes(x = GPA_pos, ymin = lower * 100, ymax = upper * 100, 
                     color = factor(type)), width = 0.2, alpha = 0.9, linewidth = 0.6,
                 position = position_dodge(width = 1)) +
@@ -1086,7 +1142,7 @@ g1_right_removed = ggplot(data = subset(df_final, grade_treat == FALSE),
   scale_y_continuous(limits = c(0, 100), oob = rescale_none) +
   scale_color_manual(values = c(cols[3], cols[5])) +
   scale_fill_manual(values = c(alpha(cols[3], 0.8), alpha(cols[5], 0.8))) +
-  theme_bw() +
+  theme_bw() + ylim(50,100) +
   xlab("GPA deciles") + ylab("% Attendance") +
   theme_ipsum_fsc(plot_title_face = "bold", plot_title_size = 24) + #plain
   theme(plot.margin = unit(c(1, 1, 1.5, 0.6), "cm"),
@@ -1129,10 +1185,10 @@ g11 = g11 + xlab("")
 g13 = ggplot(data = df_final[df_final$grade_treat==TRUE,], 
             aes(x = GPA_pos, y = mean_outcome*100, fill = type, 
                 color = type)) + 
-  geom_point(pch = 21, position = position_dodge(width = 1), alpha=.6, size = 3) +
+  geom_point(pch = 21, position = position_dodge(width = 1), alpha=.6, size = 2.5) +
   geom_errorbar(aes(x=GPA_pos, ymin=(lower)*100, 
                     ymax=(upper)*100, color = factor(type)), 
-                width=0.2, alpha=0.9, linewidth=0.6,
+                width=0.1, alpha=0.9, linewidth=0.6,
                 position = position_dodge(width = 1))+
   geom_vline(aes(xintercept = 1.5), lty = 2, color = "lightgrey") +
   geom_vline(aes(xintercept = 2.5), lty = 2, color = "lightgrey") +
@@ -1141,7 +1197,7 @@ g13 = ggplot(data = df_final[df_final$grade_treat==TRUE,],
   scale_y_continuous(limits=c(0,100),oob = rescale_none) +
   scale_color_manual(values = c(cols[3],cols[5])) +
   scale_fill_manual(values = c(alpha(cols[3],0.8),alpha(cols[5],0.8))) +
-  theme_bw()+
+  theme_bw()+ ylim(50,100) +
   xlab("GPA deciles") + ylab("% Attendance") +
   #ggplot2::annotate("text", x = 10, y = 6, label = "Adj. R2 = 0.48", size = 6, colour = "dark grey", hjust=0,family="Fira Sans Condensed") +
   theme_ipsum_fsc(plot_title_face = "bold") + ggtitle("Tested grade") + 
@@ -1163,7 +1219,7 @@ g13 = ggplot(data = df_final[df_final$grade_treat==TRUE,],
 
 g2 = ggplot(data = df_final2, aes(x = GPA_pos, y = diff_mean*100)) + 
     geom_hline(aes(yintercept = 0), lty = 1, color = "grey") +
-  geom_point(pch = 22, alpha=.6, size = 3, color = cols[1], 
+  geom_point(pch = 22, alpha=.6, size = 2.5, color = cols[1], 
              fill = alpha(cols[1],0.6)) +
     geom_errorbar(aes(x = GPA_pos, ymin = upper_diff*100, ymax = lower_diff*100),
                color = cols[1],
@@ -1223,17 +1279,22 @@ Language: 256]]
 ]]
 --
 ```{r prediction_example, fig.height=5, fig.width=10, fig.align='center', dev='svg', echo=FALSE, warning=FALSE, message=FALSE}
-df_plot <- read.csv("https://raw.githubusercontent.com/maibennett/presentations/main/content/presentations/Attendance/IngUC_20230810/data/plot_data_gpboost2017_updated_examplev5.csv")
+#df_plot = read.csv("https://raw.githubusercontent.com/maibennett/presentations/main/content/presentations/Attendance/IngUC_20230810/data/plot_data_gpboost2017_updated_examplev5.csv")
+
+df_plot = read.csv("https://raw.githubusercontent.com/maibennett/presentations/main/content/presentations/Attendance/PRIISM_20240402/data/plot_data_xgboost2017_v7_example.csv")
 
 df_plot$GPA_pos = factor(df_plot$GPA_pos, levels = c("D1","D2","D3D8","D9","D10"))
 
 df_plot$type = factor(df_plot$type, levels = c("Estimated", "Obs"),
                       labels = c("Predicted", "Observed"))
 
+df_plot = df_plot %>% mutate(ci_h = ifelse(type == "Observed", NA, ci_h),
+                             ci_l = ifelse(type == "Observed", NA, ci_l))
+
 ggplot(data = df_plot, aes(x = GPA_pos, y = outcome*100, fill = type, color = type)) + 
   geom_bar(stat="identity",position = "dodge2", alpha=.6, lwd=1) +
-  #geom_errorbar(aes(x=GPA_pos, ymin=ci_l*100, ymax=ci_h*100), width=0.4, colour="dark grey", alpha=0.9, size=1.3,
-  #              position = position_dodge(width = 1))+
+ # geom_errorbar(aes(x=GPA_pos, ymin=ci_l*100, ymax=ci_h*100), width=0.2, colour="dark grey", alpha=0.9, size=1,
+#                position = position_dodge(width = 1))+
   scale_y_continuous(limits=c(0,100),oob = rescale_none) +
   theme_bw()+
   xlab("GPA deciles") + ylab("% Attendance") +
@@ -1284,8 +1345,8 @@ ann_plot <- data.frame(rbd = 25002, GPA_pos = factor("D1", levels = c("D1","D2",
 
 ggplot(data = df_plot, aes(x = GPA_pos, y = outcome*100, fill = type, color = type)) + 
   geom_bar(stat="identity",position = "dodge2", alpha=.6, lwd=1) +
-  #geom_errorbar(aes(x=GPA_pos, ymin=ci_l*100, ymax=ci_h*100), width=0.4, colour="dark grey", alpha=0.9, size=1.3,
-  #              position = position_dodge(width = 1))+
+#  geom_errorbar(aes(x=GPA_pos, ymin=ci_l*100, ymax=ci_h*100), width=0.2, colour="dark grey", alpha=0.9, size=1,
+#                position = position_dodge(width = 1))+
   scale_y_continuous(limits=c(0,100),oob = rescale_none) +
   theme_bw()+
   xlab("GPA deciles") + ylab("% Attendance") +
@@ -1333,10 +1394,10 @@ df_wide_test = read.csv("https://raw.githubusercontent.com/maibennett/presentati
 #                      method = "kmeans")
 df_wide_test$cluster = factor(df_wide_test$cluster, levels = c(1,2,3), labels=c(1,2,3))
 
-g1 = ggplot(df_wide_test, aes(x = cluster, y = diff_4_D1)) + 
+g1 = ggplot(df_wide_test, aes(x = cluster, y = diff_4_D1*100)) + 
         geom_boxplot(aes(fill = cluster, color = cluster)) + 
   xlab("") +
-  ylab("Diff. obs - pred") + ggtitle("D1 GPA") +
+  ylab(expression(Delta* " Obs - Pred (pp)")) + ggtitle("D1 GPA") +
   scale_color_manual(name = "Cluster",values = c(cols[2],cols[3])) +
   scale_fill_manual(name = "Cluster", values = c(alpha(cols[2],0.4),alpha(cols[3],0.4))) +
   #ggplot2::annotate("text", x = 10, y = 6, label = "Adj. R2 = 0.48", size = 6, colour = "dark grey", hjust=0,family="Fira Sans Condensed") +
@@ -1354,12 +1415,12 @@ g1 = ggplot(df_wide_test, aes(x = cluster, y = diff_4_D1)) +
         legend.title = element_text(size = 12),
         legend.text = element_text(size=15),
         legend.background = element_rect(fill="white",colour ="white"),
-        title = element_text(size=14))
+        plot.title = element_text(size=14, color = col_text))
 
-g2 = ggplot(df_wide_test, aes(x = cluster, y = diff_4_D2)) + 
+g2 = ggplot(df_wide_test, aes(x = cluster, y = diff_4_D2*100)) + 
         geom_boxplot(aes(fill = cluster, color = cluster)) + 
   xlab("") +
-  ylab("Diff. obs - pred") + ggtitle("D2 GPA") +
+  ylab(expression(Delta* " Obs - Pred (pp)")) + ggtitle("D2 GPA") +
   scale_color_manual(name = "Cluster",values = c(cols[2],cols[3])) +
   scale_fill_manual(name = "Cluster", values = c(alpha(cols[2],0.4),alpha(cols[3],0.4))) +
   #ggplot2::annotate("text", x = 10, y = 6, label = "Adj. R2 = 0.48", size = 6, colour = "dark grey", hjust=0,family="Fira Sans Condensed") +
@@ -1377,12 +1438,12 @@ g2 = ggplot(df_wide_test, aes(x = cluster, y = diff_4_D2)) +
         legend.title = element_text(size = 12),
         legend.text = element_text(size=15),
         legend.background = element_rect(fill="white",colour ="white"),
-        title = element_text(size=14))
+        plot.title = element_text(size=14, color = col_text))
 
-g3 = ggplot(df_wide_test, aes(x = cluster, y = diff_4_D9)) + 
+g3 = ggplot(df_wide_test, aes(x = cluster, y = diff_4_D9*100)) + 
                 geom_boxplot(aes(fill = cluster, color = cluster)) + 
   xlab("") +
-  ylab("Diff. obs - pred") + ggtitle("D9 GPA") +
+  ylab(expression(Delta* " Obs - Pred (pp)")) + ggtitle("D9 GPA") +
   scale_color_manual(name = "Cluster",values = c(cols[2],cols[3])) +
   scale_fill_manual(name = "Cluster", values = c(alpha(cols[2],0.4),alpha(cols[3],0.4))) +
   #ggplot2::annotate("text", x = 10, y = 6, label = "Adj. R2 = 0.48", size = 6, colour = "dark grey", hjust=0,family="Fira Sans Condensed") +
@@ -1400,12 +1461,12 @@ g3 = ggplot(df_wide_test, aes(x = cluster, y = diff_4_D9)) +
         legend.title = element_text(size = 12),
         legend.text = element_text(size=15),
         legend.background = element_rect(fill="white",colour ="white"),
-        title = element_text(size=14))
+        plot.title = element_text(size=14, color = col_text))
 
-g4 = ggplot(df_wide_test, aes(x = cluster, y = diff_4_D10)) + 
+g4 = ggplot(df_wide_test, aes(x = cluster, y = diff_4_D10*100)) + 
                 geom_boxplot(aes(fill = cluster, color = cluster)) + 
   xlab("") +
-  ylab("Diff. obs - pred") + ggtitle("D10 GPA") +
+  ylab(expression(Delta* " Obs - Pred (pp)")) + ggtitle("D10 GPA") +
   scale_color_manual(name = "Cluster",values = c(cols[2],cols[3])) +
   scale_fill_manual(name = "Cluster", values = c(alpha(cols[2],0.4),alpha(cols[3],0.4))) +
   #ggplot2::annotate("text", x = 10, y = 6, label = "Adj. R2 = 0.48", size = 6, colour = "dark grey", hjust=0,family="Fira Sans Condensed") +
@@ -1423,7 +1484,7 @@ g4 = ggplot(df_wide_test, aes(x = cluster, y = diff_4_D10)) +
         legend.title = element_text(size = 12),
         legend.text = element_text(size=15),
         legend.background = element_rect(fill="white",colour ="white"),
-        title = element_text(size=14))
+        plot.title = element_text(size=14, color = col_text))
 
 (g1 + g2) / (g3 + g4) + plot_layout(guides = "collect") & theme(legend.position = 'right')
 #fviz_cluster(PCA_clus, data = scale(df_wide_test[,-1]), frame.type = "convex",
@@ -1465,9 +1526,88 @@ d_tab <- d_tab %>% rename(`Avg. SIMCE Lang` = Avg..SIMCE.Lang,
 
 d_tab$cluster = factor(d_tab$cluster, levels = c(1,2), labels = c("Cluster 1\nIncrease att", "Cluster 2\nLower att (bottom)"))
 
-datasummary_balance(~ cluster, data = d_tab, dinm_statistic = "p.value", fmt = "%.2f", dinm = TRUE, align = c("lcccccc"),
-                    output = "html",
-                    notes = "Note: Diff DX GPA represents the difference between obs. attendance and predicted attendance for decile X") %>% kable_paper(bootstrap_options = c("hover","condensed"), full_width = FALSE)
+balance_tab = datasummary_balance(~ cluster, data = d_tab, dinm_statistic = "p.value", fmt = "%.2f", dinm = TRUE, align = c("lcccccc"),
+                    output = "data.frame",
+                    notes = "Note: Diff DX GPA represents the difference between obs. attendance and predicted attendance for decile X")
+
+balance_tab2 = balance_tab
+names(balance_tab2) = c(" ","Mean","SD","Mean","SD", "Diff. in Means", "P-value")
+
+kable(balance_tab2, format = "html", align = c("l", "c", "c", "c", "c", "c", "c")) %>%
+  kable_paper(bootstrap_options = c("hover", "condensed"), full_width = FALSE) %>%
+  add_header_above(c(" " = 1, "Cluster 1\nIncrease Att (N=1094)" = 2, "Cluster 2\nLower Att (bottom) (N=346)" = 2, " " = 2)) %>%
+  kable_styling(bootstrap_options = c("hover", "condensed"), full_width = FALSE)
+
+```
+]
+
+---
+# Schools that appear to exclude lower-perfoming students are also more vulnerable
+
+.smaller[
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
+# Convert #A5AC20 to RGBA for transparency
+color_rgba <- "rgba(148,66,181, 0.3)"  # This includes the transparency
+text_color <- "#9442B5"  # Your specified color for the text
+
+balance_tab = datasummary_balance(~ cluster, data = d_tab, dinm_statistic = "p.value", fmt = "%.2f", dinm = TRUE, align = c("lcccccc"),
+                    output = "data.frame",
+                    notes = "Note: Diff DX GPA represents the difference between obs. attendance and predicted attendance for decile X")
+
+balance_tab$`Diff. in Means`[3] = cell_spec(balance_tab$`Diff. in Means`[1], "html", background = color_rgba, color = text_color, bold = TRUE)
+balance_tab$`Diff. in Means`[5] = cell_spec(balance_tab$`Diff. in Means`[2], "html", background = color_rgba, color = text_color, bold = TRUE)
+
+balance_tab2 = balance_tab
+names(balance_tab2) = c(" ","Mean","SD","Mean","SD", "Diff. in Means", "P-value")
+
+kable(balance_tab2, format = "html", align = c("l", "c", "c", "c", "c", "c", "c"), escape = F) %>%
+  kable_paper(bootstrap_options = c("hover", "condensed"), full_width = FALSE) %>%
+  add_header_above(c(" " = 1, "Cluster 1\nIncrease Att (N=1094)" = 2, "Cluster 2\nLower Att (bottom) (N=346)" = 2, " " = 2)) %>%
+  kable_styling(bootstrap_options = c("hover", "condensed"), full_width = FALSE)
+
+```
+]
+
+---
+# Schools that appear to exclude lower-perfoming students are also more vulnerable
+
+.smaller[
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
+
+library(modelsummary)
+
+d_tab <- read.csv("https://raw.githubusercontent.com/maibennett/presentations/main/content/presentations/Attendance/IngUC_20230810/data/d_tabv5.csv")
+
+d_tab <- d_tab %>% dplyr::select(-c(X, rbd))
+
+d_tab <- d_tab %>% rename(`Avg. SIMCE Lang` = Avg..SIMCE.Lang,
+                          `Avg. SIMCE Math` = Avg..SIMCE.Math,
+                          `SEP status` = SEP.status,
+                          `% Priority Students` = X..Priority.Students,
+                          `Diff D1 GPA` = Diff.D1.GPA,
+                          `Diff D2 GPA` = Diff.D2.GPA,
+                          `Diff D9 GPA` = Diff.D9.GPA,
+                          `Diff D10 GPA` = Diff.D10.GPA)
+
+d_tab$cluster = factor(d_tab$cluster, levels = c(1,2), labels = c("Cluster 1\nIncrease att", "Cluster 2\nLower att (bottom)"))
+# Convert #A5AC20 to RGBA for transparency
+color_rgba <- "rgba(148,66,181, 0.3)"  # This includes the transparency
+text_color <- "#9442B5"  # Your specified color for the text
+
+balance_tab = datasummary_balance(~ cluster, data = d_tab, dinm_statistic = "p.value", fmt = "%.2f", dinm = TRUE, align = c("lcccccc"),
+                    output = "data.frame",
+                    notes = "Note: Diff DX GPA represents the difference between obs. attendance and predicted attendance for decile X")
+
+balance_tab$`Diff. in Means`[1] = cell_spec(balance_tab$`Diff. in Means`[3], "html", background = color_rgba, color = text_color, bold = TRUE)
+balance_tab$`Diff. in Means`[2] = cell_spec(balance_tab$`Diff. in Means`[5], "html", background = color_rgba, color = text_color, bold = TRUE)
+
+balance_tab2 = balance_tab
+names(balance_tab2) = c(" ","Mean","SD","Mean","SD", "Diff. in Means", "P-value")
+
+kable(balance_tab2, format = "html", align = c("l", "c", "c", "c", "c", "c", "c"), escape = F) %>%
+  kable_paper(bootstrap_options = c("hover", "condensed"), full_width = FALSE) %>%
+  add_header_above(c(" " = 1, "Cluster 1\nIncrease Att (N=1094)" = 2, "Cluster 2\nLower Att (bottom) (N=346)" = 2, " " = 2)) %>%
+  kable_styling(bootstrap_options = c("hover", "condensed"), full_width = FALSE)
 
 ```
 ]

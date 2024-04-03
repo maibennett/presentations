@@ -444,10 +444,8 @@ class: inverse, center, middle
 
 - Results from **.coolblue[high-stakes tests]** widely used in education policy
    
-   - E.g. funding, promotions, school closures, school choice, etc.
-<br>
-<br>
---
+.center[
+![:scale 50%](https://raw.githubusercontent.com/maibennett/presentations/main/content/presentations/Attendance/PRIISM_20240402/images/iitems4.svg)]
 
 - **.coolblue[Assumption]**: Standardize tests used as a proxy of school quality
 <br>

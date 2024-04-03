@@ -811,6 +811,8 @@ shift_legend2(gr)
 
 - Schools directly **.coolblue[(des)incentivize attendance of (lower)higher performers]**
 
+
+
 ---
 # Differences in communication and incentives between high and low performers
 
@@ -986,8 +988,8 @@ g1 = ggplot(data = df_final, aes(x = GPA_pos, y = mean_outcome*100, fill = type,
   geom_vline(aes(xintercept = 3.5), lty = 2, color = "lightgrey") +
   geom_vline(aes(xintercept = 4.5), lty = 2, color = "lightgrey") +
   scale_y_continuous(limits=c(0,100),oob = rescale_none) +
-  scale_color_manual(values = c(cols[3],cols[5])) +
-  scale_fill_manual(values = c(alpha(cols[3],0.8),alpha(cols[5],0.8))) +
+  scale_color_manual(values = c(cols[3],cols[4])) +
+  scale_fill_manual(values = c(alpha(cols[3],0.8),alpha(cols[4],0.8))) +
   theme_bw()+ ylim(50,100) +
   xlab("GPA deciles") + ylab("% Attendance") +
   #ggplot2::annotate("text", x = 10, y = 6, label = "Adj. R2 = 0.48", size = 6, colour = "dark grey", hjust=0,family="Fira Sans Condensed") +
@@ -1027,8 +1029,8 @@ g11 = ggplot(data = df_final[df_final$grade_treat==FALSE,],
   geom_vline(aes(xintercept = 3.5), lty = 2, color = "lightgrey") +
   geom_vline(aes(xintercept = 4.5), lty = 2, color = "lightgrey") +
   scale_y_continuous(limits=c(0,100),oob = rescale_none) +
-  scale_color_manual(values = c(cols[3],cols[5])) +
-  scale_fill_manual(values = c(alpha(cols[3],0.8),alpha(cols[5],0.8))) +
+  scale_color_manual(values = c(cols[3],cols[4])) +
+  scale_fill_manual(values = c(alpha(cols[3],0.8),alpha(cols[4],0.8))) +
   theme_bw()+ ylim(50,100) +
   xlab("GPA deciles") + ylab("% Attendance") +
   #ggplot2::annotate("text", x = 10, y = 6, label = "Adj. R2 = 0.48", size = 6, colour = "dark grey", hjust=0,family="Fira Sans Condensed") +
@@ -1064,8 +1066,8 @@ g12 = ggplot(data = df_final[df_final$grade_treat==FALSE,],
   geom_vline(aes(xintercept = 3.5), lty = 2, color = "lightgrey") +
   geom_vline(aes(xintercept = 4.5), lty = 2, color = "lightgrey") +
   scale_y_continuous(limits=c(0,100),oob = rescale_none) +
-  scale_color_manual(values = c(cols[3],cols[5])) +
-  scale_fill_manual(values = c(alpha(cols[3],0.8),alpha(cols[5],0.8))) +
+  scale_color_manual(values = c(cols[3],cols[4])) +
+  scale_fill_manual(values = c(alpha(cols[3],0.8),alpha(cols[4],0.8))) +
   theme_bw()+ ylim(50,100) +
   xlab("GPA deciles") + ylab("% Attendance") +
   #ggplot2::annotate("text", x = 10, y = 6, label = "Adj. R2 = 0.48", size = 6, colour = "dark grey", hjust=0,family="Fira Sans Condensed") +
@@ -1140,8 +1142,8 @@ g1_right_removed = ggplot(data = subset(df_final, grade_treat == FALSE),
   geom_vline(aes(xintercept = 3.5), lty = 2, color = "lightgrey") +
   geom_vline(aes(xintercept = 4.5), lty = 2, color = "lightgrey") +
   scale_y_continuous(limits = c(0, 100), oob = rescale_none) +
-  scale_color_manual(values = c(cols[3], cols[5])) +
-  scale_fill_manual(values = c(alpha(cols[3], 0.8), alpha(cols[5], 0.8))) +
+  scale_color_manual(values = c(cols[3], cols[4])) +
+  scale_fill_manual(values = c(alpha(cols[3], 0.8), alpha(cols[4], 0.8))) +
   theme_bw() + ylim(50,100) +
   xlab("GPA deciles") + ylab("% Attendance") +
   theme_ipsum_fsc(plot_title_face = "bold", plot_title_size = 24) + #plain
@@ -1195,8 +1197,8 @@ g13 = ggplot(data = df_final[df_final$grade_treat==TRUE,],
   geom_vline(aes(xintercept = 3.5), lty = 2, color = "lightgrey") +
   geom_vline(aes(xintercept = 4.5), lty = 2, color = "lightgrey") +
   scale_y_continuous(limits=c(0,100),oob = rescale_none) +
-  scale_color_manual(values = c(cols[3],cols[5])) +
-  scale_fill_manual(values = c(alpha(cols[3],0.8),alpha(cols[5],0.8))) +
+  scale_color_manual(values = c(cols[3],cols[4])) +
+  scale_fill_manual(values = c(alpha(cols[3],0.8),alpha(cols[4],0.8))) +
   theme_bw()+ ylim(50,100) +
   xlab("GPA deciles") + ylab("% Attendance") +
   #ggplot2::annotate("text", x = 10, y = 6, label = "Adj. R2 = 0.48", size = 6, colour = "dark grey", hjust=0,family="Fira Sans Condensed") +
@@ -1511,9 +1513,9 @@ g4 = ggplot(df_wide_test, aes(x = cluster, y = diff_4_D10*100)) +
 ---
 # Schools that appear to exclude lower-perfoming students are also more vulnerable
 
-.smaller[
-```{r, echo=FALSE, message=FALSE, warning=FALSE}
+```{r loveplot1, fig.height=5, fig.width=10, fig.align='center', dev='svg', echo=FALSE, warning=FALSE, message=FALSE}
 library(modelsummary)
+library(designmatch)
 
 d_tab <- read.csv("https://raw.githubusercontent.com/maibennett/presentations/main/content/presentations/Attendance/IngUC_20230810/data/d_tabv5.csv")
 
@@ -1528,22 +1530,197 @@ d_tab <- d_tab %>% rename(`Avg. SIMCE Lang` = Avg..SIMCE.Lang,
                           `Diff D9 GPA` = Diff.D9.GPA,
                           `Diff D10 GPA` = Diff.D10.GPA)
 
-d_tab$cluster = factor(d_tab$cluster, levels = c(1,2), labels = c("Cluster 1\nIncrease att", "Cluster 2\nLower att (bottom)"))
+Xmat = d_tab %>% dplyr::select(-cluster) %>% as.data.frame()
 
-balance_tab = datasummary_balance(~ cluster, data = d_tab, dinm_statistic = "p.value", fmt = "%.2f", dinm = TRUE, align = c("lcccccc"),
-                    output = "data.frame",
-                    notes = "Note: Diff DX GPA represents the difference between obs. attendance and predicted attendance for decile X")
+meanbal = meantab(Xmat, t_ind = as.numeric(d_tab$cluster==2), t_id = which(d_tab$cluster==2), c_id = which(d_tab$cluster==1), digits = 50) %>% as.data.frame()
 
-balance_tab2 = balance_tab
-names(balance_tab2) = c(" ","Mean","SD","Mean","SD", "Diff. in Means", "P-value")
+meanbal = cbind(rownames(meanbal), meanbal)
+names(meanbal) = c("Variable",names(meanbal)[2:ncol(meanbal)])
 
-kable(balance_tab2, format = "html", align = c("l", "c", "c", "c", "c", "c", "c")) %>%
-  kable_paper(bootstrap_options = c("hover", "condensed"), full_width = FALSE) %>%
-  add_header_above(c(" " = 1, "Cluster 1\nIncrease Att (N=1094)" = 2, "Cluster 2\nLower Att (bottom) (N=346)" = 2, " " = 2)) %>%
-  kable_styling(bootstrap_options = c("hover", "condensed"), full_width = FALSE)
+meanbal$Variable = factor(meanbal$Variable, levels = rev(meanbal$Variable))
+
+meanbal = meanbal %>% mutate(z.score = qnorm(1 - `P-val`/2))
+
+d1 = t.test(d_tab$`Diff D1 GPA`[d_tab$cluster==2],d_tab$`Diff D1 GPA`[d_tab$cluster==1])$statistic
+d2 = t.test(d_tab$`Diff D2 GPA`[d_tab$cluster==2],d_tab$`Diff D2 GPA`[d_tab$cluster==1])$statistic
+
+meanbal = meanbal %>% mutate(z.score = ifelse(Variable=="Diff D1 GPA", d1, z.score),
+                             z.score = ifelse(Variable=="Diff D2 GPA", d2, z.score),)
+
+meanbal = meanbal %>% mutate(std.error = abs(`Std Dif`)/z.score,
+                             ci_upper = `Std Dif` + 1.96*std.error,
+                             ci_lower = `Std Dif` - 1.96*std.error)
+
+g1 = ggplot(data = meanbal, aes(y = Variable, x = `Std Dif`)) +
+  geom_point(size = 3, color = cols[2]) +
+  geom_segment(aes(y = Variable, yend = Variable, x = ci_upper, xend = ci_lower), color = cols[2], linewidth = 0.8) +
+  geom_vline(aes(xintercept = 0), lty = 2, linewidth = 1, color = "darkgrey") +
+  ylab("") + xlab(expression(Delta* " Cluster 2 - Cluster 1 (SD)")) +
+  theme_ipsum_fsc(plot_title_face = "bold",plot_title_size = 18) + #plain
+  xlim(-1.5,0.5)+
+  theme(plot.margin=unit(c(0,1,1,1.2),"cm"),
+        panel.grid.major.x = element_blank(),
+        panel.grid.minor.x = element_blank(),
+        panel.grid.major.y = element_blank(),
+        panel.grid.minor.y = element_blank(),
+        axis.line = element_line(colour = "dark grey"))+
+  theme(axis.title.x = element_text(size=14),#margin = margin(t = 10, r = 0, b = 0, l = 0)),
+        axis.text.x = element_text(size=12),
+        axis.title.y = element_text(size=14),#margin = margin(t = 0, r = 10, b = 0, l = 0)),
+        axis.text.y = element_text(size=12),
+        legend.position = "none") +
+  annotate("rect", xmin = -1.5, xmax = 0.5, ymin = 5 - 0.45, ymax = 9 + 0.45, alpha = 0.1, fill = cols[2])
+  
+g1
+
 
 ```
-]
+
+---
+# Schools that appear to exclude lower-perfoming students are also more vulnerable
+
+```{r loveplot2, fig.height=5, fig.width=10, fig.align='center', dev='svg', echo=FALSE, warning=FALSE, message=FALSE}
+
+g1 = ggplot(data = meanbal, aes(y = Variable, x = `Std Dif`)) +
+  geom_point(size = 3, color = cols[2]) +
+  geom_segment(aes(y = Variable, yend = Variable, x = ci_upper, xend = ci_lower), color = cols[2], linewidth = 0.8) +
+  geom_vline(aes(xintercept = 0), lty = 2, linewidth = 1, color = "darkgrey") +
+  ylab("") + xlab(expression(Delta* " Cluster 2 - Cluster 1 (SD)")) +
+  theme_ipsum_fsc(plot_title_face = "bold",plot_title_size = 18) + #plain
+  xlim(-1.5,0.5)+
+  theme(plot.margin=unit(c(0,1,1,1.2),"cm"),
+        panel.grid.major.x = element_blank(),
+        panel.grid.minor.x = element_blank(),
+        panel.grid.major.y = element_blank(),
+        panel.grid.minor.y = element_blank(),
+        axis.line = element_line(colour = "dark grey"))+
+  theme(axis.title.x = element_text(size=14),#margin = margin(t = 10, r = 0, b = 0, l = 0)),
+        axis.text.x = element_text(size=12),
+        axis.title.y = element_text(size=14),#margin = margin(t = 0, r = 10, b = 0, l = 0)),
+        axis.text.y = element_text(size=12),
+        legend.position = "none") +
+  annotate("rect", xmin = -1.5, xmax = 0.5, ymin = 5 - 0.45, ymax = 9 + 0.45, alpha = 0.1, fill = cols[2]) +
+  annotate("rect", xmin = meanbal$ci_lower[meanbal$Variable=="Public"] - 0.1, xmax = meanbal$ci_upper[meanbal$Variable=="Public"] + 0.1,
+           ymin = 7 - 0.3, ymax = 7 + 0.3, color = cols[1], alpha = 0, linewidth = 0.8) +
+  annotate("rect", xmin = meanbal$ci_lower[meanbal$Variable=="% Priority Students"] - 0.1, xmax = meanbal$ci_upper[meanbal$Variable=="% Priority Students"] + 0.1,
+           ymin = 5 - 0.3, ymax = 5 + 0.3, color = cols[1], alpha = 0, linewidth = 0.8)
+  
+g1
+
+
+```
+
+---
+# Schools that appear to exclude lower-perfoming students are also more vulnerable
+
+```{r loveplot3, fig.height=5, fig.width=10, fig.align='center', dev='svg', echo=FALSE, warning=FALSE, message=FALSE}
+
+g1 = ggplot(data = meanbal, aes(y = Variable, x = `Std Dif`)) +
+  geom_point(size = 3, color = cols[2]) +
+  geom_segment(aes(y = Variable, yend = Variable, x = ci_upper, xend = ci_lower), color = cols[2], linewidth = 0.8) +
+  geom_vline(aes(xintercept = 0), lty = 2, linewidth = 1, color = "darkgrey") +
+  ylab("") + xlab(expression(Delta* " Cluster 2 - Cluster 1 (SD)")) +
+  theme_ipsum_fsc(plot_title_face = "bold",plot_title_size = 18) + #plain
+  xlim(-1.5,0.5)+
+  theme(plot.margin=unit(c(0,1,1,1.2),"cm"),
+        panel.grid.major.x = element_blank(),
+        panel.grid.minor.x = element_blank(),
+        panel.grid.major.y = element_blank(),
+        panel.grid.minor.y = element_blank(),
+        axis.line = element_line(colour = "dark grey"))+
+  theme(axis.title.x = element_text(size=14),#margin = margin(t = 10, r = 0, b = 0, l = 0)),
+        axis.text.x = element_text(size=12),
+        axis.title.y = element_text(size=14),#margin = margin(t = 0, r = 10, b = 0, l = 0)),
+        axis.text.y = element_text(size=12),
+        legend.position = "none") +
+  annotate("rect", xmin = -1.5, xmax = 0.5, ymin = 5 - 0.45, ymax = 9 + 0.45, alpha = 0.1, fill = cols[2]) +
+  annotate("rect", xmin = meanbal$ci_lower[meanbal$Variable=="Avg. SIMCE Lang"] - 0.1, xmax = meanbal$ci_upper[meanbal$Variable=="Avg. SIMCE Lang"] + 0.1,
+           ymin = 9 - 0.3, ymax = 9 + 0.3, color = cols[1], alpha = 0, linewidth = 0.8) +
+  annotate("rect", xmin = meanbal$ci_lower[meanbal$Variable=="Avg. SIMCE Math"] - 0.1, xmax = meanbal$ci_upper[meanbal$Variable=="Avg. SIMCE Math"] + 0.1,
+           ymin = 8 - 0.3, ymax = 8 + 0.3, color = cols[1], alpha = 0, linewidth = 0.8)
+  
+g1
+
+
+```
+
+---
+# Schools that appear to exclude lower-perfoming students are also more vulnerable
+
+```{r loveplot4, fig.height=5, fig.width=10, fig.align='center', dev='svg', echo=FALSE, warning=FALSE, message=FALSE}
+library(modelsummary)
+library(designmatch)
+
+d_tab <- read.csv("https://raw.githubusercontent.com/maibennett/presentations/main/content/presentations/Attendance/IngUC_20230810/data/d_tabv5.csv")
+
+d_tab <- d_tab %>% dplyr::select(-c(X, rbd))
+
+d_tab <- d_tab %>% rename(`Avg. SIMCE Lang` = Avg..SIMCE.Lang,
+                          `Avg. SIMCE Math` = Avg..SIMCE.Math,
+                          `SEP status` = SEP.status,
+                          `% Priority Students` = X..Priority.Students,
+                          `Diff D1 GPA` = Diff.D1.GPA,
+                          `Diff D2 GPA` = Diff.D2.GPA,
+                          `Diff D9 GPA` = Diff.D9.GPA,
+                          `Diff D10 GPA` = Diff.D10.GPA)
+
+Xmat = d_tab %>% dplyr::select(-cluster) %>% as.data.frame()
+
+meanbal = meantab(Xmat, t_ind = as.numeric(d_tab$cluster==2), t_id = which(d_tab$cluster==2), c_id = which(d_tab$cluster==1), digits = 50) %>% as.data.frame()
+
+meanbal = cbind(rownames(meanbal), meanbal)
+names(meanbal) = c("Variable",names(meanbal)[2:ncol(meanbal)])
+
+meanbal$Variable = factor(meanbal$Variable, levels = rev(meanbal$Variable))
+
+meanbal = meanbal %>% mutate(z.score = qnorm(1 - `P-val`/2))
+
+d1 = t.test(d_tab$`Diff D1 GPA`[d_tab$cluster==2],d_tab$`Diff D1 GPA`[d_tab$cluster==1])$statistic
+d2 = t.test(d_tab$`Diff D2 GPA`[d_tab$cluster==2],d_tab$`Diff D2 GPA`[d_tab$cluster==1])$statistic
+
+meanbal = meanbal %>% mutate(z.score = ifelse(Variable=="Diff D1 GPA", d1, z.score),
+                             z.score = ifelse(Variable=="Diff D2 GPA", d2, z.score),)
+
+meanbal = meanbal %>% mutate(std.error = abs(`Std Dif`)/z.score,
+                             ci_upper = `Std Dif` + 1.96*std.error,
+                             ci_lower = `Std Dif` - 1.96*std.error)
+
+ggplot(data = meanbal, aes(y = Variable, x = `Std Dif`)) +
+  geom_point(size = 3, color = cols[2]) +
+  geom_segment(aes(y = Variable, yend = Variable, x = ci_upper, xend = ci_lower), color = cols[2], linewidth = 0.8) +
+  geom_vline(aes(xintercept = 0), lty = 2, linewidth = 1, color = "darkgrey") +
+  ylab("") + xlab(expression(Delta* " Cluster 2 - Cluster 1 (SD)")) +
+  theme_ipsum_fsc(plot_title_face = "bold",plot_title_size = 18) + #plain
+  xlim(-1.5,0.5)+
+  theme(plot.margin=unit(c(0,1,1,1.2),"cm"),
+        panel.grid.major.x = element_blank(),
+        panel.grid.minor.x = element_blank(),
+        panel.grid.major.y = element_blank(),
+        panel.grid.minor.y = element_blank(),
+        axis.line = element_line(colour = "dark grey"))+
+  theme(axis.title.x = element_text(size=14),#margin = margin(t = 10, r = 0, b = 0, l = 0)),
+        axis.text.x = element_text(size=12),
+        axis.title.y = element_text(size=14),#margin = margin(t = 0, r = 10, b = 0, l = 0)),
+        axis.text.y = element_text(size=12),
+        legend.position = "none") +
+  annotate("rect", xmin = -1.5, xmax = 0.5, ymin = 1 - 0.45, ymax = 4 + 0.45, alpha = 0.1, fill = cols[2])
+  
+
+d_tab$cluster = factor(d_tab$cluster, levels = c(1,2), labels = c("Cluster 1\nIncrease att", "Cluster 2\nLower att (bottom)"))
+
+#balance_tab = datasummary_balance(~ cluster, data = d_tab, dinm_statistic = "p.value", fmt = "%.2f", dinm = TRUE, align = c("lcccccc"),
+#                    output = "data.frame",
+#                    notes = "Note: Diff DX GPA represents the difference between obs. attendance and predicted attendance for decile X")
+
+#balance_tab2 = balance_tab
+#names(balance_tab2) = c(" ","Mean","SD","Mean","SD", "Diff. in Means", "P-value")
+
+#kable(balance_tab2, format = "html", align = c("l", "c", "c", "c", "c", "c", "c")) %>%
+#  kable_paper(bootstrap_options = c("hover", "condensed"), full_width = FALSE) %>%
+#  add_header_above(c(" " = 1, "Cluster 1\nIncrease Att (N=1094)" = 2, "Cluster 2\nLower Att (bottom) (N=346)" = 2, " " = 2)) %>%
+#  kable_styling(bootstrap_options = c("hover", "condensed"), full_width = FALSE)
+
+```
 
 ---
 # Schools that appear to exclude lower-perfoming students are also more vulnerable
@@ -1684,6 +1861,14 @@ impute2_wide = impute2 %>% pivot_wider(data = ., id_cols = imputation,
 
 impute2_wide = impute2_wide %>% mutate(diff = clus1 - clus2)
 
+impute2_wide$imputation = factor(impute2_wide$imputation,
+                                 levels = c("Impute All",
+          "Impute Pred-Obs (Min All)",
+          "Impute Pred-Obs (Min Decile)",
+          "Impute Pred-Obs (Min School)",
+          "Impute Pred-Obs (Min School Decile)",
+          "No Imputation"))
+
 d_tab2_long = d_tab2_long %>% mutate(imputation = ifelse(imputation == "impute_all", "Impute All", imputation),
                                      imputation = ifelse(imputation == "impute_no", "No Imputation", imputation),
                                      imputation = ifelse(imputation == "impute_pred_min_all", "Impute Pred-Obs (Min All)", imputation),
@@ -1706,7 +1891,7 @@ d_tab2_long1$Avg_Math_Simce[d_tab2_long1$imputation %in% c("Impute Pred-Obs (Min
   "Impute Pred-Obs (Min School Decile)")] <- NA
 
 ggplot(data = d_tab2_long1, aes(y = imputation, x = Avg_Math_Simce, fill = factor(cluster), color = factor(cluster))) + stat_halfeye(height = 0.8) + 
-   scale_color_manual(name = "Cluster", labels = c("Increase Att","Lower att"),values = c(cols[2],cols[3])) +
+  scale_color_manual(name = "Cluster", labels = c("Increase Att","Lower att"),values = c(cols[2],cols[3])) +
   scale_fill_manual(name = "Cluster", labels = c("Increase Att","Lower att"),values = c(alpha(cols[2],0.3),alpha(cols[3],0.3))) +
   xlab("SIMCE Math") + ylab("") +
   xlim(100,350) +
@@ -1740,6 +1925,14 @@ impute_wide = impute %>% pivot_wider(data = ., id_cols = imputation,
                                        values_from = mean)
 
 impute_wide = impute_wide %>% mutate(diff = clus1 - clus2)
+
+impute_wide$imputation = factor(impute_wide$imputation,
+                                 levels = c("Impute All",
+          "Impute Pred-Obs (Min All)",
+          "Impute Pred-Obs (Min Decile)",
+          "Impute Pred-Obs (Min School)",
+          "Impute Pred-Obs (Min School Decile)",
+          "No Imputation"))
 
 ggplot(data = d_tab2_long, aes(y = imputation, x = Avg_Math_Simce, fill = factor(cluster), color = factor(cluster))) + stat_halfeye(height = 0.8) + 
    scale_color_manual(name = "Cluster", labels = c("Increase Att","Lower att"),values = c(cols[2],cols[3])) +

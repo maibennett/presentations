@@ -1070,7 +1070,7 @@ We can write a general form of the potential outcomes $Y(0)$ and $Y(1)$ as follo
 $$Y_{it}(0) =  \alpha_i + \lambda_{t} + \gamma_0(X_{i}) + \color{#119DA4}{\mathbf{\gamma_1(X_i,t)}} + \gamma_2(X_i,t)\cdot Z_i + u_{it}$$
 
 .darkgrey[- $\alpha_i$ and $\lambda_t$ are individual and time FE, respectively.
-  - If $\lambda_t|Z \sim F_{\lambda}(z,t)$, then PTA fails.]
+  - If $\lambda_t|Z \sim F_{\lambda}(z,t)$, then PTA fails.
   
 - $\gamma_0(X_i)$ is a time-invariant function that associates $X$ and $Y$.]
 
@@ -1085,9 +1085,9 @@ We can write a general form of the potential outcomes $Y(0)$ and $Y(1)$ as follo
 $$Y_{it}(0) =  \alpha_i + \lambda_{t} + \gamma_0(X_{i}) + \gamma_1(X_i,t) + \color{#119DA4}{\mathbf{\gamma_2(X_i,t)\cdot Z_i}} + u_{it}$$
 
 .darkgrey[- $\alpha_i$ and $\lambda_t$ are individual and time FE, respectively.
-  - If $\lambda_t|Z \sim F_{\lambda}(z,t)$, then PTA fails.]
+  - If $\lambda_t|Z \sim F_{\lambda}(z,t)$, then PTA fails.
   
-- $\gamma_0(X_i)$ is a time-invariant function that associates $X$ and $Y$.]
+- $\gamma_0(X_i)$ is a time-invariant function that associates $X$ and $Y$.
 
 - $\gamma_1(X_i,t)$ is a time-dependent function.]
 
@@ -1271,7 +1271,7 @@ g1 + g2
 
 --
 .center[
-![](images/M_plot_beta6_effect0.svg)
+![](images/M_plot_beta6_ppt.svg)
 ]
 
 ---
@@ -1391,18 +1391,18 @@ Number of simulations | 1,000
 ---
 # Why is this bias reduction important?
 
-- Sensitivity analysis results are skewed by the magnitude of the bias:
+- Even under modest bias, we would incorrectly reject the null 20% of the time.
 
 .center[
-![Rejection rate of null hypothesis for different values of $\beta_x_t$](images/coverage_beta_quad1_original_PE.svg)]
+![Rejection rate of null hypothesis for different values of $\beta_x_t$](images/coverage_beta_quad1_original_PE_ppt.svg)]
 
 ---
 # Why is this bias reduction important?
 
-- Even under modest bias, we would incorrectly reject the null 20% of the time
+- Sensitivity analysis results are skewed by the magnitude of the bias.
 
 .center[
-![:scale 65%](images/coverage_beta_quad1_M.svg)]
+![](images/coverage_beta_quad1_M_ppt.svg)]
 
 ---
 background-position: 50% 50%
@@ -1517,6 +1517,13 @@ Application
 
 .center[
 ![:scale 65%](images/loveplot.svg)]
+
+---
+# Matching in 16 out of 53 provinces 
+
+.center[
+![:scale 37%](images/map2b.png)]
+
 ---
 # After matching: Household income
 
@@ -1563,7 +1570,7 @@ Application
   
   - $\Gamma_c = 1.76$ $\rightarrow$ Unobserved confounder would have to change the probability of assignment from 50% vs 50% to 32.7% vs 67.3%.
   
-  - Allows up to 70% of the maximum deviation in the pre-intervention period ($M = 0.7$) vs 50% without matching (Rambachan & Roth, 2023)
+  - Allows up to 70% of the maximum deviation in the pre-intervention period (*M = 0.7*) vs 50% without matching (Rambachan & Roth, 2023)
   
 ---
 # Potential reasons?

@@ -2324,26 +2324,29 @@ Let's Wrap Up...
 ]
 
 ---
-# Conclusions and next steps
+# Takeways and next steps
 
 - Non-representative patterns of absenteeism **.coolblue[beyond exclusion of low-performers]**
   
   - High heterogeneity between schools
-  - Identification of gaming schools (e.g. persistance)
- 
---
-<br>
-<br>
-
-- **.coolblue[Communication strategies]** play important role for **.coolblue[lower-performing students]**
+  - Identification of gaming schools (e.g. persistence)
 
 --
 <br>
 <br>
 
-- Impact of **.coolblue[imputation policies]**?
+- Results presented to the **.coolblue[Educational Quality Agency]** for feedback
 
-  - How does non-representativeness and different imputation strategies impact policies and information provision? What score do we impute and for whom?
+  - Use of ML algorithm to increase monitoring in a targeted way.
+
+--
+<br>
+<br>
+
+- **.coolblue[Can we predict test scores]**?
+
+  - Absent students might be substantially different from observed students (_out of sample prediction_).
+  - Use of no-consequences period (2022) as a benchmark.
   
 
 ---
